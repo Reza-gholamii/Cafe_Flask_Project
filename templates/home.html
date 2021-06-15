@@ -19,6 +19,7 @@
 
         * {
             font-family: Vazir, sans-serif;
+            direction: rtl;
         }
 
         .rtl {
@@ -31,7 +32,16 @@
     </style>
 </head>
 <body class="relative">
-<div class="fixed inset-2 md:inset-4 bottom-0 md:bottom-0 shadow-inner bg-black bg-opacity-10 animate__animated animate__fadeIn"></div>
+<div class="fixed inset-2 md:inset-4 bottom-0 gap-0 md:bottom-0 shadow-inner bg-black bg-opacity-10 animate__animated animate__fadeIn overflow-hidden">
+    <nav class="grid grid-cols-3 w-full">
+        <ul class="col-span-2 float-right">
+            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i>خانه</a></li>
+            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i></a></li>
+            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i></a></li>
+            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i></a></li>
+        </ul>
+    </nav>
+</div>
 
 <!--  JS Plugins  -->
 <!--  JS Plugins  -->
