@@ -19,13 +19,28 @@
             text-decoration: none;
         }
 
-        a:hover {
+        h1, strong, a:hover{
             color: brown;
+        }
+
+        input {
+            width: 100%;
+        }
+
+        .btn-coffee {
+            color: #fafafa;
+            background-color: brown;
+        }
+
+        @media only screen and (min-width: 992px) {
+            .card {
+                margin: 2rem 5rem;
+            }
         }
     </style>
 </head>
 <body>
-<div class="card">
+<div class="card shadow rounded">
 <div class="card-header"><h1 class="text-center">اطلاعات تماس</h1></div>
 <div class="card-body">
 <div class="container">
@@ -34,18 +49,18 @@
     <section id="address">
     <address>
     <ul class="text-right">
-        <li>
+        <li class="my-4">
             <strong>آدرس: </strong>
             ایران - تهران - خیابان کارگر شمالی - خیابان فرصت - کوچه فرخنده - پلاک &#1778
         </li>
-        <li>
+        <li class="my-4">
             <strong>تلفن: </strong>
             <!-- <a href="tel:021-54429000" target="_blank">021-54429000</a> -->
             <a href="tel:021-54429000" target="_blank">
                 &#1781&#1780&#1780&#1778&#1785&#1776&#1776&#1776-&#1776&#1778&#1777
             </a>
         </li>
-        <li>
+        <li class="my-4">
             <strong>ایمیل: </strong>
             <a href="mailto:info@lamizcoffee.com" target="_blank">info@lamizcoffee.com</a>
         </li>
@@ -56,7 +71,27 @@
     <div class="col-12 col-lg-6">
     <section id="form">
     <form action="#">
-
+    <div class="container">
+    <div class="form-row">
+        <div class="col-12 mt-4 mb-3 input-group" dir="ltr">
+            <input type="text" class="form-control text-right" placeholder="* نام خانوادگی" name="fname" required>
+            <input type="text" class="form-control text-right" placeholder="* نام" name="lname" required>
+        </div>
+        <div class="col-12 col-lg-6 mb-3 input-group" dir="ltr">
+            ​<div class="input-group-prepend">
+                <span class="input-group-text">09</span>
+            </div>
+            <input type="text" class="form-control text-right" placeholder="* تلفن همراه" name="phone" minlength="9" maxlength="9" required>
+        </div>
+        <div class="col-12 col-lg-6 mb-3" dir="ltr">
+            <input type="text" class="form-control text-right" placeholder="نشانی پستی" name="email">
+        </div>
+        <div class="col-12 mb-4" dir="ltr">
+            <textarea class="form-control text-right" name="message" placeholder="* پیام شما" required></textarea>
+        </div>
+        <button type="button" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2">ارسال</button>
+    </div>
+    </div>
     </form>
     </section>
     </div>
