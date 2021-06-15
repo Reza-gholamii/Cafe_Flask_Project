@@ -23,18 +23,33 @@
             color: brown;
         }
 
-        input {
-            width: 100%;
-        }
+        /* ​input:focus {
+            border: 3px solid brown !important;
+        } */
 
         .btn-coffee {
             color: #fafafa;
             background-color: brown;
+            border-color: brown;
+        }
+
+        .btn-coffee:hover{
+            color: black;
         }
 
         @media only screen and (min-width: 992px) {
             .card {
                 margin: 2rem 5rem;
+            }
+
+            #loc {
+                border-left: 1px solid gray;
+            }
+        }
+
+        @media only screen and (max-width: 992px) {
+            #loc {
+                border-bottom: 1px solid gray;
             }
         }
     </style>
@@ -45,8 +60,8 @@
 <div class="card-body">
 <div class="container">
 <div class="row">
-    <div class="col-12 col-lg-6">
-    <section id="address">
+    <div class="col-12 col-lg-6" id="loc">
+    <section>
     <address>
     <ul class="text-right">
         <li class="my-4">
@@ -68,9 +83,9 @@
     </address>
     </section>
     </div>
-    <div class="col-12 col-lg-6">
-    <section id="form">
-    <form action="#">
+    <div class="col-12 col-lg-6" id="msg">
+    <section>
+    <form action="#" method="POST">
     <div class="container">
     <div class="form-row">
         <div class="col-12 mt-4 mb-3 input-group" dir="ltr">
@@ -89,7 +104,7 @@
         <div class="col-12 mb-4" dir="ltr">
             <textarea class="form-control text-right" name="message" placeholder="* پیام شما" required></textarea>
         </div>
-        <button type="button" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2">ارسال</button>
+        <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2" value="ارسال">
     </div>
     </div>
     </form>
