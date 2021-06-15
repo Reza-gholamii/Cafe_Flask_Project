@@ -5,6 +5,7 @@
     <title>کافی شاپ من</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
     <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
@@ -18,7 +19,7 @@
         }
 
         * {
-            font-family: Vazir, sans-serif;
+            font-family: Yekan, sans-serif;
             direction: rtl;
         }
 
@@ -29,16 +30,19 @@
         .ltr {
             direction: ltr;
         }
+
+        .text-shadow-md {
+            text-shadow: 0 0 10px #999;
+        }
     </style>
 </head>
 <body class="relative">
 <div class="fixed inset-2 md:inset-4 bottom-0 gap-0 md:bottom-0 shadow-inner bg-black bg-opacity-10 animate__animated animate__fadeIn overflow-hidden">
-    <nav class="grid grid-cols-3 w-full">
-        <ul class="col-span-2 float-right">
-            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i>خانه</a></li>
-            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i></a></li>
-            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i></a></li>
-            <li><a href="#" class="py-2 md:py-4 inline-block sm:px-4 md:px-6 text-lg md:text-2xl text-center"><i class="gb ml-1"></i></a></li>
+    <nav class="grid grid-cols-4 w-full">
+        <ul class="col-span-4 mx-auto sm:mx-4 sm:col-span-3 float-right">
+            <li class="text-shadow-md inline-block py-2 md:py-4 px-4 rounded-lg rounded-r-t-0 rounded-t-none w-36 md:w-44 transition text-center text-yellow-900 hover:bg-yellow-900 hover:text-white"><a href="#" class="text-md sm:text-lg md:text-xl text-center"><i class="gb gb_s24 relative left-2 mb-1 gb_shopping_basket"></i>فروشگاه</a></li>
+            <li class="text-shadow-md inline-block py-2 md:py-4 px-4 rounded-lg rounded-r-t-0 rounded-t-none w-36 md:w-44 transition text-center text-yellow-900 hover:bg-yellow-900 hover:text-white"><a href="#" class="text-md sm:text-lg md:text-xl text-center"><i class="gb gb_s24 relative left-2 mb-1 gb_phone gb_r270"></i>تماس با ما</a></li>
+            <li class="text-shadow-md inline-block py-2 md:py-4 px-4 rounded-lg rounded-r-t-0 rounded-t-none w-36 md:w-44 transition text-center text-yellow-900 hover:bg-yellow-900 hover:text-white"><a href="#" class="text-md sm:text-lg md:text-xl text-center"><i class="gb gb_s24 relative left-2 mb-1 gb_info"></i>درباره ما</a></li>
         </ul>
     </nav>
 </div>
