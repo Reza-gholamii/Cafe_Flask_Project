@@ -20,6 +20,7 @@
             --primary-color: #795548;
             --bg-color: #f2f2f2;
             --text-color: #444444;
+            --secondary-color: #7E334B ;
         }
 
         .bg-color {
@@ -37,7 +38,7 @@
             color: black;
             font-size: 1.4em;
             margin: auto 0;
-            padding-top: .3em !important;
+            padding-top: .3em;
         }
 
         .logo > span {
@@ -82,27 +83,55 @@
             color: var(--primary-color);
             font-weight: bold;
         }
+
+        /*.sign-btn {
+            border: 1px solid var(--primary-color);
+            padding: .5em 1em;
+            border-radius: 1em;
+        }*/
+        .sign-btn>span{
+            padding-left: 3px;
+            padding-top: 1px;
+        }
+        a:hover{
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .secondary-nav-btn{
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row bg-light border-bottom  ">
-        <div class="col-3">
+        <div class="col-3 d-flex flex-wrap">
             <img src="../static/img/main_icon.png" class="logo-pic" alt="logo">
-            <a class="btn logo" href="#">panda<span>kaffee</span></a>
+            <a class="logo" href="#">panda<span>kaffee</span></a>
         </div>
-        <div class="col-6 align-self-center">
+        <div class="col-6 d-flex flex-wrap">
             <ul class="primary-nav">
-                <li><a class="{{ 'choosed' if page_name=='home' else 'unchoosed' }}" href="#">Home</a></li>
-                <li><a class="{{ 'choosed' if page_name=='menu' else 'unchoosed' }}" href="#">Menu</a></li>
-                <li><a class="{{ 'choosed' if page_name=='about_us' else 'unchoosed' }}" href="#">About Us</a></li>
-                <li><a class="{{ 'choosed' if page_name=='contact_us' else 'unchoosed' }}" href="#">Contact Us</a></li>
+                <li><a class="{{ 'choosed' if page_name=='home' else 'unchoosed' }}"
+                       href="{{ url_for("home") }}">Home</a></li>
+                <li><a class="{{ 'choosed' if page_name=='menu' else 'unchoosed' }}"
+                       href="{{ url_for("menu") }}">Menu</a></li>
+                <li><a class="flex-wrap {{ 'choosed' if page_name=='about_us' else 'unchoosed' }}"
+                       href="{{ url_for("about_us") }}">About Us</a></li>
+                <li><a class="{{ 'choosed' if page_name=='contact_us' else 'unchoosed' }}"
+                       href="{{ url_for("contact_us") }}">Contact Us</a></li>
             </ul>
         </div>
-        <div class="col-3  align-self-center align-content-end d-flex justify-content-end">
-            <ul class="secondary-nav">
-                <li><a class="my-btn" href="#">Login</a></li>
-                <li><a class="my-btn" href="#"><i class="gb "></i>Sign up</a></li>
+        <div class="col-3  align-self-center d-flex flex-wrap">
+            <ul class="secondary-nav ">
+                <li><a class="secondary-nav-btn" href="#">order list</a></li>
+                <li>
+                    <a class="secondary-nav-btn" href="#">
+                        <i class="gb gb_account_circle gb_s24"></i>
+                        <span>Sign up</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
