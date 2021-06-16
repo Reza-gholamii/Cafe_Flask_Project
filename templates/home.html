@@ -54,7 +54,7 @@
     </style>
 </head>
 <body class="relative">
-<div class="fixed inset-2 md:inset-4 bottom-0 gap-0 md:bottom-0 shadow-inner animate__animated animate__fadeIn overflow-hidden" style="background: #E1E1E1 url(bg.jpg)">
+<div class="fixed inset-2 md:inset-4 gap-0 shadow-inner animate__animated animate__fadeIn overflow-hidden" style="background: #E1E1E1 url(bg.jpg)">
     <!--<nav class="grid grid-cols-4 w-full animate__animated animate__bounceInDown">
         <ul class="col-span-4 mx-auto sm:mx-4 float-right">
             <li class="text-shadow-md inline-block py-2 md:py-4 px-4 rounded-lg rounded-r-t-0 rounded-t-none md:w-44 transition text-center text-yellow-900 hover:bg-yellow-900 hover:text-white"><a href="#" class="text-md text-2xl md:text-3xl text-center"><i class="gb relative left-2 mb-1 gb_shopping_basket"></i><span class="text-lg sm:text-xl">فروشگاه</span></a></li>
@@ -79,7 +79,8 @@
         </div>
     </section>
 
-    <section class="grid transform ring-8 ring-yellow-900 ring-opacity-50 -skew-y-3 grid-cols-3 bg-yellow-900 absolute w-full sm:w-10/12 md:w-9/12 lg:w-8/12 mx-auto shadow-2xl h-48 sm:rounded-xl sm:rounded-b-none left-0 right-0" style="bottom: -35px;">
+    <section class="grid transform ring-8 ring-yellow-900 ring-opacity-50 -skew-y-3 grid-cols-3 bg-yellow-900 fixed w-full sm:w-10/12 md:w-9/12 lg:w-8/12 mx-auto shadow-2xl h-32 sm:rounded-xl sm:rounded-b-none left-0 right-0 z-20 " style="bottom: -35px;">
+        <a onclick="close()" class="cursor-pointer z-30 text-white text-4xl rounded-full px-2 text-center absolute bg-yellow-900 bg-opacity-30 right-0 top-0">&times</a>
         <div class="col-span-1 relative"></div>
         <div class="col-span-1 relative"></div>
         <div class="col-span-1 relative"></div>
