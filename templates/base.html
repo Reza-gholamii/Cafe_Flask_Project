@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css') }}">
+
+    {% block extra_head %}
+    {% endblock %}
+    <title>kaffee coffee</title>
+
+    <style>
+        :root {
+            --primary-color: #795548;
+            --bg-color: #f2f2f2;
+            --text-color: #444444;
+        }
+
+        .bg-color {
+            background: var(--bg-color);
+        }
+
+        body {
+            background: var(--bg-color);
+            margin: 0;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+            font-size: 1.4em;
+            margin: auto 0;
+            padding-top: .3em !important;
+        }
+
+        .logo > span {
+            color: var(--primary-color);
+        }
+
+        .logo-pic {
+            width: 2.5em;
+            margin: .7em;
+        }
+
+        .primary-nav {
+            display: flex;
+            justify-self: center;
+            margin: auto;
+            list-style-type: none;
+            text-decoration: none;
+        }
+
+        .primary-nav > li {
+            margin: 0 2em;
+        }
+
+        .secondary-nav {
+            display: flex;
+
+            margin: auto;
+            padding-top: .5em;
+            list-style-type: none;
+            text-decoration: none;
+        }
+
+        .secondary-nav > li {
+            margin: 0 2em;
+        }
+
+        .unchoosed {
+            color: black;
+        }
+
+        .choosed {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row bg-light border-bottom  ">
+        <div class="col-3">
+            <img src="../static/img/main_icon.png" class="logo-pic" alt="logo">
+            <a class="btn logo" href="#">panda<span>kaffee</span></a>
+        </div>
+        <div class="col-6 align-self-center">
+            <ul class="primary-nav">
+                <li><a class="{{ 'choosed' if page_name=='home' else 'unchoosed' }}" href="#">Home</a></li>
+                <li><a class="{{ 'choosed' if page_name=='menu' else 'unchoosed' }}" href="#">Menu</a></li>
+                <li><a class="{{ 'choosed' if page_name=='about_us' else 'unchoosed' }}" href="#">About Us</a></li>
+                <li><a class="{{ 'choosed' if page_name=='contact_us' else 'unchoosed' }}" href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="col-3  align-self-center align-content-end d-flex justify-content-end">
+            <ul class="secondary-nav">
+                <li><a class="my-btn" href="#">Login</a></li>
+                <li><a class="my-btn" href="#"><i class="gb "></i>Sign up</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row bg-color">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+</div>
+</body>
+</html>
