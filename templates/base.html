@@ -53,19 +53,19 @@
         .primary-nav {
             display: flex;
             justify-self: center;
-            margin: auto;
+            margin: auto 0 ;
             list-style-type: none;
             text-decoration: none;
         }
 
         .primary-nav > li {
-            margin: 0 2em;
+            margin: 0 1.5em;
         }
 
         .secondary-nav {
             display: flex;
 
-            margin: auto;
+            margin-right: 0;
             padding-top: .5em;
             list-style-type: none;
             text-decoration: none;
@@ -107,7 +107,7 @@
 <body>
 <div class="container-fluid">
     <div class="row bg-light border-bottom  ">
-        <div class="col-3 d-flex flex-wrap">
+        <div class="col-2 d-flex flex-wrap">
             <img src="../static/img/main_icon.png" class="logo-pic" alt="logo">
             <a class="logo" href="#">panda<span>kaffee</span></a>
         </div>
@@ -123,11 +123,11 @@
                        href="{{ url_for("contact_us") }}">Contact Us</a></li>
             </ul>
         </div>
-        <div class="col-3  align-self-center d-flex flex-wrap">
+        <div class="col-4 float-right align-self-center d-flex flex-wrap m-0 p-0">
             <ul class="secondary-nav ">
                 <li><a class="secondary-nav-btn" href="#">order list</a></li>
                 <li>
-                    <a class="secondary-nav-btn" href="#">
+                    <a class="secondary-nav-btn d-flex justify-content-end" href="#">
                         <i class="gb gb_account_circle gb_s24"></i>
                         <span>Sign up</span>
                     </a>
