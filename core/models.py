@@ -1,7 +1,12 @@
-from abc import ABC, abstractclassmethod
+from abc import ABC
 
 
-class BaseModels(ABC):
-
-    def to_dict(self):
+class BaseModel(ABC):
+    """
+    A Base Model for Inheritanced All Entities Class Models
+    """
+    def to_dict(self) -> dict:
+        """
+        This Method Returned All Attributes of the self instance
+        """
         return vars(self)
