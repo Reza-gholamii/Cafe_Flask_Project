@@ -22,7 +22,7 @@ class DataBaseContext:
             curs: cursor = conn.cursor()
 
             # preparing query to create a database
-            SQL = f"CREATE DATABASE {dbconfig.get('dbname')};"
+            SQL = f"CREATE DATABASE {dbconfig.get('dbname')} WITH OWNER = postgres;"
             # creating a database
             curs.execute(SQL)
 
