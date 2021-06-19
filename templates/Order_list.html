@@ -35,10 +35,13 @@
             border-radius: 7px;
         }
 
+        .btn {
+            max-width: 100%;
+        }
 
         #icon {
             color: black;
-            font-size: 18px;
+            font-size: 22px;
             margin-left: 4px;
             margin-right: 4px;
         }
@@ -49,10 +52,10 @@
 <body>
 <div class="container-fluid">
     <div class="row main-row bg-light">
-        <div class="col-8 col-md-7 col-lg-8 main-col text-center mx-auto my-3">
+        <div class="col-9 col-md-7 col-lg-8 main-col text-center mx-auto my-3">
 
 
-            <div class="row row-order mx-auto my-4 shadow bg-light">
+            <div class="row row-order mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز 1</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: 325</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order">سرو شده</div>
@@ -63,13 +66,34 @@
                     <a id=icon href="#"><i class="fa fa-check"></i></a>
                     <a id=icon href="#"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-4 col-order">
-                    <button type="button" class="btn btn-info"></button>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">جزئیات
+                    </button>
+                </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
-            <div class="row row-order mx-auto my-4 shadow bg-light">
+            <div class="row row-order mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز 2</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: 325</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order">سرو شده</div>
@@ -80,13 +104,34 @@
                     <a id=icon href="#"><i class="fa fa-check"></i></a>
                     <a id=icon href="#"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-4 col-order">
-                    <button type="button" class="btn btn-info"></button>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">جزئیات
+                    </button>
+                </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
-            <div class="row row-order mx-auto my-4 shadow bg-light">
+            <div class="row row-order mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز 3</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: 325</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order">سرو شده</div>
@@ -97,13 +142,34 @@
                     <a id=icon href="#"><i class="fa fa-check"></i></a>
                     <a id=icon href="#"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-4 col-order">
-                    <button type="button" class="btn btn-info"></button>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">جزئیات
+                    </button>
+                </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
-            <div class="row row-order mx-auto my-4 shadow bg-light">
+            <div class="row row-order mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز 4</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: 325</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order">سرو شده</div>
@@ -114,13 +180,34 @@
                     <a id=icon href="#"><i class="fa fa-check"></i></a>
                     <a id=icon href="#"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-4 col-order">
-                    <button type="button" class="btn btn-info"></button>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">جزئیات
+                    </button>
+                </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
-            <div class="row row-order mx-auto my-4 shadow bg-light">
+            <div class="row row-order mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز 5</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: 325</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order">سرو شده</div>
@@ -131,13 +218,34 @@
                     <a id=icon href="#"><i class="fa fa-check"></i></a>
                     <a id=icon href="#"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-4 col-order">
-                    <button type="button" class="btn btn-info"></button>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">جزئیات
+                    </button>
+                </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
-            <div class="row row-order mx-auto my-4 shadow bg-light">
+            <div class="row row-order mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز 6</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: 325</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order">سرو شده</div>
@@ -148,13 +256,34 @@
                     <a id=icon href="#"><i class="fa fa-check"></i></a>
                     <a id=icon href="#"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-4 col-order">
-                    <button type="button" class="btn btn-info"></button>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">جزئیات
+                    </button>
+                </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
-            <div class="row row-order mx-auto my-4 shadow bg-light">
+            <div class="row row-order mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز 7</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: 325</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order">سرو شده</div>
@@ -165,9 +294,31 @@
                     <a id=icon href="#"><i class="fa fa-check"></i></a>
                     <a id=icon href="#"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-4 col-4 col-order">
-                    <button type="button" class="btn btn-info"></button>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">جزئیات
+                    </button>
                 </div>
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
 
 
