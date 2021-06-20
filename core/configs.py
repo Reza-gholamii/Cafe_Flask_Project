@@ -26,7 +26,7 @@ class DataBaseContext:
             curs: cursor = conn.cursor()
 
             # preparing query to create a database
-            SQL = f"CREATE DATABASE {dbconfig.get('dbname')} WITH OWNER = postgres;"
+            SQL = f" CREATE DATABASE {dbconfig.get('dbname')} WITH OWNER = postgres;"
             # creating a database
             curs.execute(SQL)
 
@@ -39,6 +39,11 @@ class DataBaseContext:
     def __enter__(self):
         self.conn: connection = connect(config)
         self.curs: cursor = self.conn.cursor()
+
+        SQL = "CREATE SCHEMA IF NOT EXISTS public;"
+        self.curs.execute(SQL)
+        self.conn.commit()
+
         return self.curs
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -52,7 +57,7 @@ class DataBaseContext:
 
 sql_queries = [
     """
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
 first_name CHAR(50) NOT NULL,
 last_name CHAR(50) NOT NULL,
 phone_number CHAR(11) NOT NULL,
@@ -62,13 +67,13 @@ extra_information JSON NOT NULL,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE tables (
+CREATE TABLE IF NOT EXISTS tables (
 table_number INT NOT NULL,
 position_space CHAR(20) NOT NULL,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE menu_items (
+CREATE TABLE IF NOT EXISTS menu_items (
 name CHAR(50) NOT NULL,
 price INT NOT NULL,
 category CHAR(20) NOT NULL,
@@ -79,7 +84,7 @@ cooking_time TIME,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE recepites (
+CREATE TABLE IF NOT EXISTS recepites (
 total_price INT NOT NULL,
 final_price INT NOT NULL,
 status BOOLEAN NOT NULL,
@@ -93,6 +98,27 @@ CONSTRAINT fk_num
 );
 """,
     """
-
+CREATE TABLE IF NOT EXISTS orders (
+status BOOLEAN NOT NULL,
+time_stamp TIMESTAMP NOT NULL,
+recepites_id INT NOT NULL,
+menu_items_id INT NOT NULL,
+id SERIAL PRIMARY KEY,
+CONSTRAINT fk_recepite
+    FOREIGN KEY(recepites_id)
+    REFERENCES recepites(id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL
+CONSTRAINT fk_menu_item
+    FOREIGN KEY(menu_items_id)
+    REFERENCES menu_items(id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL
+);
 """
 ]
+
+# creating tables
+with DataBaseContext() as DBCursor:
+    for query in sql_queries:
+        DBCursor.execute(query)

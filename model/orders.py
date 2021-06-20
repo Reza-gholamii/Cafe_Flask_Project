@@ -9,7 +9,7 @@ class Order(BaseModel):
 
     ID: int
     status: bool # present or not
-    timestamp: datetime # object of datetime class
+    time_stamp: datetime # object of datetime class
     # Forigen Key Reference to Recepites ID
     # Forigen Key Reference to Menu Items ID
 
