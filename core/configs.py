@@ -62,7 +62,10 @@ extra_information JSON NOT NULL,
 id SERIAL PRIMARY KEY);
 """,
     """
-
+CREATE TABLE tables (
+table_number INT NOT NULL,
+position_space CHAR(20) NOT NULL,
+id SERIAL PRIMARY KEY);
 """,
     """
 
