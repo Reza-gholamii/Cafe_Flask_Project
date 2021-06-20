@@ -79,7 +79,18 @@ cooking_time TIME,
 id SERIAL PRIMARY KEY);
 """,
     """
-
+CREATE TABLE recepites (
+total_price INT NOT NULL,
+final_price INT NOT NULL,
+status BOOLEAN NOT NULL,
+table_num INT NOT NULL,
+id SERIAL PRIMARY KEY,
+CONSTRAINT fk_num
+    FOREIGN KEY(table_num)
+    REFERENCES tables(table_number)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL
+);
 """,
     """
 
