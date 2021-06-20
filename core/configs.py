@@ -49,3 +49,28 @@ class DataBaseContext:
             logging.info(f"{__name__}: Execute Query Successfully.")
         return True  # For ignore raising exceptions!
 
+
+sql_queries = [
+    """
+CREATE TABLE users (
+first_name CHAR(50) NOT NULL,
+last_name CHAR(50) NOT NULL,
+phone_number CHAR(11) NOT NULL,
+email CHAR(100),
+password CHAR(100) NOT NULL,
+extra_information JSON NOT NULL,
+id SERIAL PRIMARY KEY);
+""",
+    """
+
+""",
+    """
+
+""",
+    """
+
+""",
+    """
+
+"""
+]
