@@ -1,5 +1,3 @@
-from db_syncer import *
-
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor
 
@@ -14,7 +12,7 @@ class DataBaseContext:
     Context Manager for Accessing DataBase
     """
 
-    def __init__(self):
+    def __init__(self, dbconfig):
         try:
             # establishing the connection
             conn: connection = connect(database="postgres",
@@ -35,9 +33,11 @@ class DataBaseContext:
             logging.info(f"{__name__}: Database Created Successfully.")
         except:
             logging.warning(f"{__name__}: Database Already Existed.")
+        finally:
+            self.config = ' '.join([key + '=' + value for key, value in dbconfig.items()])
 
     def __enter__(self):
-        self.conn: connection = connect(config)
+        self.conn: connection = connect(self.config)
         self.curs: cursor = self.conn.cursor()
 
         SQL = "CREATE SCHEMA IF NOT EXISTS public;"
@@ -57,7 +57,7 @@ class DataBaseContext:
 
 sql_queries = [
     """
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
 first_name CHAR(50) NOT NULL,
 last_name CHAR(50) NOT NULL,
 phone_number CHAR(11) NOT NULL,
@@ -67,13 +67,13 @@ extra_information JSON NOT NULL,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE IF NOT EXISTS tables (
+CREATE TABLE tables (
 table_number INT NOT NULL,
 position_space CHAR(20) NOT NULL,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE IF NOT EXISTS menu_items (
+CREATE TABLE menu_items (
 name CHAR(50) NOT NULL,
 price INT NOT NULL,
 category CHAR(20) NOT NULL,
@@ -84,7 +84,7 @@ cooking_time TIME,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE IF NOT EXISTS recepites (
+CREATE TABLE recepites (
 total_price INT NOT NULL,
 final_price INT NOT NULL,
 status BOOLEAN NOT NULL,
@@ -98,7 +98,7 @@ CONSTRAINT fk_num
 );
 """,
     """
-CREATE TABLE IF NOT EXISTS orders (
+CREATE TABLE orders (
 status BOOLEAN NOT NULL,
 time_stamp TIMESTAMP NOT NULL,
 recepites_id INT NOT NULL,
@@ -117,8 +117,3 @@ CONSTRAINT fk_menu_item
 );
 """
 ]
-
-# creating tables
-with DataBaseContext() as DBCursor:
-    for query in sql_queries:
-        DBCursor.execute(query)
