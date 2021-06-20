@@ -37,7 +37,10 @@ class DataBaseContext:
         self.curs: cursor = self.conn.cursor()
         return self.curs
 
-    def __exit__(self):
-        self.conn.commit()
-        self.curs.close()
-        self.conn.close()
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if not exc_type:
+            self.conn.commit()
+            self.curs.close()
+            self.conn.close()
+            logging.info(f"{__name__}: Execute Query Successfully.")
+        return True # For ignore raising exceptions!
