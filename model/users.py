@@ -22,3 +22,4 @@ class User(BaseModel):
         self.email = email
         self.password = password
         self.extra_information = extra_information
+        # Create method in DataBaseManager
