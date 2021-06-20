@@ -50,4 +50,23 @@ class BaseDataBaseManager(BaseManager):
 
 
 class ExtraDataBaseManager(BaseDataBaseManager):
-    pass
+    """
+    Extra Methods for DataBase Manager Executed the Other Queries
+    """
+
+    def bestsellers(self, size: int = 3):
+        """
+        Query to Find the Best Selling Products
+        """
+
+        query = """
+SELECT menu_items.name, COUNT(orders.menu_item) AS Sale
+FROM orders INNER JOIN menu_items
+ON orders.menu_item = menu_items.id
+GROUP BY menu_item
+ORDER BY COUNT(orders.menu_item) DESC;
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            return cafe_cursor.fetchmany(size)
