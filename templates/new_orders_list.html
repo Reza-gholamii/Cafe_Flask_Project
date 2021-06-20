@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa-IR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>کافه | لیست سفارشات جدید</title>
+
+    <style>
+        * {
+            font-family: Yekan, sans-serif;
+            direction: rtl;
+        }
+
+        body {
+            background-color: #fafafa;
+        }
+
+        .order-col {
+            height: 100%;
+        }
+
+        .btn {
+            max-width: 100%;
+        }
+
+        .icon {
+            color: black;
+            font-size: 21px;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+
+        .table-responsive {
+            display: inherit;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row main-row bg-light">
+        <div class="col-8 order-col mx-auto my-3 rounded shadow">
+            <table class="table-responsive text-center mx-auto">
+                <thead>
+                <tr>
+                    <th>شماره سفارش</th>
+                    <th>شماره میز</th>
+                    <th>زمان درخواست</th>
+                    <th>وضعیت</th>
+                    <th>ویرایش</th>
+                    <th>آیتمهای سفارش</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-xl-2 col-md-6 col-12">325</td>
+                    <td class="col-xl-2 col-md-6 col-12">1</td>
+                    <td class="col-xl-2 col-md-6 col-12">06/20/2021</td>
+                    <td class="col-xl-2 col-md-6 col-12" id="status">جدید</td>
+                    <td class="col-xl-2 col-md-6 col-12">
+                        <a class="icon" id='icon_refresh' href="#" onclick="change_status(this)">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                        <a class="icon" id='icon_cook' href="#" onclick="change_status(this)">
+                            <i class="fa fa-share"></i>
+                        </a>
+                        <a class="icon" id='icon_serve' href="#" onclick="change_status(this)">
+                            <i class="fa fa-coffee"></i>
+                        </a>
+                        <a class="icon" id='icon_check' href="#" onclick="change_status(this)">
+                            <i class="fa fa-check"></i>
+                        </a>
+                        <a class="icon" id='icon_trash' href="#" onclick="change_status(this)">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                    <td class="col-xl-2 col-md-6 col-12">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">آیتمهای
+                            سفارش
+                        </button>
+
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>325</td>
+                    <td>1</td>
+                    <td>سرو شده</td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>325</td>
+                    <td>1</td>
+                    <td>سرو شده</td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>325</td>
+                    <td>1</td>
+                    <td>سرو شده</td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>325</td>
+                    <td>1</td>
+                    <td>سرو شده</td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>325</td>
+                    <td>1</td>
+                    <td>سرو شده</td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>325</td>
+                    <td>1</td>
+                    <td>سرو شده</td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info"></button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<script src="../static/js/order_list.js"></script>
+</body>
+</html>
