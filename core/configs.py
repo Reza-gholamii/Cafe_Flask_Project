@@ -16,8 +16,8 @@ class DataBaseContext:
         try:
             # establishing the connection
             conn: connection = connect(database="postgres",
-                                       user=dbconfig.get("user", "postgres"), password=dbconfig.get("password"),
-                                       host=dbconfig.get("host", "localhost"), port=dbconfig.get("port", "5432"))
+                user=dbconfig.get("user", "postgres"), password=dbconfig.get("password"),
+                host=dbconfig.get("host", "localhost"), port=dbconfig.get("port", "5432"))
 
             conn.autocommit = True
             # creating a cursor object using the cursor() method
@@ -53,32 +53,33 @@ class DataBaseContext:
             self.conn.close()
             logging.info(f"{__name__}: Execute Query Successfully.")
         else:
-            logging.error(f"{__name__}: Error in Connection or Create Table")
+            logging.error(f"{__name__}: {exc_type} >>> {exc_val}")
         return True  # For ignore raising exceptions!
 
 
 sql_queries = [
     """
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
 first_name CHAR(50) NOT NULL,
 last_name CHAR(50) NOT NULL,
 phone_number CHAR(11) NOT NULL,
 email CHAR(100),
 password CHAR(100) NOT NULL,
-extra_information JSON NOT NULL,
+extra_information JSON,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE tables (
-table_number INT NOT NULL UNIQUE,
-position_space CHAR(20) NOT NULL,
+CREATE TABLE IF NOT EXISTS tables (
+capacity INT NOT NULL,
+position_space CHAR(20) NOT NULL UNIQUE,
+empty BOOLEAN DEFAULT true,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE menu_items (
-name CHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS menu_items (
+name CHAR(50) NOT NULL UNIQUE,
 price INT NOT NULL,
-category CHAR(20) NOT NULL,
+category CHAR(30) NOT NULL,
 image_name CHAR(100),
 discount INT,
 serving_time TIME,
@@ -86,33 +87,33 @@ cooking_time TIME,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE receipts (
+CREATE TABLE IF NOT EXISTS recepites (
 total_price INT NOT NULL,
 final_price INT NOT NULL,
-status BOOLEAN NOT NULL,
-table_num INT NOT NULL,
+status BOOLEAN DEFAULT false,
+table_number INT NOT NULL,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_num
-    FOREIGN KEY(table_num)
-    REFERENCES tables(table_number)
+    FOREIGN KEY(table_number)
+    REFERENCES tables(id)
     ON DELETE SET NULL
     ON UPDATE SET NULL
 );
 """,
     """
-CREATE TABLE orders (
-status BOOLEAN NOT NULL,
+CREATE TABLE IF NOT EXISTS orders (
+status BOOLEAN DEFAULT false,
 time_stamp TIMESTAMP NOT NULL,
-receipts_id INT NOT NULL,
-menu_items_id INT NOT NULL,
+recepite INT NOT NULL,
+menu_item INT NOT NULL,
 id SERIAL PRIMARY KEY,
-CONSTRAINT fk_receipt
-    FOREIGN KEY(receipts_id)
-    REFERENCES receipts(id)
+CONSTRAINT fk_recepite
+    FOREIGN KEY(recepite)
+    REFERENCES recepites(id)
     ON DELETE SET NULL
     ON UPDATE SET NULL,
 CONSTRAINT fk_menu_item
-    FOREIGN KEY(menu_items_id)
+    FOREIGN KEY(menu_item)
     REFERENCES menu_items(id)
     ON DELETE SET NULL
     ON UPDATE SET NULL
