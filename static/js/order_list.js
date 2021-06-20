@@ -1,6 +1,6 @@
 function change_status(status) {
     let row_number = status.parentNode.parentNode
-    let target_column = row_number.childNodes[7]
+    let target_column = row_number.childNodes[5]
     if (status.id === 'icon_refresh') {
         target_column.innerText = 'جدید'
     } else if (status.id === 'icon_cook') {
