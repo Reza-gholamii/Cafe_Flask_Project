@@ -1,5 +1,3 @@
-import core
-from core import configs
 from core.configs import *
 
 
