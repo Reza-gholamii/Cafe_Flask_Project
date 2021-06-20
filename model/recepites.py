@@ -12,5 +12,7 @@ class Recepites(BaseModel):
     status: bool # payment or not
     # Forigen Key Reference to Table ID
 
-    def __init__(self):
-        pass
+    def __init__(self, total_price, final_price, status=False):
+        self.total_price = total_price
+        self.final_price = final_price
+        self.status = status

@@ -8,10 +8,11 @@ class Order(BaseModel):
     """
 
     ID: int
-    status: bool # present or not
     time_stamp: datetime # object of datetime class
+    status: bool # present or not
     # Forigen Key Reference to Recepites ID
     # Forigen Key Reference to Menu Items ID
 
-    def __init__(self):
-        pass
+    def __init__(self, time_stamp, status=False):
+        self.time_stamp = time_stamp
+        self.status = status
