@@ -52,6 +52,8 @@ class DataBaseContext:
             self.curs.close()
             self.conn.close()
             logging.info(f"{__name__}: Execute Query Successfully.")
+        else:
+            logging.error(f"{__name__}: Error in Connection or Create Table")
         return True  # For ignore raising exceptions!
 
 
