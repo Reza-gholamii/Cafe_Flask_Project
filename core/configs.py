@@ -16,8 +16,8 @@ class DataBaseContext:
         try:
             # establishing the connection
             conn: connection = connect(database="postgres",
-                user=dbconfig.get("user", "postgres"), password=dbconfig.get("password"),
-                host=dbconfig.get("host", "localhost"), port=dbconfig.get("port", "5432"))
+                                       user=dbconfig.get("user", "postgres"), password=dbconfig.get("password"),
+                                       host=dbconfig.get("host", "localhost"), port=dbconfig.get("port", "5432"))
 
             conn.autocommit = True
             # creating a cursor object using the cursor() method
@@ -70,7 +70,7 @@ id SERIAL PRIMARY KEY);
 """,
     """
 CREATE TABLE tables (
-table_number INT NOT NULL,
+table_number INT NOT NULL UNIQUE,
 position_space CHAR(20) NOT NULL,
 id SERIAL PRIMARY KEY);
 """,
@@ -86,7 +86,7 @@ cooking_time TIME,
 id SERIAL PRIMARY KEY);
 """,
     """
-CREATE TABLE recepites (
+CREATE TABLE receipts (
 total_price INT NOT NULL,
 final_price INT NOT NULL,
 status BOOLEAN NOT NULL,
@@ -103,14 +103,14 @@ CONSTRAINT fk_num
 CREATE TABLE orders (
 status BOOLEAN NOT NULL,
 time_stamp TIMESTAMP NOT NULL,
-recepites_id INT NOT NULL,
+receipts_id INT NOT NULL,
 menu_items_id INT NOT NULL,
 id SERIAL PRIMARY KEY,
-CONSTRAINT fk_recepite
-    FOREIGN KEY(recepites_id)
-    REFERENCES recepites(id)
+CONSTRAINT fk_receipt
+    FOREIGN KEY(receipts_id)
+    REFERENCES receipts(id)
     ON DELETE SET NULL
-    ON UPDATE SET NULL
+    ON UPDATE SET NULL,
 CONSTRAINT fk_menu_item
     FOREIGN KEY(menu_items_id)
     REFERENCES menu_items(id)
