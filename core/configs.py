@@ -68,7 +68,15 @@ position_space CHAR(20) NOT NULL,
 id SERIAL PRIMARY KEY);
 """,
     """
-
+CREATE TABLE menu_items (
+name CHAR(50) NOT NULL,
+price INT NOT NULL,
+category CHAR(20) NOT NULL,
+image_name CHAR(100),
+discount INT,
+serving_time TIME,
+cooking_time TIME,
+id SERIAL PRIMARY KEY);
 """,
     """
 
