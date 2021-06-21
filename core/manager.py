@@ -49,7 +49,11 @@ class BaseDataBaseManager(BaseManager):
         pass
 
 
-class ExtraDataBaseManager(BaseDataBaseManager):
+class DataBaseManager(BaseDataBaseManager):
+    pass
+
+
+class ExtraDataBaseManager(DataBaseManager):
     """
     Extra Methods for DataBase Manager Executed the Other Queries
     """
