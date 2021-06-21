@@ -1,15 +1,16 @@
 function change_status(status) {
     let row_number = status.parentNode.parentNode
     let target_column = row_number.childNodes[5]
-    if (status.id === 'icon_refresh') {
+    let class_name = status.classList[1]
+    if (class_name === 'icon_refresh') {
         target_column.innerText = 'جدید'
-    } else if (status.id === 'icon_cook') {
+    } else if (class_name === 'icon_cook') {
         target_column.innerText = 'در حال پخت'
-    } else if (status.id === 'icon_serve') {
+    } else if (class_name === 'icon_serve') {
         target_column.innerText = 'سرو شده'
-    } else if (status.id === 'icon_check') {
+    } else if (class_name === 'icon_check') {
         target_column.innerText = 'پرداخت شده'
-    } else if (status.id === 'icon_trash') {
+    } else if (class_name === 'icon_trash') {
         target_column.innerText = 'کنسل شده'
     }
 }
