@@ -104,7 +104,7 @@ class DataBaseManager(BaseDataBaseManager):
             db_cursor.execute(query)
             return db_cursor.fetchall()
 
-    # Read All Data Method ...
+    # Read All Data Methods ...
 
     def send_query(self, query, data=None):
         with self.access_database() as db_cursor:
