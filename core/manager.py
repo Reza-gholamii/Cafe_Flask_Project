@@ -58,6 +58,10 @@ class BaseDataBaseManager(BaseManager):
 
 class DataBaseManager(BaseDataBaseManager):
 
+    def send_query(self, query, data=None):
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query, data)
+
     @contextmanager
     def access_database(self):
         conn: connection = connect(dbconfig.config)
