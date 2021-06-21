@@ -1,4 +1,8 @@
 from abc import ABC, abstractmethod
+from contextlib import contextmanager
+from psycopg2 import connect
+from psycopg2._psycopg import connection, cursor
+from db_syncer import dbconfig
 
 
 class BaseManager(ABC):
@@ -31,25 +35,75 @@ class BaseManager(ABC):
         """
 
 
-class BaseDataBaseManager(BaseManager):
+class DataBaseManager(BaseManager):
     """
     Managed DataBase Tables to CRUD Data of Models
     """
 
     def create(self, table, model):
-        pass
-
-    def read(self, table, row_id):
-        pass
+        attrs: dict = model.to_dict()
+        dict_values = tuple(attrs.values())
+        value_num = '%s, ' * len(dict_values)
+        query = f"INSERT INTO {table} VALUES ({value_num[:-2]});"
+        self.send_query(query, dict_values)
 
     def update(self, table, **kwargs):
-        pass
+        set_string = ""
+        condition_string_key = list(kwargs.keys())[0]
+        condition_string_value = kwargs[condition_string_key]
+        condition_string = f"{condition_string_key}='{condition_string_value}'"
+        kwargs.pop(condition_string_key)
+        for key, value in kwargs.items():
+            set_string += f"{key}='{value}', "
+        query = f"UPDATE {table} SET {set_string[:-2]} where {condition_string}"
+        self.send_query(query)
+
+    def read(self, table, row_id):
+        query = f"SELECT * FROM {table} where id={row_id}"
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query)
+            return db_cursor.fetchall()
 
     def delete(self, table, row_id):
-        pass
+        query = f"DELETE FROM {table} where id={row_id}"
+        self.send_query(query)
+
+    def get_id(self, table, **kwargs):
+        condition = ""
+        for column, value in kwargs.items():
+            condition += f"{table}.{column}='{value}' and "
+        query = f"SELECT {table}.id from {table} where {condition[:-5]};"
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query)
+            return db_cursor.fetchone()[0]
+
+    def check_record(self, table, **kwargs):
+        condition_string = ''
+        for key, value in kwargs.items():
+            condition_string += f"{key}='{value}' and "
+        query = f"SELECT * from {table} where {condition_string[:-5]};"
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query)
+            return db_cursor.fetchall()
+
+    # Read All Data Methods ...
+
+    def send_query(self, query, data=None):
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query, data)
+
+    @contextmanager
+    def access_database(self):
+        config = ' '.join([key + '=' + value for key, value in dbconfig.items()])
+        conn: connection = connect(config)
+        curs: cursor = conn.cursor()
+        yield curs
+        curs.close()
+        conn.commit()
+        conn.close()
 
 
-class ExtraDataBaseManager(BaseDataBaseManager):
+class ExtraDataBaseManager(DataBaseManager):
     """
     Extra Methods for DataBase Manager Executed the Other Queries
     """
@@ -69,4 +123,6 @@ ORDER BY COUNT(orders.menu_item) DESC;
 
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
-            return cafe_cursor.fetchmany(size)
+            result = cafe_cursor.fetchmany(size)
+
+        return result
