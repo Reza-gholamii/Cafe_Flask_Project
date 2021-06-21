@@ -65,6 +65,17 @@ class DataBaseManager(BaseDataBaseManager):
         query = f"INSERT INTO {table} VALUES ({value_num[:-2]});"
         self.send_query(query, dict_values)
 
+    def update(self, table, **kwargs):
+        set_string = ""
+        condition_string_key = list(kwargs.keys())[0]
+        condition_string_value = kwargs[condition_string_key]
+        condition_string = f"{condition_string_key}='{condition_string_value}'"
+        kwargs.pop(condition_string_key)
+        for key, value in kwargs.items():
+            set_string += f"{key}='{value}', "
+        query = f"UPDATE {table} SET {set_string[:-2]} where {condition_string}"
+        self.send_query(query)
+
     def read(self, table, row_id):
         query = f"SELECT * FROM {table} where id={row_id}"
         with self.access_database() as db_cursor:
