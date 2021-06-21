@@ -58,6 +58,10 @@ class BaseDataBaseManager(BaseManager):
 
 class DataBaseManager(BaseDataBaseManager):
 
+    def delete(self, table, row_id):
+        query = f"DELETE FROM {table} where id={row_id}"
+        self.send_query(query)
+
     def get_id(self, table, **kwargs):
         condition = ""
         for column, value in kwargs.items():
