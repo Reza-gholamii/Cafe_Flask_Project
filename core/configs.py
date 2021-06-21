@@ -78,7 +78,14 @@ id SERIAL PRIMARY KEY);
     """
 CREATE TABLE IF NOT EXISTS categories (
 field CHAR(50) NOT NULL UNIQUE,
-id SERIAL PRIMARY KEY);
+root INT,
+id SERIAL PRIMARY KEY,
+CONSTRAINT fk_tree
+    FOREIGN KEY(root)
+    REFERENCES categories(id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL
+);
 """,
     """
 CREATE TABLE IF NOT EXISTS menu_items (
