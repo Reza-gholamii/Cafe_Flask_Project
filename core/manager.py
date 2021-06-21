@@ -58,14 +58,23 @@ class BaseDataBaseManager(BaseManager):
 
 class DataBaseManager(BaseDataBaseManager):
 
+    def get_id(self, table, **kwargs):
+        condition = ""
+        for column, value in kwargs.items():
+            condition += f"{table}.{column}='{value}' and "
+        query = f"SELECT {table}.id from {table} where {condition[:-5]};"
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query)
+            return db_cursor.fetchone()[0]
+
     def check_record(self, table, **kwargs):
         condition_string = ''
         for key, value in kwargs.items():
             condition_string += f"{key}='{value}' and "
         query = f"SELECT * from {table} where {condition_string[:-5]};"
-        with self.access_database() as lab_cursor:
-            lab_cursor.execute(query)
-            return lab_cursor.fetchall()
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query)
+            return db_cursor.fetchall()
 
     # Read All Data Method ...
 
