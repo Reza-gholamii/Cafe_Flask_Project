@@ -76,15 +76,26 @@ empty BOOLEAN DEFAULT true,
 id SERIAL PRIMARY KEY);
 """,
     """
+CREATE TABLE IF NOT EXISTS categories (
+field CHAR(50) NOT NULL UNIQUE,
+id SERIAL PRIMARY KEY);
+""",
+    """
 CREATE TABLE IF NOT EXISTS menu_items (
 name CHAR(50) NOT NULL UNIQUE,
 price INT NOT NULL,
-category CHAR(30) NOT NULL,
+category INT NOT NULL,
 image_name CHAR(100),
 discount INT,
 serving_time TIME,
 cooking_time TIME,
-id SERIAL PRIMARY KEY);
+id SERIAL PRIMARY KEY,
+CONSTRAINT fk_group
+    FOREIGN KEY(category)
+    REFERENCES categories(id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL
+);
 """,
     """
 CREATE TABLE IF NOT EXISTS recepites (
