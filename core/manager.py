@@ -65,6 +65,12 @@ class DataBaseManager(BaseDataBaseManager):
         query = f"INSERT INTO {table} VALUES ({value_num[:-2]});"
         self.send_query(query, dict_values)
 
+    def read(self, table, row_id):
+        query = f"SELECT * FROM {table} where id={row_id}"
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query)
+            return db_cursor.fetchall()
+
     def delete(self, table, row_id):
         query = f"DELETE FROM {table} where id={row_id}"
         self.send_query(query)
