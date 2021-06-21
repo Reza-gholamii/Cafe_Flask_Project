@@ -9,7 +9,7 @@ dbconfig = {
     "port": '5432'
 }
 
-config = " ".join([f"{key}={dbconfig[key]}" for key in dbconfig.keys()])
+config = ' '.join([key + '=' + value for key, value in dbconfig.items()])
 
 # creating tables
 with DataBaseContext(dbconfig) as DBCursor:
