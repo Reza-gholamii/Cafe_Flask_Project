@@ -57,7 +57,15 @@ class BaseDataBaseManager(BaseManager):
 
 
 class DataBaseManager(BaseDataBaseManager):
-    pass
+
+    @contextmanager
+    def access_database(self):
+        conn: connection = connect(dbconfig.config)
+        curs: cursor = conn.cursor()
+        yield curs
+        curs.close()
+        conn.commit()
+        conn.close()
 
 
 class ExtraDataBaseManager(DataBaseManager):
