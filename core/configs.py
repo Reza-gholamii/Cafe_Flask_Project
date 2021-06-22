@@ -72,7 +72,7 @@ id SERIAL PRIMARY KEY);
 CREATE TABLE IF NOT EXISTS tables (
 capacity INT NOT NULL,
 position_space CHAR(20) NOT NULL UNIQUE,
-empty BOOLEAN DEFAULT true,
+status BOOLEAN DEFAULT FALSE,
 id SERIAL PRIMARY KEY);
 """,
     """
@@ -108,7 +108,7 @@ CONSTRAINT fk_group
 CREATE TABLE IF NOT EXISTS recepites (
 total_price INT NOT NULL,
 final_price INT NOT NULL,
-status BOOLEAN DEFAULT false,
+status BOOLEAN DEFAULT FALSE,
 table_number INT NOT NULL,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_num
@@ -120,7 +120,7 @@ CONSTRAINT fk_num
 """,
     """
 CREATE TABLE IF NOT EXISTS orders (
-status BOOLEAN DEFAULT false,
+status BOOLEAN DEFAULT FALSE,
 time_stamp TIMESTAMP NOT NULL,
 recepite INT NOT NULL,
 menu_item INT NOT NULL,

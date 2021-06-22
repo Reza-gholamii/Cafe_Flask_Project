@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor
 from contextlib import contextmanager
@@ -107,7 +108,7 @@ class ExtraDataBaseManager(DataBaseManager):
     Extra Methods for DataBase Manager Executed the Other Queries
     """
 
-    def bestsellers(self, size: int = 3):
+    def bestsellers(self, size: int = 3) -> List[tuple]:
         """
         Query to Find the Best Selling Products
         """
@@ -125,3 +126,19 @@ ORDER BY COUNT(menu_items.id) DESC;
             result = cafe_cursor.fetchmany(size)
 
         return result
+
+    def statusfilter(self, table: str, status: bool) -> List[int]:
+        """
+        Query to Get Empty Table or Payment Recepites or Present Order...
+        """
+
+        query = f"""
+SELECT id FROM {table}
+WHERE status={'true' if status else 'false'};
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchall() # list contains single member tuple (id,)
+        
+        return [item[0] for item in result]
