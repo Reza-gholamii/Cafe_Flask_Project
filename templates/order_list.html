@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
     <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
     <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
     <meta charset="UTF-8">
@@ -43,7 +43,7 @@
 
         .icon {
             color: black;
-            font-size: 21px;
+            font-size: 20px;
             margin-left: 4px;
             margin-right: 4px;
         }
@@ -60,19 +60,22 @@
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز ۱</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: ۳۲۵</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order" id="status">جدید</div>
-                <div class="col-lg-2 d-none d-xl-block col-order"></div>
-                <div class="col-xl-2 col-lg col-md-8 col-8 px-xl-0 col-order">
+                <div class="col-lg-1 d-none d-xl-block col-order"></div>
+                <div class="col-xl-3 col-lg col-md-8 col-8 px-0 col-order">
+                    <a class="icon icon_refresh" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
                     <a class="icon icon_cook" onclick="change_status(this)">
-                        <i class="fa fa-share"></i>
+                        <i class="gb gb_kitchen"></i>
                     </a>
                     <a class="icon icon_serve" onclick="change_status(this)">
-                        <i class="fa fa-coffee"></i>
+                        <i class="gb gb_local_cafe"></i>
                     </a>
                     <a class="icon icon_check" onclick="change_status(this)">
-                        <i class="fa fa-check"></i>
+                        <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" onclick="change_status(this)">
-                        <i class="fa fa-trash"></i>
+                        <i class="gb gb_delete"></i>
                     </a>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
@@ -119,19 +122,22 @@
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز ۲</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: ۳۲۵</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order" id="status">جدید</div>
-                <div class="col-lg-2 d-none d-xl-block col-order"></div>
-                <div class="col-xl-2 col-lg col-md-8 col-8 px-xl-0 col-order">
-                   <a class="icon icon_cook" onclick="change_status(this)">
-                        <i class="fa fa-share"></i>
+                <div class="col-lg-1 d-none d-xl-block col-order"></div>
+                <div class="col-xl-3 col-lg col-md-8 col-8 px-0 col-order">
+                    <a class="icon icon_refresh" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
+                    <a class="icon icon_cook" onclick="change_status(this)">
+                        <i class="gb gb_kitchen"></i>
                     </a>
                     <a class="icon icon_serve" onclick="change_status(this)">
-                        <i class="fa fa-coffee"></i>
+                        <i class="gb gb_local_cafe"></i>
                     </a>
                     <a class="icon icon_check" onclick="change_status(this)">
-                        <i class="fa fa-check"></i>
+                        <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" onclick="change_status(this)">
-                        <i class="fa fa-trash"></i>
+                        <i class="gb gb_delete"></i>
                     </a>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
@@ -178,19 +184,22 @@
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز ۳</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: ۳۲۵</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order" id="status">جدید</div>
-                <div class="col-lg-2 d-none d-xl-block col-order"></div>
-                <div class="col-xl-2 col-lg col-md-8 col-8 px-xl-0 col-order">
+                <div class="col-lg-1 d-none d-xl-block col-order"></div>
+                <div class="col-xl-3 col-lg col-md-8 col-8 px-0 col-order">
+                    <a class="icon icon_refresh" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
                     <a class="icon icon_cook" onclick="change_status(this)">
-                        <i class="fa fa-share"></i>
+                        <i class="gb gb_kitchen"></i>
                     </a>
                     <a class="icon icon_serve" onclick="change_status(this)">
-                        <i class="fa fa-coffee"></i>
+                        <i class="gb gb_local_cafe"></i>
                     </a>
                     <a class="icon icon_check" onclick="change_status(this)">
-                        <i class="fa fa-check"></i>
+                        <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" onclick="change_status(this)">
-                        <i class="fa fa-trash"></i>
+                        <i class="gb gb_delete"></i>
                     </a>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
@@ -237,19 +246,22 @@
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز ۴</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: ۳۲۵</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order" id="status">جدید</div>
-                <div class="col-lg-2 d-none d-xl-block col-order"></div>
-                <div class="col-xl-2 col-lg col-md-8 col-8 px-xl-0 col-order">
+                <div class="col-lg-1 d-none d-xl-block col-order"></div>
+                <div class="col-xl-3 col-lg col-md-8 col-8 px-0 col-order">
+                    <a class="icon icon_refresh" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
                     <a class="icon icon_cook" onclick="change_status(this)">
-                        <i class="fa fa-share"></i>
+                        <i class="gb gb_kitchen"></i>
                     </a>
                     <a class="icon icon_serve" onclick="change_status(this)">
-                        <i class="fa fa-coffee"></i>
+                        <i class="gb gb_local_cafe"></i>
                     </a>
                     <a class="icon icon_check" onclick="change_status(this)">
-                        <i class="fa fa-check"></i>
+                        <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" onclick="change_status(this)">
-                        <i class="fa fa-trash"></i>
+                        <i class="gb gb_delete"></i>
                     </a>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
@@ -296,19 +308,22 @@
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز ۵</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: ۳۲۵</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order" id="status">جدید</div>
-                <div class="col-lg-2 d-none d-xl-block col-order"></div>
-                <div class="col-xl-2 col-lg col-md-8 col-8 px-xl-0 col-order">
+                <div class="col-lg-1 d-none d-xl-block col-order"></div>
+                <div class="col-xl-3 col-lg col-md-8 col-8 px-0 col-order">
+                    <a class="icon icon_refresh" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
                     <a class="icon icon_cook" onclick="change_status(this)">
-                        <i class="fa fa-share"></i>
+                        <i class="gb gb_kitchen"></i>
                     </a>
                     <a class="icon icon_serve" onclick="change_status(this)">
-                        <i class="fa fa-coffee"></i>
+                        <i class="gb gb_local_cafe"></i>
                     </a>
                     <a class="icon icon_check" onclick="change_status(this)">
-                        <i class="fa fa-check"></i>
+                        <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" onclick="change_status(this)">
-                        <i class="fa fa-trash"></i>
+                        <i class="gb gb_delete"></i>
                     </a>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
@@ -355,19 +370,22 @@
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز ۶</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: ۳۲۵</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order" id="status">جدید</div>
-                <div class="col-lg-2 d-none d-xl-block col-order"></div>
-                <div class="col-xl-2 col-lg col-md-8 col-8 px-xl-0 col-order">
-                   <a class="icon icon_cook" onclick="change_status(this)">
-                        <i class="fa fa-share"></i>
+                <div class="col-lg-1 d-none d-xl-block col-order"></div>
+                <div class="col-xl-3 col-lg col-md-8 col-8 px-0 col-order">
+                    <a class="icon icon_refresh" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
+                    <a class="icon icon_cook" onclick="change_status(this)">
+                        <i class="gb gb_kitchen"></i>
                     </a>
                     <a class="icon icon_serve" onclick="change_status(this)">
-                        <i class="fa fa-coffee"></i>
+                        <i class="gb gb_local_cafe"></i>
                     </a>
                     <a class="icon icon_check" onclick="change_status(this)">
-                        <i class="fa fa-check"></i>
+                        <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" onclick="change_status(this)">
-                        <i class="fa fa-trash"></i>
+                        <i class="gb gb_delete"></i>
                     </a>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
@@ -414,19 +432,22 @@
                 <div class="col-xl-2 col-lg-2 col-md-3 col-3 px-0 col-order">میز ۷</div>
                 <div class="col-xl-2 col-lg-2 col-md-5 col-5 px-0 col-order">سفارش: ۳۲۵</div>
                 <div class="col-xl-2 col-lg col-md-4 col-4 px-0 col-order" id="status">جدید</div>
-                <div class="col-lg-2 d-none d-xl-block col-order"></div>
-                <div class="col-xl-2 col-lg col-md-8 col-8 px-xl-0 col-order">
+                <div class="col-lg-1 d-none d-xl-block col-order"></div>
+                <div class="col-xl-3 col-lg col-md-8 col-8 px-0 col-order">
+                    <a class="icon icon_refresh" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
                     <a class="icon icon_cook" onclick="change_status(this)">
-                        <i class="fa fa-share"></i>
+                        <i class="gb gb_kitchen"></i>
                     </a>
                     <a class="icon icon_serve" onclick="change_status(this)">
-                        <i class="fa fa-coffee"></i>
+                        <i class="gb gb_local_cafe"></i>
                     </a>
                     <a class="icon icon_check" onclick="change_status(this)">
-                        <i class="fa fa-check"></i>
+                        <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" onclick="change_status(this)">
-                        <i class="fa fa-trash"></i>
+                        <i class="gb gb_delete"></i>
                     </a>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-4 col-4 px-0 col-order" style="padding-top: 10px">
