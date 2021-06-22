@@ -142,3 +142,22 @@ WHERE status={'true' if status else 'false'};
             result = cafe_cursor.fetchall() # list contains single member tuple (id,)
         
         return [item[0] for item in result]
+
+    def read_all(self, table: str, limit: int = None, offset: int = None) -> List[tuple]:
+        """
+        Query to SELECT All Row & Columns from a Table with Limit Opional
+        """
+
+        query = f"SELECT * FROM {table}"
+
+        if limit:
+            query += f" LIMIT {limit}"
+        
+            if offset:
+                query += f" OFFSET {(offset - 1) * limit}"
+        
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query + ';')
+            result = cafe_cursor.fetchall()
+        
+        return result
