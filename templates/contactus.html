@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/x-icon"
         href="https://icons.iconarchive.com/icons/graphicloads/food-drink/32/coffee-bean-icon.png">
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
             --Background: #fafafa;
@@ -55,17 +56,12 @@
             list-style-type: none;
         }
 
-        a,
-        a:hover {
-            color: #000;
-            text-decoration: none;
+        a {
+            text-decoration: none !important;
         }
 
-        h1,
-        strong,
-        i,
-        a:hover {
-            color: #3d1800;
+        a.text-md, a.text-md:hover {
+            color: #fff !important;
         }
 
         .card {
@@ -106,9 +102,27 @@
 
 <body>
 <div class="bg-caffe"></div>
-    <div class="card shadow rounded">
+<!--  nav  -->
+    <div class="mx-auto relative pt-8 text-center">
+        <ul>
+            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-blue-600 text-white">
+                <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_shopping_basket"></i><span
+                        class="text-lg sm:text-xl">فهرست</span></a></li>
+            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-yellow-500 text-white mx-3">
+                <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_info"></i><span
+                        class="text-lg sm:text-xl">درباره ما</span></a></li>
+            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white">
+                <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_home"></i><span
+                        class="text-lg sm:text-xl">خانه</span></a></li>
+        </ul>
+    </div>
+    <!--  nav  -->
+    <div class="card shadow rounded mt-8">
         <div class="card-header">
-            <h1 class="text-center">اطلاعات تماس</h1>
+            <h1 class="text-center text-4xl py-2 ">اطلاعات تماس</h1>
         </div>
         <div class="card-body">
             <div class="container">
@@ -123,7 +137,6 @@
                                     </li>
                                     <li class="my-4">
                                         <strong><i class="gb gb_phone ml-2 mb-2"></i>تلفن: </strong>
-                                        <!-- <a href="tel:021-54429000" target="_blank">021-54429000</a> -->
                                         <a href="tel:021-54429000" target="_blank">
                                             &#1781&#1780&#1780&#1778&#1785&#1776&#1776&#1776-&#1776&#1778&#1777
                                         </a>
