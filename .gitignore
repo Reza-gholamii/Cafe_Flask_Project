@@ -28,7 +28,11 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
+<<<<<<< HEAD
+#  Usually these files are written by a python script from a templates
+=======
 #  Usually these files are written by a python script from a template
+>>>>>>> c0140beb7b42965899de81782104ac15d1617829
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
