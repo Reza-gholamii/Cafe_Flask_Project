@@ -73,7 +73,7 @@
         <div id="coffee_logo" class="mx-auto col-span-3 sm:col-span-2 relative" style="transition: margin 300ms ease-in-out">
             <img class="w-72 sm:w-96" src="coffee.png" alt="کافه ی من">
         </div>
-        <div class="mx-auto col-span-3 relative text-center">
+        <div id="brown_board" class="animate__animated mx-auto col-span-3 relative text-center">
             <h1 class="mt-8 text-5xl sm:text-6xl md:text-7xl font-bold Vazir titler">کافه رستوران لبخند</h1>
             <div class="connect-bar h-12 w-80 md:w-96 ring-l mx-auto relative"></div>
             <div class="ring-2 px-5 py-4 animate__animated animate__tada rounded-md shadow-2xl ring-yellow-900 ring-opacity-50 bg-yellow-900 text-center">
@@ -89,6 +89,14 @@
 </div>
 <!--  JS Plugins  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    setInterval(function () {
+        $('#brown_board').addClass('animate__tada');
+        setTimeout(function () {
+            $('#brown_board').removeClass('animate__tada');
+        },3000)
+    },5000)
+</script>
 <!--  JS Plugins  -->
 </body>
 </html>
