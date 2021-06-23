@@ -70,7 +70,7 @@
                 <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white animate__animated animate__delay-3s animate__fadeInDown"><a href="#" class="text-md text-2xl md:text-3xl text-center "><i class="absolute p-3 h-36 right-0 top-0 border-l-4 bg-white bg-opacity-20 gb gb_info"></i><span class="text-lg sm:text-xl">درباره ما</span></a></li>
             </ul>
         </div>
-        <div class="mx-auto col-span-3 sm:col-span-2 relative">
+        <div id="coffee_logo" class="mx-auto col-span-3 sm:col-span-2 relative" style="transition: margin 300ms ease-in-out">
             <img class="w-72 sm:w-96" src="coffee.png" alt="کافه ی من">
         </div>
         <div class="mx-auto col-span-3 relative text-center">
@@ -82,7 +82,7 @@
         </div>
     </section>
     <section id="banner-comment" class="transform ring-8 ring-yellow-900 ring-opacity-50 -skew-y-3 bg-yellow-900 fixed w-full sm:w-10/12 md:w-9/12 lg:w-8/12 mx-auto shadow-2xl h-28 sm:rounded-xl sm:rounded-b-none left-0 right-0 z-20 overflow-visible" style="bottom: -400px;transition: bottom 600ms linear">
-        <a onclick="$(this).parent().slideUp(100)" class="cursor-pointer z-30 text-white text-4xl rounded-full px-2 text-center absolute bg-yellow-900 bg-opacity-30 right-0 mr-1 top-0">&times</a>
+        <a onclick="$(this).parent().slideUp(100,function(){$('#coffee_logo').addClass('mt-24')})" class="cursor-pointer z-30 text-white text-4xl rounded-full px-2 text-center absolute bg-yellow-900 bg-opacity-30 right-0 mr-1 top-0">&times</a>
         <span class="absolute transform skew-y-3 rounded-2xl ring-4 p-4 ring-white ring-opacity-50 bg-yellow-800 -rotate-3 text-white block left-4 w-25 z-40" style="top: -45px;"><i class="gb gb_face gb_s24 mb-1 ml-1"></i> محمد امین طهرانی</span>
         <p class="transform skew-y-3 relative mt-10 mr-3 text-yellow-100"><i class="gb gb_"></i> کافه لبخند یکی خاطره انگیز ترین مکان های مورد علاقمه !</p>
     </section>
