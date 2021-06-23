@@ -51,7 +51,7 @@
             </div>
             <hr class="hr-menu-top p-0 m-0 w-100">
             <div id="nav_parent" class="row h-100 bg-dark menu ">
-                <nav class="w-100 ">
+                <nav id="nav_menu" class="w-100 ">
                     <ul id="menu_left_side" class="nav-list" style="padding: 0 2em !important;  text-align: center !important; ">
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item choosed "><i class="gb gb_dashboard gb_s24 menu-icon"></i>داشبورد</li>
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item "><i class="gb gb_tablet gb_s24 menu-icon"></i>سفارش ها</li>
@@ -85,7 +85,14 @@
 
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="cashier_js.js"></script>
+<script>
+    $('#menu_left_side>li').bind('click',function () {
+        $('li.choosed').removeClass("choosed");
+        $(this).addClass("choosed");
+    })
+</script>
 </body>
 
 </html>
