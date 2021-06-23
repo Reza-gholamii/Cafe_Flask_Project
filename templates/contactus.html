@@ -21,7 +21,18 @@
         }
 
         body {
-            background: var(--Background);
+            background-color: #c8c8c8;
+            padding-top: 10px;
+        }
+
+        .bg-caffe {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            opacity: 0.3;
+            background: url(../static/img/bg.jpg);
         }
 
         * {
@@ -94,6 +105,7 @@
 </head>
 
 <body>
+<div class="bg-caffe"></div>
     <div class="card shadow rounded">
         <div class="card-header">
             <h1 class="text-center">اطلاعات تماس</h1>
