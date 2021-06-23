@@ -2,7 +2,7 @@
 <html lang="fa-IR">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -11,7 +11,7 @@
     <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
     <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>کافه | لیست سفارشات پرداخت شده</title>
+    <title>کافه | لیست کلیه سفارشات</title>
 
     <style>
         * {
@@ -20,7 +20,7 @@
         }
 
         body {
-            background-color: #fafafa;
+            background-color: #e3e3e3;
         }
 
         .order-col {
@@ -45,9 +45,10 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row main-row bg-light">
-        <div class="order-col col-9 col-sm-8 px-0 mx-auto my-3 rounded shadow">
-            <table class="table text-center table-hover">
+    <div class="row main-row">
+        <div class="order-col col-11 col-sm-10 px-0 mx-auto my-3 shadow"
+             style=" border-radius: 8px !important;overflow: hidden;background: #fff;">
+            <table class="table text-center table-hover mb-0">
                 <thead class="bg-info">
                 <tr>
                     <th>شماره سفارش</th>
@@ -62,7 +63,7 @@
                     <td class="w-25">۳۲۵</td>
                     <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status1">پرداخت شده</td>
+                    <td class="w-25" id="status1">جدید</td>
 
 
                 </tr>
@@ -70,7 +71,7 @@
                     <td class="w-25">۳۲۵</td>
                     <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status2">پرداخت شده</td>
+                    <td class="w-25" id="status2">سرو شده</td>
 
 
                 </tr>
@@ -78,7 +79,7 @@
                     <td class="w-25">۳۲۵</td>
                     <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status3">پرداخت شده</td>
+                    <td class="w-25" id="status3">در حال پخت</td>
 
 
                 </tr>
@@ -86,7 +87,7 @@
                     <td class="w-25">۳۲۵</td>
                     <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status4">پرداخت شده</td>
+                    <td class="w-25" id="status4">کنسل شده</td>
 
 
                 </tr>
@@ -282,6 +283,6 @@
     </div>
 
 </div>
-<script src="../static/js/lists.js"></script>
+<script src="../../static/js/lists.js"></script>
 </body>
 </html>
