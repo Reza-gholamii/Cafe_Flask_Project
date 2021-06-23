@@ -116,15 +116,22 @@
                                 <li>
                                     <span class="float-right">نسکافه</span>
                                     <span class="float-left">
-                                        <i id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
+                                        <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
                                            style="color: #008b0e"></i>
                                         <b>1</b> عدد
-                                        <i id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
-                                           style="color: #a30000"></i></span>
+                                        <i data-id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
+                                           style="color: #a30000"></i>
+                                    </span>
                                 </li>
                                 <li>
                                     <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
+                                    <span class="float-left">
+                                        <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
+                                           style="color: #008b0e"></i>
+                                        <b>1</b> عدد
+                                        <i data-id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
+                                           style="color: #a30000"></i>
+                                    </span>
                                 </li>
                                 <hr>
                                 <li>
@@ -297,12 +304,12 @@
 </div>
 <script src="../../static/js/lists.js"></script>
 <script>
-    $('#adder_num').bind('click', function () {
+    $("[data-id=adder_num]").bind('click', function () {
         let num = Number($(this).parent().children('b')[0].innerText);
         $(this).parent().children('b')[0].innerText = String(num + 1);
     })
 
-    $('#suber_num').bind('click', function () {
+    $("[data-id=suber_num]").bind('click', function () {
         let num = Number($(this).parent().children('b')[0].innerText);
         if (num !== 1) {
             $(this).parent().children('b')[0].innerText = String(num - 1);
