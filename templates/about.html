@@ -12,6 +12,20 @@
     <title>کافه | درباره ما</title>
 
     <style>
+        body {
+            background-color: #c8c8c8;
+        }
+
+        .bg-caffe {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            opacity: 0.3;
+            background: url(../static/img/bg.jpg);
+        }
+
         * {
             font-family: Yekan, sans-serif;
             direction: rtl;
@@ -21,12 +35,13 @@
             font-size: 13px;
         }
 
-        body {
-            background-color: #fafafa;
+        .row {
+            background-color:#fafafa;
+            border-radius: 10px;
         }
 
-        .row {
-            background-color: #ccc;
+        .row-custom {
+            box-shadow: 0 0 10px 0 #00000073;
         }
 
         .row-header {
@@ -46,9 +61,9 @@
     </style>
 </head>
 <body>
-
+<div class="bg-caffe"></div>
 <div class="container-fluid">
-    <div class="row w-75 my-4 mx-auto">
+    <div class="row row-custom w-75 my-4 mx-auto">
         <div class="col-12 shadow">
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
@@ -61,7 +76,8 @@
             <div class="row">
                 <div class="col-md-6 h-100 text-right my-auto">
                     <p class="text-justify">
-                        برند لبخند با هدف پر کردن خلا قهوه و کافه داری و برای ترویج فرهنگ قهوه نوشی در جامعه ای که محوریت
+                        برند لبخند با هدف پر کردن خلا قهوه و کافه داری و برای ترویج فرهنگ قهوه نوشی در جامعه ای که
+                        محوریت
                         آن صرفا نوشیدن چای بود در سال 1388 در تهران تاسیس شد و اولین کافی شاپ زنجیره ای آن همان سال در
                         میدان تجریش آغاز به کار کرد.
                         لبخند برندی است با ساختاری عمودی: از قهوه سبز تا لیوان دست شما. بهترین دانه های قهوه با دقت و
@@ -85,7 +101,7 @@
             </div>
         </div>
     </div>
-    <div class="row w-75 my-4 mx-auto">
+    <div class="row row-custom w-75 my-4 mx-auto">
         <div class="col-12 shadow">
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
