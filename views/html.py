@@ -19,4 +19,4 @@ def menu():
 
 
 def order_list():
-    pass
+    return render_template("order_list.html")
