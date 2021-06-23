@@ -11,7 +11,7 @@
     <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
     <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>کافه | لیست کلیه سفارشات</title>
+    <title> کافه | سفارشات مشتری</title>
 
     <style>
         * {
@@ -52,42 +52,42 @@
                 <thead class="bg-info">
                 <tr>
                     <th>شماره سفارش</th>
-                    <th>شماره میز</th>
                     <th>زمان درخواست</th>
                     <th>وضعیت</th>
+                    <th>هزینه (تومان)</th>
                 </tr>
 
                 </thead>
                 <tbody>
                 <tr class="table-row" data-toggle="modal" data-target="#myModal1">
                     <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status1">جدید</td>
+                    <td class="w-25">جدید</td>
+                    <td class="w-25">۱۰۰۰۰۰</td>
 
 
                 </tr>
                 <tr class="table-row" data-toggle="modal" data-target="#myModal2">
                     <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status2">سرو شده</td>
+                    <td class="w-25">جدید</td>
+                    <td class="w-25">۱۵۰۰۰۰</td>
 
 
                 </tr>
                 <tr class="table-row" data-toggle="modal" data-target="#myModal3">
                     <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status3">در حال پخت</td>
+                    <td class="w-25">جدید</td>
+                    <td class="w-25">۲۰۰۰۰۰</td>
 
 
                 </tr>
                 <tr class="table-row" data-toggle="modal" data-target="#myModal4">
                     <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
                     <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status4">کنسل شده</td>
+                    <td class="w-25">جدید</td>
+                    <td class="w-25">۲۲۰۰۰۰</td>
 
 
                 </tr>
@@ -115,23 +115,6 @@
                                     <span class="float-left">۲ عدد</span>
                                 </li>
                             </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal1" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal1" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal1" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal1" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal1" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
                         </div>
                         <div class="modal-footer mx-auto">
                             <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
@@ -161,23 +144,6 @@
                                     <span class="float-left">۲ عدد</span>
                                 </li>
                             </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal2" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal2" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal2" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal2" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal2" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
                         </div>
                         <div class="modal-footer mx-auto">
                             <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
@@ -207,23 +173,6 @@
                                     <span class="float-left">۲ عدد</span>
                                 </li>
                             </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal3" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal3" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal3" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal3" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal3" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
                         </div>
                         <div class="modal-footer mx-auto">
                             <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
@@ -253,23 +202,7 @@
                                     <span class="float-left">۲ عدد</span>
                                 </li>
                             </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal4" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal4" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal4" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal4" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal4" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
+
                         </div>
                         <div class="modal-footer mx-auto">
                             <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
