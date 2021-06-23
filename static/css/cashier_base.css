@@ -18,14 +18,14 @@
 
     .logo-img {
         width: 5em;
-        margin: 1.5em 2em 1.5em 1em;
+        margin: 1.5em 1em 2.3em 1em;
     }
 
     .logo-text {
         position: absolute;
-        bottom: 0;
+        bottom: .4em;
         font-size: 1.75em;
-        right: 4em;
+        right: 3.7em;
         color: white;
 
     }
@@ -103,3 +103,32 @@
         color: #29b6f6;
         margin-left: .5em;
     }
+
+        .mobile-display{
+        display: none;
+        }
+
+
+    @media only screen and (max-width: 767px) {
+            .logo-img{
+                visibility: hidden;
+            }
+        .hamburger-menu{
+            visibility: visible !important;
+
+        }
+        .menu{
+            display: none;
+        }
+        .title-p{
+            display: none;
+        }
+        .menu-row{
+            height: 15em !important;
+        }
+        .top-mobile{
+            height: unset !important;
+        }
+
+        }
+
