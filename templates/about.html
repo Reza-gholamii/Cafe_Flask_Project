@@ -8,10 +8,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
     <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>کافه | درباره ما</title>
 
     <style>
+
+        a {
+            text-decoration: none !important;
+            color: #fff !important;
+        }
+
         body {
             background-color: #c8c8c8;
         }
@@ -36,7 +44,7 @@
         }
 
         .row {
-            background-color:#fafafa;
+            background-color: #fafafa;
             border-radius: 10px;
         }
 
@@ -58,11 +66,33 @@
             height: auto;
         }
 
+        .bg-whitee {
+            background-color: rgba(255, 255, 255, 0.20);
+        }
+
     </style>
 </head>
 <body>
 <div class="bg-caffe"></div>
 <div class="container-fluid">
+    <!--  nav  -->
+    <div class="mx-auto relative pt-8 text-center">
+        <ul>
+            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-blue-600 text-white">
+                <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_shopping_basket"></i><span
+                        class="text-lg sm:text-xl">فهرست</span></a></li>
+            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-yellow-500 text-white mx-3">
+                <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_phone"></i><span
+                        class="text-lg sm:text-xl">تماس</span></a></li>
+            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white">
+                <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_home"></i><span
+                        class="text-lg sm:text-xl">خانه</span></a></li>
+        </ul>
+    </div>
+    <!--  nav  -->
     <div class="row row-custom w-75 my-4 mx-auto">
         <div class="col-12 shadow">
             <div class="row justify-content-center">
