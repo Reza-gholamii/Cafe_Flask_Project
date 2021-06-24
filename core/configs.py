@@ -59,6 +59,11 @@ class DataBaseContext:
 
 sql_queries = [
     """
+CREATE TABLE IF NOT EXISTS comments (
+
+);
+""",
+    """
 CREATE TABLE IF NOT EXISTS users (
 first_name CHAR(50) NOT NULL,
 last_name CHAR(50) NOT NULL,
@@ -120,6 +125,7 @@ CONSTRAINT fk_num
 """,
     """
 CREATE TABLE IF NOT EXISTS orders (
+count INT DEFAULT 1,
 status BOOLEAN DEFAULT FALSE,
 time_stamp TIMESTAMP NOT NULL,
 recepite INT NOT NULL,
