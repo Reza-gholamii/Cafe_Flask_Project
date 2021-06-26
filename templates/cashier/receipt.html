@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fa-IR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>کافه | لیست سفارشات ۰۶/۲۰/۲۰۲۱</title>
+
+    <style>
+        * {
+            font-family: Yekan, sans-serif;
+            direction: rtl;
+        }
+
+        body {
+            background-color: #fafafa;
+        }
+
+        ul {
+            list-style: square !important;
+        }
+
+        .order-col {
+            height: 100%;
+        }
+
+        .btn {
+            max-width: 100%;
+        }
+
+        .icon {
+            color: black;
+            font-size: 21px;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+
+        ul {
+            padding: 0 30px;
+        }
+
+        ul > li {
+            padding: 15px 0;
+        }
+
+        .table-row {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row main-row bg-light">
+        <div class="order-col col-11 col-sm-9 px-0 mx-auto my-3 rounded shadow">
+            <table class="table text-center table-hover">
+                <thead class="bg-info">
+                <tr>
+                    <th>شماره سفارش</th>
+                    <th>هزینه کل</th>
+                    <th>زمان درخواست</th>
+                    <th>زمان تحویل</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr class="table-row" data-toggle="modal" data-target="#myModal1">
+                    <td class="w-25">۳۲۵</td>
+                    <td class="w-25">۱</td>
+                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
+                    <td class="w-25" id="status1">۰۶/۲۰/۲۰۲۱</td>
+                </tr>
+                <tr class="table-row" data-toggle="modal" data-target="#myModal2">
+                    <td class="w-25">۳۲۵</td>
+                    <td class="w-25">۱</td>
+                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
+                    <td class="w-25" id="status2">۰۶/۲۰/۲۰۲۱</td>
+                </tr>
+                <tr class="table-row" data-toggle="modal" data-target="#myModal3">
+                    <td class="w-25">۳۲۵</td>
+                    <td class="w-25">۱</td>
+                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
+                    <td class="w-25" id="status3">۰۶/۲۰/۲۰۲۱</td>
+                </tr>
+                <tr class="table-row" data-toggle="modal" data-target="#myModal4">
+                    <td class="w-25">۳۲۵</td>
+                    <td class="w-25">۱</td>
+                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
+                    <td class="w-25" id="status4">۰۶/۲۰/۲۰۲۱</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="myModal1" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
+                        </div>
+                        <div class="modal-body text-right">
+                            <ul class="border rounded pl-2">
+                                <li>
+                                    <span class="float-right">آیتم ها</span>
+                                    <span class="float-left">تعداد</span>
+                                </li>
+                                <hr>
+                                <li>
+                                    <span class="float-right">نسکافه</span>
+                                    <span class="float-left">
+                                        <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
+                                           style="color: #008b0e"></i>
+                                        <b>1</b> عدد
+                                        <i data-id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
+                                           style="color: #a30000"></i>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="float-right">کاپوچینو</span>
+                                    <span class="float-left">
+                                        <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
+                                           style="color: #008b0e"></i>
+                                        <b>1</b> عدد
+                                        <i data-id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
+                                           style="color: #a30000"></i>
+                                    </span>
+                                </li>
+                                <hr>
+                                <li>
+                                    <span class="float-right">تخفیف :</span>
+                                    <span class="float-left">۲۲۲۲۲ تومان</span>
+                                </li>
+                                <li>
+                                    <span class="float-right">قیمت کل :</span>
+                                    <span class="float-left">۱۱۱۱۱۱۱ تومان</span>
+                                </li>
+                            </ul>
+                            <div class="col mx-auto text-center">
+                                <a class="icon icon_check modal1" onclick="change_status(this)">
+                                    <i class="gb gb_done_all"></i>
+                                </a>
+                                <a class="icon icon_trash modal1" onclick="change_status(this)">
+                                    <i class="gb gb_delete"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer mx-auto">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="myModal2" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
+                        </div>
+                        <div class="modal-body text-right">
+                            <ul class="border rounded pl-2 py-2">
+                                <li>
+                                    <span class="float-right">قهوه</span>
+                                    <span class="float-left">۲ عدد</span></li>
+                                <li>
+                                    <span class="float-right">نسکافه</span>
+                                    <span class="float-left">۱ عدد</span></li>
+                                <li>
+                                    <span class="float-right">کاپوچینو</span>
+                                    <span class="float-left">۲ عدد</span>
+                                </li>
+                            </ul>
+                            <div class="col mx-auto text-center">
+                                <a class="icon icon_refresh modal2">
+                                    <i class="gb gb_autorenew"></i>
+                                </a>
+                                <a class="icon icon_cook modal2" >
+                                    <i class="gb gb_kitchen"></i>
+                                </a>
+                                <a class="icon icon_serve modal2">
+                                    <i class="gb gb_local_cafe"></i>
+                                </a>
+                                <a class="icon icon_check modal2">
+                                    <i class="gb gb_done_all"></i>
+                                </a>
+                                <a class="icon icon_trash modal2">
+                                    <i class="gb gb_delete"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer mx-auto">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="myModal3" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
+                        </div>
+                        <div class="modal-body text-right">
+                            <ul class="border rounded pl-2 py-2">
+                                <li>
+                                    <span class="float-right">قهوه</span>
+                                    <span class="float-left">۲ عدد</span></li>
+                                <li>
+                                    <span class="float-right">نسکافه</span>
+                                    <span class="float-left">۱ عدد</span></li>
+                                <li>
+                                    <span class="float-right">کاپوچینو</span>
+                                    <span class="float-left">۲ عدد</span>
+                                </li>
+                            </ul>
+                            <div class="col mx-auto text-center">
+                                <a class="icon icon_refresh modal3" onclick="change_status(this)">
+                                    <i class="gb gb_autorenew"></i>
+                                </a>
+                                <a class="icon icon_cook modal3" onclick="change_status(this)">
+                                    <i class="gb gb_kitchen"></i>
+                                </a>
+                                <a class="icon icon_serve modal3" onclick="change_status(this)">
+                                    <i class="gb gb_local_cafe"></i>
+                                </a>
+                                <a class="icon icon_check modal3" onclick="change_status(this)">
+                                    <i class="gb gb_done_all"></i>
+                                </a>
+                                <a class="icon icon_trash modal3" onclick="change_status(this)">
+                                    <i class="gb gb_delete"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer mx-auto">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="myModal4" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
+                        </div>
+                        <div class="modal-body text-right">
+                            <ul class="border rounded pl-2 py-2">
+                                <li>
+                                    <span class="float-right">قهوه</span>
+                                    <span class="float-left">۲ عدد</span></li>
+                                <li>
+                                    <span class="float-right">نسکافه</span>
+                                    <span class="float-left">۱ عدد</span></li>
+                                <li>
+                                    <span class="float-right">کاپوچینو</span>
+                                    <span class="float-left">۲ عدد</span>
+                                </li>
+                            </ul>
+                            <div class="col mx-auto text-center">
+                                <a class="icon icon_refresh modal4" onclick="change_status(this)">
+                                    <i class="gb gb_autorenew"></i>
+                                </a>
+                                <a class="icon icon_cook modal4" onclick="change_status(this)">
+                                    <i class="gb gb_kitchen"></i>
+                                </a>
+                                <a class="icon icon_serve modal4" onclick="change_status(this)">
+                                    <i class="gb gb_local_cafe"></i>
+                                </a>
+                                <a class="icon icon_check modal4" onclick="change_status(this)">
+                                    <i class="gb gb_done_all"></i>
+                                </a>
+                                <a class="icon icon_trash modal4" onclick="change_status(this)">
+                                    <i class="gb gb_delete"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer mx-auto">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script src="../../static/js/lists.js"></script>
+<script>
+    $("[data-id=adder_num]").bind('click', function () {
+        let num = Number($(this).parent().children('b')[0].innerText);
+        $(this).parent().children('b')[0].innerText = String(num + 1);
+    })
+
+    $("[data-id=suber_num]").bind('click', function () {
+        let num = Number($(this).parent().children('b')[0].innerText);
+        if (num !== 1) {
+            $(this).parent().children('b')[0].innerText = String(num - 1);
+        }
+    })
+</script>
+</body>
+</html>

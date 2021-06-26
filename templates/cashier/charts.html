@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --Background: #fafafa;
+        }
+
+        body {
+            background: var(--Background);
+        }
+
+        * {
+            font-family: Yekan, sans-serif;
+            direction: rtl;
+        }
+
+        .Vazir {
+            font-family: Vazir, sans-serif;
+        }
+
+        .rtl {
+            direction: rtl;
+        }
+
+        .ltr {
+            direction: ltr;
+        }
+
+        .text-shadow-md {
+            text-shadow: 0 0 10px #999;
+        }
+
+        .bg-yellow-900 {
+            background: #3d1800;
+        }
+
+        .text-yellow-900 {
+            color: #3d1800;
+        }
+
+        .titler {
+            color: #3d1800;
+            text-shadow: 0 2px 0 #fbe5cb, 0 -2px 0 #fbe5cb, 2px 0 #fbe5cb, -2px 0 0 #fbe5cb, 0 0 10px #000;
+        }
+
+        .connect-bar {
+            border-left: 2px solid #3D1800;
+            border-right: 2px solid #3D1800;
+            top: -15px;
+            margin-bottom: -15px;
+        }
+    </style>
+</head>
+<body class="animate__animated animate__fadeInDown animate__delay-1s grid grid-cols-6 gap-8">
+<div class="col-span-6 p-10 overflow-hidden ">
+  <div class="text-center text-2xl text-purple-600">گزارش سفارشات ساعتی</div>
+  <canvas class="p-10 " id="chartLine"></canvas>
+</div>
+
+<div class="animate__animated animate__fadeInRight animate__delay-2s col-span-6 md:col-span-3 p-10 overflow-hidden">
+  <div class="text-center text-2xl text-purple-600">محبوب ترین های هفته</div>
+  <canvas class="p-10 " id="chartPie"></canvas>
+</div>
+
+<div class="animate__animated animate__fadeInLeft animate__delay-2s col-span-6 md:col-span-3 p-10 overflow-hidden">
+  <div class="text-center text-2xl text-purple-600">گزارش سفارشات هفتگی</div>
+  <canvas class="p-10" height="400" id="chartBar"></canvas>
+</div>
+
+
+<!-- Required chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Chart bar -->
+<script>
+
+  const labelsBarChart = [
+        'شنبه',
+        'یکشنبه',
+        'دوشنبه',
+        'سه شنبه',
+        'چهارشنبه',
+        'پنج شنبه',
+        'جمعه',
+  ];
+  const dataBarChart = {
+    labels: labelsBarChart,
+    datasets: [{
+      label: "تعداد سفارشات",
+      backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+      borderColor: 'hsl(252, 82.9%, 67.8%)',
+      data: [18, 10, 50, 20, 10, 30, 45],
+    }]
+  };
+
+  const configBarChart = {
+    type: 'bar',
+    data: dataBarChart,
+    options: {}
+  };
+
+
+  var chartBar = new Chart(
+    document.getElementById('chartBar'),
+    configBarChart
+  );
+</script>
+
+
+<!-- Chart pie -->
+<script>
+
+  const dataPie = {
+    labels: [
+      'نسکافه',
+      'قهوه اسپرسو',
+      'کاپوچینو'
+    ],
+    datasets: [{
+      label: 'My First Dataset',
+      data: [300, 50, 100],
+      backgroundColor: [
+        'rgb(133, 105, 241)',
+        'rgb(164, 101, 241)',
+        'rgb(101, 143, 241)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const configPie = {
+    type: 'pie',
+    data: dataPie,
+    options: {}
+  };
+
+
+  var chartBar = new Chart(
+    document.getElementById('chartPie'),
+    configPie
+  );
+</script>
+
+<!-- Chart line -->
+<script>
+
+    const labels = [
+      '10',
+        '12',
+        '14',
+        '16',
+        '18',
+        '20',
+        '22',
+    ];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'تعداد سفارش',
+            backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+            borderColor: 'hsl(252, 82.9%, 67.8%)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+        }]
+    };
+
+    const configLineChart = {
+        type: 'line',
+        data,
+        options: {}
+    };
+
+    var chartLine = new Chart(
+        document.getElementById('chartLine'),
+        configLineChart
+    );
+</script>
+
+<!-- Chart bar -->
+</body>
+</html>
