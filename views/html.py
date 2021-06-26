@@ -26,15 +26,16 @@ def contact_us():
     """
     
     if request.method == 'GET':
-        return render_template("contactus.html")
+        return render_template("contact_us.html")
     
     else:
         _vars = dict(request.form)
         message = TextMessage(**_vars)
         # TODO: use try and except for exceptions handeling after check validate
         db_manager.create(table="messages", model=message)
-        logging.info(f"{__name__}: Message has Writteb into the DataBase")  
-
+        logging.info(f"{__name__}: Message has Written into the DataBase") 
+        # TODO: show alert for send message successfully and next ...?
+        return redirect(url_for('home'))
 
 def menu():
     return render_template("menu.html", page_name="menu")
