@@ -11,9 +11,9 @@
     {% block tailwindcss %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     {% block bootstrap %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     {% endblock %}

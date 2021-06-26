@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 
-{% block tailwindcss %}{{ super() }}{% endblock %}
+{% block bootstrap %}{% endblock %}
 {% block title %}خانه{% endblock %}
 {% block extra_head %}
     <style>
+
+        body > div:first-child > div:first-child {
+            background: #E1E1E1 url({{ url_for('static', filename='img/bg-home.jpg') }});
+        }
+
         .bg-yellow-900 {
             background: #3d1800;
         }
@@ -26,7 +31,7 @@
     <div class="fixed top-0 bottom-0 right-0 left-0"
          onload="setTimeout(function(){$('#banner-comment').css('bottom','-35px')},3000)">
         <div class="fixed inset-2 md:inset-4 gap-0 animate__animated animate__fadeIn overflow-hidden rounded"
-             style="background: #E1E1E1 url(bg.jpg);box-shadow:0 0 40px inset #3D1800">
+             style="box-shadow:0 0 40px inset #3D1800">
             <section
                     class="grid animate__animated animate__bounceIn grid-cols-3 w-full sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto gap-8 pt-5 sm:pt-10">
                 <div class="col-span-3 mx-auto sm:mx-none sm:col-span-1 sm:mt-6 relative">
@@ -47,7 +52,7 @@
                 </div>
                 <div id="coffee_logo" class="mx-auto top-6 col-span-3 sm:col-span-2 relative"
                      style="transition: margin 300ms ease-in-out">
-                    <img class="w-72 sm:w-96" src="coffee.png" alt="کافه ی من">
+                    <img class="w-72 sm:w-96" src="../static/img/coffee.png" alt="کافه ی من">
                 </div>
                 <div id="brown_board" class="animate__animated mx-auto col-span-3 relative text-center">
                     <h1 class="mt-8 text-5xl sm:text-6xl md:text-7xl font-bold Vazir titler">کافه رستوران لبخند</h1>
