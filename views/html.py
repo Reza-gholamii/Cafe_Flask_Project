@@ -2,6 +2,11 @@ from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
 from core.manager import ExtraDataBaseManager
 from core.models import TextMessage
+import logging
+
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)-10s - %(message)s')
 
 
 db_manager = ExtraDataBaseManager()
@@ -21,12 +26,14 @@ def contact_us():
     """
     
     if request.method == 'GET':
-        return render_template("contact_us.html")
+        return render_template("contactus.html")
     
     else:
-        _vars = request.form
-        message = TextMessage()
-        # TODO: use try and except for exceptions handeling after check validate        
+        _vars = dict(request.form)
+        message = TextMessage(**_vars)
+        # TODO: use try and except for exceptions handeling after check validate
+        db_manager.create(table="messages", model=message)
+        logging.info(f"{__name__}: Message has Writteb into the DataBase")  
 
 
 def menu():
