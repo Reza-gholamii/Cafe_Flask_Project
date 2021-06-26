@@ -18,6 +18,9 @@ def menu():
     return render_template("menu.html", page_name="menu")
 
 
+# fro here all are for cashier side
+
+
 # this is for test
 
 orders = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
@@ -30,4 +33,13 @@ orders = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "�
 
 
 def order_list():
+    # need call a function to get access to last orders based on tables
     return render_template("order_list.html", orders=orders)
+
+
+items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات داگ", "۴۰۰۰۰"), ("همبرگر", "۳۰۰۰۰"), ("پیش غذا", "۱۰۰۰۰")]
+
+
+def menu_items():
+    # need call a function to get access to last menu items
+    return render_template("menu_items.html", items=items)
