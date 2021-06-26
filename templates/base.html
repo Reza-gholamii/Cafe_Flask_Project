@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block tailwindcss %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
     {% block bootstrap %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
-        <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
-        <script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     {% endblock %}
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>کافه لبخند | {% block title %}{% endblock %}</title>
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-{% block body %}{% endblock %}
+    {% block body %}{% endblock %}
 <!--  JS Plugins  -->
-{% block js_plugin %}{% endblock %}
+<script src="{{ url_for('static', filename='js/modernizr.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    {% block extra_js %}{% endblock %}
+</script>
 <!--  JS Plugins  -->
 </body>
 </html>
