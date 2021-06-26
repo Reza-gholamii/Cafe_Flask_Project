@@ -119,7 +119,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form action="#">
+                                                    <form action="{{ url_for('menu_items') }}" method="POST">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="name"
                                                                    placeholder="نام محصول را وارد نمایید" name="name"
@@ -152,15 +152,18 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form action="#">
+                                                    <form action="{{ url_for('menu_items') }}" method="POST">
                                                         <div class="form-group">
                                                             <p class="text-right">آیا از حذف این محصول اطمینان
                                                                 دارید؟</p>
+                                                            <input style="display: none" type="text"
+                                                                   class="form-control" name="delete" value="ok">
                                                         </div>
                                                         <button type="button" class="btn mdl btn-primary"
                                                                 data-dismiss="modal">بازگشت
                                                         </button>
-                                                        <button type="submit" class="btn mdl btn-danger mr-2">حذف
+                                                        <button type="submit" class="btn mdl btn-danger mr-2"
+                                                                id="delete-item">بله
                                                         </button>
                                                     </form>
                                                 </div>
@@ -176,39 +179,40 @@
         </li>
 
         {% endfor %}
-        <div class="col-12 mt-5 mb-2">
-            <button type="button" class="btn btn-success w-100 add" data-toggle="modal" data-target="#add">
-                <strong><i class="gb gb_add_circle_outline ml-2 mb-2" style="font-size: 2.5rem;"></i></strong>
-            </button>
+    </ul>
+    <div class="col-12 mt-5 mb-2">
+        <button type="button" class="btn btn-success w-100 add" data-toggle="modal" data-target="#add">
+            <strong><i class="gb gb_add_circle_outline ml-2 mb-2" style="font-size: 2.5rem;"></i></strong>
+        </button>
 
-            <div class="modal fade" id="add">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">محصول جدید</h4>
-                            <button type="button" class="close zrbdr" data-dismiss="modal">&times;</button>
-                        </div>
+        <div class="modal fade" id="add">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">محصول جدید</h4>
+                        <button type="button" class="close zrbdr" data-dismiss="modal">&times;</button>
+                    </div>
 
-                        <div class="modal-body">
-                            <form action="#">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="new_name"
-                                           placeholder="نام محصول را وارد نمایید" name="name">
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" class="form-control" id="new_price"
-                                           placeholder="قیمت محصول را وارد نمایید" name="price" step="1000">
-                                </div>
-                                <button type="button" class="btn mdl btn-danger" data-dismiss="modal">لغو</button>
-                                <button type="submit" class="btn mdl btn-primary mr-2">ثبت</button>
-                            </form>
-                        </div>
+                    <div class="modal-body">
+                        <form action="{{ url_for('menu_items') }}" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="new_name"
+                                       placeholder="نام محصول را وارد نمایید" name="name">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="new_price"
+                                       placeholder="قیمت محصول را وارد نمایید" name="price" step="1000">
+                            </div>
+                            <button type="button" class="btn mdl btn-danger" data-dismiss="modal">لغو</button>
+                            <button type="submit" class="btn mdl btn-primary mr-2">ثبت</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
         </div>
-    </ul>
+
+    </div>
+
 </div>
 </body>
 </html>
