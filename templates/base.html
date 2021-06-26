@@ -1,157 +1,29 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fa-IR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css') }}">
-
-    {% block extra_head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css')}}">
+    {% block tailwindcss %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css')}}">
     {% endblock %}
-    <title>kaffee coffee</title>
-
-    <style>
-        :root {
-            --primary-color: #795548;
-            --bg-color: #f2f2f2;
-            --text-color: #444444;
-            --secondary-color: #7E334B ;
-        }
-
-        .bg-color {
-            background: var(--bg-color);
-        }
-
-        body {
-            background: var(--bg-color);
-            margin: 0;
-        }
-
-        .logo {
-            text-decoration: none;
-            font-weight: bold;
-            color: black;
-            font-size: 1.4em;
-            margin: auto 0;
-            padding-top: .3em;
-        }
-
-        .logo > span {
-            color: var(--primary-color);
-        }
-
-        .logo-pic {
-            width: 2.5em;
-            margin: .7em;
-        }
-
-        .primary-nav {
-            display: flex;
-            justify-self: center;
-            margin: auto 0 ;
-            list-style-type: none;
-            text-decoration: none;
-        }
-
-        .primary-nav > li {
-            margin: 0 1.5em;
-        }
-
-        .secondary-nav {
-            display: flex;
-
-            margin-right: 0;
-            padding-top: .5em;
-            list-style-type: none;
-            text-decoration: none;
-        }
-
-        .secondary-nav > li {
-            margin: 0 2em;
-        }
-
-        .unchoosed {
-            color: black;
-        }
-
-        .choosed {
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /*.sign-btn {
-            border: 1px solid var(--primary-color);
-            padding: .5em 1em;
-            border-radius: 1em;
-        }*/
-        .sign-btn>span{
-            padding-left: 3px;
-            padding-top: 1px;
-        }
-        a:hover{
-            text-decoration: none;
-            color: var(--primary-color);
-        }
-
-        .secondary-nav-btn{
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-    </style>
+    {% block bootstrap %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/popper.min.js')}}"></script>
+    {% endblock %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico')}}">
+    <title>کافه لبخند | {% block title %}{% endblock %}</title>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-
-
-    <ul class="nav-list">
-        <li class="nav-list-item"><i class="gb gb_dashboard gb_s24"></i>dashboard</li>
-        <li class="nav-list-item "><i class="gb gb_tablet gb_s24"></i>orders</li>
-        <li class="nav-list-item "><i class="gb gb_restaurant gb_s24"></i>tables</li>
-        <li class="nav-list-item"><i class="gb gb_restaurant_menu gb_s24"></i>menu</li>
-    </ul>
-
-
-
-<div class="container-fluid">
-    <div class="row bg-light border-bottom  ">
-        <div class="col-2 d-flex flex-wrap">
-            <img src="../static/img/main_icon.png" class="logo-pic" alt="logo">
-            <a class="logo" href="#">panda<span>kaffee</span></a>
-        </div>
-        <div class="col-6 d-flex flex-wrap">
-            <ul class="primary-nav">
-                <li><a class="{{ 'choosed' if page_name=='home' else 'unchoosed' }}"
-                       href="{{ url_for("home") }}">Home</a></li>
-                <li><a class="{{ 'choosed' if page_name=='menu' else 'unchoosed' }}"
-                       href="{{ url_for("menu") }}">Menu</a></li>
-                <li><a class="flex-wrap {{ 'choosed' if page_name=='about_us' else 'unchoosed' }}"
-                       href="{{ url_for("about_us") }}">About Us</a></li>
-                <li><a class="{{ 'choosed' if page_name=='contact_us' else 'unchoosed' }}"
-                       href="{{ url_for("contact_us") }}">Contact Us</a></li>
-            </ul>
-        </div>
-        <div class="col-4 float-right align-self-center d-flex flex-wrap m-0 p-0">
-            <ul class="secondary-nav ">
-                <li><a class="secondary-nav-btn" href="#">order list</a></li>
-                <li>
-                    <a class="secondary-nav-btn d-flex justify-content-end" href="#">
-                        <i class="gb gb_account_circle gb_s24"></i>
-                        <span>Sign up</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="row bg-color">
-        {% block body %}
-        {% endblock %}
-    </div>
-
-</div>
+{% block body %}{% endblock %}
+<!--  JS Plugins  -->
+{% block js_plugin %}{% endblock %}
+<!--  JS Plugins  -->
 </body>
 </html>
