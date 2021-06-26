@@ -41,5 +41,18 @@ items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات د
 
 
 def menu_items():
-    # need call a function to get access to last menu items
-    return render_template("menu_items.html", items=items)
+    if request.method == "GET":
+        # need call a function to get access last menu items in database
+        return render_template("menu_items.html", items=items)
+    else:
+        _vars = request.form
+        if "delete" in _vars.keys():
+            # call function to delete the item from database
+            pass
+        elif "name" in _vars.keys():
+            # call function to edit existing menu item in database
+            pass
+        elif "new_name" in _vars.keys():
+            # call function to add a new menu item to database
+            pass
+        return render_template("menu_items.html", items=items)
