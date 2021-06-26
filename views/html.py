@@ -1,5 +1,10 @@
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
+from core.manager import ExtraDataBaseManager
+from core.models import TextMessage
+
+
+db_manager = ExtraDataBaseManager()
 
 
 def home():
@@ -11,7 +16,17 @@ def about_us():
 
 
 def contact_us():
-    return render_template("contact_us.html", page_name="contact_us")
+    """
+    Manage The Request to Contact US Page for Example Just See or Send Message
+    """
+    
+    if request.method == 'GET':
+        return render_template("contact_us.html")
+    
+    else:
+        _vars = request.form
+        message = TextMessage()
+        # TODO: use try and except for exceptions handeling after check validate        
 
 
 def menu():
