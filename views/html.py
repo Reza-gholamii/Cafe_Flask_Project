@@ -4,10 +4,8 @@ from core.manager import ExtraDataBaseManager
 from core.models import TextMessage
 import logging
 
-
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)-10s - %(message)s')
-
 
 db_manager = ExtraDataBaseManager()
 
@@ -24,18 +22,19 @@ def contact_us():
     """
     Manage The Request to Contact US Page for Example Just See or Send Message
     """
-    
+
     if request.method == 'GET':
         return render_template("contact_us.html")
-    
+
     else:
         _vars = dict(request.form)
         message = TextMessage(**_vars)
         # TODO: use try and except for exceptions handeling after check validate
         db_manager.create(table="messages", model=message)
-        logging.info(f"{__name__}: Message has Written into the DataBase") 
+        logging.info(f"{__name__}: Message has Written into the DataBase")
         # TODO: show alert for send message successfully and next ...?
         return redirect(url_for('home'))
+
 
 def menu():
     return render_template("menu.html", page_name="menu")
@@ -56,8 +55,14 @@ orders = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "�
 
 
 def order_list():
-    # need call a function to get access to last orders based on tables
-    return render_template("order_list.html", orders=orders)
+    if request.method == "GET":
+        # need call a function to get access to last orders based on tables
+        return render_template("order_list.html", orders=orders)
+    else:
+        json_data = request.get_json()
+        # print(json_data['status'])
+        # data must be updated in database
+        return render_template('order_list.html', orders=orders)
 
 
 # this is for test
