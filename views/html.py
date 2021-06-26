@@ -37,6 +37,8 @@ def order_list():
     return render_template("order_list.html", orders=orders)
 
 
+# this is for test
+
 items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات داگ", "۴۰۰۰۰"), ("همبرگر", "۳۰۰۰۰"), ("پیش غذا", "۱۰۰۰۰")]
 
 
@@ -56,3 +58,21 @@ def menu_items():
             # call function to add a new menu item to database
             pass
         return render_template("menu_items.html", items=items)
+
+
+# this is for test
+
+served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
+
+
+def served_order_list():
+    if request.method == "GET":
+        return render_template("served_orders_list.html", orders=served_orders)
+    else:
+        return render_template("served_orders_list.html", orders=served_orders)
