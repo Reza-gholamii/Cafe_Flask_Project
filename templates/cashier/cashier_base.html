@@ -2,12 +2,12 @@
 <html class="no-js" lang="fa-IR">
 <head>
     <meta charset="UTF-8">
+    <title>صندوقدار | {% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier_base.css') }}">
     {% block tailwindcss %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
@@ -18,33 +18,8 @@
         <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     {% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <title>صندوقدار | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier_base.css') }}">
     {% block extra_head %}{% endblock %}
-    <style>
-        .hamburger-menu {
-            color: white;
-            visibility: hidden;
-            position: absolute;
-            right: .9em;
-            bottom: .6em;
-            text-align: right;
-            font-size: 3em;
-
-
-        }
-
-        .hamburger-close-menu {
-            color: white;
-            visibility: hidden;
-            position: absolute;
-            right: .9em;
-            bottom: .6em;
-            text-align: right;
-            font-size: 3em;
-
-
-        }
-    </style>
 </head>
 
 <body onresize="hamburger_close()">
@@ -108,12 +83,6 @@
 <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script src="{{ url_for('static', filename='js/cashier_js.js') }}"></script>
-<script>
-    $('#menu_left_side>li').bind('click', function () {
-        $('li.choosed').removeClass("choosed");
-        $(this).addClass("choosed");
-    })
-</script>
 {% block extra_js %}{% endblock %}
 <!--  JS Plugins  -->
 

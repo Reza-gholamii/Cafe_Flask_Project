@@ -1,8 +1,8 @@
-function hamburger_open(){
+function hamburger_open() {
     const menu = document.getElementById("nav_menu")
     const close = document.getElementById("hamburger_close")
     const open = document.getElementById("hamburger_open")
-    const hero= document.getElementById("menu-position")
+    const hero = document.getElementById("menu-position")
     open.style.display = "none"
     close.style.visibility = "visible"
     hero.appendChild(menu)
@@ -11,9 +11,9 @@ function hamburger_open(){
 
 }
 
-function hamburger_close(){
+function hamburger_close() {
     const navparent = document.getElementById("nav_parent")
-    const hero=  document.getElementById("nav_menu")
+    const hero = document.getElementById("nav_menu")
     const menu = document.getElementById("menu-position")
     const close = document.getElementById("hamburger_close")
     const open = document.getElementById("hamburger_open")
@@ -23,3 +23,8 @@ function hamburger_close(){
     navparent.appendChild(hero)
 
 }
+
+$('#menu_left_side>li').bind('click', function () {
+    $('li.choosed').removeClass("choosed");
+    $(this).addClass("choosed");
+})

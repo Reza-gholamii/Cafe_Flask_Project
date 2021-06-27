@@ -22,12 +22,12 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    {% block body %}{% endblock %}
+{% block body %}{% endblock %}
 <!--  JS Plugins  -->
 <script src="{{ url_for('static', filename='js/modernizr.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    {% block extra_js %}{% endblock %}
+{% block extra_js %}{% endblock %}
 <!--  JS Plugins  -->
 </body>
 </html>
