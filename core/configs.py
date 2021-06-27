@@ -78,10 +78,22 @@ extra_information JSON,
 id SERIAL PRIMARY KEY);
 """,
     """
+CREATE TABLE IF NOT EXISTS statuses (
+name VARCHAR(20),
+subtable INT,
+id SERIAL PRIMARY KEY,
+CONSTRAINT fk_sub
+    FOREIGN KEY(subtable)
+    REFERENCES statuses(id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL
+);
+""",
+    """
 CREATE TABLE IF NOT EXISTS tables (
 capacity INT NOT NULL,
 position_space VARCHAR(20) NOT NULL UNIQUE,
-status BOOLEAN DEFAULT FALSE,
+status BOOLEAN DEFAULT TRUE,
 id SERIAL PRIMARY KEY);
 """,
     """
@@ -103,6 +115,7 @@ price INT NOT NULL,
 category INT NOT NULL,
 image_name VARCHAR(100),
 discount INT DEFAULT 0,
+status BOOLEAN DEFAULT TRUE,
 serving_time TIME,
 cooking_time TIME,
 id SERIAL PRIMARY KEY,
