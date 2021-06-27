@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from core.models import BaseModel
-from typing import List
+from typing import List, Tuple
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor
 from contextlib import contextmanager
@@ -172,10 +172,29 @@ WHERE status={'true' if status else 'false'};
 SELECT recepites.id, menu_items.name, orders.count, menu_items.price
 FROM recepites INNER JOIN orders ON orders.recepites = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
-WHERE recepites.table_number = {table_number} recepites.status = FALSE;
+WHERE recepites.table_number = {table_number} AND recepites.status = FALSE;
 """
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query + ';')
             result = cafe_cursor.fetchall()
+
+        return result
+
+    def calculate_price(self, recepite_number: int) -> Tuple[int]:
+        """
+        Calculate Total Price and Final Price of a Recepite with Sum Orders Price
+        """
+
+        query = f"""
+SELECT SUM(orders.count * menu_items.price) AS Total,
+SUM(orders.count * (menu_items.price - menu_items.discount)) AS Final
+FROM recepites INNER JOIN orders ON orders.recepites = recepites.id
+INNER JOIN menu_items ON orders.menu_item = menu_items.id
+WHERE recepites.id = {recepite_number};
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query + ';')
+            result = cafe_cursor.fetchone()
 
         return result
