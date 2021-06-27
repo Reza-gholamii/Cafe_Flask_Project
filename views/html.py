@@ -77,16 +77,15 @@ def menu_items():
     else:
         json_data = request.get_json()
         print("hree", json_data)
-        # _vars = request.form
-        # if "delete" in _vars.keys():
-        #     # call function to delete the item from database
-        #     pass
-        # elif "name" in _vars.keys():
-        #     # call function to edit existing menu item in database
-        #     pass
-        # elif "new_name" in _vars.keys():
-        #     # call function to add a new menu item to database
-        #     pass
+        if json_data['action'] == "delete":
+            # call function to delete the item from database
+            pass
+        elif json_data['action'] == "update":
+            # call function to edit existing menu item in database
+            pass
+        elif json_data['action'] == "add":
+            # call function to add a new menu item to database
+            items.append((json_data['name'], json_data['price']))
         return render_template("menu_items_test.html", items=items)
 
 
