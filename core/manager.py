@@ -170,12 +170,12 @@ WHERE status={'true' if status else 'false'};
 
         query = f"""
 SELECT recepites.id, menu_items.name, orders.count, menu_items.price
-FROM recepites INNER JOIN orders ON orders.recepites = recepites.id
+FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 WHERE recepites.table_number = {table_number} AND recepites.status = FALSE;
 """
         with self.access_database() as cafe_cursor:
-            cafe_cursor.execute(query + ';')
+            cafe_cursor.execute(query)
             result = cafe_cursor.fetchall()
 
         return result
@@ -188,13 +188,13 @@ WHERE recepites.table_number = {table_number} AND recepites.status = FALSE;
         query = f"""
 SELECT SUM(orders.count * menu_items.price) AS Total,
 SUM(orders.count * (menu_items.price - menu_items.discount)) AS Final
-FROM recepites INNER JOIN orders ON orders.recepites = recepites.id
+FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 WHERE recepites.id = {recepite_number};
 """
 
         with self.access_database() as cafe_cursor:
-            cafe_cursor.execute(query + ';')
+            cafe_cursor.execute(query)
             result = cafe_cursor.fetchone()
 
         return result
