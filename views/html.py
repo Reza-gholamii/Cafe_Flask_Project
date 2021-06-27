@@ -6,6 +6,7 @@ from core.manager import *
 
 db_manager = ExtraDataBaseManager()
 
+
 #
 # def home():
 #     return render_template("home.html", page_name="home")
@@ -25,7 +26,9 @@ db_manager = ExtraDataBaseManager()
 
 def order_list():
     res = db_manager.order_lists(1)
+    price = db_manager.calculate_price(res[0][1])
     pprint(res)
+    print(price)
 
 
 if __name__ == "__main__":

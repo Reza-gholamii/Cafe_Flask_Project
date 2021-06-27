@@ -169,7 +169,7 @@ WHERE status={'true' if status else 'false'};
         """
 
         query = f"""
-SELECT recepites.id, menu_items.name, orders.count, menu_items.price
+SELECT recepites.table_number, recepites.id, recepites.status, menu_items.name, orders.count, orders.status, menu_items.price
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 WHERE recepites.table_number = {table_number} AND recepites.status = FALSE;
