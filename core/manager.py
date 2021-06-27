@@ -115,11 +115,11 @@ class ExtraDataBaseManager(DataBaseManager):
         """
 
         query = """
-SELECT menu_items.id, title, COUNT(menu_items.id) AS sales
+SELECT menu_items.id, title, SUM(orders.count) AS Sellers
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
 GROUP BY menu_items.id
-ORDER BY COUNT(menu_items.id) DESC;
+ORDER BY Sellers DESC;
 """
 
         with self.access_database() as cafe_cursor:
