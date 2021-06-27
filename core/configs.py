@@ -57,7 +57,7 @@ class DataBaseContext:
         return True  # For ignore raising exceptions!
 
 
-sql_queries = [
+sql_queries_creates = [
     """
 CREATE TABLE IF NOT EXISTS messages (
 first_name VARCHAR(50) NOT NULL,
@@ -160,4 +160,43 @@ CONSTRAINT fk_menu_item
     ON UPDATE SET NULL
 );
 """
+]
+
+sql_queries_inserts = [
+    """
+INSERT INTO statuses (name, id)
+VALUES ('orders', 1);
+""",
+    """
+INSERT INTO statuses (name, id)
+VALUES ('recepites', 2);
+""",
+    """
+INSERT INTO statuses (name, subtable, id)
+VALUES ('new', 1, 3);
+""",
+    """
+INSERT INTO statuses (name, subtable, id)
+VALUES ('cooking', 1, 4);
+""",
+    """
+INSERT INTO statuses (name, subtable, id)
+VALUES ('serving', 1, 5);
+""",
+    """
+INSERT INTO statuses (name, subtable, id)
+VALUES ('canceled', 1, 6);
+""",
+    """
+INSERT INTO statuses (name, subtable, id)
+VALUES ('paid', 2, 7);
+""",
+    """
+INSERT INTO statuses (name, subtable, id)
+VALUES ('unpaid', 2, 8);
+""",
+    """
+INSERT INTO statuses (name, subtable, id)
+VALUES ('canceled', 2, 9);
+""",
 ]
