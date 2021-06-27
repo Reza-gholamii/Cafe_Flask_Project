@@ -104,3 +104,7 @@ def served_order_list():
         return render_template("served_orders_list.html", orders=served_orders)
     else:
         return render_template("served_orders_list.html", orders=served_orders)
+
+
+def dashboard():
+    return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data={})
