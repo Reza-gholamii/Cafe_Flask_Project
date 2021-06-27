@@ -44,3 +44,5 @@ class DataBaseContext:
             self.conn.close()
             logging.info(f"{__name__}: Execute Query Successfully.")
         return True # For ignore raising exceptions!
+
+    #
