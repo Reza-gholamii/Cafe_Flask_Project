@@ -163,16 +163,17 @@ WHERE status={'true' if status else 'false'};
 
         return result
     
-    def order_lists(self, table_number: int) -> List[tuple]:
+    def order_list(self, recepite_number: int) -> List[tuple]:
         """
         Get List of Orders from a Table with One Recepites
         """
 
         query = f"""
-SELECT recepites.table_number, recepites.id, recepites.status, menu_items.name, orders.count, orders.status, menu_items.price
+SELECT statuses.title, menu_items.title, orders.count, menu_items.price
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
-WHERE recepites.table_number = {table_number} AND recepites.status = FALSE;
+INNER JOIN statuses ON orders.status = statuses.id
+WHERE recepites.id = {recepite_number} AND recepites.status = FALSE;
 """
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
