@@ -1,107 +1,49 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/css/cashier_base.css">
-    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
-    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
-    <title>Document</title>
-
-<style>
-    .hamburger-menu {
-        color: white;
-        visibility: hidden;
-        position: absolute;
-        right: .9em;
-        bottom: .6em;
-        text-align: right;
-        font-size: 3em;
-
-
-    }
-
-    .rounded-md {
-        border-radius: 15px !important;
-    }
-
-      .hamburger-close-menu {
-        color: white;
-        visibility: hidden;
-        position: absolute;
-        right: .9em;
-        bottom: .6em;
-        text-align: right;
-        font-size: 3em;
-
-
-    }
-
-      iframe {
-          min-height: 100vh;
-          overflow: visible;
-      }
-</style>
-</head>
-<body onresize="hamburger_close()">
-
-<div class="container-fluid" style="height: 100vh">
-    <div class="row  h-100 top-mobile menu-row">
-        <div class="h-100 col-lg-3 col-md-4  position-sticky top-mobile">
-            <div class="row  bg-dark position-relative" >
-                <i id="hamburger_open" onclick="hamburger_open()"   class="gb gb_menu hamburger-menu "></i>
-                <i id="hamburger_close" onclick="hamburger_close()" class="gb gb_close hamburger-close hamburger-close-menu"></i>
-                <img class="logo-img" src="../coffee.png" alt="">
-                <p class="logo-text Vazir">کافه <span class="font-weight-bold logo-text2">لبخند</span></p>
-            </div>
-            <hr class="hr-menu-top p-0 m-0 w-100">
-            <div id="nav_parent" class="row h-100 bg-dark menu ">
-                <nav id="nav_menu" class="w-100 ">
-                    <ul id="menu_left_side" class="nav-list" style="padding: 0 2em !important;  text-align: center !important; ">
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item choosed "><i class="gb gb_dashboard gb_s24 menu-icon"></i>داشبورد</li>
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item "><i class="gb gb_tablet gb_s24 menu-icon"></i>سفارش ها</li>
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item "><i class="gb gb_restaurant gb_s24 menu-icon"></i>میزها</li>
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item"><i class="gb gb_restaurant_menu gb_s24 menu-icon"></i>منو</li>
-                    </ul>
-                </nav>
-            </div>
-
-            </nav>
-        </div>
-        <div class="col-lg-9 col-md-8 ">
-            <div class="row border-bottom shadow title-p" style="height: 9em">
-                <div class="col-3 align-bottom position-relative">
-                    <p class="title position-absolute ">داشبورد</p>
-                </div>
-                <div class="col-9  position-relative ">
-                    <a href="#" class="position-absolute profile shadow">
-                        <i class="profile-icon gb gb_account_circle gb_s48"></i>
-                        <span class="profile-text">رضا یزدانی</span>
-                    </a>
-                </div>
-            </div>
-            <div id="hero" class="row  position-relative">
-            <div id="menu-position"  class="bg-dark w-100"> </div>
-                <iframe class="w-100" src="iframe-dashboard.html"  frameborder="0"></iframe>
-            </div>
-        </div>
-
+{% extends "cashier_base.html" %}
+{% block title %}داشبورد{% endblock %}
+{% block bootstrap %}{{ super() }}{% endblock %}
+{% block tailwindcss %}{{ super() }}{% endblock %}
+{% block extra_head %}
+    <style>
+        .text-shadow-md {
+            text-shadow: 0 0 10px #999;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="w-full grid gap-4 sm:gap-8 p-8 grid-cols-6">
+    <a href="" class="animate__animated animate__fadeInDown animate__delay-1s relative rounded-3xl block col-span-6 p-4 bg-purple-400 text-white border-8 border-purple-300 shadow-xl hover:shadow-lg">
+        <b class="float-left text-5xl p-7 bg-white bg-opacity-20 rounded-3xl">35</b>
+        <span class="absolute right-8 pt-8 float-right text-2xl font-bold">سفارشات جدید</span>
+    </a>
+    <a href="#"
+       class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-2 p-6 rounded-2xl overflow-hidden text-center bg-green-400 border-green-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">
+        سفارش
+        <i class="gb gb_assignment absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
+        <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">1020</b>
+    </a>
+    <a href="#"
+       class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-2 p-6 rounded-2xl overflow-hidden text-center bg-red-400 border-red-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">
+        میز خالی
+        <i class="gb gb_weekend absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
+        <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">4</b>
+    </a>
+    <a href="#"
+       class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-2 p-6 rounded-2xl overflow-hidden text-center bg-yellow-400 border-yellow-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">صورت
+        حساب
+        <i class="gb gb_description absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
+        <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">320</b>
+    </a>
+    <div class="animate__animated animate__fadeInDown animate__delay-3s relative rounded-3xl block col-span-6 md:col-span-3 p-4 bg-blue-400 text-white border-8 border-blue-300 shadow-xl hover:shadow-lg">
+        <b class="float-left text-5xl p-7 bg-white bg-opacity-20 rounded-3xl">105,000</b>
+        <span class="absolute right-8 pt-8 float-right text-2xl font-bold">مخارج امروز</span>
     </div>
-
-
+    <div class="animate__animated animate__fadeInDown animate__delay-3s relative rounded-3xl block col-span-6 md:col-span-3 p-4 bg-gray-600 text-white border-8 border-gray-400 shadow-xl hover:shadow-lg">
+        <b class="float-left text-5xl p-7 bg-white bg-opacity-20 rounded-3xl">650,000</b>
+        <span class="absolute right-8 pt-8 float-right text-2xl font-bold">درآمد امروز</span>
+    </div>
+    <div class="animate__animated animate__fadeInDown animate__delay-4s relative rounded-3xl block col-span-6 p-4 bg-pink-500 text-white border-8 border-pink-300 shadow-xl hover:shadow-lg">
+        <b class="float-left text-5xl p-7 bg-white bg-opacity-20 rounded-3xl">81,000,000</b>
+        <span class="absolute right-8 pt-8 float-right text-2xl font-bold">درآمد کل</span>
+    </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../../static/css/cashier_js.js"></script>
-<script>
-    $('#menu_left_side>li').bind('click',function () {
-        $('li.choosed').removeClass("choosed");
-        $(this).addClass("choosed");
-    })
-</script>
-</body>
-
-</html>
-
+{% endblock %}
