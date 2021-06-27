@@ -130,12 +130,17 @@ CONSTRAINT fk_group
 CREATE TABLE IF NOT EXISTS recepites (
 total_price INT DEFAULT 0,
 final_price INT DEFAULT 0,
-status BOOLEAN DEFAULT FALSE,
+status INT DEFAULT 8,
 table_number INT NOT NULL,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_num
     FOREIGN KEY(table_number)
     REFERENCES tables(id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
+CONSTRAINT fk_stat
+    FOREIGN KEY(status)
+    REFERENCES statuses(id)
     ON DELETE SET NULL
     ON UPDATE SET NULL
 );
@@ -143,7 +148,7 @@ CONSTRAINT fk_num
     """
 CREATE TABLE IF NOT EXISTS orders (
 count INT DEFAULT 1,
-status BOOLEAN DEFAULT FALSE,
+status INT DEFAULT 3,
 time_stamp TIMESTAMP NOT NULL,
 recepite INT NOT NULL,
 menu_item INT NOT NULL,
@@ -157,7 +162,12 @@ CONSTRAINT fk_menu_item
     FOREIGN KEY(menu_item)
     REFERENCES menu_items(id)
     ON DELETE SET NULL
-    ON UPDATE SET NULL
+    ON UPDATE SET NULL,
+CONSTRAINT fk_stat
+    FOREIGN KEY(status)
+    REFERENCES statuses(id)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
 );
 """
 ]
