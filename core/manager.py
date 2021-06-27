@@ -173,7 +173,7 @@ SELECT statuses.title, menu_items.title, orders.count, menu_items.price
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON orders.status = statuses.id
-WHERE recepites.id = {recepite_number} AND recepites.status = FALSE;
+WHERE recepites.id = {recepite_number};
 """
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
