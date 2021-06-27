@@ -106,5 +106,15 @@ def served_order_list():
         return render_template("served_orders_list.html", orders=served_orders)
 
 
+# this is test for tables status
+empty_table = [1, 3, 4, 7]
+
+
 def dashboard():
-    return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data={})
+    data = {
+        'count_new_orders': len(orders),
+        'count_orders': len(orders) + len(served_orders),
+        'count_empty_tables': len(empty_table),
+        'count_view': viewers.count,
+    }
+    return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
