@@ -162,3 +162,20 @@ WHERE status={'true' if status else 'false'};
             result = cafe_cursor.fetchall()
 
         return result
+    
+    def order_lists(self, table_number: int) -> List[tuple]:
+        """
+        Get List of Orders from a Table with One Recepites
+        """
+
+        query = f"""
+SELECT recepites.id, menu_items.name, orders.count, menu_items.price
+FROM recepites INNER JOIN orders ON orders.recepites = recepites.id
+INNER JOIN menu_items ON orders.menu_item = menu_items.id
+WHERE recepites.table_number = {table_number} recepites.status = FALSE;
+"""
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query + ';')
+            result = cafe_cursor.fetchall()
+
+        return result
