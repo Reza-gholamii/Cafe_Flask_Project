@@ -1,5 +1,13 @@
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
+from core.manager import ExtraDataBaseManager
+from core.models import TextMessage
+import logging
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)-10s - %(message)s')
+
+db_manager = ExtraDataBaseManager()
 
 
 def home():
@@ -11,11 +19,28 @@ def about_us():
 
 
 def contact_us():
-    return render_template("contact_us.html", page_name="contact_us")
+    """
+    Manage The Request to Contact US Page for Example Just See or Send Message
+    """
+
+    if request.method == 'GET':
+        return render_template("contact_us.html")
+
+    else:
+        _vars = dict(request.form)
+        message = TextMessage(**_vars)
+        # TODO: use try and except for exceptions handeling after check validate
+        db_manager.create(table="messages", model=message)
+        logging.info(f"{__name__}: Message has Written into the DataBase")
+        # TODO: show alert for send message successfully and next ...?
+        return redirect(url_for('home'))
 
 
 def menu():
     return render_template("menu.html", page_name="menu")
+
+
+# fro here all are for cashier side
 
 
 # this is for test
@@ -30,4 +55,52 @@ orders = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "�
 
 
 def order_list():
-    return render_template("order_list.html", orders=orders)
+    if request.method == "GET":
+        # need call a function to get access to last orders based on tables
+        return render_template("order_list.html", orders=orders)
+    else:
+        json_data = request.get_json()
+        # print(json_data['status'])
+        # data must be updated in database
+        return render_template('order_list.html', orders=orders)
+
+
+# this is for test
+
+items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات داگ", "۴۰۰۰۰"), ("همبرگر", "۳۰۰۰۰"), ("پیش غذا", "۱۰۰۰۰")]
+
+
+def menu_items():
+    if request.method == "GET":
+        # need call a function to get access last menu items in database
+        return render_template("menu_items.html", items=items)
+    else:
+        _vars = request.form
+        if "delete" in _vars.keys():
+            # call function to delete the item from database
+            pass
+        elif "name" in _vars.keys():
+            # call function to edit existing menu item in database
+            pass
+        elif "new_name" in _vars.keys():
+            # call function to add a new menu item to database
+            pass
+        return render_template("menu_items.html", items=items)
+
+
+# this is for test
+
+served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
+
+
+def served_order_list():
+    if request.method == "GET":
+        return render_template("served_orders_list.html", orders=served_orders)
+    else:
+        return render_template("served_orders_list.html", orders=served_orders)

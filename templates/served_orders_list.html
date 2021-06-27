@@ -2,7 +2,7 @@
 <html lang="fa-IR">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -58,45 +58,21 @@
 
                 </thead>
                 <tbody>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal1">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status1">سرو شده</td>
-
-
+                {% for order in orders %}
+                <tr class="table-row" data-toggle="modal" data-target="#myModal{{ loop.index0 }}">
+                    <td class="w-25">{{ order.0 }}</td>
+                    <td class="w-25">{{ order.1 }}</td>
+                    <td class="w-25">{{ order.2 }}</td>
+                    <td class="w-25" id="status1">{{ order.3 }}</td>
                 </tr>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal2">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status2">سرو شده</td>
+                {% endfor %}
 
-
-                </tr>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal3">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status3">سرو شده</td>
-
-
-                </tr>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal4">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status4">سرو شده</td>
-
-
-                </tr>
                 </tbody>
             </table>
-
-            <div class="modal fade" id="myModal1" role="dialog">
+            {% for order in orders %}
+            <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
                 <div class="modal-dialog">
 
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header bg-info">
                             <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
@@ -104,14 +80,14 @@
                         <div class="modal-body text-right">
                             <ul class="border rounded pl-2 py-2">
                                 <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
+                                    <span class="float-right">{{ order.4 }}</span>
+                                    <span class="float-left">{{ order.5 }} عدد</span></li>
                                 <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
+                                    <span class="float-right">{{ order.6 }}</span>
+                                    <span class="float-left">{{ order.7 }} عدد</span></li>
                                 <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
+                                    <span class="float-right">{{ order.8 }}</span>
+                                    <span class="float-left">{{ order.9 }} عدد</span>
                                 </li>
                             </ul>
                             <div class="col mx-auto text-center">
@@ -139,144 +115,8 @@
 
                 </div>
             </div>
-            <div class="modal fade" id="myModal2" role="dialog">
-                <div class="modal-dialog">
+            {% endfor %}
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
-                        </div>
-                        <div class="modal-body text-right">
-                            <ul class="border rounded pl-2 py-2">
-                                <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
-                                <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
-                                <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
-                                </li>
-                            </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal2" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal2" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal2" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal2" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal2" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="modal-footer mx-auto">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal fade" id="myModal3" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
-                        </div>
-                        <div class="modal-body text-right">
-                            <ul class="border rounded pl-2 py-2">
-                                <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
-                                <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
-                                <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
-                                </li>
-                            </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal3" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal3" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal3" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal3" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal3" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="modal-footer mx-auto">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal fade" id="myModal4" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
-                        </div>
-                        <div class="modal-body text-right">
-                            <ul class="border rounded pl-2 py-2">
-                                <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
-                                <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
-                                <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
-                                </li>
-                            </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal4" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal4" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal4" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal4" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal4" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="modal-footer mx-auto">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
     </div>

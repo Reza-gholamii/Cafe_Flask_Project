@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from core.models import BaseModel
 from typing import List
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor
@@ -12,25 +13,25 @@ class BaseManager(ABC):
     """
 
     @abstractmethod
-    def create(self, table, model):
+    def create(self, table: str, model: BaseModel):
         """
         Create New Row in DataBase Table By Model and to_dict Method
         """
 
     @abstractmethod
-    def read(self, table, row_id):
+    def read(self, table: str, row_id):
         """
         Read Data from DataBase and Return All of the Columns
         """
 
     @abstractmethod
-    def update(self, table, **kwargs):
+    def update(self, table: str, **kwargs):
         """
         Update Information of a Model in the DataBase with Row ID
         """
 
     @abstractmethod
-    def delete(self, table, row_id):
+    def delete(self, table: str, row_id):
         """
         Delete a Model by Row ID from the DataBase Table
         """
@@ -41,7 +42,7 @@ class DataBaseManager(BaseManager):
     Managed DataBase Tables to CRUD Data of Models
     """
 
-    def create(self, table, model):
+    def create(self, table: str, model: BaseModel):
         attrs: dict = model.to_dict()
         dict_values = tuple(attrs.values())
         value_num = '%s, ' * len(dict_values)

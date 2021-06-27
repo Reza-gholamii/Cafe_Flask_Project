@@ -59,25 +59,34 @@ class DataBaseContext:
 
 sql_queries = [
     """
+CREATE TABLE IF NOT EXISTS messages (
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+phone_number INT NOT NULL,
+email VARCHAR(100),
+comment TEXT NOT NULL,
+id SERIAL PRIMARY KEY);
+""",
+    """
 CREATE TABLE IF NOT EXISTS users (
-first_name CHAR(50) NOT NULL,
-last_name CHAR(50) NOT NULL,
-phone_number CHAR(11) NOT NULL,
-email CHAR(100),
-password CHAR(100) NOT NULL,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+phone_number INT NOT NULL,
+email VARCHAR(100),
+password CHAR(64) NOT NULL,
 extra_information JSON,
 id SERIAL PRIMARY KEY);
 """,
     """
 CREATE TABLE IF NOT EXISTS tables (
 capacity INT NOT NULL,
-position_space CHAR(20) NOT NULL UNIQUE,
+position_space VARCHAR(20) NOT NULL UNIQUE,
 status BOOLEAN DEFAULT FALSE,
 id SERIAL PRIMARY KEY);
 """,
     """
 CREATE TABLE IF NOT EXISTS categories (
-field CHAR(50) NOT NULL UNIQUE,
+field VARCHAR(50) NOT NULL UNIQUE,
 root INT,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_tree
@@ -89,10 +98,10 @@ CONSTRAINT fk_tree
 """,
     """
 CREATE TABLE IF NOT EXISTS menu_items (
-name CHAR(50) NOT NULL UNIQUE,
+name VARCHAR(50) NOT NULL UNIQUE,
 price INT NOT NULL,
 category INT NOT NULL,
-image_name CHAR(100),
+image_name VARCHAR(100),
 discount INT,
 serving_time TIME,
 cooking_time TIME,
@@ -120,6 +129,7 @@ CONSTRAINT fk_num
 """,
     """
 CREATE TABLE IF NOT EXISTS orders (
+count INT DEFAULT 1,
 status BOOLEAN DEFAULT FALSE,
 time_stamp TIMESTAMP NOT NULL,
 recepite INT NOT NULL,
