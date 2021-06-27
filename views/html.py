@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
-from core.manager import ExtraDataBaseManager
+from core.manager import ExtraDataBaseManager , DataBaseManager
 from core.models import TextMessage
 import logging
 
@@ -105,3 +105,50 @@ def served_order_list():
         return render_template("served_orders_list.html", orders=served_orders)
     else:
         return render_template("served_orders_list.html", orders=served_orders)
+
+
+# this is test for tables status
+empty_table = [1, 3, 4, 7]
+
+
+def dashboard():
+    data = {
+        'count_new_orders': len(orders),
+        'count_orders': len(orders) + len(served_orders),
+        'count_empty_tables': len(empty_table),
+        'count_view': 15
+    }
+    return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
+
+
+def login():
+    pass
+    # if request.method == "GET":
+    #     return render_template("login_cachier.html")
+    # elif request.method == "POST":
+    #     resp = request.form
+    #     print(resp)
+    #
+    #     try:
+    #
+    #         user = DataBaseManager().read_condition("users", "phone_number", resp["username"])[0]
+    #
+    #     except:
+    #         return render_template("cashier/login_cachier.html", condition="user not fount")
+    #
+    #     # TODO: where is bug?? just update
+    #     # TODO: hash
+    #
+    #     if user[-3] == resp["password"]:
+    #         pass
+    #     else:
+    #         return render_template("cashier/login_cachier.html", condition="wrong password")
+    #     return redirect(f"/cashier/{user[-1]}/dashboard")
+
+def tables():
+    return 'table page'
+
+
+def charts():
+    return 'charts page'
+

@@ -1,0 +1,89 @@
+<!doctype html>
+<html class="no-js" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>صندوقدار | {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    {% block bootstrap %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    {% endblock %}
+    {% block tailwindcss %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+    {% endblock %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier_base.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body onresize="hamburger_close()">
+
+<div class="container-fluid" style="height: 100vh">
+    <div class="row  h-100 top-mobile menu-row">
+        <div class="h-100 col-lg-3 col-md-4  position-sticky top-mobile">
+            <div class="row  bg-dark position-relative">
+                <i id="hamburger_open" onclick="hamburger_open()" class="gb gb_menu hamburger-menu "></i>
+                <i id="hamburger_close" onclick="hamburger_close()"
+                   class="gb gb_close hamburger-close hamburger-close-menu"></i>
+                <img class="logo-img" src="{{ url_for('static', filename='img/coffee.png') }}" alt="کافه لبخند">
+                <p class="logo-text Vazir mb-5">کافه <span class="font-weight-bold logo-text2">لبخند</span></p>
+            </div>
+            <hr class="hr-menu-top p-0 m-0 w-100">
+            <div id="nav_parent" class="row h-100 bg-dark menu ">
+                <nav id="nav_menu" class="w-100 ">
+                    <ul id="menu_left_side" class="nav-list"
+                        style="padding: 0 2em !important;  text-align: center !important; ">
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item choosed "><i
+                                class="gb gb_dashboard gb_s24 menu-icon"></i>داشبورد
+                        </li>
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item "><i
+                                class="gb gb_tablet gb_s24 menu-icon"></i>سفارش ها
+                        </li>
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item "><i
+                                class="gb gb_restaurant gb_s24 menu-icon"></i>میزها
+                        </li>
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item"><i
+                                class="gb gb_restaurant_menu gb_s24 menu-icon"></i>منو
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-8 ">
+            <div class="row border-bottom shadow title-p" style="height: 9em">
+                <div class="col-3 align-bottom position-relative">
+                    <p class="title position-absolute mb-5">داشبورد</p>
+                </div>
+                <div class="col-9  position-relative ">
+                    <a href="#" class="position-absolute profile shadow">
+                        <i class="profile-icon gb gb_account_circle gb_s48"></i>
+                        <span class="profile-text">{{ user['name'] }}</span>
+                    </a>
+                </div>
+            </div>
+            <div id="menu-position" class="w-100 bg-dark"></div>
+            <div id="hero" class="row  position-relative">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  JS Plugins  -->
+<script src="{{ url_for('static', filename='js/modernizr.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cashier_js.js') }}"></script>
+{% block extra_js %}{% endblock %}
+<!--  JS Plugins  -->
+
+</body>
+</html>
+
