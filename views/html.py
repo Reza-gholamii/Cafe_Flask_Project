@@ -115,6 +115,6 @@ def dashboard():
         'count_new_orders': len(orders),
         'count_orders': len(orders) + len(served_orders),
         'count_empty_tables': len(empty_table),
-        'count_view': viewers.count,
+        'count_view': 15
     }
     return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
