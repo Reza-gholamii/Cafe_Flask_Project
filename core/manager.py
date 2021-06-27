@@ -128,14 +128,15 @@ ORDER BY Sellers DESC;
 
         return result
 
-    def statusfilter(self, table: str, status: bool) -> List[int]:
+    def statusfilter(self, table: str, status: str) -> List[int]:
         """
         Query to Get Empty Table or Payment Recepites or Present Order...
         """
 
         query = f"""
-SELECT id FROM {table}
-WHERE status={'true' if status else 'false'};
+SELECT {table}.id FROM {table}
+INNER JOIN statuses ON {table}.status = statuses.id
+WHERE statuses.title = '{status}';
 """
 
         with self.access_database() as cafe_cursor:
