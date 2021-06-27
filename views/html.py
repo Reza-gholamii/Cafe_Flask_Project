@@ -118,3 +118,11 @@ def dashboard():
         'count_view': 15
     }
     return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
+
+
+def tables():
+    return 'table page'
+
+
+def charts():
+    return 'charts page'
