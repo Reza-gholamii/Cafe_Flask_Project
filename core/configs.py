@@ -79,7 +79,7 @@ id SERIAL PRIMARY KEY);
 """,
     """
 CREATE TABLE IF NOT EXISTS statuses (
-name VARCHAR(20),
+title VARCHAR(20) NOT NULL,
 subtable INT,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_sub
@@ -110,7 +110,7 @@ CONSTRAINT fk_tree
 """,
     """
 CREATE TABLE IF NOT EXISTS menu_items (
-name VARCHAR(50) NOT NULL UNIQUE,
+title VARCHAR(50) NOT NULL UNIQUE,
 price INT NOT NULL,
 category INT NOT NULL,
 image_name VARCHAR(100),
@@ -167,46 +167,46 @@ CONSTRAINT fk_stat
     FOREIGN KEY(status)
     REFERENCES statuses(id)
     ON DELETE SET NULL
-    ON UPDATE SET NULL,
+    ON UPDATE SET NULL
 );
 """
 ]
 
 sql_queries_inserts = [
     """
-INSERT INTO statuses (name, id)
+INSERT INTO statuses (title, id)
 VALUES ('orders', 1);
 """,
     """
-INSERT INTO statuses (name, id)
+INSERT INTO statuses (title, id)
 VALUES ('recepites', 2);
 """,
     """
-INSERT INTO statuses (name, subtable, id)
+INSERT INTO statuses (title, subtable, id)
 VALUES ('new', 1, 3);
 """,
     """
-INSERT INTO statuses (name, subtable, id)
+INSERT INTO statuses (title, subtable, id)
 VALUES ('cooking', 1, 4);
 """,
     """
-INSERT INTO statuses (name, subtable, id)
+INSERT INTO statuses (title, subtable, id)
 VALUES ('serving', 1, 5);
 """,
     """
-INSERT INTO statuses (name, subtable, id)
+INSERT INTO statuses (title, subtable, id)
 VALUES ('canceled', 1, 6);
 """,
     """
-INSERT INTO statuses (name, subtable, id)
+INSERT INTO statuses (title, subtable, id)
 VALUES ('paid', 2, 7);
 """,
     """
-INSERT INTO statuses (name, subtable, id)
+INSERT INTO statuses (title, subtable, id)
 VALUES ('unpaid', 2, 8);
 """,
     """
-INSERT INTO statuses (name, subtable, id)
+INSERT INTO statuses (title, subtable, id)
 VALUES ('canceled', 2, 9);
-""",
+"""
 ]
