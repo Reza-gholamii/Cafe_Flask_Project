@@ -161,3 +161,13 @@
 
 
 }
+
+a , a:hover {
+    text-decoration: none !important;
+    color: white;
+}
+
+b {
+    text-align: center;
+    font-family: Vazir, sans-serif;
+}

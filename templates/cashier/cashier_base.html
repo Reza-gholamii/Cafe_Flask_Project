@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    {% block tailwindcss %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
-    {% endblock %}
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     {% block bootstrap %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    {% endblock %}
+    {% block tailwindcss %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier_base.css') }}">
@@ -33,7 +33,7 @@
                 <i id="hamburger_close" onclick="hamburger_close()"
                    class="gb gb_close hamburger-close hamburger-close-menu"></i>
                 <img class="logo-img" src="{{ url_for('static', filename='img/coffee.png') }}" alt="کافه لبخند">
-                <p class="logo-text Vazir">کافه <span class="font-weight-bold logo-text2">لبخند</span></p>
+                <p class="logo-text Vazir mb-5">کافه <span class="font-weight-bold logo-text2">لبخند</span></p>
             </div>
             <hr class="hr-menu-top p-0 m-0 w-100">
             <div id="nav_parent" class="row h-100 bg-dark menu ">
@@ -59,7 +59,7 @@
         <div class="col-lg-9 col-md-8 ">
             <div class="row border-bottom shadow title-p" style="height: 9em">
                 <div class="col-3 align-bottom position-relative">
-                    <p class="title position-absolute ">داشبورد</p>
+                    <p class="title position-absolute mb-5">داشبورد</p>
                 </div>
                 <div class="col-9  position-relative ">
                     <a href="#" class="position-absolute profile shadow">
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div id="hero" class="row  position-relative">
-                <div id="menu-position" class="bg-dark w-100">
+                <div id="menu-position" class="w-100">
                     {% block body %}{% endblock %}
                 </div>
             </div>
