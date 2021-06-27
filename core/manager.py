@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from core.models import BaseModel
-from typing import List
+from typing import List, Tuple
 from psycopg2 import connect
 from psycopg2._psycopg import connection, cursor
 from contextlib import contextmanager
@@ -115,11 +115,11 @@ class ExtraDataBaseManager(DataBaseManager):
         """
 
         query = """
-SELECT menu_items.id, name, COUNT(menu_items.id) AS sales
+SELECT menu_items.id, title, SUM(orders.count) AS Sellers
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
 GROUP BY menu_items.id
-ORDER BY COUNT(menu_items.id) DESC;
+ORDER BY Sellers DESC;
 """
 
         with self.access_database() as cafe_cursor:
@@ -128,20 +128,21 @@ ORDER BY COUNT(menu_items.id) DESC;
 
         return result
 
-    def statusfilter(self, table: str, status: bool) -> List[int]:
+    def statusfilter(self, table: str, status: str) -> List[int]:
         """
         Query to Get Empty Table or Payment Recepites or Present Order...
         """
 
         query = f"""
-SELECT id FROM {table}
-WHERE status={'true' if status else 'false'};
+SELECT {table}.id FROM {table}
+INNER JOIN statuses ON {table}.status = statuses.id
+WHERE statuses.title = '{status}';
 """
 
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
-            result = cafe_cursor.fetchall() # list contains single member tuple (id,)
-        
+            result = cafe_cursor.fetchall()  # list contains single member tuple (id,)
+
         return [item[0] for item in result]
 
     def read_all(self, table: str, limit: int = None, offset: int = None) -> List[tuple]:
@@ -153,12 +154,51 @@ WHERE status={'true' if status else 'false'};
 
         if limit:
             query += f" LIMIT {limit}"
-        
+
             if offset:
                 query += f" OFFSET {(offset - 1) * limit}"
-        
+
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query + ';')
             result = cafe_cursor.fetchall()
-        
+
+        return result
+    
+    def order_list(self, recepite_number: int) -> List[tuple]:
+        """
+        Get List of Orders by One Recepite Number
+        """
+
+        query = f"""
+SELECT statuses.title, menu_items.title, orders.count, menu_items.price, menu_items.discount
+FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
+INNER JOIN menu_items ON orders.menu_item = menu_items.id
+INNER JOIN statuses ON orders.status = statuses.id
+WHERE recepites.id = {recepite_number};
+"""
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchall()
+
+        return result
+
+    def calculate_price(self, table_number: int) -> Tuple[int]:
+        """
+        Calculate Total Price and Final Price for One Table & Recepite Number
+        """
+
+        query = f"""
+SELECT MAX(recepites.id) AS Recepite, MAX(statuses.title) AS Status,
+SUM(orders.count * menu_items.price) AS Total,
+SUM(orders.count * (menu_items.price - menu_items.discount)) AS Final
+FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
+INNER JOIN menu_items ON orders.menu_item = menu_items.id
+INNER JOIN statuses ON recepites.status = statuses.id
+WHERE recepites.table_number = {table_number} AND recepites.status = 8;
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchone()
+
         return result
