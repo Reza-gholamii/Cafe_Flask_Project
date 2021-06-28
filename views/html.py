@@ -68,25 +68,25 @@ def order_list():
 
 # this is for test
 
-items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات داگ", "۴۰۰۰۰"), ("همبرگر", "۳۰۰۰۰"), ("پیش غذا", "۱۰۰۰۰")]
-
 
 def menu_items():
     if request.method == "GET":
-        # need call a function to get access last menu items in database
+        items = db_manager.read_all('menu_items')
         return render_template("cashier/menu_items.html", items=items)
     else:
         json_data = request.get_json()
         print("hree", json_data)
         if json_data['action'] == "delete":
-            # call function to delete the item from database
-            pass
+            db_manager.delete('menu_items', json_data['row'])
         elif json_data['action'] == "update":
             # call function to edit existing menu item in database
             pass
         elif json_data['action'] == "add":
+            items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات داگ", "۴۰۰۰۰"), ("همبرگر", "۳۰۰۰۰"),
+                     ("پیش غذا", "۱۰۰۰۰")]
+
             # call function to add a new menu item to database
-            items.append((json_data['name'], json_data['price']))
+            # items.append((json_data['name'], json_data['price']))
         return render_template("menu_items_test.html", items=items)
 
 
@@ -158,7 +158,6 @@ def tables():
 
 def charts():
     return 'charts page'
-
 
 
 def user_seter():
