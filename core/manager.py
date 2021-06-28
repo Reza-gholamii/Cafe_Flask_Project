@@ -164,7 +164,7 @@ WHERE statuses.title = '{status}';
 
         return result
     
-    def order_list(self, recepite_number: int) -> List[tuple]:
+    def order_list(self, recepite_number: int) -> List[Tuple[str, str, int, int, int]]:
         """
         Get List of Orders by One Recepite Number
         """
@@ -182,7 +182,7 @@ WHERE recepites.id = {recepite_number};
 
         return result
 
-    def calculate_price(self, table_number: int) -> Tuple[int]:
+    def calculate_price(self, table_number: int) -> Tuple[int, str, int, int]:
         """
         Calculate Total Price and Final Price for One Table & Recepite Number
         """
@@ -194,7 +194,7 @@ SUM(orders.count * (menu_items.price - menu_items.discount)) AS Final
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON recepites.status = statuses.id
-WHERE recepites.table_number = {table_number} AND recepites.status = 8;
+WHERE recepites.table_number = {table_number} AND recepites.status = 10;
 """
 
         with self.access_database() as cafe_cursor:
