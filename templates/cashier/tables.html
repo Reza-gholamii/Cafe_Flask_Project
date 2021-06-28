@@ -181,6 +181,55 @@
         </a>
     </div>
 </div>
+<script>
+    $('.delete-btn').hide()
+    $('.close-remove-btn').hide()
 
+    $('#main_pop').click(function () {
+
+        if (event.target === $(this)[0]) {
+            $('#form_add').removeClass('animate__bounceIn').addClass('animate__bounceOut')
+
+            setTimeout(function () {
+                $('#main_pop').removeClass('animate__fadeIn').addClass('animate__fadeOut')
+            }, 600)
+
+            setTimeout(function () {
+                $('#form_add').addClass('hidden')
+                $('#main_pop').addClass('hidden')
+            }, 700)
+        }
+    })
+
+    $('#btn_add').click(function () {
+        $('#main_pop').removeClass('animate__fadeOut').addClass('animate__fadeIn').removeClass('hidden')
+        $('#form_add').removeClass('animate__bounceOut').addClass('animate__bounceIn').removeClass('hidden');
+    })
+
+    $('.box_close').click(function () {
+        $('#form_add').removeClass('animate__bounceIn').addClass('animate__bounceOut')
+
+            setTimeout(function () {
+                $('#main_pop').removeClass('animate__fadeIn').addClass('animate__fadeOut')
+            }, 600)
+
+            setTimeout(function () {
+                $('#form_add').addClass('hidden')
+                $('#main_pop').addClass('hidden')
+            }, 700)
+    })
+
+    $('#btn_edit').click(function () {
+        $('.close-remove-btn').fadeIn()
+        $('.delete-btn').attr('href','?remove_table='+$(this).attr('data-index')).removeClass('animate__fadeOut').addClass('animate__fadeIn').show()
+    })
+
+    $('.close-remove-btn').click(function () {
+        $('.close-remove-btn').fadeOut()
+        $('.delete-btn').addClass('animate__fadeOut')
+    })
+
+
+</script>
 </body>
 </html>
