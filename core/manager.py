@@ -164,18 +164,25 @@ WHERE statuses.title = '{status}';
 
         return result
 
-    def category_list(self, sub: bool = True) -> List[str]:
+    def category_list(self, sub: bool = True, root: str = None) -> List[str]:
         """
-        List of Category or Sub Categories
+        List of Category or Sub Categories And Show All or Filter by Root
         """
 
         query = f"""
 SELECT field FROM categories
-WHERE root IS {'NOT NULL' if sub else 'NULL'};
+WHERE root IS {'NOT NULL' if sub else 'NULL'}
 """
 
+        if root:
+            with self.access_database() as cafe_cursor:
+                cafe_cursor.execute(f"SELECT id FROM categories WHERE root = '{root}';")
+                index = cafe_cursor.fetchone()
+
+            query += f" AND root = {index[0]}"
+
         with self.access_database() as cafe_cursor:
-            cafe_cursor.execute(query)
+            cafe_cursor.execute(query + ';')
             result = cafe_cursor.fetchall()
 
         return [item[0] for item in result]
