@@ -75,18 +75,17 @@ def order_list(_id):
 
 
 def menu_items(_id):
-    print(request.method)
     if request.method == "GET":
         items = db_manager.read_all('menu_items')
         return render_template("cashier/menu_items.html", items=items, id=_id)
     else:
         json_data = request.get_json()
         if json_data['action'] == "delete":
-            item_id = db_manager.get_id('menu_items', name=json_data['name'])
+            item_id = db_manager.get_id('menu_items', title=json_data['name'])
             db_manager.delete('menu_items', item_id)
         elif json_data['action'] == "update":
-            item_id = db_manager.get_id('menu_items', name=json_data['name'])
-            db_manager.update('menu_items', id=item_id, name=json_data['name'], price=json_data['price'])
+            item_id = db_manager.get_id('menu_items', title=json_data['name'])
+            db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
         elif json_data['action'] == "add":
             new_item = MenuItem(name=json_data['name'], price=json_data['price'], category=2)
             db_manager.create('menu_items', new_item)
