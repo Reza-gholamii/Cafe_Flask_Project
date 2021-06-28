@@ -5,6 +5,7 @@
         * {
             font-family: Vazir, sans-serif !important;
         }
+
         .category-img {
             width: 6em;
             margin-bottom: 1em;
@@ -58,7 +59,7 @@
 {% endblock %}
 {% block body %}
     <div class="container-fluid">
-        <div class="row  mb-5">
+        <div class="row mb-5">
             {% for cat in category_list %}
                 <div class="col-2 d-flex justify-content-center">
                     <div class="category align-self-center">
@@ -70,33 +71,17 @@
             {% endfor %}
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center">
-                <div class="menu-card">
-                    <img class="menu-img" src="../static/img/shake.jpeg" alt="menu pic"><br>
-                    <h1 class="d-block">شیک قهوه</h1>
-                    <h5>قیمت : ۱۲ هزار تومان</h5>
-                    <h5>دسته بندی : بستنی</h5>
-                    <a href="" class="btn btn-info buy-btn">خرید</a>
+            {% for item in items %}
+                <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                    <div class="menu-card">
+                        <img class="menu-img" src="{{ url_for('static','img/'+item['img']) }}" alt="{{ item['alt'] }}"><br>
+                        <h1 class="d-block">{{ item['name'] }}</h1>
+                        <h5>قیمت : {{ item['price'] }} هزار تومان</h5>
+                        <h5>دسته بندی : {{ item['category'] }}</h5>
+                        <a href="/add?id={{ item['id'] }}" class="btn btn-info buy-btn">خرید</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center">
-                <div class="menu-card">
-                    <img class="menu-img" src="../static/img/shake.jpeg" alt="menu pic"><br>
-                    <h1 class="d-block">شیک قهوه</h1>
-                    <h5>قیمت : ۱۲ هزار تومان</h5>
-                    <h5>دسته بندی : بستنی</h5>
-                    <a href="" class="btn btn-info buy-btn">خرید</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center">
-                <div class="menu-card">
-                    <img class="menu-img" src="../static/img/shake.jpeg" alt="menu pic"><br>
-                    <h1 class="d-block">شیک قهوه</h1>
-                    <h5>قیمت : ۱۲ هزار تومان</h5>
-                    <h5>دسته بندی : بستنی</h5>
-                    <a href="" class="btn btn-info buy-btn">خرید</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
