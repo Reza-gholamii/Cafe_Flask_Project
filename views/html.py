@@ -60,7 +60,7 @@ def order_list():
         return render_template("order_list.html", orders=orders)
     else:
         json_data = request.get_json()
-        # print(json_data['status'])
+        print(json_data['status'])
         # data must be updated in database
         return render_template('order_list.html', orders=orders)
 
@@ -73,19 +73,20 @@ items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات د
 def menu_items():
     if request.method == "GET":
         # need call a function to get access last menu items in database
-        return render_template("menu_items.html", items=items)
+        return render_template("menu_items_test.html", items=items)
     else:
-        _vars = request.form
-        if "delete" in _vars.keys():
+        json_data = request.get_json()
+        print("hree", json_data)
+        if json_data['action'] == "delete":
             # call function to delete the item from database
             pass
-        elif "name" in _vars.keys():
+        elif json_data['action'] == "update":
             # call function to edit existing menu item in database
             pass
-        elif "new_name" in _vars.keys():
+        elif json_data['action'] == "add":
             # call function to add a new menu item to database
-            pass
-        return render_template("menu_items.html", items=items)
+            items.append((json_data['name'], json_data['price']))
+        return render_template("menu_items_test.html", items=items)
 
 
 # this is for test
