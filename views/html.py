@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
-from core.manager import ExtraDataBaseManager , DataBaseManager
+from core.manager import ExtraDataBaseManager, DataBaseManager
 from core.models import TextMessage
+from model import users
 import logging
 
 logging.basicConfig(level=logging.INFO,
@@ -122,7 +123,6 @@ def dashboard():
 
 
 def login():
-
     if request.method == "GET":
         return render_template("cashier/login_cachier.html")
     elif request.method == "POST":
@@ -130,7 +130,7 @@ def login():
         print(resp)
 
         try:
-            user = DataBaseManager().check_record("users", phone_number= resp["username"])[0]
+            user = DataBaseManager().check_record("users", phone_number=resp["username"])[0]
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
 
@@ -143,10 +143,34 @@ def login():
             return render_template("cashier/login_cachier.html", condition="warning")
         return redirect(f"/cashier/{user[-1]}/dashboard")
 
+
 def tables():
-    return 'table page'
+    # if check_login():
+    #     return check_login()
+    tables = ExtraDataBaseManager().read_all("tables")
+    # TODO: where is order number?
+    print("where are here")
+    print(tables)
+    #
+    user = {"name": "حسابدار"}
+    return render_template("cashier/tables.html", tables=tables, user=user)
 
 
 def charts():
     return 'charts page'
 
+
+
+def user_seter():
+    """
+    this is not flask function .
+    this function just check cookie and return user if it exists
+    """
+    cookies = request.cookies
+    if cookies.get("_id"):
+        id = cookies.get("_id")
+        u = DataBaseManager().read("users", id)
+        print(u)
+        return redirect(f"cashier/{id}")
+    else:
+        return redirect("login")
