@@ -5,6 +5,7 @@ from datetime import timedelta
 import model.users
 from core.manager import ExtraDataBaseManager, DataBaseManager
 from core.models import TextMessage, BaseModel
+from model.menu_items import MenuItem
 
 from model import users
 import logging
@@ -74,24 +75,23 @@ def order_list(_id):
 
 
 def menu_items(_id):
+    print(request.method)
     if request.method == "GET":
         items = db_manager.read_all('menu_items')
-        return render_template("cashier/menu_items.html", items=items)
+        return render_template("cashier/menu_items.html", items=items, id=_id)
     else:
         json_data = request.get_json()
-        print("hree", json_data)
         if json_data['action'] == "delete":
-            db_manager.delete('menu_items', json_data['row'])
+            item_id = db_manager.get_id('menu_items', name=json_data['name'])
+            db_manager.delete('menu_items', item_id)
         elif json_data['action'] == "update":
-            # call function to edit existing menu item in database
-            pass
+            item_id = db_manager.get_id('menu_items', name=json_data['name'])
+            db_manager.update('menu_items', id=item_id, name=json_data['name'], price=json_data['price'])
         elif json_data['action'] == "add":
-            items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات داگ", "۴۰۰۰۰"), ("همبرگر", "۳۰۰۰۰"),
-                     ("پیش غذا", "۱۰۰۰۰")]
-
-            # call function to add a new menu item to database
-            # items.append((json_data['name'], json_data['price']))
-        return render_template("menu_items_test.html", items=items)
+            new_item = MenuItem(name=json_data['name'], price=json_data['price'], category=2)
+            db_manager.create('menu_items', new_item)
+        items = db_manager.read_all('menu_items')
+        return render_template("cashier/menu_items.html", items=items)
 
 
 # this is for test
