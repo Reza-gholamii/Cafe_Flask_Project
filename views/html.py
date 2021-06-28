@@ -121,28 +121,26 @@ def dashboard():
 
 
 def login():
-    pass
-    # if request.method == "GET":
-    #     return render_template("login_cachier.html")
-    # elif request.method == "POST":
-    #     resp = request.form
-    #     print(resp)
-    #
-    #     try:
-    #
-    #         user = DataBaseManager().read_condition("users", "phone_number", resp["username"])[0]
-    #
-    #     except:
-    #         return render_template("cashier/login_cachier.html", condition="user not fount")
-    #
-    #     # TODO: where is bug?? just update
-    #     # TODO: hash
-    #
-    #     if user[-3] == resp["password"]:
-    #         pass
-    #     else:
-    #         return render_template("cashier/login_cachier.html", condition="wrong password")
-    #     return redirect(f"/cashier/{user[-1]}/dashboard")
+
+    if request.method == "GET":
+        return render_template("cashier/login_cachier.html")
+    elif request.method == "POST":
+        resp = request.form
+        print(resp)
+
+        try:
+            user = DataBaseManager().check_record("users", phone_number= resp["username"])[0]
+        except:
+            return render_template("cashier/login_cachier.html", condition="warning")
+
+        # TODO: where is bug?? just update
+        # TODO: hash
+
+        if user[-3] == resp["password"]:
+            pass
+        else:
+            return render_template("cashier/login_cachier.html", condition="warning")
+        return redirect(f"/cashier/{user[-1]}/dashboard")
 
 def tables():
     return 'table page'

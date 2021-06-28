@@ -14,6 +14,6 @@ app.add_url_rule("/cashier/tables", 'tables', html.tables, methods=['GET', 'POST
 app.add_url_rule("/cashier/charts", 'charts', html.charts, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/menu", 'menu_items', html.menu_items, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders/served", 'served_order_list', html.served_order_list, methods=['GET', 'POST'])
-app.add_url_rule("/cashier/login", 'login', html.served_order_list, methods=['GET', 'POST'])
+app.add_url_rule("/cashier/login", 'login', html.login, methods=['GET', 'POST'])
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=12345)
