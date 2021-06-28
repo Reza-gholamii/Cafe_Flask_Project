@@ -202,3 +202,23 @@ WHERE recepites.table_number = {table_number} AND recepites.status = 10 AND orde
             result = cafe_cursor.fetchone()
 
         return result
+
+    def incoming(self, day: str = None) -> int:
+        """
+        Calculate Incoming of Orders in One Day or All Days
+        """
+
+        query = f"""
+SELECT SUM(count * (price - discount))
+FROM orders INNER JOIN menu_items
+ON orders.menu_item = menu_items.id
+WHERE orders.status <> 6"""
+
+        if day:
+            query += f" AND time_stamp::DATE = '{day}'"
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query + ';')
+            result = cafe_cursor.fetchone()
+
+        return result
