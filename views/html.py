@@ -77,6 +77,7 @@ def order_list(_id):
 def menu_items(_id):
     if request.method == "GET":
         items = db_manager.read_all('menu_items')
+        items.sort(key=lambda x: x[8])
         return render_template("cashier/menu_items.html", items=items, id=_id)
     else:
         json_data = request.get_json()
@@ -90,6 +91,7 @@ def menu_items(_id):
             new_item = MenuItem(name=json_data['name'], price=json_data['price'], category=2)
             db_manager.create('menu_items', new_item)
         items = db_manager.read_all('menu_items')
+        items.sort(key=lambda x: x[8])
         return render_template("cashier/menu_items.html", items=items)
 
 
