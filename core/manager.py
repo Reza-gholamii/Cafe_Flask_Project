@@ -54,6 +54,14 @@ class DataBaseManager(BaseManager):
         with self.access_database() as db_cursor:
             db_cursor.execute(query)
             return db_cursor.fetchall()
+    # '''''''''''''''''''
+    def read_condition(self, table, condition_row_name, condition):
+        query = f"SELECT * FROM {table} where {condition_row_name}='{condition}'"
+        with self.access_database() as db_cursor:
+            db_cursor.execute(query)
+            return db_cursor.fetchall()
+    # '''''''''''''''''''''
+
 
     def update(self, table, **kwargs):
         set_string = ""
