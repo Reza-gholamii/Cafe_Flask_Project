@@ -26,6 +26,29 @@ $(document).ready(function () {
         $("#edit" + index).modal('hide');
     });
 
+    $(".delete_form").submit(function (event) {
+        event.preventDefault();
+        var index = $(this).attr("data-index")
+        var data = {"action": "delete", "row": index};
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/cashier/menu',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                console.log("ok", result);
+            }, error: function (result) {
+                console.log("Not ok", result);
+            }
+        });
+        $("#delete" + index).modal('hide');
+        $('#delete' + index).on('hidden.bs.modal', function () {
+            $("#li" + index).remove();
+        })
+    });
+
+
 
 });
 
