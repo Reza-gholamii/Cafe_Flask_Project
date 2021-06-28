@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
 
+from core.manager import *
 
 def home():
     return render_template("home.html", page_name="home")
