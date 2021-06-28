@@ -56,6 +56,8 @@ class DataBaseManager(BaseManager):
             return db_cursor.fetchall()
 
     def update(self, table, **kwargs):
+        """kwargs should include id of a row and one or more column=amount for updating
+            Example: row_id=1, first_name=ali, last_name=ahmadi"""
         set_string = ""
         condition_string_key = list(kwargs.keys())[0]
         condition_string_value = kwargs[condition_string_key]
@@ -71,6 +73,8 @@ class DataBaseManager(BaseManager):
         self.send_query(query)
 
     def get_id(self, table, **kwargs):
+        """kwargs should include table name and one column=amount for searching
+                Example: users, national-code=11111"""
         condition = ""
         for column, value in kwargs.items():
             condition += f"{table}.{column}='{value}' and "
@@ -163,7 +167,7 @@ WHERE statuses.title = '{status}';
             result = cafe_cursor.fetchall()
 
         return result
-    
+
     def order_list(self, recepite_number: int) -> List[tuple]:
         """
         Get List of Orders by One Recepite Number
