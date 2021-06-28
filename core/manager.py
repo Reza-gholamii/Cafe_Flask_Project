@@ -163,6 +163,22 @@ WHERE statuses.title = '{status}';
             result = cafe_cursor.fetchall()
 
         return result
+
+    def category_list(self, sub: bool = True) -> List[str]:
+        """
+        List of Category or Sub Categories
+        """
+
+        query = f"""
+SELECT field FROM categories
+WHERE root IS {'NOT NULL' if sub else 'NULL'};
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchall()
+
+        return [item[0] for item in result]
     
     def order_list(self, recepite_number: int) -> List[Tuple[str, str, int, int, int]]:
         """
@@ -221,4 +237,4 @@ WHERE orders.status <> 6"""
             cafe_cursor.execute(query + ';')
             result = cafe_cursor.fetchone()
 
-        return result
+        return result[0]
