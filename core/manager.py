@@ -150,7 +150,7 @@ WHERE statuses.title = '{status}';
         Query to SELECT All Row & Columns from a Table with Limit Opional
         """
 
-        query = f"SELECT * FROM {table}"
+        query = f"SELECT * FROM {table} ORDER BY {table}.status"
 
         if limit:
             query += f" LIMIT {limit}"
