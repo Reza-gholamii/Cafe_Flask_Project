@@ -46,7 +46,30 @@
     </style>
 </head>
 <body class="bg-gray-100">
-
+<div id="main_pop"
+     class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-sm z-10 animate__animated hidden">
+    <form id="form_add"
+          class="fixed z-10 inset-8 bg-white sm:w-6/12 mx-auto my-auto h-44 rounded-lg shadow-lg ring-4 ring-opacity-40 ring-white p-8 animate__animated animate__bounceIn hidden"
+          action="#" method="post" style="max-width: 500px;">
+        <a class="box_close cursor-pointer absolute text-4xl -top-5 -right-3 px-2 w-10 ring-4 ring-opacity-40 ring-red-500 text-center text-white py-0 rounded-full bg-red-500 block hover:bg-red-600 transition">&times</a>
+        <svg class="absolute z-40 left-11 top-11 fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+        </svg>
+        <select name="capacity"
+                class="cursor-pointer Vazir appearance-none relative w-full transition mb-4 rounded-md bg-black py-2 px-4 bg-opacity-10 ">
+            <option disabled selected hidden>ظرفیت میز را انتخاب کنید ...</option>
+            <option class="Vazir" value="two">2 نفره</option>
+            <option class="Vazir" value="four">4 نفره</option>
+            <option class="Vazir" value="eight">8 نفره</option>
+        </select>
+        <button type="submit"
+                class="w-full text-white transition mt-4 border-none rounded-md bg-green-400 hover:bg-green-500 py-2 px-4 focus:ring-4 text-center">
+            <i class="gb gb_add_circle_outline gb_s24 ml-1 relative" style="font-size: 28px"></i>
+            <span class="relative top-1">اضـافـه کردن میز جدید</span>
+        </button>
+    </form>
+</div>
 <div class="max-w-screen-2xl mx-auto">
     <div class="table-main grid grid-cols-4 md:grid-cols-8 shadow-lg gap-8 gap-y-16 p-8 pt-12">
 
