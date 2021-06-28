@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 {% block extra_head %}
 
@@ -8,3 +9,109 @@
 {% endblock %}
 
 
+=======
+<!DOCTYPE html>
+<html lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>کافه رستوران لبخند</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --Background: #fafafa;
+        }
+
+        body {
+            background: var(--Background);
+        }
+
+        * {
+            font-family: Yekan, sans-serif;
+            direction: rtl;
+        }
+
+        .Vazir {
+            font-family: Vazir, sans-serif;
+        }
+
+        .rtl {
+            direction: rtl;
+        }
+
+        .ltr {
+            direction: ltr;
+        }
+
+        .text-shadow-md {
+            text-shadow: 0 0 10px #999;
+        }
+
+        .bg-yellow-900 {
+            background: #3d1800;
+        }
+
+        .text-yellow-900 {
+            color: #3d1800;
+        }
+
+        .titler {
+            color: #3d1800;
+            text-shadow: 0 2px 0 #fbe5cb, 0 -2px 0 #fbe5cb, 2px 0 #fbe5cb, -2px 0 0 #fbe5cb, 0 0 10px #000;
+        }
+
+        .connect-bar {
+            border-left: 2px solid #3D1800;
+            border-right: 2px solid #3D1800;
+            top: -15px;
+            margin-bottom: -15px;
+        }
+    </style>
+</head>
+<body class="relative">
+<div class="fixed inset-2 md:inset-4 gap-0 shadow-inner animate__animated animate__fadeIn overflow-hidden" style="background: #E1E1E1 url(bg.jpg)">
+    <!--<nav class="grid grid-cols-4 w-full animate__animated animate__bounceInDown">
+        <ul class="col-span-4 mx-auto sm:mx-4 float-right">
+            <li class="text-shadow-md inline-block py-2 md:py-4 px-4 rounded-lg rounded-r-t-0 rounded-t-none md:w-44 transition text-center text-yellow-900 hover:bg-yellow-900 hover:text-white"><a href="#" class="text-md text-2xl md:text-3xl text-center"><i class="gb relative left-2 mb-1 gb_shopping_basket"></i><span class="text-lg sm:text-xl">فروشگاه</span></a></li>
+            <li class="text-shadow-md inline-block py-2 md:py-4 px-4 rounded-lg rounded-r-t-0 rounded-t-none md:w-44 transition text-center text-yellow-900 hover:bg-yellow-900 hover:text-white"><a href="#" class="text-md text-2xl md:text-3xl text-center"><i class="gb relative left-2 mb-1 gb_phone gb_r270"></i><span class="text-lg sm:text-xl">تماس با ما</span></a></li>
+            <li class="text-shadow-md inline-block py-2 md:py-4 px-4 rounded-lg rounded-r-t-0 rounded-t-none md:w-44 transition text-center text-yellow-900 hover:bg-yellow-900 hover:text-white"><a href="#" class="text-md text-2xl md:text-3xl text-center"><i class="gb relative left-2 mb-1 gb_info"></i><span class="text-lg sm:text-xl">درباره ما</span></a></li>
+        </ul>
+    </nav>-->
+
+    <section class="grid animate__animated animate__bounceIn grid-cols-3 w-full sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto gap-8 pt-5 sm:pt-10">
+        <div class="col-span-3 mx-auto sm:mx-none sm:col-span-1 relative">
+            <ul>
+                <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-blue-600 text-white"><a href="#" class="text-md text-2xl md:text-3xl text-center"><i class="absolute p-3 sm:p-3 h-36 right-0 top-0 border-l-4 bg-white bg-opacity-20 gb gb_shopping_basket"></i><span class="text-lg sm:text-xl">فهرست</span></a></li>
+                <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-yellow-500 text-white mx-3 sm:mx-0 sm:my-8"><a href="#" class="text-md text-2xl md:text-3xl text-center"><i class="absolute p-3 h-36 right-0 top-0 border-l-4 bg-white bg-opacity-20 gb gb_phone"></i><span class="text-lg sm:text-xl">تماس</span></a></li>
+                <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white"><a href="#" class="text-md text-2xl md:text-3xl text-center"><i class="absolute p-3 h-36 right-0 top-0 border-l-4 bg-white bg-opacity-20 gb gb_info"></i><span class="text-lg sm:text-xl">درباره ما</span></a></li>
+            </ul>
+        </div>
+        <div class="mx-auto col-span-3 sm:col-span-2 relative">
+            <img class="w-72 sm:w-96" src="coffee.png" alt="کافه ی من">
+        </div>
+        <div class="mx-auto col-span-3 relative text-center">
+            <h1 class="mt-8 text-5xl sm:text-6xl md:text-7xl font-bold Vazir titler">کافه رستوران لبخند</h1>
+            <div class="connect-bar h-12 w-80 md:w-96 ring-l mx-auto relative"></div>
+            <div class="ring-2 px-5 py-4 animate__animated animate__tada rounded-md shadow-2xl ring-yellow-900 ring-opacity-50 bg-yellow-900 text-center">
+                <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl Vazir text-white">قراره باخنده از تلخی قهوه ی ما شیرینی باهم بودن رو بچشیم !</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="banner-comment" class="transform ring-8 ring-yellow-900 ring-opacity-50 -skew-y-3 bg-yellow-900 fixed w-full sm:w-10/12 md:w-9/12 lg:w-8/12 mx-auto shadow-2xl h-28 sm:rounded-xl sm:rounded-b-none left-0 right-0 z-20 " style="bottom: -35px;">
+        <a onclick="$(this).parent().fadeOut()" class="cursor-pointer z-30 text-white text-4xl rounded-full px-2 text-center absolute bg-yellow-900 bg-opacity-30 right-0 mr-1 top-0">&times</a>
+        <span class="absolute transform skew-y-3 rounded-2xl ring-4 p-4 ring-white ring-opacity-50 bg-yellow-800 -rotate-3 text-white block left-4 w-25" style="top: -45px;"><i class="gb gb_face gb_s24 mb-1 ml-1"></i> محمد امین طهرانی</span>
+        <p class="transform skew-y-3 relative mt-10 mr-3 text-yellow-100"><i class="gb gb_"></i> کافه لبخند یکی خاطره انگیز ترین مکان های مورد علاقمه !</p>
+    </section>
+</div>
+
+<!--  JS Plugins  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--  JS Plugins  -->
+</body>
+</html>
+>>>>>>> c0140beb7b42965899de81782104ac15d1617829

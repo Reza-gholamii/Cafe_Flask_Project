@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import time
 from typing import Optional
 from core.models import BaseModel
 
@@ -14,8 +14,14 @@ class MenuItem(BaseModel):
     category: str
     image_name: Optional[str]
     discount: Optional[int]
-    serving_time: Optional[datetime] # Serving time period
-    cooking_time: Optional[datetime] # Estimated cooking time
+    serving_time: Optional[time]  # Serving time period
+    cooking_time: Optional[time]  # Estimated cooking time
 
-    def __init__(self):
-        pass
+    def __init__(self, name, price, category, image_name="", discount=0, serving_time=time(0), cooking_time=time(0)):
+        self.name = name
+        self.price = price
+        self.category = category
+        self.image_name = image_name
+        self.discount = discount
+        self.serving_time = serving_time
+        self.cooking_time = cooking_time
