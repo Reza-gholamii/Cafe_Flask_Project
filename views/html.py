@@ -1,7 +1,11 @@
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
+from datetime import timedelta
+
+import model.users
 from core.manager import ExtraDataBaseManager, DataBaseManager
-from core.models import TextMessage
+from core.models import TextMessage, BaseModel
+
 from model import users
 import logging
 
@@ -55,7 +59,7 @@ orders = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "�
           ("۷", "۳۲۵", "جدید", "ممد نادیجی", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
 
 
-def order_list():
+def order_list(_id):
     if request.method == "GET":
         # need call a function to get access to last orders based on tables
         return render_template("order_list.html", orders=orders)
@@ -69,7 +73,7 @@ def order_list():
 # this is for test
 
 
-def menu_items():
+def menu_items(_id):
     if request.method == "GET":
         items = db_manager.read_all('menu_items')
         return render_template("cashier/menu_items.html", items=items)
@@ -101,7 +105,7 @@ served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", 
                  ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
 
 
-def served_order_list():
+def served_order_list(_id):
     if request.method == "GET":
         return render_template("served_orders_list.html", orders=served_orders)
     else:
@@ -112,7 +116,15 @@ def served_order_list():
 empty_table = [1, 3, 4, 7]
 
 
-def dashboard():
+def dashboard(_id):
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)
+        user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     data = {
         'count_new_orders': len(orders),
         'count_orders': len(orders) + len(served_orders),
@@ -128,31 +140,37 @@ def login():
     elif request.method == "POST":
         resp = request.form
         print(resp)
-
         try:
             user = DataBaseManager().check_record("users", phone_number=resp["username"])[0]
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
 
-        # TODO: where is bug?? just update
         # TODO: hash
 
         if user[-3] == resp["password"]:
-            pass
+            html_str = redirect(f"/cashier/{user[-1]}")
+            response = make_response(html_str)
+            response.set_cookie(
+                '_ID', user[-1], max_age=timedelta(weeks=1))
+            return response
         else:
             return render_template("cashier/login_cachier.html", condition="warning")
-        return redirect(f"/cashier/{user[-1]}/dashboard")
 
 
-def tables():
-    # if check_login():
-    #     return check_login()
+def tables(_id):
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)
+        user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     tables = ExtraDataBaseManager().read_all("tables")
     # TODO: where is order number?
     print("where are here")
     print(tables)
     #
-    user = {"name": "حسابدار"}
     return render_template("cashier/tables.html", tables=tables, user=user)
 
 
@@ -170,6 +188,6 @@ def user_seter():
         id = cookies.get("_id")
         u = DataBaseManager().read("users", id)
         print(u)
-        return redirect(f"cashier/{id}")
+        return int(id)
     else:
         return redirect("login")
