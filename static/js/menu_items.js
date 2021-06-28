@@ -49,7 +49,34 @@ $(document).ready(function () {
     });
 
 
+    $("#add_form").submit(function (event) {
+        event.preventDefault();
+        var $inputs = $('#add_form :input');
+        var values = {};
+        $inputs.each(function () {
+            values[this.name] = $(this).val();
+        });
+        console.log(values)
+        var data = {"action": "add", "name": values["new_name"], "price": values["new_price"]};
+        console.log(data)
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/cashier/menu',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            success: function (result) {
+                console.log("ok", result);
+            }, error: function (result) {
+                console.log(result);
+            }
+        });
+        $("#add").modal('hide');
+        $('#add').on('hidden.bs.modal', function () {
+            location.reload()
+        })
 
+    });
 });
 
 
