@@ -74,7 +74,7 @@ items = [("پیتزا", "۶۰۰۰۰"), ("پاستا", "۵۰۰۰۰"), ("هات د
 def menu_items():
     if request.method == "GET":
         # need call a function to get access last menu items in database
-        return render_template("menu_items_test.html", items=items)
+        return render_template("cashier/menu_items.html", items=items)
     else:
         json_data = request.get_json()
         print("hree", json_data)
