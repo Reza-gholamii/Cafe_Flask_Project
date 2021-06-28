@@ -116,7 +116,7 @@
 
                                                 <div class="modal-body">
                                                     <form class="edit_form" id="edit_form{{loop.index0}}" action="#"
-                                                          data-index="{{loop.index0}}"
+                                                          data-index="{{loop.index0}}" data-user_id="{{id}}"
                                                           method="post">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="name"
@@ -151,7 +151,7 @@
 
                                                 <div class="modal-body">
                                                     <form class="delete_form" id="delete_form{{loop.index0}}" action="#"
-                                                          data-index="{{loop.index0}}"
+                                                          data-index="{{loop.index0}}" data-user_id="{{id}}"
                                                           method="POST">
                                                         <div class="form-group">
                                                             <p class="text-right">آیا از حذف این محصول اطمینان
@@ -195,7 +195,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form id="add_form" action="#" method="POST">
+                        <form id="add_form" action="#" method="POST" data-user_id="{{id}}">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="new_name"
                                        placeholder="نام محصول را وارد نمایید" name="new_name">
@@ -215,6 +215,6 @@
     </div>
 
 </div>
-<script src="../static/js/menu_items.js"></script>
+<script src="../../static/js/menu_items.js"></script>
 </body>
 </html>
