@@ -194,7 +194,7 @@ SUM(orders.count * (menu_items.price - menu_items.discount)) AS Final
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON recepites.status = statuses.id
-WHERE recepites.table_number = {table_number} AND recepites.status = 10;
+WHERE recepites.table_number = {table_number} AND recepites.status = 10 AND orders.status <> 8;
 """
 
         with self.access_database() as cafe_cursor:
