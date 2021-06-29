@@ -12,12 +12,12 @@ class Table(BaseModel):
     name = "tables"
     number: int
     capacity: int
-    place: str
+    position_space: str
     status: int
 
-    def __init__(self, capacity, place, status="empty"):
+    def __init__(self, capacity, position_space, status="empty"):
         self.capacity = capacity
-        self.place = place
+        self.position_space = position_space
         self.status = db_manager.get_id("statuses", title=status)
         self.number = db_manager.create(self.name, self)
 
