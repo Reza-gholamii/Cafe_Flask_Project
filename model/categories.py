@@ -17,3 +17,10 @@ class Category(BaseModel):
         if root:
             self.root = db_manager.get_id(self.name, field=root)
         db_manager.create(self.name, self)
+
+    def add_sub(self, title: str):
+        """
+        Method to Add New Category in Child this Category Parent
+        """
+
+        self.__class__.__init__(self.__class__, title, self.title)
