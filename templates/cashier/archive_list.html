@@ -41,6 +41,10 @@
         .table-row {
             cursor: pointer;
         }
+
+        td {
+            width: 20%;
+        }
     </style>
 </head>
 <body>
@@ -52,45 +56,32 @@
                 <thead class="bg-info">
                 <tr>
                     <th>شماره سفارش</th>
-                    <th>شماره میز</th>
-                    <th>زمان درخواست</th>
+                    <th>شماره صورتحساب</th>
+                    <th>آیتم</th>
+                    <th>تعداد</th>
                     <th>وضعیت</th>
                 </tr>
 
                 </thead>
                 <tbody>
                 <tr class="table-row" data-toggle="modal" data-target="#myModal1">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status1">جدید</td>
+                    <td>۳۲۵</td>
+                    <td>۲۲</td>
+                    <td>قهوه</td>
+                    <td>۲ عدد</td>
+                    <td id="status1">جدید</td>
 
 
                 </tr>
                 <tr class="table-row" data-toggle="modal" data-target="#myModal2">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status2">سرو شده</td>
-
-
-                </tr>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal3">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status3">در حال پخت</td>
-
+                    <td>۳۲۵</td>
+                    <td>۲۲</td>
+                    <td>قهوه</td>
+                    <td>۲ عدد</td>
+                    <td id="status2">جدید</td>
 
                 </tr>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal4">
-                    <td class="w-25">۳۲۵</td>
-                    <td class="w-25">۱</td>
-                    <td class="w-25">۰۶/۲۰/۲۰۲۱</td>
-                    <td class="w-25" id="status4">کنسل شده</td>
 
-
-                </tr>
                 </tbody>
             </table>
 
@@ -105,14 +96,14 @@
                         <div class="modal-body text-right">
                             <ul class="border rounded pl-2 py-2">
                                 <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
+                                    <span class="float-right">زمان درخواست</span>
+                                    <span class="float-left">۶/۶/۱۴۰۰</span></li>
                                 <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
+                                    <span class="float-right">وضعیت</span>
+                                    <span id="modal_status1" class="float-left">جدید</span></li>
                                 <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
+                                    <span class="float-right">دسته بندی</span>
+                                    <span class="float-left">نوشیدنی</span>
                                 </li>
                             </ul>
                             <div class="col mx-auto text-center">
@@ -151,14 +142,14 @@
                         <div class="modal-body text-right">
                             <ul class="border rounded pl-2 py-2">
                                 <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
+                                    <span class="float-right">زمان درخواست</span>
+                                    <span class="float-left">۶/۶/۱۴۰۰</span></li>
                                 <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
+                                    <span class="float-right">وضعیت</span>
+                                    <span id="modal_status2" class="float-left">جدید</span></li>
                                 <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
+                                    <span class="float-right">دسته بندی</span>
+                                    <span class="float-left">نوشیدنی</span>
                                 </li>
                             </ul>
                             <div class="col mx-auto text-center">
@@ -186,103 +177,11 @@
 
                 </div>
             </div>
-            <div class="modal fade" id="myModal3" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
-                        </div>
-                        <div class="modal-body text-right">
-                            <ul class="border rounded pl-2 py-2">
-                                <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
-                                <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
-                                <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
-                                </li>
-                            </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal3" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal3" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal3" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal3" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal3" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="modal-footer mx-auto">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal fade" id="myModal4" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
-                        </div>
-                        <div class="modal-body text-right">
-                            <ul class="border rounded pl-2 py-2">
-                                <li>
-                                    <span class="float-right">قهوه</span>
-                                    <span class="float-left">۲ عدد</span></li>
-                                <li>
-                                    <span class="float-right">نسکافه</span>
-                                    <span class="float-left">۱ عدد</span></li>
-                                <li>
-                                    <span class="float-right">کاپوچینو</span>
-                                    <span class="float-left">۲ عدد</span>
-                                </li>
-                            </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal4" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal4" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal4" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal4" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal4" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="modal-footer mx-auto">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
     </div>
 
 </div>
-<script src="../static/js/lists.js"></script>
+<script src="../../static/js/lists.js"></script>
 </body>
 </html>
