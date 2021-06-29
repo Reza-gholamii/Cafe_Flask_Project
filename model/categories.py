@@ -1,6 +1,7 @@
 from core.models import *
 from core.manager import *
 
+
 db_manager = ExtraDataBaseManager()
 
 

@@ -2,11 +2,7 @@ from core.models import *
 from core.manager import *
 from datetime import time
 from typing import Optional
-import logging
 
-
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)-10s - %(message)s')
 
 db_manager = ExtraDataBaseManager()
 
@@ -44,7 +40,7 @@ class MenuItem(BaseModel):
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
 
-    def apply_discount(self, discount):
+    def apply_discount(self, discount: int):
         """
         Method for Apply Discount for Menu Item Per Unit of Percentage
         """
@@ -53,7 +49,7 @@ class MenuItem(BaseModel):
         self.discount = discount
         logging.debug(f"{__name__}: Change Discount Column Successfully in DataBase.")
 
-    def change_price(self, price):
+    def change_price(self, price: int):
         """
         Method for Change Price of Menu Item Because Inflation or ...
         """

@@ -3,11 +3,7 @@ from core.manager import *
 from typing import Optional
 from json import dumps, loads
 from hashlib import sha256
-import logging
 
-
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)-10s - %(message)s')
 
 db_manager = ExtraDataBaseManager()
 

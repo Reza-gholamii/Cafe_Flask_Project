@@ -1,10 +1,6 @@
 from core.models import *
 from core.manager import *
-import logging
 
-
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)-10s - %(message)s')
 
 db_manager = ExtraDataBaseManager()
 

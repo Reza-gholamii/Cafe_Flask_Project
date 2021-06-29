@@ -1,5 +1,10 @@
 from abc import ABC
 from psycopg2.errors import *
+import logging
+
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)-10s - %(message)s')
 
 
 class BaseModel(ABC):
