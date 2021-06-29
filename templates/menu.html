@@ -24,6 +24,7 @@
         * {
             font-family: Yekan, sans-serif;
             direction: rtl;
+            transition: all 500ms linear;
         }
 
         .Vazir {
@@ -46,21 +47,6 @@
             background: #3d1800;
         }
 
-        .text-yellow-900 {
-            color: #3d1800;
-        }
-
-        .titler {
-            color: #3d1800;
-            text-shadow: 0 2px 0 #fbe5cb, 0 -2px 0 #fbe5cb, 2px 0 #fbe5cb, -2px 0 0 #fbe5cb, 0 0 10px #000;
-        }
-
-        .connect-bar {
-            border-left: 2px solid #3D1800;
-            border-right: 2px solid #3D1800;
-            top: -15px;
-            margin-bottom: -15px;
-        }
     </style>
 </head>
 <body>
@@ -88,6 +74,21 @@
     </ul>
 </div>
 <!--  nav  -->
-<div class="main-div mx-auto w-full grid grid-cols-3 my-4 gap-4 sm:gap-8" style="max-width:1280px"></div>
+<div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-4 gap-8 px-8" style="max-width:1280px">
+    <!-- category -->
+    <div class="col-span-4 grid grid-cols-3 md:grid-cols-6 w-full text-center gap-4 pb-4">
+        <span class="block col-span-3 md:col-span-6 text-right Vazir bg-yellow-900 rounded-t-md text-yellow-100 px-2 py-3 "><i class="gb gb_view_list gb_r180 ml-2 gb_s24"></i>دسته بندی ها</span>
+        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
+        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
+        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
+        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
+        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
+        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
+    </div>
+    <!-- category -->
+    <!-- items -->
+    <div class="h-36 w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></div>
+    <!-- items -->
+</div>
 </body>
 </html>
