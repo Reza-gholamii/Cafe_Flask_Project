@@ -64,6 +64,15 @@
             color: white;
             background: #374266;
         }
+
+        .category > a:nth-of-type(3):hover > .img-category {
+            filter: drop-shadow(0 0 5px #FFBC27);
+        }
+
+        .category > a:nth-of-type(3):hover > span {
+            color: white;
+            background: #FFBC27;
+        }
     </style>
 </head>
 <body>
@@ -94,18 +103,21 @@
 <div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-4 gap-8 px-8"
      style="max-width:1280px">
     <!-- category -->
-    <div class="col-span-4 grid grid-cols-3 md:grid-cols-6 w-full text-center gap-4 pb-4 category">
-        <span class="block col-span-3 md:col-span-6 text-right Vazir bg-yellow-900 rounded-t-md text-yellow-100 px-2 py-3 "><i
-                class="gb gb_view_list gb_r180 ml-2 gb_s24"></i>دسته بندی ها</span>
+    <div class="col-span-4 grid grid-cols-3 md:grid-cols-6 w-full text-center gap-4 py-4 category">
         <a class="cursor-pointer w-full rounded-2xl hover:shadow-2xl shadow-lg text-center p-4 relative mt-10 border-4 border-red-100 hover:border-red-300">
             <img src="menu-img/love.png" class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
                  alt="popular">
-            <span class="text-red-400 font-bold block rounded-md py-2 mx-auto text-sm -mt-8"><i class="gb gb_heart"></i>محبوب ترین ها</span>
+            <span class="text-red-400 font-bold block rounded-md py-2 mx-auto text-sm -mt-8">محبوب ترین ها</span>
         </a>
         <a class="cursor-pointer w-full rounded-2xl hover:shadow-2xl shadow-lg text-center p-4 relative mt-10 border-4 border-gray-200 hover:border-gray-600">
             <img src="menu-img/bag.png" class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
                  alt="most">
-            <span class="text-gray-700 font-bold block rounded-md py-2 mx-auto text-sm -mt-8"><i class="gb gb_heart"></i>بیشترین خرید</span>
+            <span class="text-gray-700 font-bold block rounded-md py-2 mx-auto text-sm -mt-8">بیشترین خرید</span>
+        </a>
+        <a class="cursor-pointer w-full rounded-2xl hover:shadow-2xl shadow-lg text-center p-4 relative mt-10 border-4 border-yellow-100 hover:border-yellow-500">
+            <img src="menu-img/hot.png" class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
+                 alt="hot-drink">
+            <span class="text-yellow-600 font-bold block rounded-md py-2 mx-auto text-sm -mt-8">نوشیدنی گرم</span>
         </a>
     </div>
     <!-- category -->
