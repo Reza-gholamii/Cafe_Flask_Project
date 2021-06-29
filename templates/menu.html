@@ -73,6 +73,15 @@
             color: white;
             background: #FFBC27;
         }
+
+        .category > a:nth-of-type(4):hover > .img-category {
+            filter: drop-shadow(0 0 5px #4F46E5);
+        }
+
+        .category > a:nth-of-type(4):hover > span {
+            color: white;
+            background: #4F46E5;
+        }
     </style>
 </head>
 <body>
@@ -118,6 +127,11 @@
             <img src="menu-img/hot.png" class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
                  alt="hot-drink">
             <span class="text-yellow-600 font-bold block rounded-md py-2 mx-auto text-sm -mt-8">نوشیدنی گرم</span>
+        </a>
+        <a class="cursor-pointer w-full rounded-2xl hover:shadow-2xl shadow-lg text-center p-4 relative mt-10 border-4 border-indigo-200 hover:border-indigo-500">
+            <img src="menu-img/cold.png" class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
+                 alt="cold-drink">
+            <span class="text-indigo-600 font-bold block rounded-md py-2 mx-auto text-sm -mt-8">نوشیدنی سرد</span>
         </a>
     </div>
     <!-- category -->
