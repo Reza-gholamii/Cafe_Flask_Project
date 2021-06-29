@@ -42,7 +42,7 @@ class DataBaseManager(BaseManager):
     Managed DataBase Tables to CRUD Data of Models
     """
 
-    def create(self, table: str, model: BaseModel):
+    def create(self, table: str, model: BaseModel) -> int:
         attrs: dict = model.to_dict()
         dict_values = tuple(attrs.values())
         value_num = '%s, ' * len(dict_values)
@@ -199,7 +199,7 @@ WHERE recepites.id = {recepite_number};
         query = f"""
 SELECT MAX(recepites.id) AS Recepite, MAX(statuses.title) AS Status,
 SUM(orders.count * menu_items.price) AS Total,
-SUM(orders.count * (menu_items.price - menu_items.discount)) AS Final
+SUM(orders.count * (menu_items.price * (1 - (menu_items.discount / 100)))) AS Final
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON recepites.status = statuses.id

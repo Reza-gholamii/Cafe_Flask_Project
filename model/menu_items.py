@@ -32,3 +32,28 @@ class MenuItem(BaseModel):
         self.cooking_time = cooking_time
         self.status = db_manager.get_id("statuses", title=status)
         self.number = db_manager.create(self.name, self)
+
+    def apply_discount(self, discount):
+        """
+        Method for Apply Discount for Menu Item Per Unit of Percentage
+        """
+
+        db_manager.update(self.name, id=self.number, discount=discount)
+        self.discount = discount
+
+    def change_price(self, price):
+        """
+        Method for Change Price of Menu Item Because Inflation or ...
+        """
+
+        db_manager.update(self.name, id=self.number, price=price)
+        self.price = price
+
+    def change_status(self, status="deactive"):
+        """
+        Method for Change Status of Model from active to deactive or Upside Down
+        """
+
+        code = db_manager.get_id("statuses", title=status)
+        db_manager.update(self.name, id=self.number, status=code)
+        self.status = status

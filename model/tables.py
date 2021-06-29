@@ -28,3 +28,4 @@ class Table(BaseModel):
 
         code = db_manager.get_id("statuses", title=status)
         db_manager.update(self.name, id=self.number, status=code)
+        self.status = status
