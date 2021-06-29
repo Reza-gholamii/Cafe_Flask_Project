@@ -25,7 +25,3 @@ class Category(BaseModel):
 
         self.__class__(title, self.title)
         return db_manager.get_id(self.name, title=title)
-
-
-c=Category("drinks")
-print(c.add_sub("tea"))

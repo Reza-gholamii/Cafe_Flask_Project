@@ -119,11 +119,11 @@ CREATE TABLE IF NOT EXISTS menu_items (
 title VARCHAR(50) NOT NULL UNIQUE,
 price INT NOT NULL,
 category INT NOT NULL,
-image_name VARCHAR(100),
 discount INT DEFAULT 0,
-status INT DEFAULT 14,
-serving_time TIME,
+image_name VARCHAR(100),
 cooking_time TIME,
+serving_time TIME,
+status INT DEFAULT 14,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_group
     FOREIGN KEY(category)
