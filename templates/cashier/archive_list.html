@@ -92,26 +92,32 @@
                                     <span class="float-left">{{ order.2 }}</span></li>
                                 <li>
                                     <span class="float-right">وضعیت</span>
-                                    <span id="modal_status{{ loop.index0 }}" class="float-left">{{ order.1 }}</span></li>
+                                    <span id="modal_status{{ loop.index0 }}" class="float-left">{{ order.1 }}</span>
+                                </li>
                                 <li>
                                     <span class="float-right">دسته بندی</span>
-                                    <span class="float-left">نوشیدنی</span>
+                                    <span class="float-left">{{ order.6 }}</span>
                                 </li>
                             </ul>
                             <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal{{ loop.index0 }}" onclick="change_status(this)">
+                                <a class="icon icon_refresh modal{{ loop.index0 }} row{{ order.5 }}"
+                                   onclick="change_status(this)">
                                     <i class="gb gb_autorenew"></i>
                                 </a>
-                                <a class="icon icon_cook modal{{ loop.index0 }}" onclick="change_status(this)">
+                                <a class="icon icon_cook modal{{ loop.index0 }} row{{ order.5 }}"
+                                   onclick="change_status(this)">
                                     <i class="gb gb_kitchen"></i>
                                 </a>
-                                <a class="icon icon_serve modal{{ loop.index0 }}" onclick="change_status(this)">
+                                <a class="icon icon_serve modal{{ loop.index0 }} row{{ order.5 }}"
+                                   onclick="change_status(this)">
                                     <i class="gb gb_local_cafe"></i>
                                 </a>
-                                <a class="icon icon_check modal{{ loop.index0 }}" onclick="change_status(this)">
+                                <a class="icon icon_check modal{{ loop.index0 }} row{{ order.5 }}"
+                                   onclick="change_status(this)">
                                     <i class="gb gb_done_all"></i>
                                 </a>
-                                <a class="icon icon_trash modal{{ loop.index0 }}" onclick="change_status(this)">
+                                <a class="icon icon_trash modal{{ loop.index0 }} row{{ order.5 }}"
+                                   onclick="change_status(this)">
                                     <i class="gb gb_delete"></i>
                                 </a>
                             </div>
@@ -129,6 +135,9 @@
 
 </div>
 <!--<script src="static/js/archive_list.js"></script>-->
-<script src="{{ url_for('static', filename='js/lists.js') }}"></script>
+<script>
+    var user_id = '{{id}}';
+</script>
+<script src="{{ url_for('static', filename='js/archive_list.js') }}"></script>
 </body>
 </html>
