@@ -3,6 +3,11 @@ from core.manager import *
 from typing import Optional
 from json import dumps, loads
 from hashlib import sha256
+import logging
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)-10s - %(message)s')
+
 
 db_manager = ExtraDataBaseManager()
 
@@ -24,11 +29,16 @@ class User(BaseModel):
     def __init__(self, first_name, last_name, phone_number, password, email=None, **extra_information):
         self.first_name = first_name
         self.last_name = last_name
-        self.phone_number = phone_number[2:]
+        self.phone_number = phone_number
         self.email = email
-        self.password = sha256(password.encode()).hexdigest()
+        self.password = password
         self.extra_information = dumps(extra_information)
-        self.number = db_manager.create(self.name, self)
+        try:
+            self.number = db_manager.create(self.name, self)
+            logging.info(f"{__name__}: ")
+        except:
+            self.number = db_manager.get_id(self.name, **self.to_dict())
+            logging.warning(f"{__name__}: ")
 
     @classmethod
     def check_user(cls, phone_number: str, password: str) -> Optional[int]:
@@ -50,5 +60,7 @@ First Name: {self.first_name}
 Last Name: {self.last_name}
 Phone Number: 09{self.phone_number}
 Email Address: {self.email if self.email else '-'}
-Extra Informations: {self.extra_information if loads(self.extra_information) else '-'}
+Extra Information: {self.extra_information if loads(self.extra_information) else '-'}
 """
+
+User('sep', 'baz','09','123')

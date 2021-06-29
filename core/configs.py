@@ -71,7 +71,7 @@ id SERIAL PRIMARY KEY);
 CREATE TABLE IF NOT EXISTS users (
 first_name VARCHAR(50) NOT NULL,
 last_name VARCHAR(50) NOT NULL,
-phone_number CHAR(9) NOT NULL,
+phone_number CHAR(9) NOT NULL UNIQUE,
 email VARCHAR(100),
 password CHAR(64) NOT NULL,
 extra_information VARCHAR,

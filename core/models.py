@@ -1,4 +1,5 @@
 from abc import ABC
+from psycopg2.errors import *
 
 
 class BaseModel(ABC):
