@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fa-IR">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
@@ -10,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
     <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
-    <meta charset="UTF-8">
     <title>کافه | لیست کلیه سفارشات</title>
 
     <style>
@@ -64,28 +64,21 @@
 
                 </thead>
                 <tbody>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal1">
-                    <td>۳۲۵</td>
-                    <td>۲۲</td>
-                    <td>قهوه</td>
-                    <td>۲ عدد</td>
-                    <td id="status1">جدید</td>
 
-
+                {% for order in orders %}
+                <tr class="table-row" data-toggle="modal" data-target="#myModal{{ loop.index0 }}">
+                    <td>{{ order.5 }}</td>
+                    <td>{{ order.3 }}</td>
+                    <td>{{ order.4 }}</td>
+                    <td>{{ order.0 }} عدد</td>
+                    <td id="status{{ loop.index0 }}">{{ order.1 }}</td>
                 </tr>
-                <tr class="table-row" data-toggle="modal" data-target="#myModal2">
-                    <td>۳۲۵</td>
-                    <td>۲۲</td>
-                    <td>قهوه</td>
-                    <td>۲ عدد</td>
-                    <td id="status2">جدید</td>
-
-                </tr>
-
+                {% endfor %}
                 </tbody>
             </table>
 
-            <div class="modal fade" id="myModal1" role="dialog">
+            {% for order in orders %}
+            <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
@@ -97,29 +90,29 @@
                             <ul class="border rounded pl-2 py-2">
                                 <li>
                                     <span class="float-right">زمان درخواست</span>
-                                    <span class="float-left">۶/۶/۱۴۰۰</span></li>
+                                    <span class="float-left">{{ order.2 }}</span></li>
                                 <li>
                                     <span class="float-right">وضعیت</span>
-                                    <span id="modal_status1" class="float-left">جدید</span></li>
+                                    <span id="modal_status{{ loop.index0 }}" class="float-left">{{ order.1 }}</span></li>
                                 <li>
                                     <span class="float-right">دسته بندی</span>
                                     <span class="float-left">نوشیدنی</span>
                                 </li>
                             </ul>
                             <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal1" onclick="change_status(this)">
+                                <a class="icon icon_refresh modal{{ loop.index0 }}" onclick="change_status(this)">
                                     <i class="gb gb_autorenew"></i>
                                 </a>
-                                <a class="icon icon_cook modal1" onclick="change_status(this)">
+                                <a class="icon icon_cook modal{{ loop.index0 }}" onclick="change_status(this)">
                                     <i class="gb gb_kitchen"></i>
                                 </a>
-                                <a class="icon icon_serve modal1" onclick="change_status(this)">
+                                <a class="icon icon_serve modal{{ loop.index0 }}" onclick="change_status(this)">
                                     <i class="gb gb_local_cafe"></i>
                                 </a>
-                                <a class="icon icon_check modal1" onclick="change_status(this)">
+                                <a class="icon icon_check modal{{ loop.index0 }}" onclick="change_status(this)">
                                     <i class="gb gb_done_all"></i>
                                 </a>
-                                <a class="icon icon_trash modal1" onclick="change_status(this)">
+                                <a class="icon icon_trash modal{{ loop.index0 }}" onclick="change_status(this)">
                                     <i class="gb gb_delete"></i>
                                 </a>
                             </div>
@@ -131,53 +124,7 @@
 
                 </div>
             </div>
-            <div class="modal fade" id="myModal2" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
-                        </div>
-                        <div class="modal-body text-right">
-                            <ul class="border rounded pl-2 py-2">
-                                <li>
-                                    <span class="float-right">زمان درخواست</span>
-                                    <span class="float-left">۶/۶/۱۴۰۰</span></li>
-                                <li>
-                                    <span class="float-right">وضعیت</span>
-                                    <span id="modal_status2" class="float-left">جدید</span></li>
-                                <li>
-                                    <span class="float-right">دسته بندی</span>
-                                    <span class="float-left">نوشیدنی</span>
-                                </li>
-                            </ul>
-                            <div class="col mx-auto text-center">
-                                <a class="icon icon_refresh modal2" onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
-                                </a>
-                                <a class="icon icon_cook modal2" onclick="change_status(this)">
-                                    <i class="gb gb_kitchen"></i>
-                                </a>
-                                <a class="icon icon_serve modal2" onclick="change_status(this)">
-                                    <i class="gb gb_local_cafe"></i>
-                                </a>
-                                <a class="icon icon_check modal2" onclick="change_status(this)">
-                                    <i class="gb gb_done_all"></i>
-                                </a>
-                                <a class="icon icon_trash modal2" onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="modal-footer mx-auto">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
 
