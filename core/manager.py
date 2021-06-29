@@ -82,7 +82,10 @@ class DataBaseManager(BaseManager):
     def get_id(self, table, **kwargs):
         condition = ""
         for column, value in kwargs.items():
-            condition += f"{table}.{column}='{value}' and "
+            if value:
+                condition += f"{table}.{column}='{value}' and "
+            else:
+                condition += f"{table}.{column} IS NULL and "
         query = f"SELECT {table}.id from {table} where {condition[:-5]};"
         with self.access_database() as db_cursor:
             db_cursor.execute(query)
