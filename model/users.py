@@ -30,8 +30,18 @@ class User(BaseModel):
         self.extra_information = dumps(extra_information)
         self.number = db_manager.create(self.name, self)
 
-    def check_user(self) -> bool:
-        pass
+    @classmethod
+    def check_user(cls, phone_number: str, password: str) -> Optional[int]:
+        """
+        Check Exist User with Correct Password for Cashier Login
+        """
+
+        phone_number = phone_number[2:]
+        password = sha256(password.encode()).hexdigest()
+        try:
+            return db_manager.get_id(cls.name, phone_number=phone_number, password=password)
+        except:
+            pass
 
     def __repr__(self) -> str:
         return f"""
@@ -40,5 +50,5 @@ First Name: {self.first_name}
 Last Name: {self.last_name}
 Phone Number: 09{self.phone_number}
 Email Address: {self.email if self.email else '-'}
-Extra Informations: {self.extra_information if self.extra_information else '-'}
+Extra Informations: {self.extra_information if loads(self.extra_information) else '-'}
 """

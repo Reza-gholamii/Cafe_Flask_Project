@@ -74,7 +74,7 @@ last_name VARCHAR(50) NOT NULL,
 phone_number CHAR(9) NOT NULL,
 email VARCHAR(100),
 password CHAR(64) NOT NULL,
-extra_information JSON,
+extra_information VARCHAR,
 id SERIAL PRIMARY KEY);
 """,
     """
