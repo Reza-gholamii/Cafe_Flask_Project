@@ -35,10 +35,10 @@ class User(BaseModel):
         self.extra_information = dumps(extra_information)
         try:
             self.number = db_manager.create(self.name, self)
-            logging.info(f"{__name__}: ")
+            logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
         except:
             self.number = db_manager.get_id(self.name, **self.to_dict())
-            logging.warning(f"{__name__}: ")
+            logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
 
     @classmethod
     def check_user(cls, phone_number: str, password: str) -> Optional[int]:
@@ -51,7 +51,7 @@ class User(BaseModel):
         try:
             return db_manager.get_id(cls.name, phone_number=phone_number, password=password)
         except:
-            pass
+            logging.warning(f"{__name__}: This Username & Password Unavailable in DataBase.")
 
     def __repr__(self) -> str:
         return f"""
@@ -62,5 +62,3 @@ Phone Number: 09{self.phone_number}
 Email Address: {self.email if self.email else '-'}
 Extra Information: {self.extra_information if loads(self.extra_information) else '-'}
 """
-
-User('sep', 'baz','09','123')
