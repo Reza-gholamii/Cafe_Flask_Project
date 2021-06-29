@@ -1,5 +1,7 @@
-from typing_extensions import ParamSpec
-from core.models import BaseModel
+from core.models import *
+from core.manager import *
+
+db_manager = ExtraDataBaseManager()
 
 
 class Table(BaseModel):
@@ -7,12 +9,13 @@ class Table(BaseModel):
     Information About Tables of in the Cafe for Example Cafe Position Space and ...
     """
 
-    ID: int
+    number: int
     capacity: int
     position_space: str
-    empty: bool
+    status: int
 
-    def __init__(self, capacity, position_space, empty=True):
+    def __init__(self, capacity, position_space, status="empty"):
         self.capacity = capacity
         self.position_space = position_space
-        self.empty = empty
+        self.status = db_manager.get_id("statuses", title=status)
+        self.number = db_manager.create("tables", self)

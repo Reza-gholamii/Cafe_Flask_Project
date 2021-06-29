@@ -46,7 +46,7 @@ class DataBaseManager(BaseManager):
         attrs: dict = model.to_dict()
         dict_values = tuple(attrs.values())
         value_num = '%s, ' * len(dict_values)
-        query = f"INSERT INTO {table} VALUES ({value_num[:-2]});"
+        query = f"INSERT INTO {table} VALUES ({value_num[:-2]}) RETURNING id;"
         self.send_query(query, dict_values)
 
     def read(self, table, row_id):
