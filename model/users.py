@@ -5,9 +5,9 @@ from json import dumps, loads
 from hashlib import sha256
 import logging
 
+
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)-10s - %(message)s')
-
 
 db_manager = ExtraDataBaseManager()
 
@@ -49,6 +49,7 @@ class User(BaseModel):
         phone_number = phone_number[2:]
         password = sha256(password.encode()).hexdigest()
         try:
+            logging.debug(f"{__name__}: Find This Username & Password Successfully in DataBase.")
             return db_manager.get_id(cls.name, phone_number=phone_number, password=password)
         except:
             logging.warning(f"{__name__}: This Username & Password Unavailable in DataBase.")
