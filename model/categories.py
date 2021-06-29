@@ -17,7 +17,12 @@ class Category(BaseModel):
         self.title = title
         if root:
             self.root = db_manager.get_id(self.name, title=root)
-        db_manager.create(self.name, self)
+        try:
+            db_manager.create(self.name, self)
+            logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
+        except:
+            logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+
 
     def add_sub(self, title: str) -> int:
         """
