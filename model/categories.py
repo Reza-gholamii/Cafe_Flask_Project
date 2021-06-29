@@ -1,29 +1,18 @@
-from abc import ABC, abstractmethod
 from core.models import *
 from core.manager import *
-
 
 db_manager = ExtraDataBaseManager()
 
 
-class Node(ABC):
-    def __init__(self, parent=None):
-        self.parent = parent
-        self.child = []
-        if self.parent:
-            self.parent.child.append(self)
-
-
-class Category(BaseModel, Node):
+class Category(BaseModel):
     """
     Model of Category and SubCategories in DataBase
     """
 
     title: str
 
-    def __init__(self, title, root=None):
-        super().__init__(root)
+    def __init__(self, title, root: str = None):
         self.title = title
         if root:
-            self.root = root.title
+            self.root = db_manager.get_id("categories", field=root)
         db_manager.create("categories", self)
