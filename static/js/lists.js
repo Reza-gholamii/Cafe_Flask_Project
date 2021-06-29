@@ -1,24 +1,37 @@
 function change_status(status) {
+    var user_id = '{{id}}';
     let class_name = status.classList[1]
     let target_name = status.classList[2]
     let target_column = document.getElementById('status' + target_name.slice(-1))
     let target_modal = document.getElementById('modal_status' + target_name.slice(-1))
     if (class_name === 'icon_refresh') {
-        target_column.innerText = 'جدید'
-        target_modal.innerText = 'جدید'
+        new_status = 'جدید'
     } else if (class_name === 'icon_cook') {
-        target_column.innerText = 'در حال پخت'
-        target_modal.innerText = 'در حال پخت'
+        new_status = 'در حال پخت'
     } else if (class_name === 'icon_serve') {
-        target_column.innerText = 'سرو شده'
-        target_modal.innerText = 'سرو شده'
+        new_status = 'سرو شده'
     } else if (class_name === 'icon_check') {
-        target_column.innerText = 'پرداخت شده'
-        target_modal.innerText = 'پرداخت شده'
+        new_status = 'پرداخت شده'
     } else if (class_name === 'icon_trash') {
-        target_column.innerText = 'کنسل شده'
-        target_modal.innerText = 'کنسل شده'
+        new_status = 'کنسل شده'
     }
+
+    target_column.innerText = new_status
+    target_modal.innerText = new_status
+    var data = {"status": new_status};
+
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: '/cashier/' + user_id + '/orders',
+        dataType: 'json',
+        data: JSON.stringify(data),
+        success: function (result) {
+            console.log("ok", result);
+        }, error: function (result) {
+            console.log(result);
+        }
+    });
 }
 
 
