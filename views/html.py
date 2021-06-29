@@ -15,6 +15,8 @@ logging.basicConfig(level=logging.INFO,
 
 db_manager = ExtraDataBaseManager()
 
+status_dict = {'new': 'جدید', 'cooking': 'در حال پخت', 'serving': 'سرو شده', 'canceled': 'کنسل شده'}
+
 
 def home():
     return render_template("home.html", page_name="home")
@@ -76,7 +78,7 @@ def order_list(_id):
         return render_template("cashier/order_list.html", orders=orders)
     else:
         json_data = request.get_json()
-        print(json_data['status'])
+        # print(json_data['status'])
         # data must be updated in database
         return render_template('cashier/order_list.html', orders=orders)
 
@@ -102,7 +104,7 @@ def menu_items(_id):
             db_manager.create('menu_items', new_item)
         items = db_manager.read_all('menu_items')
         items.sort(key=lambda x: x[8])
-        return render_template("cashier/menu_items.html", items=items)
+        return render_template("cashier/menu_items.html", items=items, id=_id)
 
 
 # this is for test
@@ -121,11 +123,28 @@ served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", 
 
 
 def archive_list(_id):
+    all_orders_l = []
     all_orders = db_manager.read_all('orders')
+    for order in all_orders:
+        menu_item = db_manager.read('menu_items', row_id=order[4])
+        item_name = menu_item[0][0]
+        item_category_id = menu_item[0][2]
+        item_category = db_manager.read('categories', row_id=item_category_id)
+        status = db_manager.read('statuses', row_id=order[1])
+        status_name = status[0][0]
+        order_l = list(order)
+        order_l[4], order_l[1] = item_name, status_name
+        order_l.append(item_category[0][0])
+        all_orders_l.append(order_l)
     if request.method == "GET":
-        return render_template("cashier/archive_list.html", orders=all_orders)
+        return render_template("cashier/archive_list.html", orders=all_orders_l, id=_id)
     else:
-        return render_template("cashier/archive_list.html", orders=all_orders)
+        json_data = request.get_json()
+        status_dict_reverse = {}
+        for key, value in status_dict.items(): status_dict_reverse.update({value: key})
+        status_id = db_manager.get_id('statuses', title=status_dict_reverse[json_data['status']])
+        db_manager.update('orders', id=json_data['index'], status=status_id)
+        return render_template("cashier/archive_list.html", orders=all_orders_l, id=_id)
 
 
 def new_order_list(_id):
@@ -186,13 +205,13 @@ def dashboard(_id):
     else:
         return user_seter()
     # ''''''''''''''''''''
-    # data = {
-    #     'count_new_orders': len(orders),
-    #     'count_orders': len(orders) + len(served_orders),
-    #     'count_empty_tables': len(empty_table),
-    #     'count_view': 15
-    # }
-    # return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
+    data = {
+        'count_new_orders': len(orders),
+        'count_orders': len(orders) + len(served_orders),
+        'count_empty_tables': len(empty_table),
+        'count_view': 15
+    }
+    return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
 
 
 def login():
