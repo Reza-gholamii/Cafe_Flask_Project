@@ -62,13 +62,23 @@ orders = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "�
 
 def order_list(_id):
     if request.method == "GET":
-        # need call a function to get access to last orders based on tables
-        return render_template("order_list.html", orders=orders)
+        # tables_info = db_manager.read_all('tables')
+        # tables_numbers = [i[3] for i in tables_info]
+        # orders = []
+        # for tables_number in tables_numbers:
+        #     print(tables_number)
+        #     # I think this query does not work correctly, since recepites.status = 8 while 8 is for orders
+        #     receipts_number = db_manager.calculate_price(tables_number)
+        #     print(receipts_number)
+        #     orders += db_manager.order_list(receipts_number[0])
+        # print(orders)
+        # # need call a function to get access to last orders based on tables
+        return render_template("cashier/order_list.html", orders=orders)
     else:
         json_data = request.get_json()
         print(json_data['status'])
         # data must be updated in database
-        return render_template('order_list.html', orders=orders)
+        return render_template('cashier/order_list.html', orders=orders)
 
 
 # this is for test
@@ -96,7 +106,7 @@ def menu_items(_id):
 
 
 # this is for test
-
+#
 served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
                  ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
                  ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
@@ -106,11 +116,61 @@ served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", 
                  ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
 
 
+#
+# all_orders = orders.copy()
+
+
+def archive_list(_id):
+    all_orders = db_manager.read_all('orders')
+    if request.method == "GET":
+        return render_template("cashier/archive_list.html", orders=all_orders)
+    else:
+        return render_template("cashier/archive_list.html", orders=all_orders)
+
+
+def new_order_list(_id):
+    if request.method == "GET":
+        # served_orders = db_manager.statusfilter('orders', status='serving')
+        # print(served_orders)
+        return render_template("cashier/new_orders_list.html", orders=served_orders)
+    else:
+        return render_template("cashier/new_orders_list.html", orders=served_orders)
+
+
+def cooking_order_list(_id):
+    if request.method == "GET":
+        # served_orders = db_manager.statusfilter('orders', status='serving')
+        # print(served_orders)
+        return render_template("cashier/cooking_orders_list.html", orders=served_orders)
+    else:
+        return render_template("cashier/cooking_orders_list.html", orders=served_orders)
+
+
 def served_order_list(_id):
     if request.method == "GET":
-        return render_template("served_orders_list.html", orders=served_orders)
+        # served_orders = db_manager.statusfilter('orders', status='serving')
+        # print(served_orders)
+        return render_template("cashier/served_orders_list.html", orders=served_orders)
     else:
-        return render_template("served_orders_list.html", orders=served_orders)
+        return render_template("cashier/served_orders_list.html", orders=served_orders)
+
+
+def paid_order_list(_id):
+    if request.method == "GET":
+        # served_orders = db_manager.statusfilter('orders', status='serving')
+        # print(served_orders)
+        return render_template("cashier/paid_orders_list.html", orders=served_orders)
+    else:
+        return render_template("cashier/paid_orders_list.html", orders=served_orders)
+
+
+def cancelled_order_list(_id):
+    if request.method == "GET":
+        # served_orders = db_manager.statusfilter('orders', status='serving')
+        # print(served_orders)
+        return render_template("cashier/cancelled_orders_list.html", orders=served_orders)
+    else:
+        return render_template("cashier/cancelled_orders_list.html", orders=served_orders)
 
 
 # this is test for tables status
@@ -126,13 +186,13 @@ def dashboard(_id):
     else:
         return user_seter()
     # ''''''''''''''''''''
-    data = {
-        'count_new_orders': len(orders),
-        'count_orders': len(orders) + len(served_orders),
-        'count_empty_tables': len(empty_table),
-        'count_view': 15
-    }
-    return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
+    # data = {
+    #     'count_new_orders': len(orders),
+    #     'count_orders': len(orders) + len(served_orders),
+    #     'count_empty_tables': len(empty_table),
+    #     'count_view': 15
+    # }
+    # return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
 
 
 def login():
