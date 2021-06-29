@@ -39,12 +39,13 @@
             direction: ltr;
         }
 
-        .text-shadow-md {
-            text-shadow: 0 0 10px #999;
+        .bg-header {
+            background: url("bg.jpg") 700px;
         }
 
-        .bg-yellow-900 {
-            background: #3d1800;
+        .bg-header > h1 {
+            color: #3d1800;
+            text-shadow: 0 2px 0 #fbe5cb, 0 -2px 0 #fbe5cb, 2px 0 #fbe5cb, -2px 0 0 #fbe5cb, 0 0 10px #000;
         }
 
         .category > a:nth-of-type(1):hover > .img-category {
@@ -110,7 +111,7 @@
 </div>
 <!--  Window Loader  -->
 <!--  nav  -->
-<div class="mx-auto relative pt-8 text-center">
+<div class="mx-auto relative my-8 text-center">
     <ul>
         <li class="animate__animated animate__fadeInDown animate__delay-1s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-24 pr-11 sm:w-40 transition bg-green-500 text-white">
             <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
@@ -127,7 +128,14 @@
     </ul>
 </div>
 <!--  nav  -->
-<div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-4 gap-8 px-8" style="max-width:1280px">
+<!-- header -->
+<section class="bg-header w-full py-10 mt-8 text-center">
+    <h1 class="Vazir text-4xl font-bold">کافه رستوران لبخند</h1>
+</section>
+<!-- header -->
+
+<div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-8"
+     style="max-width:1280px">
     <!-- category -->
     <div class="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4 grid grid-cols-3 lg:w-full md:gap-4 md:grid-cols-6 mx-auto w-full text-center gap-4 sm:gap-8 py-4 category my-6 sm:mb-10">
         <a class="cursor-pointer w-full rounded-2xl hover:shadow-2xl shadow-lg text-center p-2 relative mt-10 border-4 border-red-100 hover:border-red-300">
@@ -156,7 +164,8 @@
             <span class="text-pink-500 font-bold block rounded-md py-2 mx-auto text-xs sm:text-sm -mt-8">خوراک</span>
         </a>
         <a class="cursor-pointer w-full rounded-2xl hover:shadow-2xl shadow-lg text-center p-2 relative mt-10 border-4 border-blue-200 hover:border-blue-500">
-            <img src="menu-img/fast-food.png" class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
+            <img src="menu-img/fast-food.png"
+                 class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
                  alt="fast-food">
             <span class="text-blue-500 font-bold block rounded-md py-2 mx-auto text-xs sm:text-sm -mt-8">فست فود</span>
         </a>
@@ -165,99 +174,171 @@
 
     <!-- items -->
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/tea.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/tea.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">چای معطر ایرانی</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">10000</del>5000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                چای معطر ایرانی</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">10000</del>5000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/cap.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/cap.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">کاپوچینو</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2"></del>15000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                کاپوچینو</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2"></del>15000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/coffee.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/coffee.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">قهوه اسپرسو دوبل</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                قهوه اسپرسو دوبل</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/green_tea.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/green_tea.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">چای سبز</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">8000</del>4000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                چای سبز</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">8000</del>4000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/mocha.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/mocha.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">کافه موکا</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">18000</del>10000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                کافه موکا</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">18000</del>10000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/cake.jpeg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/cake.jpeg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">کیک شکلاتی</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                کیک شکلاتی</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/ice.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/ice.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">بستنی مخصوص</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2"></del>12000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                بستنی مخصوص</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2"></del>12000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/shake.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/shake.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">شیک شکلات</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">25000</del>18000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                شیک شکلات</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">25000</del>18000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/hamberger.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/hamberger.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">همبرگر مخصوص</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">65000</del>49000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                همبرگر مخصوص</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">65000</del>49000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/dg.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/dg.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">سیب زمینی</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">12000</del>8000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                سیب زمینی</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">12000</del>8000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/pizza.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/pizza.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">پیتزا لبخند</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">85000</del>69000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                پیتزا لبخند</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">85000</del>69000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <div class="rounded-2xl sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="menu-img/pproni.jpg" alt="tea" class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+        <img src="menu-img/pproni.jpg" alt="tea"
+             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
         <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">پپرونی مخصوص</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10"><i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت :  <span class="text-2xl relative text-red-400"><del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان</div>
-            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن به سبد خرید</a>
+            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
+                پپرونی مخصوص</h3>
+            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
+                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان
+            </div>
+            <a class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-xs text-center block">افزودن
+                به سبد خرید</a>
         </div>
     </div>
     <!-- items -->
