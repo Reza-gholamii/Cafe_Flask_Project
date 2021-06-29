@@ -24,7 +24,7 @@
         * {
             font-family: Yekan, sans-serif;
             direction: rtl;
-            transition: all 500ms linear;
+            transition: all 400ms linear;
         }
 
         .Vazir {
@@ -46,6 +46,11 @@
         .bg-yellow-900 {
             background: #3d1800;
         }
+
+        .category > a:nth-of-type(1):hover > .img-category {
+            filter: drop-shadow(0 0 5px #E63950);
+        }
+
 
     </style>
 </head>
@@ -74,16 +79,16 @@
     </ul>
 </div>
 <!--  nav  -->
-<div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-4 gap-8 px-8" style="max-width:1280px">
+<div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-4 gap-8 px-8"
+     style="max-width:1280px">
     <!-- category -->
-    <div class="col-span-4 grid grid-cols-3 md:grid-cols-6 w-full text-center gap-4 pb-4">
-        <span class="block col-span-3 md:col-span-6 text-right Vazir bg-yellow-900 rounded-t-md text-yellow-100 px-2 py-3 "><i class="gb gb_view_list gb_r180 ml-2 gb_s24"></i>دسته بندی ها</span>
-        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
-        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
-        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
-        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
-        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
-        <a class="h-36 cursor-pointer w-full rounded-md hover:shadow-2xl shadow-lg text-center p-4"></a>
+    <div class="col-span-4 grid grid-cols-3 md:grid-cols-6 w-full text-center gap-4 pb-4 category">
+        <span class="block col-span-3 md:col-span-6 text-right Vazir bg-yellow-900 rounded-t-md text-yellow-100 px-2 py-3 "><i
+                class="gb gb_view_list gb_r180 ml-2 gb_s24"></i>دسته بندی ها</span>
+        <a class="h-36 cursor-pointer w-full rounded-2xl hover:shadow-2xl shadow-lg shadow-red-400 text-center p-4 relative mt-10 border-4 border-red-100 hover:border-red-300">
+            <img src="menu-img/love.png" class="block mx-auto img-category w-10/12 xs:w-9/12 sm:w-8/12 relative -top-12"
+                 alt="popular">
+        </a>
     </div>
     <!-- category -->
     <!-- items -->
