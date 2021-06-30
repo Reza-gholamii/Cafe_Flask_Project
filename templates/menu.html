@@ -359,16 +359,20 @@
 <!-- shopping list -->
 <div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-10"
      style="transition: display 300ms linear">
-    <div id="shopping_list" class="absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-10/12 md:w-9/12 p-4 ring-8 ring-opacity-30 ring-white rounded-xl" style="height: 60%;">
-        <h3 class="text-center pb-4 bg-yellow-900 rounded-t-md"><span class="Vazir font-bold text-xl sm:text-2xl  bg-yellow-900 rounded-md py-1 px-3 text-white">لیست سفارش ها</span></h3>
-        <div class="mt-2 grid grid-cols-12">
+    <div id="shopping_list"
+         class="absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-10/12 md:w-9/12 p-4 ring-8 ring-opacity-30 ring-white rounded-xl"
+         style="height: max-content !important;">
+        <h3 class="text-center pb-4 bg-yellow-900 rounded-t-md"><span
+                class="Vazir font-bold text-xl sm:text-2xl  bg-yellow-900 rounded-md py-1 px-3 text-white">لیست سفارش ها</span>
+        </h3>
+        <div class="mt-2 grid grid-cols-12 border-b-2 pb-2">
             <span class="Vazir col-span-6 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">نام سفارش</span>
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">قیمت</span>
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">تعداد</span>
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">حذف</span>
         </div>
         <form method="post">
-            <div class="grid grid-cols-6 text-right mt-4 border-b-2 border-yellow-900 pb-4">
+            <div class="grid grid-cols-6 text-right mt-4 border-b-2 pb-4">
                 <input type="text" name="item" hidden value="همبرگر مخصوص لبخند">
                 <b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">همبرگر مخصوص لبخند</b>
                 <b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">12,000</b>
@@ -376,6 +380,7 @@
                 <i onclick="$(this).parent().remove()" class="block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>
             </div>
         </form>
+        <div class="bg-green-500 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-green-600 cursor-pointer"> ثبت سفارش و انتخاب میز<i class="gb gb_arrow_back mr-1 gb_s24"></i></div>
     </div>
 </div>
 
