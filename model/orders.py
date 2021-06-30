@@ -35,7 +35,7 @@ class Order(BaseModel):
             self.status = STATUSES[self.name][status]
             self.time_stamp = time_stamp
             self.recepite = recepite
-            self.menu_item = menu_item
+            self.menu_item = db_manager.get_id("menu_items", title=menu_item)
 
             try:
                 self.number = db_manager.create(self.name, self)
