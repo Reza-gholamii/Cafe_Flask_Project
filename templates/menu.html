@@ -376,19 +376,27 @@
                 <input type="text" name="item" hidden value="همبرگر مخصوص لبخند">
                 <b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">همبرگر مخصوص لبخند</b>
                 <b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">12,000</b>
-                <input type="number" name="count" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">
-                <i onclick="$(this).parent().remove()" class="block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>
+                <input type="number" name="count" min="1" value="1"
+                       class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">
+                <i onclick="$(this).parent().remove()"
+                   class="block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>
             </div>
             <div class="text-center px-2 sm:px-4 pb-2 sm:pb-4 grid grid-cols-3 bg-indigo-900 bg-opacity-50 rounded-md mt-8 gap-2 sm:gap-4 overflow-hidden">
                 <span class="Vazir col-start-2 font-bold text-lg bg-purple-900 bg-opacity-40 rounded-b-md py-1 px-3 text-white">انتخاب میز</span>
                 <input type="radio" value="2" hidden name="capacity">
                 <input type="radio" value="4" hidden name="capacity">
-                <input type="radio" value="8" hidden name="capacity">
-                <span data-active="f" class="cursor-pointer Vazir hover:bg-opacity-100 col-start-1 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">دو نفره</span>
-                <span data-active="f" class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">چهار نفره</span>
-                <span data-active="f" class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">هشت نفره</span>
+                <input type="radio" value="8" hidden name="capacity" checked>
+                <span data-active="2"
+                      class="cursor-pointer Vazir hover:bg-opacity-100 col-start-1 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">دو نفره</span>
+                <span data-active="4"
+                      class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">چهار نفره</span>
+                <span data-active="8"
+                      class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">هشت نفره</span>
             </div>
-            <button disabled type="submit" class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer">ثبت سفارش</button>
+            <button disabled type="submit" id="submitter_pop"
+                    class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer">
+                ثبت سفارش
+            </button>
         </form>
     </div>
 </div>
@@ -407,6 +415,16 @@
     })
 
     // table capacity select
+    $('span[data-active]').click(function () {
+        $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
+
+        $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
+        $('input[name="capacity"]').removeAttr('checked')
+
+        $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
+        $('input[value="' + $(this).attr('data-active') + '"]').attr('checked','')
+
+    })
 
 </script>
 <!-- shopping list -->
