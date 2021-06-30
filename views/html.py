@@ -70,7 +70,6 @@ def order_list(_id):
         return render_template("cashier/order_list.html", recepits=recepits, orders=orders, id=_id)
     else:
         json_data = request.get_json()
-        print(json_data)
         # data must be updated in database
         return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
 
