@@ -13,7 +13,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: '/cashier/' + $(this).attr("data-user_id") + '/menu',
+            url: '/cashier/' + user_id + '/menu',
             dataType: 'json',
             data: JSON.stringify(data),
             success: function (result) {
@@ -37,7 +37,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: '/cashier/' + $(this).attr("data-user_id") + '/menu',
+            url: '/cashier/' + user_id + '/menu',
             dataType: 'json',
             data: JSON.stringify(data),
             success: function (result) {
@@ -64,7 +64,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: '/cashier/' + $(this).attr("data-user_id") + '/menu',
+            url: '/cashier/' + user_id + '/menu',
             dataType: 'json',
             data: JSON.stringify(data),
             success: function (result) {
