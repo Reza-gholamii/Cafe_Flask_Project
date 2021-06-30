@@ -58,14 +58,16 @@
             {% for recepit in recepits %}
             <div class="row row-recepit mx-auto my-4 bg-light">
                 <div class="col-xl-2 col-lg-2 col-sm-3 col-3 px-0 col-order">میز {{ recepit.0 }}</div>
-                <div class="col-xl-2 col-lg-3 col-sm-5 col-5 px-0 col-order">صورتحساب: {{ recepit.1 }}</div>
+                <div class="col-xl-2 col-lg-3 col-sm-5 col-5 px-0 col-order" id="recepit_number">صورتحساب: {{ recepit.1
+                    }}
+                </div>
                 <div class="col-lg-3 d-none d-xl-block col-order">هزینه:۲۰۰۰۰۰ تومان</div>
                 <div class="col-xl-2 col-lg col-sm-4 col-4 px-0 col-order" id="status">{{ recepit.2 }}</div>
                 <div class="col-xl-1 col-lg col-sm-6 col-6 px-0 col-order">
-                    <a class="icon icon_check" onclick="change_status(this)">
+                    <a class="icon icon_check" data-recepit="{{recepit.1}}" onclick="change_status(this)">
                         <i class="gb gb_done_all"></i>
                     </a>
-                    <a class="icon icon_trash" onclick="change_status(this)">
+                    <a class="icon icon_trash" data-recepit="{{recepit.1}}" onclick="change_status(this)">
                         <i class="gb gb_delete"></i>
                     </a>
                 </div>
@@ -98,23 +100,27 @@
                                             <div class="col-2 px-0" id="item">{{ item.0 }}</div>
                                             <div class="col-3 px-0">
                                                 <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
-                                                   style="color: #008b0e"></i>
+                                                   style="color: #008b0e" data-recepit="{{recepit.1}}"></i>
                                                 <b>{{ item.1 }}</b> عدد
                                                 <i data-id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
-                                                   style="color: #a30000"></i>
+                                                   style="color: #a30000" data-recepit="{{recepit.1}}"></i>
                                             </div>
                                             <div class="col-3 px-0">{{ item.2 }}</div>
                                             <div class="col-4 px-0">
-                                                <a class="icon icon_refresh" onclick="change_status(this)">
+                                                <a class="icon icon_refresh" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.0 }}" onclick="change_status(this)">
                                                     <i class="gb gb_autorenew"></i>
                                                 </a>
-                                                <a class="icon icon_cook" onclick="change_status(this)">
+                                                <a class="icon icon_cook" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.0 }}" onclick="change_status(this)">
                                                     <i class="gb gb_kitchen"></i>
                                                 </a>
-                                                <a class="icon icon_serve" onclick="change_status(this)">
+                                                <a class="icon icon_serve" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.0 }}" onclick="change_status(this)">
                                                     <i class="gb gb_local_cafe"></i>
                                                 </a>
-                                                <a class="icon icon_trash" onclick="change_status(this)">
+                                                <a class="icon icon_trash" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.0 }}" onclick="change_status(this)">
                                                     <i class="gb gb_delete"></i>
                                                 </a>
                                             </div>
