@@ -18,10 +18,10 @@ class Recepite(BaseModel):
     table_number: int
 
     def __init__(self, table_number, total_price=0, final_price=0, status="unpaid"):
-        if db_manager.read("tables", id=table_number)[0][3] == 12:
+        if db_manager.read("tables", id=table_number)[0][3] == STATUSES["tables"]["empty"]:
             self.total_price = total_price
             self.final_price = final_price
-            self.status = db_manager.get_id("statuses", title=status)
+            self.status = STATUSES[self.name][status]
             self.table_number = table_number
             try:
                 self.number = db_manager.create(self.name, self)
@@ -29,8 +29,7 @@ class Recepite(BaseModel):
             except:
                 self.number = db_manager.get_id(self.name, **self.to_dict())
                 logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
-            db_manager.update("tables", id=self.table_number,
-                            status=db_manager.get_id("statuses", title="full"))
+            db_manager.update("tables", id=self.table_number, status=STATUSES["tables"]["full"])
             logging.debug(f"{__name__}: Change Status of Table Number Successfully.")
         else:
             logging.error(f"{__name__}: This Table is Occupied & Recepite it's not Possible.")
@@ -40,10 +39,9 @@ class Recepite(BaseModel):
         Method for Change Status of Model for Example Paid, Unpaid or Canceled
         """
 
-        self.status = db_manager.get_id("statuses", title=status)
+        self.status = STATUSES[self.name][status]
         db_manager.update(self.name, id=self.number, status=self.status)
-        db_manager.update("tables", id=self.table_number,
-                          status=db_manager.get_id("statuses", title="empty"))
+        db_manager.update("tables", id=self.table_number, status=STATUSES["tables"]["empty"])
         logging.debug(f"{__name__}: Change Status Column(Recepite & Table) Successfully.")
 
     def sum_price(self):

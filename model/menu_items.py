@@ -33,7 +33,7 @@ class MenuItem(BaseModel):
         self.image_name = image_name
         self.serving_time = serving_time
         self.cooking_time = cooking_time
-        self.status = db_manager.get_id("statuses", title=status)
+        self.status = STATUSES[self.name][status]
         try:
             self.number = db_manager.create(self.name, self)
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
@@ -64,6 +64,6 @@ class MenuItem(BaseModel):
         Method for Change Status of Model from active to deactive or Upside Down
         """
 
-        self.status = db_manager.get_id("statuses", title=status)
+        self.status = STATUSES[self.name][status]
         db_manager.update(self.name, id=self.number, status=self.status)
         logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
