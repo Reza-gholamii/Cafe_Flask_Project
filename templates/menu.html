@@ -365,22 +365,31 @@
         <h3 class="text-center pb-4 bg-yellow-900 rounded-t-md"><span
                 class="Vazir font-bold text-xl sm:text-2xl  bg-yellow-900 rounded-md py-1 px-3 text-white">لیست سفارش ها</span>
         </h3>
-        <div class="mt-2 grid grid-cols-12 border-b-2 pb-2">
+        <div id="label" class="mt-2 grid grid-cols-12 pb-2">
             <span class="Vazir col-span-6 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">نام سفارش</span>
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">قیمت</span>
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">تعداد</span>
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">حذف</span>
         </div>
         <form method="post">
-            <div class="grid grid-cols-6 text-right mt-4 border-b-2 pb-4">
+            <div class="grid grid-cols-6 text-right mt-4 border-t-2 pt-4">
                 <input type="text" name="item" hidden value="همبرگر مخصوص لبخند">
                 <b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">همبرگر مخصوص لبخند</b>
                 <b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">12,000</b>
                 <input type="number" name="count" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">
                 <i onclick="$(this).parent().remove()" class="block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>
             </div>
+            <div class="text-center px-2 sm:px-4 pb-2 sm:pb-4 grid grid-cols-3 bg-indigo-900 bg-opacity-50 rounded-md mt-8 gap-2 sm:gap-4 overflow-hidden">
+                <span class="Vazir col-start-2 font-bold text-lg bg-purple-900 bg-opacity-40 rounded-b-md py-1 px-3 text-white">انتخاب میز</span>
+                <input type="radio" value="2" hidden name="capacity">
+                <input type="radio" value="4" hidden name="capacity">
+                <input type="radio" value="8" hidden name="capacity">
+                <span data-active="f" class="cursor-pointer Vazir hover:bg-opacity-100 col-start-1 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">دو نفره</span>
+                <span data-active="f" class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">چهار نفره</span>
+                <span data-active="f" class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 text-white">هشت نفره</span>
+            </div>
+            <button type="submit" class="block w-full bg-green-500 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-green-600 cursor-pointer"> ثبت سفارش و انتخاب میز<i class="gb gb_arrow_back mr-1 gb_s24"></i></button>
         </form>
-        <div class="bg-green-500 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-green-600 cursor-pointer"> ثبت سفارش و انتخاب میز<i class="gb gb_arrow_back mr-1 gb_s24"></i></div>
     </div>
 </div>
 
@@ -397,6 +406,7 @@
         $_pop.fadeIn(300)
     })
 
+    // table capacity select
 
 </script>
 <!-- shopping list -->
