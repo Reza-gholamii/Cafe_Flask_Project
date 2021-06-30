@@ -427,7 +427,7 @@
                 '<b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
                 '<b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
                 '<input type="number" name="count" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
-                '<i onclick="$(this).parent().remove()" class="block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
+                '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
                 '</div>')
         }
     })
@@ -444,6 +444,15 @@
 
     })
 
+    // event for click in deleter-ico after clean basket :
+    function deleter(_this) {
+        $(_this).parent().remove()
+
+        if (!($('.item-in-basket')[0])){
+            $_pop.fadeOut(300)
+            $('#basket_icon').fadeOut(300)
+        }
+    }
 </script>
 <!-- shopping list -->
 
