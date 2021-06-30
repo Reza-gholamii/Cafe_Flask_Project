@@ -18,6 +18,10 @@ class Category(BaseModel):
         self.title = title
         if root:
             self.root = db_manager.get_id(self.name, title=root)
+            self.__class__.CATEGORIES[root][self.title] = {}
+        else:
+            self.__class__.CATEGORIES[self.title] = {}
+
         try:
             db_manager.create(self.name, self)
             logging.info(f"{__name__}: Model Created Successfully in DataBase.")
@@ -38,6 +42,8 @@ class Category(BaseModel):
         Create & Save Categories Model from DataBase Information into the Class Attribue
         """
 
-        cls.CATEGORIES = {key[1]: {} for key in db_manager.category_list(False)}
-        for root in cls.CATEGORIES:
-            cls.CATEGORIES[root] = {key[1]: key[0] for key in db_manager.category_list(True, root)}
+        parents = [key[1] for key in db_manager.category_list(False)]
+        for parent in parents:
+            cls(parent)
+            for child in db_manager.category_list(True, parent):
+                cls(child, parent)

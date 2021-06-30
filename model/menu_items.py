@@ -2,6 +2,7 @@ from core.models import *
 from core.manager import *
 from datetime import time
 from typing import Optional
+from categories import Category
 
 
 db_manager = ExtraDataBaseManager()
@@ -22,7 +23,7 @@ class MenuItem(BaseModel):
     cooking_time: Optional[time]  # Estimated cooking time
     serving_time: Optional[time]  # Serving time period
     status: int  # active or deactive in list
-    MENU_ITEMS: dict = {}  # collection of all menu items model in cafe from database
+    MENU_ITEMS = Category.CATEGORIES  # collection of all menu items model in cafe from database
 
     def __init__(self, title, price, category, discount=0,
                  image_name=None, cooking_time=None, serving_time=None, status="active"):
@@ -40,6 +41,11 @@ class MenuItem(BaseModel):
         except:
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+        
+        for group in self.__class__.MENU_ITEMS:
+            if category in group:
+                group[category][self.number] = self
+                break
 
     def apply_discount(self, discount: int):
         """
@@ -77,6 +83,5 @@ class MenuItem(BaseModel):
         for menu_item in db_manager.read_all(cls.name):
             category = db_manager.read("categories", menu_item[2])[0]
             status = db_manager.read("statuses", menu_item[7])[0]
-            m = cls(menu_item[0], menu_item[1], category, menu_item[3],
-                    menu_item[4], menu_item[5], menu_item[6], status)
-            cls.MENU_ITEMS[m.number] = m
+            cls(menu_item[0], menu_item[1], category, menu_item[3],
+                menu_item[4], menu_item[5], menu_item[6], status)

@@ -27,6 +27,7 @@ class Table(BaseModel):
         except:
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+        self.__class__.TABLES[self.number] = self
 
     def change_status(self, status="full"):
         """
@@ -35,7 +36,7 @@ class Table(BaseModel):
 
         self.status = STATUSES[self.name][status]
         db_manager.update(self.name, id=self.number, status=self.status)
-        logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
+        logging.info(f"{__name__}: Change Status Column Successfully in DataBase.")
 
     @classmethod
     def all_tables(cls):
@@ -45,5 +46,4 @@ class Table(BaseModel):
 
         for table in db_manager.read_all(cls.name):
             status = db_manager.read("statuses", table[2])[0]
-            t = cls(table[0], table[1], status)
-            cls.TABLES[t.number] = t
+            cls(table[0], table[1], status)
