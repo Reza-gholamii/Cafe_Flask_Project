@@ -1,6 +1,7 @@
 from core.models import *
 from core.manager import *
 from datetime import datetime
+from menu_items import MenuItem
 
 
 db_manager = ExtraDataBaseManager()
@@ -21,17 +22,27 @@ class Order(BaseModel):
 
     def __init__(self, recepite, menu_item, count=1,
                  time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="new"):
-        self.count = count
-        self.status = db_manager.get_id("statuses", title=status)
-        self.time_stamp = time_stamp
-        self.recepite = recepite
-        self.menu_item = menu_item
-        try:
-            self.number = db_manager.create(self.name, self)
-            logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
-        except:
-            self.number = db_manager.get_id(self.name, **self.to_dict())
-            logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+        flag = False
+        for category in MenuItem.MENU_ITEMS:
+            for subcategory in category:
+                if menu_item in subcategory:
+                    if subcategory[menu_item].status == STATUSES["menu_items"]["active"]:
+                        flag = True
+        if flag:
+            self.count = count
+            self.status = db_manager.get_id("statuses", title=status)
+            self.time_stamp = time_stamp
+            self.recepite = recepite
+            self.menu_item = menu_item
+
+            try:
+                self.number = db_manager.create(self.name, self)
+                logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
+            except:
+                self.number = db_manager.get_id(self.name, **self.to_dict())
+                logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+        else:
+            logging.error(f"{__name__}: This Item isn't in the Active List.")
 
     def change_status(self, status):
         """

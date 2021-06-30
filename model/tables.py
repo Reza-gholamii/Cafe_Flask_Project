@@ -51,3 +51,5 @@ class Table(BaseModel):
         for table in db_manager.read_all(cls.name):
             status = db_manager.read("statuses", table[2])[0]
             cls(table[0], table[1], status)
+
+        logging.debug(f"{__name__}: Read Data from DataBase Successfully.")

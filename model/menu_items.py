@@ -88,3 +88,5 @@ class MenuItem(BaseModel):
             status = db_manager.read("statuses", menu_item[7])[0]
             cls(menu_item[0], menu_item[1], category, menu_item[3],
                 menu_item[4], menu_item[5], menu_item[6], status)
+        
+        logging.debug(f"{__name__}: Read Data from DataBase Successfully.")
