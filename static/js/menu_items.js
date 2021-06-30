@@ -8,7 +8,7 @@ $(document).ready(function () {
             values[this.name] = $(this).val();
         });
         $("#row_h6_" + index).text(values["name"])
-        $("#row_span_" + index).text(values["price"]+ ' تومان')
+        $("#row_span_" + index).text(values["price"] + ' تومان')
         var data = {"action": "update", "name": values["name"], "price": values["price"]};
         $.ajax({
             type: 'POST',
@@ -60,7 +60,14 @@ $(document).ready(function () {
         $inputs.each(function () {
             values[this.name] = $(this).val();
         });
-        var data = {"action": "add", "name": values["new_name"], "price": values["new_price"]};
+        console.log($inputs)
+        console.log(values)
+        var data = {
+            "action": "add",
+            "name": values["new_name"],
+            "category": values["new_cat"],
+            "price": values["new_price"]
+        };
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
