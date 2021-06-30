@@ -1,7 +1,26 @@
+ $("[data-id=adder_num]").bind('click', function () {
+        let num = Number($(this).parent().children('b')[0].innerText);
+        $(this).parent().children('b')[0].innerText = String(num + 1);
+    })
+
+    $("[data-id=suber_num]").bind('click', function () {
+        let num = Number($(this).parent().children('b')[0].innerText);
+        if (num !== 1) {
+            $(this).parent().children('b')[0].innerText = String(num - 1);
+        }
+    })
+
+
 function change_status(status) {
     let new_status = ""
     let row_number = status.parentNode.parentNode
-    let target_column = row_number.childNodes[5]
+    let row_id = row_number.classList[1]
+    if (row_id === 'row-recepit') {
+        var target_column = row_number.childNodes[7];
+    } else {
+        var target_column = row_number.childNodes[5];
+    }
+
     let class_name = status.classList[1]
     if (class_name === 'icon_refresh') {
         new_status = 'جدید'
