@@ -14,7 +14,7 @@ class Table(BaseModel):
     number: int
     capacity: int
     position_space: str
-    status: int
+    status: int  # empty or full
 
     def __init__(self, capacity, position_space, status="empty"):
         self.capacity = capacity

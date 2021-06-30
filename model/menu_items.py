@@ -21,7 +21,7 @@ class MenuItem(BaseModel):
     image_name: Optional[str]  # name of picture for product
     cooking_time: Optional[time]  # Estimated cooking time
     serving_time: Optional[time]  # Serving time period
-    status: int
+    status: int  # active or deactive in list
 
     def __init__(self, title, price, category, discount=0,
                  image_name=None, cooking_time=None, serving_time=None, status="active"):

@@ -19,10 +19,9 @@ class Category(BaseModel):
             self.root = db_manager.get_id(self.name, title=root)
         try:
             db_manager.create(self.name, self)
-            logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
+            logging.info(f"{__name__}: Model Created Successfully in DataBase.")
         except:
-            logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
-
+            logging.warning(f"{__name__}: Model Already Existed in DataBase.")
 
     def add_sub(self, title: str) -> int:
         """
