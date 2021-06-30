@@ -1,5 +1,6 @@
 from core.models import *
 from core.manager import *
+from datetime import datetime
 from tables import Table
 from orders import Order
 
@@ -25,14 +26,14 @@ class Recepite(BaseModel):
             self.final_price = final_price
             self.status = STATUSES[self.name][status]
             self.table_number = table_number
-            try:
-                self.number = db_manager.create(self.name, self)
-                logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
-            except:
-                self.number = db_manager.get_id(self.name, **self.to_dict())
-                logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+
+            self.number = db_manager.create(self.name, self)
+            logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
+
             Table.TABLES[self.table_number].change_status()
             logging.debug(f"{__name__}: Change Status of Table Number Successfully.")
+
+            self.orders = {}  # after write into database create empty list orders
         else:
             logging.error(f"{__name__}: This Table is Occupied & Recepite it's not Possible.")
 
@@ -58,7 +59,11 @@ class Recepite(BaseModel):
                           total_price=self.total_price, final_price=self.final_price)
         logging.info(f"{__name__}: Calculated Price has Written in DataBase.")
 
-    def add_order(self):
+    def add_order(self, menu_item, count=1,
+                  time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="new"):
         """
         Add Order for this Recepite Number by a Method for Self Recepite
         """
+        
+        order = Order(self.number, menu_item, count, time_stamp, status)
+        self.orders[order.number] = order
