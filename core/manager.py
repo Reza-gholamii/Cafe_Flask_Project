@@ -162,7 +162,7 @@ WHERE statuses.title = '{status}';
         Query to SELECT All Row & Columns from a Table with Limit Opional
         """
 
-        query = f"SELECT * FROM {table}"
+        query = f"SELECT * FROM {table} ORDER BY {table}.status"
 
         if limit:
             query += f" LIMIT {limit}"
@@ -176,6 +176,29 @@ WHERE statuses.title = '{status}';
 
         return result
     
+    def category_list(self, sub: bool = True, root: str = None) -> List[str]:
+        """
+        List of Category or Sub Categories And Show All or Filter by Root
+        """
+
+        query = f"""
+SELECT field FROM categories
+WHERE root IS {'NOT NULL' if sub else 'NULL'}
+"""
+
+        if root:
+            with self.access_database() as cafe_cursor:
+                cafe_cursor.execute(f"SELECT id FROM categories WHERE root = '{root}';")
+                index = cafe_cursor.fetchone()
+
+            query += f" AND root = {index[0]}"
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query + ';')
+            result = cafe_cursor.fetchall()
+
+        return [item[0] for item in result]
+
     def order_list(self, recepite_number: int) -> List[tuple]:
         """
         Get List of Orders by One Recepite Number
@@ -206,7 +229,7 @@ SUM(orders.count * (menu_items.price * (1 - (menu_items.discount / 100)))) AS Fi
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON recepites.status = statuses.id
-WHERE recepites.table_number = {table_number} AND recepites.status = 8;
+WHERE recepites.table_number = {table_number} AND recepites.status = 10 AND orders.status <> 8;
 """
 
         with self.access_database() as cafe_cursor:
@@ -214,3 +237,23 @@ WHERE recepites.table_number = {table_number} AND recepites.status = 8;
             result = cafe_cursor.fetchone()
 
         return result
+
+    def incoming(self, day: str = None) -> int:
+        """
+        Calculate Incoming of Orders in One Day or All Days
+        """
+
+        query = f"""
+SELECT SUM(count * (price - discount))
+FROM orders INNER JOIN menu_items
+ON orders.menu_item = menu_items.id
+WHERE orders.status <> 6"""
+
+        if day:
+            query += f" AND time_stamp::DATE = '{day}'"
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query + ';')
+            result = cafe_cursor.fetchone()
+
+        return result[0]

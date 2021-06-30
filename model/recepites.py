@@ -14,14 +14,14 @@ class Recepites(BaseModel):
     number: int
     total_price: int  # without discount
     final_price: int  # with discount
-    status: int  # payment or not
+    status: int  # paid or unpaid or canceled
     table_number: int
 
     def __init__(self, table_number, total_price=0, final_price=0, status="unpaid"):
-        self.table_number = table_number
         self.total_price = total_price
         self.final_price = final_price
         self.status = db_manager.get_id("statuses", title=status)
+        self.table_number = table_number
         try:
             self.number = db_manager.create(self.name, self)
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
