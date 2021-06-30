@@ -14,15 +14,16 @@ class Order(BaseModel):
     name = "orders"
     number: int
     count: int
-    time_stamp: datetime
+    time_stamp: str
     status: int  # new or cooking or serving or canceled
     recepite: int
     menu_item: int
 
-    def __init__(self, recepite, menu_item, count=1, status="new"):
+    def __init__(self, recepite, menu_item, count=1,
+                 time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="new"):
         self.count = count
         self.status = db_manager.get_id("statuses", title=status)
-        self.time_stamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.time_stamp = time_stamp
         self.recepite = recepite
         self.menu_item = menu_item
         try:
