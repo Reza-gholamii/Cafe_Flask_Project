@@ -57,13 +57,16 @@
 
             {% for recepit in recepits %}
             <div class="row row-recepit mx-auto my-4 bg-light">
-                <div class="col-xl-2 col-lg-2 col-sm-3 col-3 px-0 col-order">میز {{ recepit.0 }}</div>
+                <div class="col-xl-1 col-lg-2 col-sm-3 col-3 px-0 col-order">میز {{ recepit.0 }}</div>
                 <div class="col-xl-2 col-lg-3 col-sm-5 col-5 px-0 col-order" id="recepit_number">صورتحساب: {{ recepit.1
                     }}
                 </div>
                 <div class="col-lg-3 d-none d-xl-block col-order">هزینه:۲۰۰۰۰۰ تومان</div>
                 <div class="col-xl-2 col-lg col-sm-4 col-4 px-0 col-order" id="status">{{ recepit.2 }}</div>
-                <div class="col-xl-1 col-lg col-sm-6 col-6 px-0 col-order">
+                <div class="col-xl-2 col-lg col-sm-6 col-6 px-0 col-order">
+                    <a class="icon icon_refresh" data-recepit="{{recepit.1}}" onclick="change_status(this)">
+                        <i class="gb gb_autorenew"></i>
+                    </a>
                     <a class="icon icon_check" data-recepit="{{recepit.1}}" onclick="change_status(this)">
                         <i class="gb gb_done_all"></i>
                     </a>
