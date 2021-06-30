@@ -87,7 +87,7 @@
                 </tbody>
             </table>
 
-            {% for order in orders %}
+            {% for recepit in recepits %}
             <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
                 <div class="modal-dialog">
 
@@ -107,13 +107,26 @@
                                 {% set order = orders[loop.index-1] %}
                                 {% for item in order%}
                                 <li>
-                                    <span class="float-right">زمان درخواست</span>
-                                    <span class="float-left">{{ order.2 }}</span>
+                                    <span class="float-right">{{ item.0 }}</span>
+                                    <span class="float-left">{{ item.1 }} عدد</span>
                                 </li>
                                 {% endfor %}
 
 
                             </ul>
+                            <ul class="border rounded pl-2 py-2 pr-4">
+                                <li>
+                                    <span class="float-right">تخفیف</span>
+                                    <span class="float-left">22222</span>
+                                </li>
+                                <li>
+                                    <span class="float-right">هزینه کل</span>
+                                    <span class="float-left">1000000</span>
+                                </li>
+                            </ul>
+                            <div class="text-center" style="font-size: 20px" onclick="window.print()">
+                                <i class="gb gb_print"></i>
+                            </div>
                         </div>
                         <div class="modal-footer mx-auto">
                             <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
