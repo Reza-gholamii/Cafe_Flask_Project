@@ -15,6 +15,9 @@ class Category(BaseModel):
     CATEGORIES: dict = {}  # collection of all category model in cafe from database
 
     def __init__(self, title, root: str = None):
+        if not self.__class__.CATEGORIES:
+            self.__class__.all_categories()
+
         self.title = title
         if root:
             self.root = db_manager.get_id(self.name, title=root)

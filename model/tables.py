@@ -18,9 +18,13 @@ class Table(BaseModel):
     TABLES: dict = {}  # collection of all tables model in cafe from database
 
     def __init__(self, capacity, position_space, status="empty"):
+        if not self.__class__.TABLES:
+            self.__class__.all_tables()
+
         self.capacity = capacity
         self.position_space = position_space
         self.status = STATUSES[self.name][status]
+
         try:
             self.number = db_manager.create(self.name, self)
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
