@@ -95,7 +95,7 @@
                                     {% for item in order%}
                                     <li>
                                         <div class="row row-order text-center">
-                                            <div class="col-2 px-0">{{ item.0 }}</div>
+                                            <div class="col-2 px-0" id="item">{{ item.0 }}</div>
                                             <div class="col-3 px-0">
                                                 <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
                                                    style="color: #008b0e"></i>
@@ -138,6 +138,9 @@
     </div>
 
 </div>
+<script>
+    var user_id = '{{id}}';
+</script>
 <script src="../../static/js/order_list.js"></script>
 </body>
 </html>

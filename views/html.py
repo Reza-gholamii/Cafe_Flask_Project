@@ -56,32 +56,23 @@ def menu():
 recepits = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
             ("۲", "۳۲۵", "جدید", "رضا یزدانی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
             ("۳", "۳۲۵", "جدید", "علی غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-            ("۴", "۳۲۵", "جدید", "رسول احدی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-            ("۵", "۳۲۵", "جدید", "س‍پهر بازیار", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-            ("۶", "۳۲۵", "جدید", "علی احدی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-            ("۷", "۳۲۵", "جدید", "ممد نادیجی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید")]
-orders = [item[4:] for item in recepits]
+            ("۴", "۳۲۵", "جدید", "رسول احدی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید")]
+
+orders = [[("قهوه", "2", "جدید"), ("نسکافه", "۱", "جدید"), ("کاپوچینو", "۲", "جدید")],
+          [("قهوه", "۲", "جدید"), ("نسکافه", "3", "جدید"), ("کاپوچینو", "5", "جدید")],
+          [("قهوه", "۲", "جدید"), ("نسکافه", "۱", "جدید"), ("کاپوچینو", "۲", "جدید")],
+          [("قهوه", "۲", "جدید"), ("نسکافه", "۱", "جدید"), ("کاپوچینو", "۲", "جدید")]]
 
 
 def order_list(_id):
     if request.method == "GET":
-        # tables_info = db_manager.read_all('tables')
-        # tables_numbers = [i[3] for i in tables_info]
-        # orders = []
-        # for tables_number in tables_numbers:
-        #     print(tables_number)
-        #     # I think this query does not work correctly, since recepites.status = 8 while 8 is for orders
-        #     receipts_number = db_manager.calculate_price(tables_number)
-        #     print(receipts_number)
-        #     orders += db_manager.order_list(receipts_number[0])
-        # print(orders)
         # # need call a function to get access to last orders based on tables
-        return render_template("cashier/order_list.html", recepits=recepits, orders=orders)
+        return render_template("cashier/order_list.html", recepits=recepits, orders=orders, id=_id)
     else:
         json_data = request.get_json()
-        # print(json_data['status'])
+        print(json_data)
         # data must be updated in database
-        return render_template('cashier/order_list.html', orders=orders)
+        return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
 
 
 # this is for test
