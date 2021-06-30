@@ -157,12 +157,15 @@ WHERE statuses.title = '{status}';
 
         return [item[0] for item in result]
 
-    def read_all(self, table: str, limit: int = None, offset: int = None) -> List[tuple]:
+    def read_all(self, table: str, limit: int = None, offset: int = None, status: bool = True) -> List[tuple]:
         """
         Query to SELECT All Row & Columns from a Table with Limit Opional
         """
 
-        query = f"SELECT * FROM {table} ORDER BY {table}.status"
+        query = f"SELECT * FROM {table}"
+
+        if status:
+            query += f" ORDER BY {table}.status"
 
         if limit:
             query += f" LIMIT {limit}"

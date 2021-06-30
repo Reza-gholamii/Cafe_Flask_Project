@@ -31,3 +31,13 @@ class Category(BaseModel):
 
         self.__class__(title, self.title)
         return db_manager.get_id(self.name, title=title)
+    
+    @classmethod
+    def all_categories(cls):
+        """
+        Create & Save Categories Model from DataBase Information into the Class Attribue
+        """
+
+        cls.CATEGORIES = {key[1]: {} for key in db_manager.category_list(False)}
+        for root in cls.CATEGORIES:
+            cls.CATEGORIES[root] = {key[1]: key[0] for key in db_manager.category_list(True, root)}
