@@ -5,7 +5,7 @@ from core.manager import *
 db_manager = ExtraDataBaseManager()
 
 
-class Recepites(BaseModel):
+class Recepite(BaseModel):
     """
     Information About Recepites for Example Price or Payment Status and ...
     """
@@ -26,7 +26,14 @@ class Recepites(BaseModel):
             self.number = db_manager.create(self.name, self)
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
         except:
-            print(self.to_dict())
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
-Recepites(1)
+
+    def change_status(self, status="paid"):
+        """
+        Method for Change Status of Model for Example Paid, Unpaid or Canceled
+        """
+
+        self.status = db_manager.get_id("statuses", title=status)
+        db_manager.update(self.name, id=self.number, status=self.status)
+        logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")

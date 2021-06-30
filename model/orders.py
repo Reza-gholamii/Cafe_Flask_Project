@@ -32,3 +32,12 @@ class Order(BaseModel):
         except:
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+
+    def change_status(self, status):
+        """
+        Method for Change Status of Model for Example New, Cooking, Serving or Canceled
+        """
+
+        self.status = db_manager.get_id("statuses", title=status)
+        db_manager.update(self.name, id=self.number, status=self.status)
+        logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
