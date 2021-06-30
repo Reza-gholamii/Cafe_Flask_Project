@@ -53,10 +53,12 @@ def menu():
 
 # this is for test
 
-recepits = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-            ("۲", "۳۲۵", "جدید", "رضا یزدانی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-            ("۳", "۳۲۵", "جدید", "علی غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-            ("۴", "۳۲۵", "جدید", "رسول احدی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید")]
+recepits_list = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
+                 (
+                     "۲", "۳۲۵", "جدید", "رضا یزدانی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲",
+                     "جدید"),
+                 ("۳", "۳۲۵", "جدید", "علی غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
+                 ("۴", "۳۲۵", "جدید", "رسول احدی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید")]
 
 orders = [[("قهوه", "2", "جدید"), ("نسکافه", "۱", "جدید"), ("کاپوچینو", "۲", "جدید")],
           [("قهوه", "۲", "جدید"), ("نسکافه", "3", "جدید"), ("کاپوچینو", "5", "جدید")],
@@ -67,11 +69,11 @@ orders = [[("قهوه", "2", "جدید"), ("نسکافه", "۱", "جدید"), ("
 def order_list(_id):
     if request.method == "GET":
         # # need call a function to get access to last orders based on tables
-        return render_template("cashier/order_list.html", recepits=recepits, orders=orders, id=_id)
+        return render_template("cashier/order_list.html", recepits=recepits_list, orders=orders, id=_id)
     else:
         json_data = request.get_json()
         # data must be updated in database
-        return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
+        return render_template('cashier/order_list.html', recepits=recepits_list, orders=orders, id=_id)
 
 
 # this is for test
@@ -181,6 +183,16 @@ def cancelled_order_list(_id):
         return render_template("cashier/cancelled_orders_list.html", orders=served_orders)
     else:
         return render_template("cashier/cancelled_orders_list.html", orders=served_orders)
+
+
+def recepits(_id):
+    if request.method == "GET":
+        # print(recepits)
+        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
+    else:
+        json_data = request.get_json()
+        # call function for updating recepit status
+        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
 
 
 # this is test for tables status
