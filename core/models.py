@@ -1,4 +1,3 @@
-from manager import *
 from abc import ABC
 from typing import Optional
 import logging
@@ -6,8 +5,6 @@ import logging
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)-10s - %(message)s')
-
-db_manager = ExtraDataBaseManager()
 
 
 class BaseModel(ABC):
@@ -35,9 +32,3 @@ class TextMessage(BaseModel):
         self.phone_number = phone_number
         self.email = email or None
         self.comment = comment
-
-
-STATUSES = {key[1]: {} for key in db_manager.category_list(False, table="statuses")}
-counter = 1
-for root in STATUSES:
-    STATUSES[root] = {key[1]: key[0] for key in db_manager.category_list(True, root, "statuses")}

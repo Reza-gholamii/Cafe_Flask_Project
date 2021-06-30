@@ -83,7 +83,7 @@ title VARCHAR(20) NOT NULL,
 root INT,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_sub
-    FOREIGN KEY(subtable)
+    FOREIGN KEY(root)
     REFERENCES statuses(id)
     ON DELETE SET NULL
     ON UPDATE SET NULL

@@ -182,13 +182,13 @@ WHERE statuses.title = '{status}';
         """
 
         query = f"""
-SELECT id, field FROM {table}
+SELECT id, title FROM {table}
 WHERE root IS {'NOT NULL' if sub else 'NULL'}
 """
 
         if root:
             with self.access_database() as cafe_cursor:
-                cafe_cursor.execute(f"SELECT id FROM {table} WHERE root = '{root}';")
+                cafe_cursor.execute(f"SELECT id FROM {table} WHERE title = '{root}';")
                 index = cafe_cursor.fetchone()
 
             query += f" AND root = {index[0]}"
@@ -257,3 +257,9 @@ WHERE orders.status <> 6"""
             result = cafe_cursor.fetchone()
 
         return result[0]
+
+
+db_manager = ExtraDataBaseManager()
+STATUSES = {key[1]: {} for key in db_manager.category_list(False, table="statuses")}
+for root in STATUSES:
+    STATUSES[root] = {key[1]: key[0] for key in db_manager.category_list(True, root, "statuses")}
