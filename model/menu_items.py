@@ -45,8 +45,8 @@ class MenuItem(BaseModel):
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
         
         for group in self.__class__.MENU_ITEMS:
-            if category in group:
-                group[category][self.number] = self
+            if category in self.__class__.MENU_ITEMS[group]:
+                self.__class__.MENU_ITEMS[group][category][self.number] = self
                 break
 
     def apply_discount(self, discount: int):

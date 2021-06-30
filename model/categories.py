@@ -48,6 +48,6 @@ class Category(BaseModel):
         for parent in parents:
             cls(parent)
             for child in db_manager.category_list(True, parent):
-                cls(child, parent)
+                cls(child[1], parent)
 
         logging.debug(f"{__name__}: Read Data from DataBase Successfully.")
