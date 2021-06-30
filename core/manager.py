@@ -261,6 +261,26 @@ WHERE orders.status <> 6"""
 
         return result[0]
 
+    def archive_orders_list(self) -> List[Tuple[int, int, str, str, int, str, str]]:
+        """
+        Return Full Archive of All Orders with All Field
+        """
+
+        query = f"""
+SELECT orders.id, recepites.id, menu_items.title, category.title, orders.count,
+statuses.title, orders.time_stamp FROM orders ORDER BY orders.status
+INNER JOIN statuses ON orders.status = statuses.id
+INNER JOIN recepites ON orders.recepite = recepites.id
+INNER JOIN menu_items ON orders.menu_item = menu_items.id
+INNER JOIN categories ON menu_items.category = categories.id
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchall()
+
+        return result
+
 
 db_manager = ExtraDataBaseManager()
 STATUSES = {key[1]: {} for key in db_manager.category_list(False, table="statuses")}
