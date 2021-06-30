@@ -372,10 +372,8 @@
                 <span data-active="8"
                       class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 md:py-2 text-white">هشت نفره</span>
             </div>
-            <button disabled type="submit" id="submitter_pop"
-                    class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer">
-                ثبت سفارش
-            </button>
+            <input type="submit" id="submitter_pop"
+                    class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
         </form>
     </div>
 </div>
@@ -410,6 +408,8 @@
         }
     })
 
+    let _ind = 0;
+
     $("a[data-item='add_item']").on('click', function () {
         $('#basket_icon').fadeIn(300)
 
@@ -423,12 +423,13 @@
         } else {
             $('#basket').prepend(
                 '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
-                '<input type="text" name="item" hidden value="' + a_clone.children('h3:first').text() + '">' +
+                '<input type="text" name="item'+ _ind +'" hidden value="' + a_clone.children('h3:first').text() + '">' +
                 '<b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
                 '<b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
-                '<input type="number" name="count" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
+                '<input type="number" name="count'+ _ind +'" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
                 '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
                 '</div>')
+            _ind++
         }
     })
 
@@ -440,7 +441,7 @@
         $('input[name="capacity"]').removeAttr('checked')
 
         $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
-        $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', '')
+        $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
 
     })
 
@@ -453,6 +454,33 @@
             $('#basket_icon').fadeOut(300)
         }
     }
+
+
+    // ajax send data after submit
+
+    $("#basket").submit(function (event) {
+        event.preventDefault();
+        $inputs = $('#basket input')
+        $values = {}
+        $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
+
+        let len = Number((Object.keys($values).length-2)/2)
+
+        let count_list = []
+        let item_list = []
+
+        for (let i = 0; i < len;i++) {
+            count_list.push($values['count'+i])
+            item_list.push($values['item'+i])
+        }
+
+        let data = {
+            "capacity" : $values['capacity'],
+            "count_list": count_list,
+            "item_list": item_list
+        }
+    })
+
 </script>
 <!-- shopping list -->
 
