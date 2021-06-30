@@ -357,7 +357,7 @@
 </div>
 
 <!-- shopping list -->
-<div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-10 hidden"
+<div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-20 hidden"
      style="transition: display 300ms linear">
     <div id="shopping_list"
          class="absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-10/12 md:w-9/12 p-4 ring-8 ring-opacity-30 ring-white rounded-xl"
@@ -392,7 +392,7 @@
     </div>
 </div>
 
-<div id="basket_icon" class="fixed cursor-pointer opacity-60 hover:opacity-100 bottom-8 left-8 text-center bg-purple-500 w-20 overflow-hidden h-20 rounded-full ring-8 ring-opacity-30 ring-purple-900">
+<div id="basket_icon" class="fixed z-10 cursor-pointer opacity-60 hover:opacity-100 bottom-8 left-8 text-center bg-purple-500 w-20 overflow-hidden h-20 rounded-full ring-8 ring-opacity-30 ring-purple-900 hidden">
     <i class="gb gb_shopping_cart gb_s48 z-20 mt-4 text-white text-opacity-70 relative"></i>
     <i class="gb gb_shopping_cart inset-0 z-10 text-purple-600 absolute mx-auto -mr-3 mt-1 block" style="font-size: 200px"></i>
 </div>
@@ -406,6 +406,8 @@
     })
 
     $("a[data-item='add_item']").on('click', function () {
+        $('#basket_icon').fadeIn(300)
+
         $_pop.fadeIn(300)
         let a_clone = $(this).parent().clone()
         a_clone.children('div').children('span').children('del').text('')
