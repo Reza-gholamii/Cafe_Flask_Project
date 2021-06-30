@@ -28,9 +28,10 @@ class Order(BaseModel):
                 if menu_item in subcategory:
                     if subcategory[menu_item].status == STATUSES["menu_items"]["active"]:
                         flag = True
+
         if flag:
             self.count = count
-            self.status = db_manager.get_id("statuses", title=status)
+            self.status = STATUSES[self.name][status]
             self.time_stamp = time_stamp
             self.recepite = recepite
             self.menu_item = menu_item
@@ -49,7 +50,7 @@ class Order(BaseModel):
         Method for Change Status of Model for Example New, Cooking, Serving or Canceled
         """
 
-        self.status = db_manager.get_id("statuses", title=status)
+        self.status = STATUSES[self.name][status]
         db_manager.update(self.name, id=self.number, status=self.status)
         logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
 

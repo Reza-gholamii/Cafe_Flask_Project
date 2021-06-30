@@ -38,6 +38,7 @@ class MenuItem(BaseModel):
         self.serving_time = serving_time
         self.cooking_time = cooking_time
         self.status = STATUSES[self.name][status]
+
         try:
             self.number = db_manager.create(self.name, self)
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")

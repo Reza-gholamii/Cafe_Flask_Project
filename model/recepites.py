@@ -1,6 +1,7 @@
 from core.models import *
 from core.manager import *
 from tables import Table
+from orders import Order
 
 
 db_manager = ExtraDataBaseManager()
@@ -56,3 +57,8 @@ class Recepite(BaseModel):
         db_manager.update(self.name, id=self.number,
                           total_price=self.total_price, final_price=self.final_price)
         logging.info(f"{__name__}: Calculated Price has Written in DataBase.")
+
+    def add_order(self):
+        """
+        Add Order for this Recepite Number by a Method for Self Recepite
+        """

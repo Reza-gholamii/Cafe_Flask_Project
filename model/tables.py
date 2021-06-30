@@ -27,11 +27,11 @@ class Table(BaseModel):
 
         try:
             self.number = db_manager.create(self.name, self)
+            self.__class__.TABLES[self.number] = self
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
         except:
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
-        self.__class__.TABLES[self.number] = self
 
     def change_status(self, status="full"):
         """
