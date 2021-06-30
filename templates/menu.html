@@ -357,7 +357,7 @@
 </div>
 
 <!-- shopping list -->
-<div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-10"
+<div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-10 hidden"
      style="transition: display 300ms linear">
     <div id="shopping_list"
          class="absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-10/12 md:w-9/12 p-4 ring-8 ring-opacity-30 ring-white rounded-xl"
@@ -371,16 +371,7 @@
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">تعداد</span>
             <span class="Vazir col-span-2 inline-block text-center text-gray-500 text-xs sm:text-sm md:text-lg">حذف</span>
         </div>
-        <form method="post">
-            <div class="grid grid-cols-6 text-right mt-4 border-t-2 pt-4">
-                <input type="text" name="item" hidden value="همبرگر مخصوص لبخند">
-                <b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">همبرگر مخصوص لبخند</b>
-                <b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">12,000</b>
-                <input type="number" name="count" min="1" value="1"
-                       class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">
-                <i onclick="$(this).parent().remove()"
-                   class="block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>
-            </div>
+        <form id="basket" method="post">
             <div class="text-center px-2 sm:px-4 pb-2 sm:pb-4 grid grid-cols-3 bg-indigo-900 bg-opacity-50 rounded-md mt-8 gap-2 sm:gap-4 overflow-hidden">
                 <span class="Vazir col-start-2 font-bold text-lg bg-purple-900 bg-opacity-40 rounded-b-md py-1 px-3 text-white">انتخاب میز</span>
                 <input type="radio" value="2" hidden name="capacity">
@@ -403,7 +394,6 @@
 
 <script>
     $_pop = $('#main_pop')
-
     $_pop.click(function () {
         if (event.target === $_pop[0]) {
             $_pop.fadeOut(300)
@@ -412,6 +402,17 @@
 
     $("a[data-item='add_item']").on('click', function () {
         $_pop.fadeIn(300)
+        let a_clone = $(this).parent().clone()
+        a_clone.children('div').children('span').children('del').text('')
+
+        $('#basket').prepend(
+            '<div class="grid grid-cols-6 text-right mt-4 border-t-2 pt-4">'+
+                '<input type="text" name="item" hidden value="'+ a_clone.children('h3:first').text() +'">'+
+                '<b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">'+ a_clone.children('h3:first').text() +'</b>'+
+                '<b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">'+ a_clone.children('div').children('span').text() +'</b>'+
+                '<input type="number" name="count" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">'+
+                '<i onclick="$(this).parent().remove()" class="block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>'+
+            '</div>')
     })
 
     // table capacity select
