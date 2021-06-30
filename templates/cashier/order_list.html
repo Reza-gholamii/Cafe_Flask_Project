@@ -32,7 +32,7 @@
             padding-top: 16px;
         }
 
-        .row-order {
+        .row-recepit {
             border-radius: 7px;
             box-shadow: 1px 1px 5px #d0cdcd;
         }
@@ -91,18 +91,19 @@
                                 <h5 class="text-center">آیتم ها</h5>
                                 <ul class="border rounded pl-2 py-2 pr-4">
 
-                                    {% for order in orders %}
+                                    {% set order = orders[loop.index-1] %}
+                                    {% for item in order%}
                                     <li>
                                         <div class="row row-order text-center">
-                                            <div class="col-2 px-0">{{ order.0 }}</div>
+                                            <div class="col-2 px-0">{{ item.0 }}</div>
                                             <div class="col-3 px-0">
                                                 <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
                                                    style="color: #008b0e"></i>
-                                                <b>1</b> عدد
+                                                <b>{{ item.1 }}</b> عدد
                                                 <i data-id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
                                                    style="color: #a30000"></i>
                                             </div>
-                                            <div class="col-3 px-0">{{ order.2 }}</div>
+                                            <div class="col-3 px-0">{{ item.2 }}</div>
                                             <div class="col-4 px-0">
                                                 <a class="icon icon_refresh" onclick="change_status(this)">
                                                     <i class="gb gb_autorenew"></i>
@@ -118,8 +119,9 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    <li>
-                                    {% endfor %}
+                                        {% endfor %}
+
+
                                 </ul>
                             </div>
                             <div class="modal-footer mx-auto">
