@@ -64,20 +64,23 @@
                 <tbody>
 
                 {% for recepit in recepits %}
-
-
                 <tr class="table-row">
-                    <td data-toggle="modal" data-target="#myModal1" class="w-25">۳۲۵</td>
-                    <td data-toggle="modal" data-target="#myModal1" class="w-25">۱۰۰۰۰۰</td>
-                    <td data-toggle="modal" data-target="#myModal1" class="w-25" id="status1">جدید</td>
+                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">۳۲۵</td>
+                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">۱۰۰۰۰۰</td>
+                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25"
+                        id="status{{ loop.index0 }}">جدید
+                    </td>
                     <td class="w-25 px-0">
-                        <a class="icon icon_refresh" data-recepit="1" onclick="change_status(this)">
+                        <a class="icon icon_refresh status{{ loop.index0 }}" data-recepit="{{recepit.0}}"
+                           onclick="change_status(this)">
                             <i class="gb gb_autorenew"></i>
                         </a>
-                        <a class="icon icon_check" data-recepit="1" onclick="change_status(this)">
+                        <a class="icon icon_check status{{ loop.index0 }}" data-recepit="{{recepit.0}}"
+                           onclick="change_status(this)">
                             <i class="gb gb_done_all"></i>
                         </a>
-                        <a class="icon icon_trash" data-recepit="1" onclick="change_status(this)">
+                        <a class="icon icon_trash status{{ loop.index0 }}" data-recepit="{{recepit.0}}"
+                           onclick="change_status(this)">
                             <i class="gb gb_delete"></i>
                         </a>
                     </td>
@@ -124,7 +127,7 @@
                                     <span class="float-left">1000000</span>
                                 </li>
                             </ul>
-                            <div class="text-center" style="font-size: 20px" onclick="window.print()">
+                            <div class="text-center" style="font-size: 35px" onclick="window.print()">
                                 <i class="gb gb_print"></i>
                             </div>
                         </div>
@@ -140,5 +143,9 @@
     </div>
 
 </div>
+<script>
+    var user_id = '{{id}}';
+</script>
+<script src="../../static/js/recepit.js"></script>
 </body>
 </html>
