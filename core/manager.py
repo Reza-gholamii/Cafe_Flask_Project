@@ -82,7 +82,7 @@ class DataBaseManager(BaseManager):
     def get_id(self, table, **kwargs):
         condition = ""
         for column, value in kwargs.items():
-            if value:
+            if value is not None:
                 condition += f"{table}.{column}='{value}' and "
             else:
                 condition += f"{table}.{column} IS NULL and "
