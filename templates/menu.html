@@ -389,14 +389,18 @@
 
 <script>
     function echer(data) {
+        let state = "";
 
         $('#basket>.item-in-basket').each(function () {
+
             if ($(this).children('b:first').text() === data) {
-                return true
+                $ThisItem = $(this).children('input[type="number"]')
+                state = "true";
             }
         })
 
-        return false
+        return state === "true";
+
     }
 
     $_pop = $('#main_pop')
@@ -414,7 +418,8 @@
         a_clone.children('div').children('span').children('del').text('')
 
         if (echer(a_clone.children('h3:first').text())) {
-            $('#basket>.item-in-basket>input[type="number"]').val($(this).val()+1)
+            let _count = Number($ThisItem.val())+1
+            $ThisItem.val(_count)
         } else {
             $('#basket').prepend(
                 '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
