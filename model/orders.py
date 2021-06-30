@@ -41,3 +41,12 @@ class Order(BaseModel):
         self.status = db_manager.get_id("statuses", title=status)
         db_manager.update(self.name, id=self.number, status=self.status)
         logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
+
+    def change_count(self, count):
+        """
+        Method for Change Count of Order Menu Item from 1 to Any Number Greater than One
+        """
+
+        self.count = count
+        db_manager.update(self.name, id=self.number, count=self.count)
+        logging.debug(f"{__name__}: Change Count Number Column Successfully in DataBase.")

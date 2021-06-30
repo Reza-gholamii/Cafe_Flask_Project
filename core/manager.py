@@ -244,7 +244,7 @@ WHERE recepites.table_number = {table_number} AND recepites.status = 10 AND orde
         """
 
         query = f"""
-SELECT SUM(count * (price - discount))
+SELECT SUM(count * price * (1 - (discount / 100)))
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
 WHERE orders.status <> 6"""

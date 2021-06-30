@@ -15,6 +15,7 @@ class Table(BaseModel):
     capacity: int
     position_space: str
     status: int  # empty or full
+    TABLES: dict = {}  # collection of all tables model in cafe from database
 
     def __init__(self, capacity, position_space, status="empty"):
         self.capacity = capacity
@@ -35,3 +36,14 @@ class Table(BaseModel):
         self.status = db_manager.get_id("statuses", title=status)
         db_manager.update(self.name, id=self.number, status=self.status)
         logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
+
+    @classmethod
+    def all_tables(cls):
+        """
+        Create & Save Tables Model from DataBase Information into the Class Attribue
+        """
+
+        for table in db_manager.read_all(cls.name):
+            status = db_manager.read("statuses", table[2])[0]
+            t = cls(table[0], table[1], status)
+            cls.TABLES[t.number] = t
