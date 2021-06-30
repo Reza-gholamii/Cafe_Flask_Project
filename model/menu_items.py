@@ -6,6 +6,7 @@ from categories import Category
 
 
 db_manager = ExtraDataBaseManager()
+Category.all_categories()
 
 
 class MenuItem(BaseModel):
@@ -27,9 +28,6 @@ class MenuItem(BaseModel):
 
     def __init__(self, title, price, category, discount=0,
                  image_name=None, cooking_time=None, serving_time=None, status="active"):
-        if self.__class__.MENU_ITEMS == Category.CATEGORIES:
-            self.__class__.all_menu_items()
-
         self.title = title
         self.price = price
         self.category = db_manager.get_id("categories", title=category)

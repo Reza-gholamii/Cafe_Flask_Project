@@ -6,6 +6,7 @@ from orders import Order
 
 
 db_manager = ExtraDataBaseManager()
+Table.all_tables()
 
 
 class Recepite(BaseModel):
