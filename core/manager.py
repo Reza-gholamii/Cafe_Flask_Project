@@ -176,19 +176,19 @@ WHERE statuses.title = '{status}';
 
         return result
     
-    def category_list(self, sub: bool = True, root: str = None) -> List[str]:
+    def category_list(self, sub: bool = True, root: str = None, table: str = "categories") -> List[Tuple[int, str]]:
         """
         List of Category or Sub Categories And Show All or Filter by Root
         """
 
         query = f"""
-SELECT field FROM categories
+SELECT id, field FROM {table}
 WHERE root IS {'NOT NULL' if sub else 'NULL'}
 """
 
         if root:
             with self.access_database() as cafe_cursor:
-                cafe_cursor.execute(f"SELECT id FROM categories WHERE root = '{root}';")
+                cafe_cursor.execute(f"SELECT id FROM {table} WHERE root = '{root}';")
                 index = cafe_cursor.fetchone()
 
             query += f" AND root = {index[0]}"
@@ -197,7 +197,7 @@ WHERE root IS {'NOT NULL' if sub else 'NULL'}
             cafe_cursor.execute(query + ';')
             result = cafe_cursor.fetchall()
 
-        return [item[0] for item in result]
+        return result
 
     def order_list(self, recepite_number: int) -> List[tuple]:
         """

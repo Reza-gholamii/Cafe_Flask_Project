@@ -80,7 +80,7 @@ id SERIAL PRIMARY KEY);
     """
 CREATE TABLE IF NOT EXISTS statuses (
 title VARCHAR(20) NOT NULL,
-subtable INT,
+root INT,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_sub
     FOREIGN KEY(subtable)
@@ -201,47 +201,47 @@ INSERT INTO statuses (title, id)
 VALUES ('menu_items', 4);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('new', 1, 5);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('cooking', 1, 6);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('serving', 1, 7);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('canceled', 1, 8);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('paid', 2, 9);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('unpaid', 2, 10);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('canceled', 2, 11);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('empty', 3, 12);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('full', 3, 13);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('active', 4, 14);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('deactive', 4, 15);
 """
 ]

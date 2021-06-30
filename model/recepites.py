@@ -18,7 +18,7 @@ class Recepite(BaseModel):
     table_number: int
 
     def __init__(self, table_number, total_price=0, final_price=0, status="unpaid"):
-        if True:
+        if db_manager.read("tables", id=table_number)[0][3] == 12:
             self.total_price = total_price
             self.final_price = final_price
             self.status = db_manager.get_id("statuses", title=status)
@@ -31,8 +31,9 @@ class Recepite(BaseModel):
                 logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
             db_manager.update("tables", id=self.table_number,
                             status=db_manager.get_id("statuses", title="full"))
+            logging.debug(f"{__name__}: Change Status of Table Number Successfully.")
         else:
-            logging.error(f"{__name__}: ")
+            logging.error(f"{__name__}: This Table is Occupied & Recepite it's not Possible.")
 
     def change_status(self, status="paid"):
         """
@@ -43,7 +44,7 @@ class Recepite(BaseModel):
         db_manager.update(self.name, id=self.number, status=self.status)
         db_manager.update("tables", id=self.table_number,
                           status=db_manager.get_id("statuses", title="empty"))
-        logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
+        logging.debug(f"{__name__}: Change Status Column(Recepite & Table) Successfully.")
 
     def sum_price(self):
         """

@@ -12,6 +12,7 @@ class Category(BaseModel):
 
     name = "categories"
     title: str
+    CATEGORIES: dict = {}  # collection of all category model in cafe from database
 
     def __init__(self, title, root: str = None):
         self.title = title
