@@ -1,14 +1,14 @@
- $("[data-id=adder_num]").bind('click', function () {
-        let num = Number($(this).parent().children('b')[0].innerText);
-        $(this).parent().children('b')[0].innerText = String(num + 1);
-    })
+$("[data-id=adder_num]").bind('click', function () {
+    let num = Number($(this).parent().children('b')[0].innerText);
+    $(this).parent().children('b')[0].innerText = String(num + 1);
+})
 
-    $("[data-id=suber_num]").bind('click', function () {
-        let num = Number($(this).parent().children('b')[0].innerText);
-        if (num !== 1) {
-            $(this).parent().children('b')[0].innerText = String(num - 1);
-        }
-    })
+$("[data-id=suber_num]").bind('click', function () {
+    let num = Number($(this).parent().children('b')[0].innerText);
+    if (num !== 1) {
+        $(this).parent().children('b')[0].innerText = String(num - 1);
+    }
+})
 
 
 function change_status(status) {
