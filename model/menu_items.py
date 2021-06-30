@@ -83,8 +83,8 @@ class MenuItem(BaseModel):
         """
 
         for menu_item in db_manager.read_all(cls.name):
-            category = db_manager.read("categories", menu_item[2])[0]
-            status = db_manager.read("statuses", menu_item[7])[0]
+            category = db_manager.read("categories", menu_item[2])[0][0]
+            status = db_manager.read("statuses", menu_item[7])[0][0]
             cls(menu_item[0], menu_item[1], category, menu_item[3],
                 menu_item[4], menu_item[5], menu_item[6], status)
         

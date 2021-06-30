@@ -5,6 +5,7 @@ from menu_items import MenuItem
 
 
 db_manager = ExtraDataBaseManager()
+MenuItem.all_menu_items()
 
 
 class Order(BaseModel):
