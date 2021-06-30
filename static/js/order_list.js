@@ -1,8 +1,9 @@
 $("[data-id=adder_num]").bind('click', function () {
     let num = Number($(this).parent().children('b')[0].innerText);
-    let item = $(this).parent().parent().children('#item')[0].innerText;
     $(this).parent().children('b')[0].innerText = String(num + 1);
-    var data = {"item": item, "count": String(num + 1)};
+    let item = $(this).parent().parent().children('#item')[0].innerText;
+    let recepit_id = $(this).attr("data-recepit")
+    var data = {"recepit_id": recepit_id, "item": item, "count": String(num + 1)};
 
     $.ajax({
         type: 'POST',
@@ -22,9 +23,10 @@ $("[data-id=suber_num]").bind('click', function () {
 
     let num = Number($(this).parent().children('b')[0].innerText);
     if (num !== 1) {
-        let item = $(this).parent().parent().children('#item')[0].innerText;
         $(this).parent().children('b')[0].innerText = String(num - 1);
-        var data = {"item": item, "count": String(num - 1)};
+        let item = $(this).parent().parent().children('#item')[0].innerText;
+        let recepit_id = $(this).attr("data-recepit")
+        var data = {"recepit_id": recepit_id, "item": item, "count": String(num - 1)};
 
         $.ajax({
             type: 'POST',
@@ -59,13 +61,22 @@ function change_status(status) {
 
 
     let row_number = status.parentNode.parentNode
-    let row_id = row_number.classList[1]
-    if (row_id === 'row-recepit') {
+    let row_name = row_number.classList[1]
+
+    if (row_name === 'row-recepit') {
         var target_column = row_number.childNodes[7];
-        var data = {"new_recepit_status": new_status, "new_order_status": ""};
+        let recepit_id = status.getAttribute("data-recepit")
+        var data = {"recepit_id": recepit_id, "new_recepit_status": new_status, "new_order_status": ""};
     } else {
         var target_column = row_number.childNodes[5];
-        var data = {"new_recepit_status": "", "new_order_status": new_status};
+        let recepit_id = status.getAttribute("data-recepit")
+        let order_name = status.getAttribute("data-order")
+        var data = {
+            "recepit_id": recepit_id,
+            "order_name": order_name,
+            "new_recepit_status": "",
+            "new_order_status": new_status
+        };
     }
 
     target_column.innerText = new_status
