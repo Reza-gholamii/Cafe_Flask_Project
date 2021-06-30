@@ -65,10 +65,10 @@
 
                 {% for recepit in recepits %}
                 <tr class="table-row">
-                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">۳۲۵</td>
-                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">۱۰۰۰۰۰</td>
+                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">{{recepit.0}}</td>
+                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">{{recepit.1}}</td>
                     <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25"
-                        id="status{{ loop.index0 }}">جدید
+                        id="status{{ loop.index0 }}">{{recepit.2}}
                     </td>
                     <td class="w-25 px-0">
                         <a class="icon icon_refresh status{{ loop.index0 }}" data-recepit="{{recepit.0}}"
@@ -101,8 +101,8 @@
                         </div>
                         <div class="modal-body text-right">
                             <div class="overflow-hidden">
-                                <p class="float-right">شماره صوتحساب: 1</p>
-                                <p class="float-left">هزینه کل: 2</p>
+                                <p class="float-right">شماره صورتحساب: {{recepit.0}}</p>
+                                <p class="float-left">هزینه کل: {{recepit.1}}</p>
                             </div>
                             <h5 class="text-center">آیتم ها</h5>
                             <ul class="border rounded pl-2 py-2 pr-4">
@@ -119,12 +119,20 @@
                             </ul>
                             <ul class="border rounded pl-2 py-2 pr-4">
                                 <li>
+                                    <span class="float-right">زمان درخواست</span>
+                                    <span class="float-left">{{recepit.1}}</span>
+                                </li>
+                                <li>
+                                    <span class="float-right">زمان تحویل</span>
+                                    <span class="float-left">{{recepit.1}}</span>
+                                </li>
+                                <li>
                                     <span class="float-right">تخفیف</span>
-                                    <span class="float-left">22222</span>
+                                    <span class="float-left">{{recepit.1}}</span>
                                 </li>
                                 <li>
                                     <span class="float-right">هزینه کل</span>
-                                    <span class="float-left">1000000</span>
+                                    <span class="float-left">{{recepit.1}}</span>
                                 </li>
                             </ul>
                             <div class="text-center" style="font-size: 35px" onclick="window.print()">
