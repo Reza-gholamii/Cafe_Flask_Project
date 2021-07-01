@@ -74,14 +74,25 @@ def order_list(_id):
                     order_l.append(item)
                 recepits.append(recepit)
                 orders.append(order_l)
+        return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
     else:
         json_data = request.get_json()
-        print(json_data)
-        if json_data['new_recepit_status']:
+        # updating recepit status
+        if 'new_recepit_status' in json_data.keys() and json_data['new_recepit_status']:
             json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
-            status_row = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
-            db_manager.update('recepites', id=json_data['recepit_id'], status=status_row[2])
-    return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
+            status_record = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
+            db_manager.update('recepites', id=json_data['recepit_id'], status=status_record[2])
+        # updating order status
+        elif 'new_order_status' in json_data.keys() and json_data['new_order_status']:
+            json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
+            status_record = db_manager.check_record('statuses', title=json_data['new_order_status'])[0]
+            menu_item_record = db_manager.check_record('menu_items', title=json_data['order_name'])[0]
+            order_record = \
+                db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
+            db_manager.update('orders', id=order_record[5], status=status_record[2])
+
+
+        return {"Data Received": 200}
 
 
 # this is for test
