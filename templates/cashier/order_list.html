@@ -64,14 +64,14 @@
                 <div class="col-xl-2 col-lg col-sm-4 col-4 px-0 col-order" id="status">{{ recepit.2 }}</div>
                 <div class="col-xl-2 col-lg col-sm-6 col-6 px-0 col-order">
                     {% if recepit.1 != "" %}
-                    <a class="icon icon_refresh" data-recepit="{{recepit.1}}" onclick="change_status(this)">
-                        <i class="gb gb_autorenew"></i>
+                    <a class="icon icon_unpaid" data-recepit="{{recepit.1}}" onclick="change_status(this)">
+                        <i class="gb gb_content_paste"></i>
                     </a>
                     <a class="icon icon_check" data-recepit="{{recepit.1}}" onclick="change_status(this)">
                         <i class="gb gb_done_all"></i>
                     </a>
                     <a class="icon icon_trash" data-recepit="{{recepit.1}}" onclick="change_status(this)">
-                        <i class="gb gb_delete"></i>
+                        <i class="gb gb_cancel"></i>
                     </a>
                     {% endif %}
                 </div>
@@ -113,7 +113,7 @@
                                             <div class="col-4 px-0">
                                                 <a class="icon icon_refresh" data-recepit="{{recepit.1}}"
                                                    data-order="{{ item.1 }}" onclick="change_status(this)">
-                                                    <i class="gb gb_autorenew"></i>
+                                                    <i class="gb gb_refresh"></i>
                                                 </a>
                                                 <a class="icon icon_cook" data-recepit="{{recepit.1}}"
                                                    data-order="{{ item.1 }}" onclick="change_status(this)">
@@ -125,7 +125,7 @@
                                                 </a>
                                                 <a class="icon icon_trash" data-recepit="{{recepit.1}}"
                                                    data-order="{{ item.1 }}" onclick="change_status(this)">
-                                                    <i class="gb gb_delete"></i>
+                                                    <i class="gb gb_cancel"></i>
                                                 </a>
                                             </div>
                                         </div>
