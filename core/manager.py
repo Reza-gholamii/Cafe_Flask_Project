@@ -268,11 +268,11 @@ WHERE orders.status <> 6"""
         """
 
         query = f"""
-SELECT orders.id, orders.recepite, menu_items.title, category.title, orders.count,
-statuses.title, orders.time_stamp FROM orders ORDER BY orders.{ordered}
-INNER JOIN statuses ON orders.status = statuses.id
-INNER JOIN menu_items ON orders.menu_item = menu_items.id
-INNER JOIN categories ON menu_items.category = categories.id
+SELECT orders.id, orders.recepite, menu_items.title, categories.title, orders.count,
+statuses.title, orders.time_stamp FROM orders INNER JOIN statuses
+ON orders.status = statuses.id INNER JOIN menu_items
+ON orders.menu_item = menu_items.id INNER JOIN categories
+ON menu_items.category = categories.id ORDER BY orders.{ordered};
 """
 
         with self.access_database() as cafe_cursor:
