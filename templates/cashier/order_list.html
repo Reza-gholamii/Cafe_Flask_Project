@@ -63,6 +63,7 @@
                 <div class="col-lg-3 d-none d-xl-block col-order">هزینه: {{ recepit.4 }} تومان</div>
                 <div class="col-xl-2 col-lg col-sm-4 col-4 px-0 col-order" id="status">{{ recepit.2 }}</div>
                 <div class="col-xl-2 col-lg col-sm-6 col-6 px-0 col-order">
+                    {% if recepit.1 != "" %}
                     <a class="icon icon_refresh" data-recepit="{{recepit.1}}" onclick="change_status(this)">
                         <i class="gb gb_autorenew"></i>
                     </a>
@@ -72,6 +73,7 @@
                     <a class="icon icon_trash" data-recepit="{{recepit.1}}" onclick="change_status(this)">
                         <i class="gb gb_delete"></i>
                     </a>
+                    {% endif %}
                 </div>
                 <div class="col-xl-2 col-lg-2 col-sm-6 col-6 px-0 col-order" style="padding-top: 10px">
                     <button type="button" class="btn btn-info" data-toggle="modal"
