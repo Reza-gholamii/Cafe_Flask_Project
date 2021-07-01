@@ -86,10 +86,11 @@ class DataBaseManager(BaseManager):
                 Example: users, national-code=11111"""
         condition = ""
         for column, value in kwargs.items():
-            if value is not None:
-                condition += f"{table}.{column}='{value}' and "
-            else:
-                condition += f"{table}.{column} IS NULL and "
+            if column != "time_stamp":
+                if value is not None:
+                    condition += f"{table}.{column}='{value}' and "
+                else:
+                    condition += f"{table}.{column} IS NULL and "
         query = f"SELECT {table}.id from {table} where {condition[:-5]};"
         with self.access_database() as db_cursor:
             db_cursor.execute(query)
