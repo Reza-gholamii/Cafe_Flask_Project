@@ -72,8 +72,16 @@ def order_list(_id):
                     item = list(item)
                     item[0] = change_status_lang(item[0])
                     order_l.append(item)
-                recepits.append(recepit)
-                orders.append(order_l)
+
+            else:
+                recepit = ["" for i in recepit]
+                recepit.insert(0, table_id)
+                recepit.insert(4, "0")
+                order_l = []
+            recepits.append(recepit)
+            orders.append(order_l)
+            print(recepits, orders, sep='\n')
+
         return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
     else:
         json_data = request.get_json()
@@ -117,11 +125,11 @@ def menu_items(_id):
             item_id = db_manager.get_id('menu_items', title=json_data['name'])
             db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
         elif json_data['action'] == "add":
-            new_item = MenuItem(name=json_data['name'], price=json_data['price'], category=2)
+            new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=2)
             db_manager.create('menu_items', new_item)
         items = db_manager.read_all('menu_items')
         items.sort(key=lambda x: x[8])
-        return render_template("cashier/menu_items.html", items=items, id=_id)
+        return {"Data Received": 200}
 
 
 # this is for test
