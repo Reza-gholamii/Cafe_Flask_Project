@@ -66,7 +66,8 @@ $(document).ready(function () {
             "action": "add",
             "name": values["new_name"],
             "category": values["new_cat"],
-            "price": values["new_price"]
+            "price": values["new_price"],
+            "discount": values["new_discount"]
         };
         $.ajax({
             type: 'POST',

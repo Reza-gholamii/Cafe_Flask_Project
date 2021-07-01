@@ -129,8 +129,8 @@ def menu_items(_id):
             item_id = db_manager.get_id('menu_items', title=json_data['name'])
             db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
         elif json_data['action'] == "add":
-            new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=json_data['category'])
-            db_manager.create('menu_items', new_item)
+            new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=json_data['category'],
+                                discount=json_data['discount'])
         items = db_manager.read_all('menu_items')
         items.sort(key=lambda x: x[8])
         return {"Data Received": 200}
