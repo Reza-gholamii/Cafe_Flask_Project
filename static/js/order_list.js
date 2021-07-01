@@ -47,6 +47,10 @@ $("[data-id=suber_num]").bind('click', function () {
 function change_status(status) {
     let new_status = ""
     let class_name = status.classList[1]
+    let row_number = status.parentNode.parentNode
+    let row_name = row_number.classList[1]
+
+
     if (class_name === 'icon_refresh') {
         new_status = 'جدید'
     } else if (class_name === 'icon_cook') {
@@ -55,13 +59,12 @@ function change_status(status) {
         new_status = 'سرو شده'
     } else if (class_name === 'icon_check') {
         new_status = 'پرداخت شده'
+    } else if (class_name === 'icon_unpaid') {
+        new_status = 'پرداخت نشده'
     } else if (class_name === 'icon_trash') {
         new_status = 'کنسل شده'
     }
 
-
-    let row_number = status.parentNode.parentNode
-    let row_name = row_number.classList[1]
 
     if (row_name === 'row-recepit') {
         var target_column = row_number.childNodes[7];
