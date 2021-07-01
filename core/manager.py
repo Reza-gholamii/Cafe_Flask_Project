@@ -248,10 +248,10 @@ WHERE recepites.table_number = {table_number} AND recepites.status = 10 AND orde
         """
 
         query = f"""
-SELECT SUM(count * price * (1 - (discount::FLOAT / 100)))
+SELECT SUM(count * ((price * (1 - (discount::FLOAT / 100)))::INT))
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
-WHERE orders.status <> 6"""
+WHERE orders.status <> 8"""
 
         if day:
             query += f" AND time_stamp::DATE = '{day}'"
