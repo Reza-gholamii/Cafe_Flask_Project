@@ -1,7 +1,7 @@
 import re as regex
 
 
-def inputer(text, type=str, validator: callable = None, retry=False,retry_print=""):
+def inputer(text, type=str, validator: callable = None, retry=False, retry_print=""):
     try:
         res = type(input(text))
         if validator:
@@ -50,3 +50,23 @@ class Validators:
         """
 
         return bool(regex.search(cls.password_pattern, password))
+
+
+def change_status_lang(parameter):
+    status_dict = {'new': 'جدید',
+                   'cooking': 'در حال پخت',
+                   'serving': 'سرو شده',
+                   'canceled': 'کنسل شده',
+                   'paid': 'پرداخت شده',
+                   'unpaid': 'پرداخت نشده',
+                   'empty': 'خالی',
+                   'full': 'پر'
+                   }
+    status_dict_reverse = {value: key for key, value in status_dict.items()}
+
+    if parameter in status_dict.keys():
+        parameter = status_dict[parameter]
+    elif parameter in status_dict.values():
+        parameter = status_dict_reverse[parameter]
+
+    return parameter
