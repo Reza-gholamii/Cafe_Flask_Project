@@ -1,9 +1,8 @@
 from core.models import *
 from core.manager import *
 from datetime import datetime
-from tables import Table
-from orders import Order
-
+from model.tables import Table
+from model.orders import Order
 
 db_manager = ExtraDataBaseManager()
 Table.all_tables()
@@ -28,6 +27,8 @@ class Recepite(BaseModel):
             self.status = STATUSES[self.name][status]
             self.table_number = table_number
 
+            # todo: put create here is wrong, when you want retrive object
+            #  from database, it add recepit again into table
             self.number = db_manager.create(self.name, self)
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
 
@@ -65,6 +66,6 @@ class Recepite(BaseModel):
         """
         Add Order for this Recepite Number by a Method for Self Recepite
         """
-        
+
         order = Order(self.number, menu_item, count, time_stamp, status)
         self.orders[order.number] = order
