@@ -1,4 +1,4 @@
-from core.exceptions import UserExistError, UserNotFoundError
+from core.exceptions import UserExistError
 from core.models import *
 from core.manager import *
 from core.utility import *

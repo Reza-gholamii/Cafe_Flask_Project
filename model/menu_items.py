@@ -2,7 +2,7 @@ from core.models import *
 from core.manager import *
 from datetime import time
 from typing import Optional
-from categories import Category
+from model.categories import Category
 
 
 db_manager = ExtraDataBaseManager()
