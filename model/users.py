@@ -1,5 +1,8 @@
+from core.exceptions import UserExistError, UserNotFoundError
 from core.models import *
 from core.manager import *
+from core.utility import *
+from core.exceptions import *
 from typing import Optional
 from json import dumps, loads
 from hashlib import sha256
@@ -24,8 +27,16 @@ class User(BaseModel):
     USERS: dict = {}  # collection of all users model in cafe from database
 
     def __init__(self, first_name, last_name, phone_number, password, email=None, **extra_information):
-        if not self.__class__.USERS:
-            self.__class__.all_users()
+        for user in self.__class__.USERS:
+            if user.phone_number == phone_number:
+                raise UserExistError("User Already Exist in the Database.")
+
+        if not Validators.check_phone("09" + phone_number):
+            raise ValidationError("Phone Number Must be Length 9.")
+        # if not Validators.check_password(password):
+        #     raise ValidationError("Password Minimum Length is 8.")
+        if email and not Validators.check_email(email):
+            raise ValidationError("Email Must be Username@domain.com Form.")
 
         self.first_name = first_name
         self.last_name = last_name
@@ -36,11 +47,12 @@ class User(BaseModel):
 
         try:
             self.number = db_manager.create(self.name, self)
-            self.__class__.USERS[self.number] = self
             logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
         except:
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+        
+        self.__class__.USERS[self.number] = self
 
     @classmethod
     def check_user(cls, phone_number: str, password: str) -> Optional[int]:

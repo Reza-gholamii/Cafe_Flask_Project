@@ -24,10 +24,12 @@ class Order(BaseModel):
     def __init__(self, recepite, menu_item, count=1,
                  time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="new"):
         flag = False
+        code = db_manager.get_id("menu_items", title=menu_item)
         for category in MenuItem.MENU_ITEMS:
-            for subcategory in category:
-                if menu_item in subcategory:
-                    if subcategory[menu_item].status == STATUSES["menu_items"]["active"]:
+            for subcategory in MenuItem.MENU_ITEMS[category]:
+                if code in MenuItem.MENU_ITEMS[category][subcategory]:
+                    items = MenuItem.MENU_ITEMS[category][subcategory]
+                    if items[code].status == STATUSES["menu_items"]["active"]:
                         flag = True
 
         if flag:
@@ -35,7 +37,7 @@ class Order(BaseModel):
             self.status = STATUSES[self.name][status]
             self.time_stamp = time_stamp
             self.recepite = recepite
-            self.menu_item = db_manager.get_id("menu_items", title=menu_item)
+            self.menu_item = code
 
             try:
                 self.number = db_manager.create(self.name, self)
