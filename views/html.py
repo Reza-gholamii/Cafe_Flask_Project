@@ -80,8 +80,6 @@ def order_list(_id):
                 order_l = []
             recepits.append(recepit)
             orders.append(order_l)
-            print(recepits, orders, sep='\n')
-
         return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
     else:
         json_data = request.get_json()
@@ -114,7 +112,13 @@ def order_list(_id):
 def menu_items(_id):
     if request.method == "GET":
         items = db_manager.read_all('menu_items')
-        items.sort(key=lambda x: x[8])
+        categories = db_manager.category_list()
+        items = list(map(lambda item: list(item), items))
+        categories_dict = {}
+        categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
+        for item in items:
+            item[2] = categories_dict[item[2]]
+        # items.sort(key=lambda x: x[8])
         return render_template("cashier/menu_items.html", items=items, id=_id)
     else:
         json_data = request.get_json()
@@ -125,7 +129,7 @@ def menu_items(_id):
             item_id = db_manager.get_id('menu_items', title=json_data['name'])
             db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
         elif json_data['action'] == "add":
-            new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=2)
+            new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=json_data['category'])
             db_manager.create('menu_items', new_item)
         items = db_manager.read_all('menu_items')
         items.sort(key=lambda x: x[8])
