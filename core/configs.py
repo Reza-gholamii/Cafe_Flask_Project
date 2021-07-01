@@ -62,7 +62,7 @@ sql_queries_creates = [
 CREATE TABLE IF NOT EXISTS messages (
 first_name VARCHAR(50) NOT NULL,
 last_name VARCHAR(50) NOT NULL,
-phone_number INT NOT NULL,
+phone_number CHAR(9) NOT NULL,
 email VARCHAR(100),
 comment TEXT NOT NULL,
 id SERIAL PRIMARY KEY);
@@ -71,19 +71,19 @@ id SERIAL PRIMARY KEY);
 CREATE TABLE IF NOT EXISTS users (
 first_name VARCHAR(50) NOT NULL,
 last_name VARCHAR(50) NOT NULL,
-phone_number INT NOT NULL,
+phone_number CHAR(9) NOT NULL UNIQUE,
 email VARCHAR(100),
 password CHAR(64) NOT NULL,
-extra_information JSON,
+extra_information VARCHAR,
 id SERIAL PRIMARY KEY);
 """,
     """
 CREATE TABLE IF NOT EXISTS statuses (
 title VARCHAR(20) NOT NULL,
-subtable INT,
+root INT,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_sub
-    FOREIGN KEY(subtable)
+    FOREIGN KEY(root)
     REFERENCES statuses(id)
     ON DELETE SET NULL
     ON UPDATE SET NULL
@@ -104,7 +104,7 @@ CONSTRAINT fk_stat
 """,
     """
 CREATE TABLE IF NOT EXISTS categories (
-field VARCHAR(50) NOT NULL UNIQUE,
+title VARCHAR(50) NOT NULL UNIQUE,
 root INT,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_tree
@@ -119,11 +119,11 @@ CREATE TABLE IF NOT EXISTS menu_items (
 title VARCHAR(50) NOT NULL UNIQUE,
 price INT NOT NULL,
 category INT NOT NULL,
-image_name VARCHAR(100),
 discount INT DEFAULT 0,
-status INT DEFAULT 14,
-serving_time TIME,
+image_name VARCHAR(100),
 cooking_time TIME,
+serving_time TIME,
+status INT DEFAULT 14,
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_group
     FOREIGN KEY(category)
@@ -201,47 +201,47 @@ INSERT INTO statuses (title, id)
 VALUES ('menu_items', 4);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('new', 1, 5);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('cooking', 1, 6);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('serving', 1, 7);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('canceled', 1, 8);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('paid', 2, 9);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('unpaid', 2, 10);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('canceled', 2, 11);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('empty', 3, 12);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('full', 3, 13);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('active', 4, 14);
 """,
     """
-INSERT INTO statuses (title, subtable, id)
+INSERT INTO statuses (title, root, id)
 VALUES ('deactive', 4, 15);
 """
 ]

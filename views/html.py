@@ -17,6 +17,7 @@ db_manager = ExtraDataBaseManager()
 
 status_dict = {'new': 'جدید', 'cooking': 'در حال پخت', 'serving': 'سرو شده', 'canceled': 'کنسل شده'}
 
+from core.manager import *
 
 def home():
     return render_template("home.html", page_name="home")
