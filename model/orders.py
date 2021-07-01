@@ -1,7 +1,7 @@
 from core.models import *
 from core.manager import *
 from datetime import datetime
-from menu_items import MenuItem
+from model.menu_items import MenuItem
 
 
 db_manager = ExtraDataBaseManager()

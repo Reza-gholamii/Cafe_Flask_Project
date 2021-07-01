@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
 from datetime import timedelta
-
+from core.utility import *
 import model.users
 from core.manager import ExtraDataBaseManager, DataBaseManager
 from core.models import TextMessage, BaseModel
@@ -11,6 +11,7 @@ from model import users
 import logging
 
 from model.tables import Table
+from model.recepites import Recepite
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)-10s - %(message)s')
@@ -55,44 +56,32 @@ def menu():
 # fro here all are for cashier side
 
 
-# this is for test
-
-recepits_list = [("۱", "۳۲۵", "جدید", "رضا غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-                 (
-                     "۲", "۳۲۵", "جدید", "رضا یزدانی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲",
-                     "جدید"),
-                 ("۳", "۳۲۵", "جدید", "علی غلامی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید"),
-                 ("۴", "۳۲۵", "جدید", "رسول احدی", "قهوه", "۲", "جدید", "نسکافه", "۱", "جدید", "کاپوچینو", "۲", "جدید")]
-
-orders = [[("قهوه", "2", "جدید"), ("نسکافه", "۱", "جدید"), ("کاپوچینو", "۲", "جدید")],
-          [("قهوه", "۲", "جدید"), ("نسکافه", "3", "جدید"), ("کاپوچینو", "5", "جدید")],
-          [("قهوه", "۲", "جدید"), ("نسکافه", "۱", "جدید"), ("کاپوچینو", "۲", "جدید")],
-          [("قهوه", "۲", "جدید"), ("نسکافه", "۱", "جدید"), ("کاپوچینو", "۲", "جدید")]]
-
-
 def order_list(_id):
     if request.method == "GET":
         Table.all_tables()
         tables_id = list(Table.TABLES.keys())
         recepits, orders = [], []
         for table_id in tables_id:
-            recepit = db_manager.calculate_price(table_id)
+            recepit = list(db_manager.calculate_price(table_id))
             if recepit[0]:
-                recepit = (table_id,) + recepit
-                print(recepit)
-                recepits.append(recepit)
+                recepit.insert(0, table_id)
                 order = db_manager.order_list(recepit[1])
-                orders.append(order)
-        print(recepits)
-        print(orders)
-        # data = db_manager.archive_orders_list("status")
-        # print(data)
-        # # need call a function to get access to last orders based on tables
-        return render_template("cashier/order_list.html", recepits=recepits, orders=orders, id=_id)
+                recepit[2] = change_status_lang(recepit[2])
+                order_l = []
+                for item in order:
+                    item = list(item)
+                    item[0] = change_status_lang(item[0])
+                    order_l.append(item)
+                recepits.append(recepit)
+                orders.append(order_l)
     else:
         json_data = request.get_json()
-        # data must be updated in database
-        return render_template('cashier/order_list.html', recepits=recepits_list, orders=orders, id=_id)
+        print(json_data)
+        if json_data['new_recepit_status']:
+            json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
+            status_row = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
+            db_manager.update('recepites', id=json_data['recepit_id'], status=status_row[2])
+    return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
 
 
 # this is for test
