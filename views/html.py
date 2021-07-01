@@ -10,6 +10,8 @@ from model.menu_items import MenuItem
 from model import users
 import logging
 
+from model.tables import Table
+
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)-10s - %(message)s')
 
@@ -18,6 +20,7 @@ db_manager = ExtraDataBaseManager()
 status_dict = {'new': 'جدید', 'cooking': 'در حال پخت', 'serving': 'سرو شده', 'canceled': 'کنسل شده'}
 
 from core.manager import *
+
 
 def home():
     return render_template("home.html", page_name="home")
@@ -69,8 +72,23 @@ orders = [[("قهوه", "2", "جدید"), ("نسکافه", "۱", "جدید"), ("
 
 def order_list(_id):
     if request.method == "GET":
+        Table.all_tables()
+        tables_id = list(Table.TABLES.keys())
+        recepits, orders = [], []
+        for table_id in tables_id:
+            recepit = db_manager.calculate_price(table_id)
+            if recepit[0]:
+                recepit = (table_id,) + recepit
+                print(recepit)
+                recepits.append(recepit)
+                order = db_manager.order_list(recepit[1])
+                orders.append(order)
+        print(recepits)
+        print(orders)
+        # data = db_manager.archive_orders_list("status")
+        # print(data)
         # # need call a function to get access to last orders based on tables
-        return render_template("cashier/order_list.html", recepits=recepits_list, orders=orders, id=_id)
+        return render_template("cashier/order_list.html", recepits=recepits, orders=orders, id=_id)
     else:
         json_data = request.get_json()
         # data must be updated in database
@@ -186,7 +204,7 @@ def cancelled_order_list(_id):
         return render_template("cashier/cancelled_orders_list.html", orders=served_orders)
 
 
-def recepits(_id):
+def recepit_list(_id):
     if request.method == "GET":
         # print(recepits)
         return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
