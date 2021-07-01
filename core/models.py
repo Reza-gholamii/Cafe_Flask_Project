@@ -1,4 +1,6 @@
 from abc import ABC
+from utility import *
+from exceptions import *
 from typing import Optional
 import logging
 
@@ -26,7 +28,11 @@ class TextMessage(BaseModel):
     """
 
     def __init__(self, first_name: str, last_name: str, phone_number: int, email: Optional[str], comment: str):
-        # TODO: check validation input value with class in core.utility and raise exceptions
+        if not Validators.check_phone("09" + phone_number):
+            raise ValidationError("Phone Number Must be Length 9.")
+        if email and not Validators.check_email(email):
+            raise ValidationError("Email Must be Username@domain.com Form.")
+
         self.first_name = first_name
         self.last_name = last_name
         self.phone_number = phone_number

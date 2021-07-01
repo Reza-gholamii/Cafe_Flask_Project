@@ -230,7 +230,7 @@ WHERE recepites.id = {recepite_number};
         query = f"""
 SELECT MAX(recepites.id) AS Recepite, MAX(statuses.title) AS Status,
 SUM(orders.count * menu_items.price) AS Total,
-SUM(orders.count * (menu_items.price * (1 - (menu_items.discount / 100)))) AS Final
+SUM(orders.count * ((menu_items.price * (1 - (menu_items.discount::FLOAT / 100)))::INT)) AS Final
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON recepites.status = statuses.id
@@ -249,10 +249,10 @@ WHERE recepites.table_number = {table_number} AND recepites.status = 10 AND orde
         """
 
         query = f"""
-SELECT SUM(count * price * (1 - (discount / 100)))
+SELECT SUM(count * ((price * (1 - (discount::FLOAT / 100)))::INT))
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
-WHERE orders.status <> 6"""
+WHERE orders.status <> 8"""
 
         if day:
             query += f" AND time_stamp::DATE = '{day}'"
@@ -269,11 +269,11 @@ WHERE orders.status <> 6"""
         """
 
         query = f"""
-SELECT orders.id, orders.recepite, menu_items.title, category.title, orders.count,
-statuses.title, orders.time_stamp FROM orders ORDER BY orders.{ordered}
-INNER JOIN statuses ON orders.status = statuses.id
-INNER JOIN menu_items ON orders.menu_item = menu_items.id
-INNER JOIN categories ON menu_items.category = categories.id
+SELECT orders.id, orders.recepite, menu_items.title, categories.title, orders.count,
+statuses.title, orders.time_stamp FROM orders INNER JOIN statuses
+ON orders.status = statuses.id INNER JOIN menu_items
+ON orders.menu_item = menu_items.id INNER JOIN categories
+ON menu_items.category = categories.id ORDER BY orders.{ordered};
 """
 
         with self.access_database() as cafe_cursor:
