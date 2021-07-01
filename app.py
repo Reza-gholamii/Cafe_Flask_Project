@@ -22,6 +22,6 @@ app.add_url_rule("/cashier/<_id>/orders/served", 'served_order_list', html.serve
 app.add_url_rule("/cashier/<_id>/orders/paid", 'paid_order_list', html.paid_order_list, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/<_id>/orders/cancelled", 'cancelled_order_list', html.cancelled_order_list,
                  methods=['GET', 'POST'])
-app.add_url_rule("/cashier/<_id>/recepits", 'recepits', html.recepits, methods=['GET', 'POST'])
+app.add_url_rule("/cashier/<_id>/recepits", 'recepits', html.recepit_list, methods=['GET', 'POST'])
 if __name__ == '__main__':
     app.run(port=12345)

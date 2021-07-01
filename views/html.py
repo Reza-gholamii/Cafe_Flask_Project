@@ -90,7 +90,12 @@ def order_list(_id):
             order_record = \
                 db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
             db_manager.update('orders', id=order_record[5], status=status_record[2])
-
+        # updating order count
+        elif json_data['count']:
+            menu_item_record = db_manager.check_record('menu_items', title=json_data['item'])[0]
+            order_record = \
+                db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
+            db_manager.update('orders', id=order_record[5], count=json_data['count'])
 
         return {"Data Received": 200}
 
