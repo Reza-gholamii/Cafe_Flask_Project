@@ -229,7 +229,7 @@ WHERE recepites.id = {recepite_number};
         query = f"""
 SELECT MAX(recepites.id) AS Recepite, MAX(statuses.title) AS Status,
 SUM(orders.count * menu_items.price) AS Total,
-SUM(orders.count * (menu_items.price * (1 - (menu_items.discount::FLOAT / 100)))) AS Final
+SUM(orders.count * ((menu_items.price * (1 - (menu_items.discount::FLOAT / 100)))::INT)) AS Final
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON recepites.status = statuses.id
