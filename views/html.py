@@ -23,11 +23,19 @@ status_dict = {'new': 'جدید', 'cooking': 'در حال پخت', 'serving': '�
 from core.manager import *
 
 
+def viewer():
+    with open("views.log", "a+") as file:
+        _v = int(file.readline())+1
+        file.write(str(_v))
+
+
 def home():
+    viewer()
     return render_template("home.html", page_name="home")
 
 
 def about_us():
+    viewer()
     return render_template("about_us.html", page_name="about_us")
 
 
@@ -36,6 +44,7 @@ def contact_us():
     Manage The Request to Contact US Page for Example Just See or Send Message
     """
 
+    viewer()
     if request.method == 'GET':
         return render_template("contact_us.html")
 
