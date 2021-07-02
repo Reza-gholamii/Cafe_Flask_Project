@@ -194,10 +194,10 @@ def new_order_list(_id):
 def cooking_order_list(_id):
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
-        new_orders = [list(order) for order in all_orders if order[5] == 'cooking']
-        for order in new_orders:
+        cooking_orders = [list(order) for order in all_orders if order[5] == 'cooking']
+        for order in cooking_orders:
             order[5] = change_status_lang(order[5])
-        return render_template("cashier/cooking_orders_list.html", orders=new_orders, id=_id)
+        return render_template("cashier/cooking_orders_list.html", orders=cooking_orders, id=_id)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -208,11 +208,17 @@ def cooking_order_list(_id):
 
 def served_order_list(_id):
     if request.method == "GET":
-        # served_orders = db_manager.statusfilter('orders', status='serving')
-        # print(served_orders)
-        return render_template("cashier/served_orders_list.html", orders=served_orders)
+        all_orders = db_manager.archive_orders_list('status')
+        serving_orders = [list(order) for order in all_orders if order[5] == 'serving']
+        for order in serving_orders:
+            order[5] = change_status_lang(order[5])
+        return render_template("cashier/served_orders_list.html", orders=serving_orders, id=_id)
     else:
-        return render_template("cashier/served_orders_list.html", orders=served_orders)
+        json_data = request.get_json()
+        json_data['status'] = change_status_lang(json_data['status'])
+        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+        return {"Data Received": 200}
 
 
 def paid_order_list(_id):
