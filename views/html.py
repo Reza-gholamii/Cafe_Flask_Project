@@ -77,7 +77,8 @@ def menu():
         return render_template("menu-test.html", items=items, table_number=table_number)
     else:
         json_data = request.get_json()
-        table_num = int(json_data['capacity'])
+        print(json_data)
+        table_num = int(json_data['table_number'])
         recepite = Recepite(table_num)
         orders = []
         for i in range(len(json_data['item_list'])):
