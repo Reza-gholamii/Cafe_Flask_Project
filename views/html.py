@@ -325,6 +325,10 @@ def dashboard(_id):
 
 def login():
     if request.method == "GET":
+        __ = user_seter()
+        if type(__) == int:
+            return redirect(f"/cashier/{__}")
+
         return render_template("cashier/login_cachier.html")
     elif request.method == "POST":
         resp = request.form
@@ -332,10 +336,7 @@ def login():
             user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
-
-
         password_hashed = sha256(resp["password"].encode()).hexdigest()
-
         if user[-3] == password_hashed:
             html_str = redirect(f"/cashier/{user[-1]}")
             response = make_response(html_str)
