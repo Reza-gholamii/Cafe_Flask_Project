@@ -227,7 +227,7 @@ def paid_order_list(_id):
         paid_orders = [list(order) for order in all_orders if order[5] == 'paid']
         for order in paid_orders:
             order[5] = change_status_lang(order[5])
-        return render_template("cashier/served_orders_list.html", orders=paid_orders, id=_id)
+        return render_template("cashier/paid_orders_list.html", orders=paid_orders, id=_id)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -238,11 +238,17 @@ def paid_order_list(_id):
 
 def cancelled_order_list(_id):
     if request.method == "GET":
-        # served_orders = db_manager.statusfilter('orders', status='serving')
-        # print(served_orders)
-        return render_template("cashier/cancelled_orders_list.html", orders=served_orders)
+        all_orders = db_manager.archive_orders_list('status')
+        canceled_orders = [list(order) for order in all_orders if order[5] == 'canceled']
+        for order in canceled_orders:
+            order[5] = change_status_lang(order[5])
+        return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders, id=_id)
     else:
-        return render_template("cashier/cancelled_orders_list.html", orders=served_orders)
+        json_data = request.get_json()
+        json_data['status'] = change_status_lang(json_data['status'])
+        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+        return {"Data Received": 200}
 
 
 def recepit_list(_id):
