@@ -212,6 +212,24 @@
                       class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 md:py-2 text-white">چهار نفره</span>
                 <span data-active="8"
                       class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 md:py-2 text-white">هشت نفره</span>
+                <select class="table-number table-number-2 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
+                    <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
+                    {% for i in table_number[0] %}
+                        <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select class="table-number table-number-4 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
+                    <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
+                    {% for i in table_number[1] %}
+                        <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select class="table-number table-number-8 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
+                    <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
+                    {% for i in table_number[2] %}
+                        <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <input type="submit" id="submitter_pop"
                     class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
@@ -229,98 +247,118 @@
 
 {% block extra_js %}
     <script>
-function echer(data) {
-    let state = "";
+    function echer(data) {
+        let state = "";
 
-    $('#basket>.item-in-basket').each(function () {
+        $('#basket>.item-in-basket').each(function () {
 
-        if ($(this).children('b:first').text() === data) {
-            $ThisItem = $(this).children('input[type="number"]')
-            state = "true";
+            if ($(this).children('b:first').text() === data) {
+                $ThisItem = $(this).children('input[type="number"]')
+                state = "true";
+            }
+        })
+
+        return state === "true";
+
+    }
+
+    $_pop = $('#main_pop')
+    $_pop.click(function () {
+        if (event.target === $_pop[0]) {
+            $_pop.fadeOut(300)
         }
     })
 
-    return state === "true";
+    let _ind = 0;
 
-}
+    $("a[data-item='add_item']").on('click', function () {
+        activator()
+        $('#basket_icon').fadeIn(300)
 
-$_pop = $('#main_pop')
-$_pop.click(function () {
-    if (event.target === $_pop[0]) {
-        $_pop.fadeOut(300)
-    }
-})
+        $_pop.fadeIn(300)
+        let a_clone = $(this).parent().clone()
+        a_clone.children('div').children('span').children('del').text('')
 
-let _ind = 0;
+        if (echer(a_clone.children('h3:first').text())) {
+            let _count = Number($ThisItem.val())+1
+            $ThisItem.val(_count)
+        } else {
+            $('#basket').prepend(
+                '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
+                '<input type="text" name="item'+ _ind +'" hidden value="' + a_clone.children('h3:first').text() + '">' +
+                '<b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
+                '<b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
+                '<input type="number" name="count'+ _ind +'" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
+                '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
+                '</div>')
+            _ind++
+        }
+    })
 
-$("a[data-item='add_item']").on('click', function () {
-    $('#basket_icon').fadeIn(300)
+    // table capacity select
+    $('span[data-active]').click(function () {
 
-    $_pop.fadeIn(300)
-    let a_clone = $(this).parent().clone()
-    a_clone.children('div').children('span').children('del').text('')
+        let cap = $(this).data('active')
 
-    if (echer(a_clone.children('h3:first').text())) {
-        let _count = Number($ThisItem.val())+1
-        $ThisItem.val(_count)
-    } else {
-        $('#basket').prepend(
-            '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
-            '<input type="text" name="item'+ _ind +'" hidden value="' + a_clone.children('h3:first').text() + '">' +
-            '<b class="block col-span-3 Vazir text-sm sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
-            '<b class="block col-span-1 Vazir text-sm sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
-            '<input type="number" name="count'+ _ind +'" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
-            '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
-            '</div>')
-        _ind++
-    }
-})
+        $('.table-number').not('.table-number-'+cap).attr('name','').hide()
+        $('.table-number-'+cap).fadeIn(500)
 
-// table capacity select
-$('span[data-active]').click(function () {
-    $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
+        $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
+        $('input[name="capacity"]').removeAttr('checked')
 
-    $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
-    $('input[name="capacity"]').removeAttr('checked')
+        $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
+        $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
 
-    $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
-    $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
+    })
 
-})
-
-// event for click in deleter-ico after clean basket :
-function deleter(_this) {
-    $(_this).parent().remove()
-
-    if (!($('.item-in-basket')[0])){
-        $_pop.fadeOut(300)
-        $('#basket_icon').fadeOut(300)
-    }
-}
-
-// ajax send data after submit
-$("#basket").submit(function (event) {
-    event.preventDefault();
-    $inputs = $('#basket input')
-    $values = {}
-    $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
-
-    let len = Number((Object.keys($values).length-2)/2)
-
-    let count_list = []
-    let item_list = []
-
-    for (let i = 0; i < len;i++) {
-        count_list.push($values['count'+i])
-        item_list.push($values['item'+i])
+    // activator submitter basket:
+    function activator(){
+        if ($('#basket>.item-in-basket').length && $('select[name="table_number"]').val()){
+            $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
+        }
+        else {
+            $('#submitter_pop').removeClass('bg-green-500').removeClass('cursor-pointer').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-gray-500').addClass('cursor-not-allowed')
+        }
     }
 
-    let data = {
-        "capacity" : $values['capacity'],
-        "count_list": count_list,
-        "item_list": item_list
+    $('.table-number').click(function() {
+        activator()
+    })
+
+    // event for click in deleter-ico after clean basket :
+    function deleter(_this) {
+        $(_this).parent().remove()
+
+        if (!($('.item-in-basket')[0])){
+            $_pop.fadeOut(300)
+            $('#basket_icon').fadeOut(300)
+            activator()
+        }
     }
 
+
+    // ajax send data after submit
+    $("#basket").submit(function (event) {
+        event.preventDefault();
+        $inputs = $('#basket input')
+        $values = {}
+        $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
+
+        let len = Number((Object.keys($values).length-2)/2)
+
+        let count_list = []
+        let item_list = []
+
+        for (let i = 0; i < len;i++) {
+            count_list.push($values['count'+i])
+            item_list.push($values['item'+i])
+        }
+
+        let data = {
+            "capacity" : $values['capacity'],
+            "count_list": count_list,
+            "item_list": item_list
+        }
     $.ajax({
         type: 'POST',
         contentType: 'application/json',

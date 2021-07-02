@@ -4,7 +4,7 @@ from core.configs import *
 dbconfig = {
     "dbname": 'cafedb',
     "user": 'postgres',
-    "password": 'ra8520',
+    "password": '@@datb_new123!!',
     "host": 'localhost',
     "port": '5432'
 }

@@ -10,6 +10,7 @@ from hashlib import sha256
 from model import users
 import logging
 
+from model.orders import Order
 from model.tables import Table
 from model.recepites import Recepite
 
@@ -61,6 +62,10 @@ def contact_us():
 
 def menu():
     if request.method == "GET":
+        table_number = []
+        for i in range(len(Table.TABLES)):
+            table_number.append(Table.TABLES[i + 1].number)
+        table_number = [table_number[0:4], table_number[4:6], [table_number[6]]]
         items = db_manager.read_all('menu_items')
         categories = db_manager.category_list()
         items = list(map(lambda item: list(item), items))
@@ -69,26 +74,15 @@ def menu():
         for item in items:
             item[2] = categories_dict[item[2]]
         # items.sort(key=lambda x: x[8])
-
-        return render_template("menu-test.html", items=items)
+        return render_template("menu-test.html", items=items, table_number=table_number)
     else:
         json_data = request.get_json()
-        print(json_data)
-
-        # if json_data['action'] == "delete":
-        #     item_id = db_manager.get_id('menu_items', title=json_data['name'])
-        #     db_manager.delete('menu_items', item_id)
-        # elif json_data['action'] == "update":
-        #     item_id = db_manager.get_id('menu_items', title=json_data['name'])
-        #     db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
-        # elif json_data['action'] == "add":
-        #     new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=json_data['category'],
-        #                         discount=json_data['discount'])
-        # items = db_manager.read_all('menu_items')
-        # items.sort(key=lambda x: x[8])
+        table_num = int(json_data['capacity'])
+        recepite = Recepite(table_num)
+        orders = []
+        for i in range(len(json_data['item_list'])):
+            orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
         return {"Data Received": 200}
-
-
 
 
 # fro here all are for cashier side
@@ -297,12 +291,11 @@ empty_table = [1, 3, 4, 7]
 
 
 def dashboard(_id):
-
     # this codes should be in all cashier side functions to get user and security reasons
     __ = user_seter()
     if type(__) == int:
         user_data = DataBaseManager().read("users", __)[0]
-        print(user_data)
+
         user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
     else:
         return user_seter()
@@ -334,6 +327,7 @@ def login():
         resp = request.form
         try:
             user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
+            print(user, "sdfsdf")
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
         password_hashed = sha256(resp["password"].encode()).hexdigest()
@@ -373,7 +367,6 @@ def user_seter():
     this is not flask function .
     this function just check cookie and return user if it exists
     """
-    print("user-setter")
     cookies = request.cookies
     id = cookies.get("_ID")
     if id:
