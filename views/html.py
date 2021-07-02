@@ -10,6 +10,7 @@ from hashlib import sha256
 from model import users
 import logging
 
+from model.orders import Order
 from model.tables import Table
 from model.recepites import Recepite
 
@@ -73,22 +74,12 @@ def menu():
         return render_template("menu-test.html", items=items)
     else:
         json_data = request.get_json()
-        print(json_data)
-
-        # if json_data['action'] == "delete":
-        #     item_id = db_manager.get_id('menu_items', title=json_data['name'])
-        #     db_manager.delete('menu_items', item_id)
-        # elif json_data['action'] == "update":
-        #     item_id = db_manager.get_id('menu_items', title=json_data['name'])
-        #     db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
-        # elif json_data['action'] == "add":
-        #     new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=json_data['category'],
-        #                         discount=json_data['discount'])
-        # items = db_manager.read_all('menu_items')
-        # items.sort(key=lambda x: x[8])
+        table_num = int(json_data['capacity'])
+        recepite = Recepite(table_num)
+        orders = []
+        for i in range(len(json_data['item_list'])):
+            orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
         return {"Data Received": 200}
-
-
 
 
 # fro here all are for cashier side
@@ -328,7 +319,7 @@ def login():
         try:
 
             user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
-            print(user,"sdfsdf")
+            print(user, "sdfsdf")
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
 
