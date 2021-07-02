@@ -24,9 +24,10 @@ from core.manager import *
 
 
 def viewer():
-    with open("views.log", "a+") as file:
-        _v = int(file.readline())+1
-        file.write(str(_v))
+    # with open("views.log", "r+") as file:
+    #     _v = int(file.readline(0))+1
+    #     file.write(str(_v))
+    print("viwed from user this page!")
 
 
 def home():
@@ -173,6 +174,7 @@ def archive_list(_id):
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
         return {"Data Received": 200}
+
 
 def new_order_list(_id):
     if request.method == "GET":
