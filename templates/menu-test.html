@@ -215,19 +215,21 @@
             </div>
             <select class="table-number table-number-2 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
                 <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
-                <option value="1" class="Vazir text-white bg-indigo-500 py-2">میز شماره 1</option>
-                <option value="2" class="Vazir text-white bg-indigo-500 py-2">میز شماره 2</option>
-                <option value="3" class="Vazir text-white bg-indigo-500 py-2">میز شماره 3</option>
-                <option value="4" class="Vazir text-white bg-indigo-500 py-2">میز شماره 4</option>
+                {% for i in table_number[0] %}
+                    <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                {% endfor %}
             </select>
             <select class="table-number table-number-4 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
                 <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
-                <option value="5" class="Vazir text-white bg-indigo-500 py-2">میز شماره 5</option>
-                <option value="6" class="Vazir text-white bg-indigo-500 py-2">میز شماره 6</option>
+                {% for i in table_number[1] %}
+                    <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                {% endfor %}
             </select>
             <select class="table-number table-number-8 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
                 <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
-                <option value="8" class="Vazir text-white bg-indigo-500 py-2">میز شماره 7</option>
+                {% for i in table_number[2] %}
+                    <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                {% endfor %}
             </select>
             <input type="submit" id="submitter_pop"
                     class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
