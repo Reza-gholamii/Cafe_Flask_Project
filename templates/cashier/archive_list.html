@@ -67,11 +67,11 @@
 
                 {% for order in orders %}
                 <tr class="table-row" data-toggle="modal" data-target="#myModal{{ loop.index0 }}">
-                    <td>{{ order.5 }}</td>
-                    <td>{{ order.3 }}</td>
-                    <td>{{ order.4 }}</td>
-                    <td>{{ order.0 }} عدد</td>
-                    <td id="status{{ loop.index0 }}">{{ order.1 }}</td>
+                    <td>{{ order.0 }}</td>
+                    <td>{{ order.1 }}</td>
+                    <td>{{ order.2 }}</td>
+                    <td>{{ order.4 }} عدد</td>
+                    <td id="status{{ loop.index0 }}">{{ order.5 }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -90,34 +90,39 @@
                             <ul class="border rounded pl-2 py-2">
                                 <li>
                                     <span class="float-right">زمان درخواست</span>
-                                    <span class="float-left">{{ order.2 }}</span></li>
+                                    <span class="float-left">{{ order.6 }}</span></li>
                                 <li>
                                     <span class="float-right">وضعیت</span>
-                                    <span id="modal_status{{ loop.index0 }}" class="float-left">{{ order.1 }}</span>
+                                    <span id="modal_status{{ loop.index0 }}" class="float-left">{{ order.5 }}</span>
                                 </li>
                                 <li>
                                     <span class="float-right">دسته بندی</span>
-                                    <span class="float-left">{{ order.6 }}</span>
+                                    <span class="float-left">{{ order.3 }}</span>
                                 </li>
                             </ul>
                             <div class="col mx-auto text-center">
                                 <a class="icon icon_refresh modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}"
                                    onclick="change_status(this)">
                                     <i class="gb gb_autorenew"></i>
                                 </a>
                                 <a class="icon icon_cook modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}"
                                    onclick="change_status(this)">
                                     <i class="gb gb_kitchen"></i>
                                 </a>
                                 <a class="icon icon_serve modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}"
                                    onclick="change_status(this)">
                                     <i class="gb gb_local_cafe"></i>
                                 </a>
                                 <a class="icon icon_check modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}"
                                    onclick="change_status(this)">
                                     <i class="gb gb_done_all"></i>
                                 </a>
                                 <a class="icon icon_trash modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}"
                                    onclick="change_status(this)">
                                     <i class="gb gb_delete"></i>
                                 </a>
