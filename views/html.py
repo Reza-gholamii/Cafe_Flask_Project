@@ -6,7 +6,7 @@ import model.users
 from core.manager import ExtraDataBaseManager, DataBaseManager
 from core.models import TextMessage, BaseModel
 from model.menu_items import MenuItem
-
+from hashlib import sha256
 from model import users
 import logging
 
@@ -325,16 +325,16 @@ def login():
         return render_template("cashier/login_cachier.html")
     elif request.method == "POST":
         resp = request.form
-        print(resp)
         try:
+
             user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
-            print(user)
+            print(user,"sdfsdf")
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
 
         # TODO: hash
-
-        if user[-3] == resp["password"]:
+        password_hashed = sha256(resp["password"].encode()).hexdigest()
+        if user[-3] == password_hashed:
             html_str = redirect(f"/cashier/{user[-1]}")
             response = make_response(html_str)
             response.set_cookie(

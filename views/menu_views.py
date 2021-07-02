@@ -39,9 +39,9 @@ def register_cashier():
                                retry_print="email is not valid. pleas enter a valid email"
                                )
     password = sha256(password.encode()).hexdigest()
-    print(password)
-    print(sha256(password.encode()).digest())
-    u = user_model.User(firstname, lastname, phone_number, password, email)
+
+    print(sha256(password.encode()).digest().decode())
+    u = user_model.User(firstname, lastname, phone_number[2:], password, email)
     print(u.to_dict())
 
     # dbmanager.DataBaseManager().create("users", u)
