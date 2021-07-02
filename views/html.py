@@ -72,7 +72,7 @@ def menu():
         print(items)
         print(categories)
 
-        return render_template("menu.html", items=items)
+        return render_template("menu-test.html", items=items)
     else:
         # json_data = request.get_json()
         # if json_data['action'] == "delete":
