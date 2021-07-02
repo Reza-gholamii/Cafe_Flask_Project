@@ -2,7 +2,7 @@ import core.utility as utility
 import core.manager as dbmanager
 import core.exceptions as exception
 import model.users as user_model
-
+from hashlib import sha256
 
 def register_cashier():
     firstname = utility.inputer("enter cashier's firstname :")
@@ -38,8 +38,11 @@ def register_cashier():
                                retry=True,
                                retry_print="email is not valid. pleas enter a valid email"
                                )
+    password = sha256(password.encode()).hexdigest()
+    print(password)
+    print(sha256(password.encode()).digest())
     u = user_model.User(firstname, lastname, phone_number, password, email)
     print(u.to_dict())
 
-    dbmanager.DataBaseManager().create("users", u)
+    # dbmanager.DataBaseManager().create("users", u)
     print("user added successfully")

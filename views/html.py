@@ -282,11 +282,14 @@ def cancelled_order_list(_id):
 def recepit_list(_id):
     if request.method == "GET":
         # print(recepits)
-        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
+        # return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
+        return render_template("cashier/receipt.html")
+
     else:
         json_data = request.get_json()
         # call function for updating recepit status
-        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
+        # return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
+    return render_template("cashier/receipt.html")
 
 
 # this is test for tables status
@@ -302,9 +305,15 @@ def dashboard(_id):
     else:
         return user_seter()
     # ''''''''''''''''''''
+    # data = {
+    #     'count_new_orders': len(orders),
+    #     'count_orders': len(orders) + len(served_orders),
+    #     'count_empty_tables': len(empty_table),
+    #     'count_view': 15
+    # }
     data = {
-        'count_new_orders': len(orders),
-        'count_orders': len(orders) + len(served_orders),
+        'count_new_orders': 12,
+        'count_orders': 12 + len(served_orders),
         'count_empty_tables': len(empty_table),
         'count_view': 15
     }
@@ -318,7 +327,8 @@ def login():
         resp = request.form
         print(resp)
         try:
-            user = DataBaseManager().check_record("users", phone_number=resp["username"])[0]
+            user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
+            print(user)
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
 
