@@ -178,11 +178,13 @@ def archive_list(_id):
 
 def new_order_list(_id):
     if request.method == "GET":
-        # served_orders = db_manager.statusfilter('orders', status='serving')
-        # print(served_orders)
-        return render_template("cashier/new_orders_list.html", orders=served_orders)
+        all_orders = db_manager.archive_orders_list('status')
+        new_orders = [list(order) for order in all_orders if order[5] == 'new']
+        for order in new_orders:
+            order[5] = change_status_lang(order[5])
+        return render_template("cashier/new_orders_list.html", orders=new_orders)
     else:
-        return render_template("cashier/new_orders_list.html", orders=served_orders)
+        return {"Data Received": 200}
 
 
 def cooking_order_list(_id):
