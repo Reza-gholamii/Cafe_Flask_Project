@@ -299,12 +299,13 @@ empty_table = [1, 3, 4, 7]
 def dashboard(_id):
 
     # this codes should be in all cashier side functions to get user and security reasons
-    # __ = user_seter()
-    # if type(__) == int:
-    #     user_data = DataBaseManager().read("users", __)
-    #     user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
-    # else:
-    #     return user_seter()
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+        print(user_data)
+        user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
+    else:
+        return user_seter()
     # ''''''''''''''''''''
     # data = {
     #     'count_new_orders': len(orders),
@@ -318,8 +319,8 @@ def dashboard(_id):
         'count_empty_tables': len(empty_table),
         'count_view': 15
     }
-    print("dashboard")
-    return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
+
+    return render_template('cashier/dashboard.html', user=user_data, data=data)
 
 
 def login():
@@ -334,17 +335,12 @@ def login():
 
 
         password_hashed = sha256(resp["password"].encode()).hexdigest()
-        print("before if state")
+
         if user[-3] == password_hashed:
-            print("if state")
-            print(user[-1])
             html_str = redirect(f"/cashier/{user[-1]}")
-            print("what?")
             response = make_response(html_str)
-            print("what?? again")
             response.set_cookie(
             '_ID', str(user[-1]), max_age=timedelta(weeks=1))
-            print(response.response,"asd")
             return response
         else:
             return render_template("cashier/login_cachier.html", condition="warning")
@@ -376,11 +372,11 @@ def user_seter():
     this is not flask function .
     this function just check cookie and return user if it exists
     """
+    print("user-setter")
     cookies = request.cookies
-    if cookies.get("_id"):
-        id = cookies.get("_id")
+    id = cookies.get("_ID")
+    if id:
         u = DataBaseManager().read("users", id)
-        print(u)
         return int(id)
     else:
         return redirect("login")

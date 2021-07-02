@@ -11,23 +11,23 @@
 {% endblock %}
 {% block body %}
 <div class="w-full grid gap-4 sm:gap-8 p-8 grid-cols-6">
-    <a href="{{ url_for('order_list') }}" class="animate__animated animate__fadeInDown animate__delay-1s relative rounded-3xl block col-span-6 p-4 bg-purple-400 text-white border-8 border-purple-300 shadow-xl hover:shadow-lg">
+    <a href="#" class="animate__animated animate__fadeInDown animate__delay-1s relative rounded-3xl block col-span-6 p-4 bg-purple-400 text-white border-8 border-purple-300 shadow-xl hover:shadow-lg">
         <b class="float-left text-5xl p-7 bg-white bg-opacity-20 rounded-3xl">{{ data['count_new_orders'] }}</b>
         <span class="absolute right-8 pt-8 float-right text-2xl font-bold">سفارشات جدید</span>
     </a>
-    <a href="{{ url_for('served_order_list') }}"
+    <a href="#"
        class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-2 p-6 rounded-2xl overflow-hidden text-center bg-green-400 border-green-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">
         سفارش
         <i class="gb gb_assignment absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
         <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">{{ data['count_orders'] }}</b>
     </a>
-    <a href="{{ url_for('tables') }}"
+    <a href="#"
        class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-2 p-6 rounded-2xl overflow-hidden text-center bg-red-400 border-red-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">
         میز خالی
         <i class="gb gb_weekend absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
         <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">{{ data['count_empty_tables'] }}</b>
     </a>
-    <a href="{{ url_for('charts') }}"
+    <a href="#"
        class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-2 p-6 rounded-2xl overflow-hidden text-center bg-yellow-400 border-yellow-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">بازدید
         <i class="gb gb_remove_red_eye absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
         <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">{{ data['count_view'] }}</b>
