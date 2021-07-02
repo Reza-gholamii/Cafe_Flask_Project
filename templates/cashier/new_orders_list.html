@@ -9,8 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
-    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
-    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/fonts.css">
     <title>کافه | لیست سفارشات جدید</title>
 
     <style>
@@ -103,7 +102,7 @@
                             <div class="col mx-auto text-center">
                                 <a class="icon icon_refresh modal{{ loop.index0 }} row{{ order.5 }}"
                                    onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
+                                    <i class="gb gb_refresh"></i>
                                 </a>
                                 <a class="icon icon_cook modal{{ loop.index0 }} row{{ order.5 }}"
                                    onclick="change_status(this)">
@@ -119,7 +118,7 @@
                                 </a>
                                 <a class="icon icon_trash modal{{ loop.index0 }} row{{ order.5 }}"
                                    onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
+                                    <i class="gb gb_cancel"></i>
                                 </a>
                             </div>
                         </div>
