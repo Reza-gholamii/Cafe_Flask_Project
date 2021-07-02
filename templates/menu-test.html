@@ -324,7 +324,7 @@ $("#basket").submit(function (event) {
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
-        url: '#',
+        url: '{{ url_for("menu") }}',
         dataType: 'json',
         data: JSON.stringify(data),
         success: function (result) {

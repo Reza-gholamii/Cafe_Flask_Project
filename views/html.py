@@ -69,12 +69,12 @@ def menu():
         for item in items:
             item[2] = categories_dict[item[2]]
         # items.sort(key=lambda x: x[8])
-        print(items)
-        print(categories)
 
         return render_template("menu-test.html", items=items)
     else:
-        # json_data = request.get_json()
+        json_data = request.get_json()
+        print(json_data)
+
         # if json_data['action'] == "delete":
         #     item_id = db_manager.get_id('menu_items', title=json_data['name'])
         #     db_manager.delete('menu_items', item_id)
