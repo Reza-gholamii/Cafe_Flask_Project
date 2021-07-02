@@ -60,7 +60,35 @@ def contact_us():
 
 
 def menu():
-    return render_template("menu.html", page_name="menu")
+    if request.method == "GET":
+        items = db_manager.read_all('menu_items')
+        categories = db_manager.category_list()
+        items = list(map(lambda item: list(item), items))
+        categories_dict = {}
+        categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
+        for item in items:
+            item[2] = categories_dict[item[2]]
+        # items.sort(key=lambda x: x[8])
+        print(items)
+        print(categories)
+
+        return render_template("menu.html", items=items)
+    else:
+        # json_data = request.get_json()
+        # if json_data['action'] == "delete":
+        #     item_id = db_manager.get_id('menu_items', title=json_data['name'])
+        #     db_manager.delete('menu_items', item_id)
+        # elif json_data['action'] == "update":
+        #     item_id = db_manager.get_id('menu_items', title=json_data['name'])
+        #     db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
+        # elif json_data['action'] == "add":
+        #     new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=json_data['category'],
+        #                         discount=json_data['discount'])
+        # items = db_manager.read_all('menu_items')
+        # items.sort(key=lambda x: x[8])
+        return {"Data Received": 200}
+
+
 
 
 # fro here all are for cashier side
