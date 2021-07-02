@@ -18,7 +18,12 @@ function change_status(status) {
 
     target_column.innerText = new_status
     target_modal.innerText = new_status
-    var data = {"index": index, "status": new_status};
+    let order_id = status.getAttribute("data-order")
+
+    var data = {
+        "order_id": order_id,
+        "status": new_status
+    };
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
