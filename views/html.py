@@ -65,7 +65,7 @@ def menu():
         table_number = []
         for i in range(len(Table.TABLES)):
             table_number.append(Table.TABLES[i + 1].number)
-        table_number = [table_number[0:4], table_number[4:6], table_number[6]]
+        table_number = [table_number[0:4], table_number[4:6], [table_number[6]]]
         items = db_manager.read_all('menu_items')
         categories = db_manager.category_list()
         items = list(map(lambda item: list(item), items))
@@ -74,7 +74,6 @@ def menu():
         for item in items:
             item[2] = categories_dict[item[2]]
         # items.sort(key=lambda x: x[8])
-
         return render_template("menu-test.html", items=items, table_number=table_number)
     else:
         json_data = request.get_json()
