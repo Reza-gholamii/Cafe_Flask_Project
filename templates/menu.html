@@ -382,11 +382,10 @@
                     <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
                     <option value="5" class="Vazir text-white bg-indigo-500 py-2">میز شماره 5</option>
                     <option value="6" class="Vazir text-white bg-indigo-500 py-2">میز شماره 6</option>
-                    <option value="7" class="Vazir text-white bg-indigo-500 py-2">میز شماره 7</option>
                 </select>
                 <select class="table-number table-number-8 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
                     <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
-                    <option value="8" class="Vazir text-white bg-indigo-500 py-2">میز شماره 8</option>
+                    <option value="8" class="Vazir text-white bg-indigo-500 py-2">میز شماره 7</option>
                 </select>
             </div>
             <input type="submit" id="submitter_pop"
@@ -428,6 +427,7 @@
     let _ind = 0;
 
     $("a[data-item='add_item']").on('click', function () {
+        activator()
         $('#basket_icon').fadeIn(300)
 
         $_pop.fadeIn(300)
@@ -458,14 +458,26 @@
         $('.table-number').not('.table-number-'+cap).attr('name','').hide()
         $('.table-number-'+cap).fadeIn(500)
 
-        $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
-
         $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
         $('input[name="capacity"]').removeAttr('checked')
 
         $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
         $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
 
+    })
+
+    // activator submitter basket:
+    function activator(){
+        if ($('#basket>.item-in-basket').length && $('select[name="table_number"]').val()){
+            $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
+        }
+        else {
+            $('#submitter_pop').removeClass('bg-green-500').removeClass('cursor-pointer').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-gray-500').addClass('cursor-not-allowed')
+        }
+    }
+
+    $('.table-number').click(function() {
+        activator()
     })
 
     // event for click in deleter-ico after clean basket :
@@ -475,12 +487,12 @@
         if (!($('.item-in-basket')[0])){
             $_pop.fadeOut(300)
             $('#basket_icon').fadeOut(300)
+            activator()
         }
     }
 
 
     // ajax send data after submit
-
     $("#basket").submit(function (event) {
         event.preventDefault();
         $inputs = $('#basket input')
