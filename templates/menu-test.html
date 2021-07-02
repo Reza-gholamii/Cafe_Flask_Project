@@ -340,22 +340,25 @@
     // ajax send data after submit
     $("#basket").submit(function (event) {
         event.preventDefault();
-        $inputs = $('#basket input')
+        $inputs = $('#basket input, #basket select[name="table_number"]')
         $values = {}
         $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
+
+        console.log($inputs)
+        console.log($values)
 
         let len = Number((Object.keys($values).length-2)/2)
 
         let count_list = []
         let item_list = []
 
-        for (let i = 0; i < len;i++) {
+        for (let i = 0; i < len-1;i++) {
             count_list.push($values['count'+i])
             item_list.push($values['item'+i])
         }
 
         let data = {
-            "capacity" : $values['capacity'],
+            "table_number" : $values['table_number'],
             "count_list": count_list,
             "item_list": item_list
         }
