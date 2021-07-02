@@ -7,6 +7,7 @@ menu_dict = {
         "function": menu_views.register_cashier,
         "description": "creat new cashier"
     }
+
     ]
 }
 

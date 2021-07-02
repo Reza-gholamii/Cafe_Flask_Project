@@ -297,13 +297,14 @@ empty_table = [1, 3, 4, 7]
 
 
 def dashboard(_id):
+
     # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)
-        user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
-    else:
-        return user_seter()
+    # __ = user_seter()
+    # if type(__) == int:
+    #     user_data = DataBaseManager().read("users", __)
+    #     user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
+    # else:
+    #     return user_seter()
     # ''''''''''''''''''''
     # data = {
     #     'count_new_orders': len(orders),
@@ -317,6 +318,7 @@ def dashboard(_id):
         'count_empty_tables': len(empty_table),
         'count_view': 15
     }
+    print("dashboard")
     return render_template('cashier/dashboard.html', user={'name': 'حسابدار'}, data=data)
 
 
@@ -326,19 +328,23 @@ def login():
     elif request.method == "POST":
         resp = request.form
         try:
-
             user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
-            print(user,"sdfsdf")
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
 
-        # TODO: hash
+
         password_hashed = sha256(resp["password"].encode()).hexdigest()
+        print("before if state")
         if user[-3] == password_hashed:
+            print("if state")
+            print(user[-1])
             html_str = redirect(f"/cashier/{user[-1]}")
+            print("what?")
             response = make_response(html_str)
+            print("what?? again")
             response.set_cookie(
-                '_ID', user[-1], max_age=timedelta(weeks=1))
+            '_ID', str(user[-1]), max_age=timedelta(weeks=1))
+            print(response.response,"asd")
             return response
         else:
             return render_template("cashier/login_cachier.html", condition="warning")
