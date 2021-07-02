@@ -1,12 +1,17 @@
 import re as regex
 
 
-def inputer(text, type=str, validator: callable = None, retry=False,retry_print=""):
+def inputer(text, empty=False, type=str, validator: callable = None, retry=False, retry_print=""):
     try:
         res = type(input(text))
+        if not empty:
+            if res == "":
+                return ""
         if validator:
             if validator(res):
                 return res
+            else:
+                raise Exception
     except:
         if retry:
             print(retry_print)

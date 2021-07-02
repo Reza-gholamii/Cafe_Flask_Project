@@ -28,7 +28,7 @@ class TextMessage(BaseModel):
     """
 
     def __init__(self, first_name: str, last_name: str, phone_number: int, email: Optional[str], comment: str):
-        if not Validators.check_phone("09" + phone_number):
+        if not Validators.check_phone("09" + str(phone_number)):
             raise ValidationError("Phone Number Must be Length 9.")
         if email and not Validators.check_email(email):
             raise ValidationError("Email Must be Username@domain.com Form.")
