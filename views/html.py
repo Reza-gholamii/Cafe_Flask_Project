@@ -152,29 +152,18 @@ served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", 
 
 
 def archive_list(_id):
-    all_orders_l = []
-    all_orders = db_manager.read_all('orders')
-    for order in all_orders:
-        menu_item = db_manager.read('menu_items', row_id=order[4])
-        item_name = menu_item[0][0]
-        item_category_id = menu_item[0][2]
-        item_category = db_manager.read('categories', row_id=item_category_id)
-        status = db_manager.read('statuses', row_id=order[1])
-        status_name = status[0][0]
-        order_l = list(order)
-        order_l[4], order_l[1] = item_name, status_name
-        order_l.append(item_category[0][0])
-        all_orders_l.append(order_l)
     if request.method == "GET":
-        return render_template("cashier/archive_list.html", orders=all_orders_l, id=_id)
+        all_orders = db_manager.archive_orders_list('status')
+        all_orders = [list(order) for order in all_orders]
+        for order in all_orders:
+            order[5] = change_status_lang(order[5])
+        return render_template("cashier/new_orders_list.html", orders=all_orders, id=_id)
     else:
         json_data = request.get_json()
-        status_dict_reverse = {}
-        for key, value in status_dict.items(): status_dict_reverse.update({value: key})
-        status_id = db_manager.get_id('statuses', title=status_dict_reverse[json_data['status']])
-        db_manager.update('orders', id=json_data['index'], status=status_id)
-        return render_template("cashier/archive_list.html", orders=all_orders_l, id=_id)
-
+        json_data['status'] = change_status_lang(json_data['status'])
+        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+        return {"Data Received": 200}
 
 def new_order_list(_id):
     if request.method == "GET":
