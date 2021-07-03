@@ -289,6 +289,7 @@ def recepit_list(_id):
     if request.method == "GET":
         orders = []
         recepits_list = db_manager.read_all('recepites')
+        recepits_list.sort(key=lambda x: x[4], reverse=True)
         recepits_list = list(map(lambda recepit: list(recepit), recepits_list))
         for recepit in recepits_list:
             recepit.append(recepit[0] - recepit[1])
