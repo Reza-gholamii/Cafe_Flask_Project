@@ -99,25 +99,19 @@
 </style>
 {% endblock %}
 {% block body %}
-<!--  Window Loader  -->
-<div class="window-loader fixed inset-0 bg-white bg-opacity-50 hidden mx-auto my-auto text-center flex item-center justify-center">
-    کافه لبخند میزبان بهترین لحظات شما <br>
-    از صبر و شکیبایی شما مچکریم!
-</div>
-<!--  Window Loader  -->
 <!--  nav  -->
 <div class="mx-auto relative my-8 text-center">
     <ul>
         <li class="animate__animated animate__fadeInDown animate__delay-1s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-24 pr-11 sm:w-40 transition bg-green-500 text-white">
-            <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+            <a href="{{ url_for('home') }}" class="text-md text-2xl md:text-3xl text-center"><i
                     class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_home"></i><span
                     class="text-lg sm:text-xl Vazir">خانه</span></a></li>
         <li class="animate__animated animate__fadeInDown animate__delay-2s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-28 pr-11 sm:w-40 transition bg-yellow-500 text-white mx-3">
-            <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
+            <a href="{{ url_for('about_us') }}" class="text-md text-2xl md:text-3xl text-center"><i
                     class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_info"></i><span
                     class="text-lg sm:text-xl Vazir">درباره ما</span></a></li>
         <li class="animate__animated animate__fadeInDown animate__delay-3s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-32 pr-11 sm:w-40 transition bg-blue-600 text-white">
-            <a href="#" class="text-md text-2xl md:text-3xl sm:text-center"><i
+            <a href="{{ url_for('contact_us') }}" class="text-md text-2xl md:text-3xl sm:text-center"><i
                     class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_phone"></i><span
                     class="text-lg sm:text-xl Vazir">تماس باما</span></a></li>
     </ul>
@@ -188,6 +182,22 @@
 <!-- shopping list -->
 <div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-20"
      style="display: none;transition: display 300ms linear">
+    <!--  Window Loader  -->
+    <div class="window-loader overflow-hidden absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-11/12 md:w-10/12 lg:w-7/12 xl:w-5/12 z-30 p-8 pt-0 ring-8 ring-opacity-30 ring-white rounded-xl text-center text-2xl" style="display: none;height: max-content !important;line-height: 4rem">
+        <span class="block text-white rounded-b-xl Vazir bg-yellow-900 px-8 py-2"><i class="gb gb_info gb_s36"></i> سفارش شما در حال ثبت است ...</span>
+        <i class="gb gb_cached gb_s48 gb_animate_spin block my-8 text-yellow-900" style="font-size: 172px;"></i>
+        <div class="absolute py-6 -inset-x-4 text-white bg-yellow-900">
+                    کافه لبخند میزبان بهترین لحظات شما
+        <br>
+        از صبر و شکیبایی شما مچکریم!
+        </div>
+        <div class="text-white py-2 bg-yellow-900 opacity-0">
+                    کافه لبخند میزبان بهترین لحظات شما
+        <br>
+        از صبر و شکیبایی شما مچکریم!
+        </div>
+    </div>
+    <!--  Window Loader  -->
     <div id="shopping_list"
          class="absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-10/12 md:w-9/12 lg:w-6/12 xl:w-4/12 p-4 ring-8 ring-opacity-30 ring-white rounded-xl"
          style="height: max-content !important;">
@@ -231,8 +241,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <input type="submit" id="submitter_pop"
-                    class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
+            <input type="submit" id="submitter_pop" class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
         </form>
     </div>
 </div>
@@ -370,6 +379,21 @@
         data: JSON.stringify(data),
         success: function (result) {
             console.log("ok", result);
+
+            setTimeout(function () {
+                $('#shopping_list').fadeOut(650)
+            },700)
+
+            $('#shopping_list').hide()
+
+            setTimeout(function () {
+                $('.window-loader').fadeIn()
+            }, 100)
+
+            setTimeout(function () {
+                window.location.replace("{{ url_for('home') }}");
+            }, 7000)
+
         }, error: function (result) {
             console.log(result);
         }
