@@ -5,7 +5,7 @@ function change_status(status) {
     let target_column = document.getElementById(target_name)
 
     if (class_name === 'icon_refresh') {
-        new_status = 'جدید'
+        new_status = 'پرداخت نشده'
     } else if (class_name === 'icon_check') {
         new_status = 'پرداخت شده'
     } else if (class_name === 'icon_trash') {
