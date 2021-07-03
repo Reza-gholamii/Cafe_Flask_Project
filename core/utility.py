@@ -70,3 +70,24 @@ def change_status_lang(parameter):
         parameter = status_dict_reverse[parameter]
 
     return parameter
+
+
+def change_status_lang_by_number(parameter):
+    status_dict = {'5': 'جدید',
+                   '6': 'در حال پخت',
+                   '7': 'سرو شده',
+                   '8': 'کنسل شده',
+                   '9': 'پرداخت شده',
+                   '10': 'پرداخت نشده',
+                   '11': 'کنسل شده',
+                   '12': 'خالی',
+                   '13': 'پر'
+                   }
+    status_dict_reverse = {value: key for key, value in status_dict.items()}
+
+    if parameter in status_dict.keys():
+        parameter = status_dict[parameter]
+    elif parameter in status_dict.values():
+        parameter = status_dict_reverse[parameter]
+
+    return parameter
