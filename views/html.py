@@ -296,8 +296,6 @@ def dashboard(_id):
     __ = user_seter()
     if type(__) == int:
         user_data = DataBaseManager().read("users", __)[0]
-
-        user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
     else:
         return user_seter()
     # ''''''''''''''''''''
