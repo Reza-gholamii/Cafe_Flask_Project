@@ -286,20 +286,16 @@ def cancelled_order_list(_id):
 
 def recepit_list(_id):
     if request.method == "GET":
-        # Table.all_tables()
-        # tables_id = list(Table.TABLES.keys())
-        # recepits, orders = [], []
-        # for table_id in tables_id:
-        #     recepit = list(db_manager.calculate_price(table_id))
-        # orders = []
-        # recepits_list = db_manager.read_all('recepits')
-        # for recepit in recepits_list:
-        #     order = db_manager.order_list(recepit[0])
-        #     orders.append(order)
-        # print(recepits_list)
-
-        # return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
-        return render_template("cashier/receipt.html")
+        orders = []
+        recepits_list = db_manager.read_all('recepites')
+        recepits_list = list(map(lambda recepit: list(recepit), recepits_list))
+        for recepit in recepits_list:
+            recepit.append(recepit[0] - recepit[1])
+            order = db_manager.order_list(recepit[4])
+            recepit[2] = change_status_lang_by_number(str(recepit[2]))
+            orders.append(order)
+            recepit.append(order[0][5].strftime('%m.%d.%Y'))
+        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
 
     else:
         json_data = request.get_json()
