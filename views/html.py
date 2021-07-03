@@ -96,6 +96,7 @@ def order_list(_id):
         recepits, orders = [], []
         for table_id in tables_id:
             recepit = list(db_manager.calculate_price(table_id))
+            # todo: it's better to change the condition to unpaid or other thing
             if recepit[0]:
                 recepit.insert(0, table_id)
                 order = db_manager.order_list(recepit[1])
@@ -106,13 +107,13 @@ def order_list(_id):
                     item[0] = change_status_lang(item[0])
                     order_l.append(item)
 
-            else:
-                recepit = ["" for i in recepit]
-                recepit.insert(0, table_id)
-                recepit.insert(4, "0")
-                order_l = []
-            recepits.append(recepit)
-            orders.append(order_l)
+                # else:
+                #     recepit = ["" for i in recepit]
+                #     recepit.insert(0, table_id)
+                #     recepit.insert(4, "0")
+                #     order_l = []
+                recepits.append(recepit)
+                orders.append(order_l)
         return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
     else:
         json_data = request.get_json()
@@ -276,7 +277,18 @@ def cancelled_order_list(_id):
 
 def recepit_list(_id):
     if request.method == "GET":
-        # print(recepits)
+        # Table.all_tables()
+        # tables_id = list(Table.TABLES.keys())
+        # recepits, orders = [], []
+        # for table_id in tables_id:
+        #     recepit = list(db_manager.calculate_price(table_id))
+        # orders = []
+        # recepits_list = db_manager.read_all('recepits')
+        # for recepit in recepits_list:
+        #     order = db_manager.order_list(recepit[0])
+        #     orders.append(order)
+        # print(recepits_list)
+
         # return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
         return render_template("cashier/receipt.html")
 
@@ -336,7 +348,7 @@ def login():
             html_str = redirect(f"/cashier/{user[-1]}")
             response = make_response(html_str)
             response.set_cookie(
-            '_ID', str(user[-1]), max_age=timedelta(weeks=1))
+                '_ID', str(user[-1]), max_age=timedelta(weeks=1))
             return response
         else:
             return render_template("cashier/login_cachier.html", condition="warning")
