@@ -40,11 +40,11 @@ class Order(BaseModel):
             self.menu_item = code
 
             try:
-                self.number = db_manager.create(self.name, self)
-                logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
-            except:
                 self.number = db_manager.get_id(self.name, **self.to_dict())
                 logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
+            except:
+                self.number = db_manager.create(self.name, self)
+                logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
         else:
             logging.error(f"{__name__}: This Item isn't in the Active List.")
 
