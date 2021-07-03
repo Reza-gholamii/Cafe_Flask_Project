@@ -62,10 +62,17 @@ def contact_us():
 
 def menu():
     if request.method == "GET":
-        table_number = []
-        for i in range(len(Table.TABLES)):
-            table_number.append(Table.TABLES[i + 1].number)
-        table_number = [table_number[0:4], table_number[4:6], [table_number[6]]]
+        two_person_table_number = [table.number for table in Table.TABLES.values() if
+                                   table.status == 12 and table.capacity == 2]
+        four_person_table_number = [table.number for table in Table.TABLES.values() if
+                                    table.status == 12 and table.capacity == 4]
+        eight_person_table_number = [table.number for table in Table.TABLES.values() if
+                                     table.status == 12 and table.capacity == 8]
+        two_person_table_number.sort()
+        four_person_table_number.sort()
+        eight_person_table_number.sort()
+
+        table_number = [two_person_table_number, four_person_table_number, eight_person_table_number]
         items = db_manager.read_all('menu_items')
         categories = db_manager.category_list()
         items = list(map(lambda item: list(item), items))
