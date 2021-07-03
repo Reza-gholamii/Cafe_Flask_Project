@@ -55,14 +55,15 @@ class DataBaseManager(BaseManager):
         with self.access_database() as db_cursor:
             db_cursor.execute(query)
             return db_cursor.fetchall()
+
     # '''''''''''''''''''
     def read_condition(self, table, condition_row_name, condition):
         query = f"SELECT * FROM {table} where {condition_row_name}='{condition}'"
         with self.access_database() as db_cursor:
             db_cursor.execute(query)
             return db_cursor.fetchall()
-    # '''''''''''''''''''''
 
+    # '''''''''''''''''''''
 
     def update(self, table, **kwargs):
         """kwargs should include id of a row and one or more column=amount for updating
@@ -213,7 +214,7 @@ WHERE root IS {'NOT NULL' if sub else 'NULL'}
         """
 
         query = f"""
-SELECT statuses.title, menu_items.title, orders.count, menu_items.price, menu_items.discount
+SELECT statuses.title, menu_items.title, orders.count, menu_items.price, menu_items.discount, orders.time_stamp
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON orders.status = statuses.id
