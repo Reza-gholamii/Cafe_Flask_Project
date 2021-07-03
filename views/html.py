@@ -35,6 +35,8 @@ def home():
     viewer()
     return render_template("home.html", page_name="home")
 
+def recipe():
+    return render_template("recpie.html",page_name="recipe")
 
 def about_us():
     viewer()
