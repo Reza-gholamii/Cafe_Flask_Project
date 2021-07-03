@@ -80,8 +80,9 @@ def menu():
         categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
         for item in items:
             item[2] = categories_dict[item[2]]
-        # items.sort(key=lambda x: x[8])
-        return render_template("menu-test.html", items=items, table_number=table_number)
+        return render_template("menu-test.html", items=items, table_number=table_number,
+                               cat=list(categories_dict.values())
+                               )
     else:
         json_data = request.get_json()
         print(json_data)
