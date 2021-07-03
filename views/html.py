@@ -76,12 +76,13 @@ def menu():
         items = db_manager.read_all('menu_items')
         categories = db_manager.category_list()
         items = list(map(lambda item: list(item), items))
+        image_names = [item[4] for item in items]
         categories_dict = {}
         categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
         for item in items:
             item[2] = categories_dict[item[2]]
         return render_template("menu-test.html", items=items, table_number=table_number,
-                               cat=list(categories_dict.values())
+                               cat=list(categories_dict.values()), images=image_names
                                )
     else:
         json_data = request.get_json()
