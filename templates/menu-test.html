@@ -183,9 +183,19 @@
 <div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-20"
      style="display: none;transition: display 300ms linear">
     <!--  Window Loader  -->
-    <div class="window-loader absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-11/12 md:w-10/12 lg:w-7/12 xl:w-5/12 z-30 p-4 ring-8 ring-opacity-30 ring-white rounded-xl" style="display: none;height: max-content !important;">
-        کافه لبخند میزبان بهترین لحظات شما <br>
+    <div class="window-loader overflow-hidden absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-11/12 md:w-10/12 lg:w-7/12 xl:w-5/12 z-30 p-8 pt-0 ring-8 ring-opacity-30 ring-white rounded-xl text-center text-2xl" style="display: none;height: max-content !important;line-height: 4rem">
+        <span class="block text-white rounded-b-xl Vazir bg-yellow-900 px-8 py-2"><i class="gb gb_info gb_s36"></i> سفارش شما در حال ثبت است ...</span>
+        <i class="gb gb_cached gb_s48 gb_animate_spin block my-8 text-yellow-900" style="font-size: 172px;"></i>
+        <div class="absolute py-6 -inset-x-4 text-white bg-yellow-900">
+                    کافه لبخند میزبان بهترین لحظات شما
+        <br>
         از صبر و شکیبایی شما مچکریم!
+        </div>
+        <div class="text-white py-2 bg-yellow-900 opacity-0">
+                    کافه لبخند میزبان بهترین لحظات شما
+        <br>
+        از صبر و شکیبایی شما مچکریم!
+        </div>
     </div>
     <!--  Window Loader  -->
     <div id="shopping_list"
@@ -231,8 +241,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <input type="submit" id="submitter_pop"
-                    class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
+            <input type="submit" id="submitter_pop" class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
         </form>
     </div>
 </div>
@@ -378,12 +387,12 @@
             $('#shopping_list').hide()
 
             setTimeout(function () {
-                $('.window-loader').fadeIn(650)
-            }, 700)
+                $('.window-loader').fadeIn()
+            }, 100)
 
             setTimeout(function () {
                 window.location.replace("{{ url_for('home') }}");
-            }, 4000)
+            }, 7000)
 
         }, error: function (result) {
             console.log(result);
