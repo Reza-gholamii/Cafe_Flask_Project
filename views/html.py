@@ -5,6 +5,7 @@ from core.utility import *
 import model.users
 from core.manager import ExtraDataBaseManager, DataBaseManager
 from core.models import TextMessage, BaseModel
+from model.categories import Category
 from model.menu_items import MenuItem
 from hashlib import sha256
 from model import users
@@ -299,9 +300,10 @@ def recepit_list(_id):
 
     else:
         json_data = request.get_json()
-        # call function for updating recepit status
-        # return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
-    return render_template("cashier/receipt.html")
+        recepit_status = change_status_lang(json_data['status'])
+        recepit_status_id = db_manager.check_record('statuses', title=recepit_status)[0][2]
+        db_manager.update('recepites', id=json_data['recepit_id'], status=recepit_status_id)
+    return {"Data Received": 200}
 
 
 # this is test for tables status
