@@ -56,8 +56,12 @@
 <!-- header -->
 {% endblock %}
 
-{% block body %}
-{% endblock %}
+<!-- body -->
+<div id="body">
+{% block body %}{% endblock %}
+</div>
+<!-- body -->
+
 <!--  JS Plugins  -->
 <script src="{{ url_for('static', filename='js/modernizr.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>

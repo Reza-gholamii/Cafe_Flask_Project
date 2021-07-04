@@ -38,7 +38,6 @@
         }
     </style>
 {% endblock %}
-
 {% block body %}
     <div class="card shadow rounded mt-8">
         <div class="card-header">
@@ -102,8 +101,7 @@
                                                    placeholder="نشانی پستی(اختیاری)" name="email">
                                         </div>
                                         <div class="col-12 mb-4" dir="ltr">
-                                        <textarea tabindex="5" class="form-control  text-right" rows="14" name="comment"
-                                                  placeholder="* پیام شما" required></textarea>
+                                        <textarea tabindex="5" class="form-control  text-right" rows="14" name="comment" placeholder="* پیام شما" required></textarea>
                                         </div>
                                         <!-- <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
                                                 value="ارسال"> -->
@@ -120,7 +118,6 @@
             </div>
         </div>
     </div>
-
     <script>
         function SendMessage() {
             $.post('{{ url_for("contact_us") }}', $('form').serialize(), function (data) {
@@ -131,5 +128,4 @@
             });
         }
     </script>
-
 {% endblock %}
