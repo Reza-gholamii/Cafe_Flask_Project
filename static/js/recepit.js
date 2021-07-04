@@ -41,5 +41,17 @@ $(document).ready(function () {
     });
 });
 
+$("#unpaid-button").on("click", function () {
+    $("#total_table tr").filter(function () {
+        $(this).toggle($(this).text().indexOf("پرداخت نشده") > -1)
+    });
+
+});
+
+$("#paid-button").on("click", function () {
+    $("#total_table tr").filter(function () {
+        $(this).toggle($(this).text().indexOf("پرداخت شده") > -1)
+    });
+});
 
 
