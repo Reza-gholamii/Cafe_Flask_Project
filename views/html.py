@@ -37,8 +37,8 @@ def home():
     return render_template("home.html", page_name="home")
 
 
-def recipe():
-    return render_template("recpie.html", page_name="recipe")
+def recipe(_id):
+    return render_template("recpie.html", page_name="recipe", ID=_id)
 
 
 def about_us():
@@ -56,14 +56,6 @@ def contact_us():
         return render_template("contact_us.html")
 
     else:
-        # _vars = dict(request.form)
-        # message = TextMessage(**_vars)
-        # # TODO: use try and except for exceptions handeling after check validate
-        # db_manager.create(table="messages", model=message)
-        # logging.info(f"{__name__}: Message has Written into the DataBase")
-        # # TODO: show alert for send message successfully and next ...?
-        # return redirect(url_for('home'))
-
         _vars = dict(request.form)
         message = TextMessage(**_vars)
         db_manager.create(table="messages", model=message)
@@ -102,8 +94,10 @@ def menu():
         recepite = Recepite(table_num)
         orders = []
         for i in range(len(json_data['item_list'])):
+            # TODO: use recepite methods of class for easy add order for this price
             orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
-        return {"Data Received": 200}
+        # return {"Data Received": 200}
+        return redirect(f"/recipe/{recepite.number}")
 
 
 # fro here all are for cashier side
