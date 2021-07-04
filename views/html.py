@@ -157,7 +157,13 @@ def order_list(_id):
 # this is for test
 
 
-def menu_items(_id):
+def menu_items():
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''
     if request.method == "GET":
         items = db_manager.read_all('menu_items')
         categories = db_manager.category_list()
@@ -167,7 +173,7 @@ def menu_items(_id):
         for item in items:
             item[2] = categories_dict[item[2]]
         # items.sort(key=lambda x: x[8])
-        return render_template("cashier/menu_items.html", items=items, id=_id)
+        return render_template("cashier/menu_items.html", items=items, user=user_data, page_name="menu items")
     else:
         json_data = request.get_json()
         if json_data['action'] == "delete":

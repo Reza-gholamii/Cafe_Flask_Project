@@ -41,8 +41,7 @@
                         style="padding: 0 2em !important;  text-align: center !important;">
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="dashboard" else "" }} ">
                              <a href="{{ url_for("dashboard") }} " class="hover:text-blue-400">
-                                <i
-                                        class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
                                 داشبورد
                             </a>
                         </li>
@@ -75,7 +74,8 @@
                                 میزها
                             </a>
                         </li>
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="menu" else "" }}">
+
+                        <li class="cursor-pointer  nav-list-item {{ "choosed" if page_name=="menu items" else "" }}">
                              <a href="{{ url_for("menu_items") }} " class="hover:text-blue-400">
                                 <i
                                         class="gb gb_restaurant gb_s24 menu-icon"></i>
