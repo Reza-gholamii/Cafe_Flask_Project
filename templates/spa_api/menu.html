@@ -1,155 +1,3 @@
-{% extends "base.html" %}
-{% block title %}فهرست{% endblock %}
-{% block extra_head %}
-<script>
-$(document).ready(function () {
-    function echer(data) {
-    let state = "";
-
-    $('#basket>.item-in-basket').each(function () {
-
-        if ($(this).children('b:first').text() === data) {
-            $ThisItem = $(this).children('input[type="number"]')
-            state = "true";
-        }
-    })
-
-    return state === "true";
-
-}
-
-$_pop = $('#main_pop')
-$_pop.click(function () {
-    if (event.target === $_pop[0]) {
-        $_pop.fadeOut(300)
-    }
-})
-
-let _ind = 0;
-
-$("a[data-item='add_item']").on('click', function () {
-    activator()
-    $('#basket_icon').fadeIn(300)
-
-    $_pop.fadeIn(300)
-    let a_clone = $(this).parent().clone()
-    a_clone.children('div').children('span').children('del').text('')
-
-    if (echer(a_clone.children('h3:first').text())) {
-        let _count = Number($ThisItem.val())+1
-        $ThisItem.val(_count)
-    } else {
-        $('#basket').prepend(
-            '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
-            '<input type="text" name="item'+ _ind +'" hidden value="' + a_clone.children('h3:first').text() + '">' +
-            '<b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
-            '<b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
-            '<input type="number" name="count'+ _ind +'" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
-            '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
-            '</div>')
-        _ind++
-    }
-})
-
-// table capacity select
-$('span[data-active]').click(function () {
-
-    let cap = $(this).data('active')
-
-    $('.table-number').not('.table-number-'+cap).attr('name','').hide()
-    $('.table-number-'+cap).fadeIn(500)
-
-    $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
-    $('input[name="capacity"]').removeAttr('checked')
-
-    $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
-    $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
-
-})
-
-// activator submitter basket:
-function activator(){
-    if ($('#basket>.item-in-basket').length && $('select[name="table_number"]').val()){
-        $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
-    }
-    else {
-        $('#submitter_pop').removeClass('bg-green-500').removeClass('cursor-pointer').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-gray-500').addClass('cursor-not-allowed')
-    }
-}
-
-$('.table-number').click(function() {
-    activator()
-})
-
-// event for click in deleter-ico after clean basket :
-function deleter(_this) {
-    $(_this).parent().remove()
-
-    if (!($('.item-in-basket')[0])){
-        $_pop.fadeOut(300)
-        $('#basket_icon').fadeOut(300)
-        activator()
-    }
-}
-
-// ajax send data after submit
-$("#basket").submit(function (event) {
-    event.preventDefault();
-    $inputs = $('#basket input, #basket select[name="table_number"]')
-    $values = {}
-    $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
-
-    console.log($inputs)
-    console.log($values)
-
-    let len = Number((Object.keys($values).length-2)/2)
-
-    let count_list = []
-    let item_list = []
-
-    for (let i = 0; i < len-1;i++) {
-        count_list.push($values['count'+i])
-        item_list.push($values['item'+i])
-    }
-
-    let data = {
-        "table_number" : $values['table_number'],
-        "count_list": count_list,
-        "item_list": item_list
-    }
-$.ajax({
-    type: 'POST',
-    contentType: 'application/json',
-    url: '{{ url_for("menu") }}',
-    dataType: 'json',
-    data: JSON.stringify(data),
-    success: function (result) {
-        console.log("ok", result);
-
-        setTimeout(function () {
-            $('#shopping_list').fadeOut(650)
-        },700)
-
-        $('#shopping_list').hide()
-
-        setTimeout(function () {
-            $('.window-loader').fadeIn()
-        }, 100)
-
-        setTimeout(function () {
-            window.location.replace("{{ url_for('home') }}");
-        }, 7000)
-
-    }, error: function (result) {
-        console.log(result);
-    }
-});
-})
-
-})
-</script>
-{% endblock %}
-{% block body %}
 <div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-8"
      style="max-width:1280px">
     <!-- category -->
@@ -280,5 +128,149 @@ $.ajax({
     <i class="gb gb_shopping_cart inset-0 z-10 text-purple-600 absolute mx-auto -mr-3 mt-1 block"
        style="font-size: 200px"></i>
 </div>
-{% endblock %}
 
+    <script>
+    function echer(data) {
+        let state = "";
+
+        $('#basket>.item-in-basket').each(function () {
+
+            if ($(this).children('b:first').text() === data) {
+                $ThisItem = $(this).children('input[type="number"]')
+                state = "true";
+            }
+        })
+
+        return state === "true";
+
+    }
+
+    $_pop = $('#main_pop')
+    $_pop.click(function () {
+        if (event.target === $_pop[0]) {
+            $_pop.fadeOut(300)
+        }
+    })
+
+    let _ind = 0;
+
+    $("a[data-item='add_item']").on('click', function () {
+        activator()
+        $('#basket_icon').fadeIn(300)
+
+        $_pop.fadeIn(300)
+        let a_clone = $(this).parent().clone()
+        a_clone.children('div').children('span').children('del').text('')
+
+        if (echer(a_clone.children('h3:first').text())) {
+            let _count = Number($ThisItem.val())+1
+            $ThisItem.val(_count)
+        } else {
+            $('#basket').prepend(
+                '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
+                '<input type="text" name="item'+ _ind +'" hidden value="' + a_clone.children('h3:first').text() + '">' +
+                '<b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
+                '<b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
+                '<input type="number" name="count'+ _ind +'" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
+                '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
+                '</div>')
+            _ind++
+        }
+    })
+
+    // table capacity select
+    $('span[data-active]').click(function () {
+
+        let cap = $(this).data('active')
+
+        $('.table-number').not('.table-number-'+cap).attr('name','').hide()
+        $('.table-number-'+cap).fadeIn(500)
+
+        $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
+        $('input[name="capacity"]').removeAttr('checked')
+
+        $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
+        $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
+
+    })
+
+    // activator submitter basket:
+    function activator(){
+        if ($('#basket>.item-in-basket').length && $('select[name="table_number"]').val()){
+            $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
+        }
+        else {
+            $('#submitter_pop').removeClass('bg-green-500').removeClass('cursor-pointer').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-gray-500').addClass('cursor-not-allowed')
+        }
+    }
+
+    $('.table-number').click(function() {
+        activator()
+    })
+
+    // event for click in deleter-ico after clean basket :
+    function deleter(_this) {
+        $(_this).parent().remove()
+
+        if (!($('.item-in-basket')[0])){
+            $_pop.fadeOut(300)
+            $('#basket_icon').fadeOut(300)
+            activator()
+        }
+    }
+
+    // ajax send data after submit
+    $("#basket").submit(function (event) {
+        event.preventDefault();
+        $inputs = $('#basket input, #basket select[name="table_number"]')
+        $values = {}
+        $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
+
+        console.log($inputs)
+        console.log($values)
+
+        let len = Number((Object.keys($values).length-2)/2)
+
+        let count_list = []
+        let item_list = []
+
+        for (let i = 0; i < len-1;i++) {
+            count_list.push($values['count'+i])
+            item_list.push($values['item'+i])
+        }
+
+        let data = {
+            "table_number" : $values['table_number'],
+            "count_list": count_list,
+            "item_list": item_list
+        }
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: '{{ url_for("menu") }}',
+        dataType: 'json',
+        data: JSON.stringify(data),
+        success: function (result) {
+            console.log("ok", result);
+
+            setTimeout(function () {
+                $('#shopping_list').fadeOut(650)
+            },700)
+
+            $('#shopping_list').hide()
+
+            setTimeout(function () {
+                $('.window-loader').fadeIn()
+            }, 100)
+
+            setTimeout(function () {
+                window.location.replace("{{ url_for('home') }}");
+            }, 7000)
+
+        }, error: function (result) {
+            console.log(result);
+        }
+    });
+})
+
+</script>

@@ -9,6 +9,8 @@ app.add_url_rule("/contact_us", 'contact_us', html.contact_us, methods=['GET', '
 app.add_url_rule("/about_us", 'about_us', html.about_us)
 app.add_url_rule("/recipe/<_id>", 'resipe', html.recipe)
 
+app.add_url_rule("/api/<page>", 'api', html.api, methods=['GET'])
+
 app.add_url_rule("/cashier/login", 'login', html.login, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/<_id>", 'dashboard', html.dashboard, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/<_id>/tables", 'tables', html.tables, methods=['GET', 'POST'])
