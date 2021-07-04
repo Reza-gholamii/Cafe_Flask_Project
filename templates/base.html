@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block css_pages %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
+    {% endblock %}
     {% block tailwindcss %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
