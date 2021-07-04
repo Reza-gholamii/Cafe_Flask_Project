@@ -20,8 +20,8 @@ class Recepite(BaseModel):
     status: int  # paid or unpaid or canceled
     table_number: int
 
-    def __init__(self, table_number, total_price=0, final_price=0, status="unpaid"):
-        if Table.TABLES[table_number].status == STATUSES["tables"]["empty"]:
+    def __init__(self, table_number, total_price=0, final_price=0, status="پرداخت نشده"):
+        if Table.TABLES[table_number].status == STATUSES["tables"]["خالی"]:
             self.total_price = total_price
             self.final_price = final_price
             self.status = STATUSES[self.name][status]
@@ -39,7 +39,7 @@ class Recepite(BaseModel):
         else:
             logging.error(f"{__name__}: This Table is Occupied & Recepite it's not Possible.")
 
-    def change_status(self, status="paid"):
+    def change_status(self, status="پرداخت شده"):
         """
         Method for Change Status of Model for Example Paid, Unpaid or Canceled
         """
@@ -47,7 +47,7 @@ class Recepite(BaseModel):
         self.status = STATUSES[self.name][status]
         db_manager.update(self.name, id=self.number, status=self.status)
         logging.info(f"{__name__}: Change Status Column(Recepite) Successfully.")
-        Table.TABLES[self.table_number].change_status("empty")
+        Table.TABLES[self.table_number].change_status("خالی")
         logging.debug(f"{__name__}: Change Status Column(Table) Successfully.")
 
     def sum_price(self):
@@ -62,7 +62,7 @@ class Recepite(BaseModel):
         logging.info(f"{__name__}: Calculated Price has Written in DataBase.")
 
     def add_order(self, menu_item, count=1,
-                  time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="new"):
+                  time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="جدید"):
         """
         Add Order for this Recepite Number by a Method for Self Recepite
         """

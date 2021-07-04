@@ -22,14 +22,14 @@ class Order(BaseModel):
     menu_item: int
 
     def __init__(self, recepite, menu_item, count=1,
-                 time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="new"):
+                 time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="جدید"):
         flag = False
         code = db_manager.get_id("menu_items", title=menu_item)
         for category in MenuItem.MENU_ITEMS:
             for subcategory in MenuItem.MENU_ITEMS[category]:
                 if code in MenuItem.MENU_ITEMS[category][subcategory]:
                     items = MenuItem.MENU_ITEMS[category][subcategory]
-                    if items[code].status == STATUSES["menu_items"]["active"]:
+                    if items[code].status == STATUSES["menu_items"]["موجود"]:
                         flag = True
 
         if flag:

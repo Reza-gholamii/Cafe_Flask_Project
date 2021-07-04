@@ -27,7 +27,7 @@ class MenuItem(BaseModel):
     MENU_ITEMS = Category.CATEGORIES  # collection of all menu items model in cafe from database
 
     def __init__(self, title, price, category, discount=0,
-                 image_name=None, cooking_time=None, serving_time=None, status="active"):
+                 image_name=None, cooking_time=None, serving_time=None, status="موجود"):
         self.title = title
         self.price = price
         self.category = db_manager.get_id("categories", title=category)
@@ -67,7 +67,7 @@ class MenuItem(BaseModel):
         self.price = price
         logging.debug(f"{__name__}: Change Price Column Successfully in DataBase.")
 
-    def change_status(self, status="deactive"):
+    def change_status(self, status="ناموجود"):
         """
         Method for Change Status of Model from active to deactive or Upside Down
         """
