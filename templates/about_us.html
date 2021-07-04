@@ -1,166 +1,158 @@
 {% extends "base.html" %}
 {% block title %}درباره ما{% endblock %}
 {% block extra_head %}
-<style>
-    a {
-        text-decoration: none !important;
-        color: #fff !important;
-    }
+    <style>
+        a {
+            text-decoration: none !important;
+            color: #fff !important;
+        }
 
-    body {
-        background-color: #c8c8c8;
-    }
+        * {
+            font-family: Yekan, sans-serif;
+            direction: rtl;
+        }
 
-    .bg-caffe {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        opacity: 0.3;
-        background: url(../static/img/bg.jpg);
-    }
+        p, ul {
+            font-size: 13px;
+        }
 
-    * {
-        font-family: Yekan, sans-serif;
-        direction: rtl;
-    }
+        .row {
+            background-color: #fafafa;
+            border-radius: 10px;
+        }
 
-    p, ul {
-        font-size: 13px;
-    }
+        .row-custom {
+            box-shadow: 0 0 10px 0 #00000073;
+        }
 
-    .row {
-        background-color: #fafafa;
-        border-radius: 10px;
-    }
+        .row-header {
+            border-top: 1px black solid;
+            border-bottom: 1px black solid;
+            padding: 15px 0;
+            width: 40%;
+            margin: 20px auto;
+            font-size: 15px;
+        }
 
-    .row-custom {
-        box-shadow: 0 0 10px 0 #00000073;
-    }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
 
-    .row-header {
-        border-top: 1px black solid;
-        border-bottom: 1px black solid;
-        padding: 15px 0;
-        width: 40%;
-        margin: 20px auto;
-        font-size: 15px;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .bg-whitee {
-        background-color: rgba(255, 255, 255, 0.20);
-    }
-
-</style>
+    </style>
 {% endblock %}
 
 {% block body %}
-<div class="bg-caffe"></div>
-<div class="container-fluid">
+    <div class="bg-caffe"></div>
     <!--  nav  -->
-    <div class="mx-auto relative pt-8 text-center">
+    <div class="mx-auto relative my-8 text-center">
         <ul>
-            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-blue-600 text-white">
-                <a href="{{ url_for('menu') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_shopping_basket"></i><span
-                        class="text-lg sm:text-xl">فهرست</span></a></li>
-            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-yellow-500 text-white mx-3">
-                <a href="{{ url_for('contact_us') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_phone"></i><span
-                        class="text-lg sm:text-xl">تماس</span></a></li>
-            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white">
+            <li class="animate__animated animate__fadeInDown animate__delay-1s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-24 pr-11 sm:w-40 transition bg-green-500 text-white">
                 <a href="{{ url_for('home') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_home"></i><span
-                        class="text-lg sm:text-xl">خانه</span></a></li>
+                        class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_storage"></i><span
+                        class="text-lg sm:text-xl Vazir">فهرست</span></a></li>
+            <li class="animate__animated animate__fadeInDown animate__delay-2s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-28 pr-11 sm:w-40 transition bg-yellow-500 text-white mx-3">
+                <a href="{{ url_for('about_us') }}" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_info"></i><span
+                        class="text-lg sm:text-xl Vazir">درباره ما</span></a></li>
+            <li class="animate__animated animate__fadeInDown animate__delay-3s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-32 pr-11 sm:w-40 transition bg-blue-600 text-white">
+                <a href="{{ url_for('contact_us') }}" class="text-md text-2xl md:text-3xl sm:text-center"><i
+                        class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_phone"></i><span
+                        class="text-lg sm:text-xl Vazir">تماس باما</span></a></li>
         </ul>
     </div>
     <!--  nav  -->
-    <div class="row row-custom w-75 my-4 mx-auto">
-        <div class="col-12 shadow">
-            <div class="row justify-content-center">
-                <div class="col-12 text-center">
-                    <p class="row-header">
-                        <strong>درباره کافه لبخند</strong>
-                    </p>
-                </div>
+    <!-- header -->
+    <section class="bg-header w-full py-10 mt-8 text-center"><h1
+            class="Vazir text-4xl sm:text-5xl sm:py-6 md:text-6xl md:py-8 lg:text-8xl lg:py-10 font-bold">کافه رستوران
+        لبخند</h1></section>
+    <!-- header -->
+    <div class="container-fluid">
+        <div class="row row-custom w-75 my-4 mx-auto">
+            <div class="col-12 shadow">
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <p class="row-header">
+                            <strong>درباره کافه لبخند</strong>
+                        </p>
+                    </div>
 
-            </div>
-            <div class="row">
-                <div class="col-md-6 h-100 text-right my-auto pb-8">
-                    <p class="text-justify">
-                        برند لبخند با هدف پر کردن خلا قهوه و کافه داری و برای ترویج فرهنگ قهوه نوشی در جامعه ای که
-                        محوریت
-                        آن صرفا نوشیدن چای بود در سال 1388 در تهران تاسیس شد و اولین کافی شاپ زنجیره ای آن همان سال در
-                        میدان تجریش آغاز به کار کرد.
-                        لبخند برندی است با ساختاری عمودی: از قهوه سبز تا لیوان دست شما. بهترین دانه های قهوه با دقت و
-                        وسواس خاص به طور مستقیم از مزارع قهوه مناطق مختلف دنیا خریداری می شوند. نمونه قهوه خریداری شده
-                        توسط گروه تحقیق و توسعه لبخند مورد بررسی قرار میگیرند و استادان برشته کاری قهوه
-                        دستورالعمل منحصر به فرد برشته کردن دانه ها را (بنا به نوع دانه) آماده می کنند.
-                    </p>
-                    <ul class="text-justify">
-                        <li>با منظره ای رویایی در بالاترین نقطه منطقه ، چشم اندازی زیبا و هوایی دلپذیر از تراس کافه بام
-                            غروب زیبای خورشید که با رنگهای بنفش و نارنجی رنگ آمیزی شده است تا شما را به میهمانی ستاره ها
-                            ببریم.
-                        </li>
-                        <li>فضای مناسب برای دیدار های دوستانه ،قرارهای کاری و لحظات خاطره انگیز برای تمام فصول با
-                            تهویه مناسب و نور کافی ، فضایی برای تمام سلیقه ها
-                        </li>
-                    </ul>
                 </div>
-                <div class="col-md-6 h-100 justify-content-center my-auto pb-8">
-                    <img class="img-fluid rounded" src="../static/img/cafe1.jpg" alt="Cafe Picture">
+                <div class="row">
+                    <div class="col-md-6 h-100 text-right my-auto pb-8">
+                        <p class="text-justify">
+                            برند لبخند با هدف پر کردن خلا قهوه و کافه داری و برای ترویج فرهنگ قهوه نوشی در جامعه ای که
+                            محوریت
+                            آن صرفا نوشیدن چای بود در سال 1388 در تهران تاسیس شد و اولین کافی شاپ زنجیره ای آن همان سال
+                            در
+                            میدان تجریش آغاز به کار کرد.
+                            لبخند برندی است با ساختاری عمودی: از قهوه سبز تا لیوان دست شما. بهترین دانه های قهوه با دقت
+                            و
+                            وسواس خاص به طور مستقیم از مزارع قهوه مناطق مختلف دنیا خریداری می شوند. نمونه قهوه خریداری
+                            شده
+                            توسط گروه تحقیق و توسعه لبخند مورد بررسی قرار میگیرند و استادان برشته کاری قهوه
+                            دستورالعمل منحصر به فرد برشته کردن دانه ها را (بنا به نوع دانه) آماده می کنند.
+                        </p>
+                        <ul class="text-justify">
+                            <li>با منظره ای رویایی در بالاترین نقطه منطقه ، چشم اندازی زیبا و هوایی دلپذیر از تراس کافه
+                                بام
+                                غروب زیبای خورشید که با رنگهای بنفش و نارنجی رنگ آمیزی شده است تا شما را به میهمانی
+                                ستاره ها
+                                ببریم.
+                            </li>
+                            <li>فضای مناسب برای دیدار های دوستانه ،قرارهای کاری و لحظات خاطره انگیز برای تمام فصول با
+                                تهویه مناسب و نور کافی ، فضایی برای تمام سلیقه ها
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 h-100 justify-content-center my-auto pb-8">
+                        <img class="img-fluid rounded" src="../static/img/cafe1.jpg" alt="Cafe Picture">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row row-custom w-75 my-4 mx-auto ">
-        <div class="col-12 shadow">
-            <div class="row justify-content-center">
-                <div class="col-12 text-center">
-                    <p class="row-header">
-                        <strong>تیم ما</strong>
-                    </p>
-                </div>
+        <div class="row row-custom w-75 my-4 mx-auto ">
+            <div class="col-12 shadow">
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <p class="row-header">
+                            <strong>تیم ما</strong>
+                        </p>
+                    </div>
 
-            </div>
-            <div class="row pb-2">
-                <div class="col-md-3 my-2">
-                    <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter1.jpg"
-                         alt="Cafe Picture">
-                    <p class="text-center">
-                        رضا غلامی: پیر مجلس
-                    </p>
                 </div>
-                <div class="col-md-3 my-2">
-                    <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter2.jpg"
-                         alt="Cafe Picture">
-                    <p class="text-center">
-                        سپهر بازیار: آروم، موقر، باصفا
-                    </p>
-                </div>
-                <div class="col-md-3 my-2">
-                    <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter3.jpg"
-                         alt="Cafe Picture">
-                    <p class="text-center">
-                        رسول احدی: خلاق، متفکر، سخت کوش
-                    </p>
-                </div>
-                <div class="col-md-3 my-2">
-                    <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter4.jpg"
-                         alt="Cafe Picture">
-                    <p class="text-center">
-                        رضا یزدانی: پرشور، با نشاط، خدای لینوکس
-                    </p>
+                <div class="row pb-2">
+                    <div class="col-md-3 my-2">
+                        <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter1.jpg"
+                             alt="Cafe Picture">
+                        <p class="text-center">
+                            رضا غلامی: پیر مجلس
+                        </p>
+                    </div>
+                    <div class="col-md-3 my-2">
+                        <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter2.jpg"
+                             alt="Cafe Picture">
+                        <p class="text-center">
+                            سپهر بازیار: آروم، موقر، باصفا
+                        </p>
+                    </div>
+                    <div class="col-md-3 my-2">
+                        <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter3.jpg"
+                             alt="Cafe Picture">
+                        <p class="text-center">
+                            رسول احدی: خلاق، متفکر، سخت کوش
+                        </p>
+                    </div>
+                    <div class="col-md-3 my-2">
+                        <img class="img-fluid rounded shadow-sm mb-3 mx-auto" src="../static/img/waiter4.jpg"
+                             alt="Cafe Picture">
+                        <p class="text-center">
+                            رضا یزدانی: پرشور، با نشاط، خدای لینوکس
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 {% endblock %}

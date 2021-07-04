@@ -2,53 +2,6 @@
 {% block title %}تماس با ما{% endblock %}
 {% block extra_head %}
     <style>
-        :root {
-            --Background: #fafafa;
-        }
-
-        html {
-            direction: rtl;
-        }
-
-        body {
-            background-color: #c8c8c8;
-            padding-top: 10px;
-        }
-
-        .bg-caffe {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            opacity: 0.3;
-            background: url(../static/img/bg.jpg);
-        }
-
-        * {
-            font-family: Yekan, sans-serif;
-        }
-
-        .Vazir {
-            font-family: Vazir, sans-serif;
-        }
-
-        .rtl {
-            direction: rtl;
-        }
-
-        .ltr {
-            direction: ltr;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        a {
-            text-decoration: none !important;
-        }
-
         a.text-md, a.text-md:hover {
             color: #fff !important;
         }
@@ -90,106 +43,120 @@
 {% endblock %}
 
 {% block body %}
-<div class="bg-caffe"></div>
-<!--  nav  -->
-<div class="mx-auto relative pt-8 text-center">
-    <ul>
-        <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-blue-600 text-white">
-            <a href="{{ url_for('menu') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                    class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_shopping_basket"></i><span
-                    class="text-lg sm:text-xl">فهرست</span></a></li>
-        <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-yellow-500 text-white mx-3">
-            <a href="{{ url_for('about_us') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                    class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_info"></i><span
-                    class="text-lg sm:text-xl">درباره ما</span></a></li>
-        <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white">
-            <a href="{{ url_for('home') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                    class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_home"></i><span
-                    class="text-lg sm:text-xl">خانه</span></a></li>
-    </ul>
-</div>
-<!--  nav  -->
-<div class="card shadow rounded mt-8">
-    <div class="card-header">
-        <h1 class="text-center text-4xl py-2 ">اطلاعات تماس</h1>
+    <div class="bg-caffe"></div>
+    <!--  nav  -->
+    <div class="mx-auto relative my-8 text-center">
+        <ul>
+            <li class="animate__animated animate__fadeInDown animate__delay-1s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-24 pr-11 sm:w-40 transition bg-green-500 text-white">
+                <a href="{{ url_for('home') }}" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_storage"></i><span
+                        class="text-lg sm:text-xl Vazir">فهرست</span></a></li>
+            <li class="animate__animated animate__fadeInDown animate__delay-2s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-28 pr-11 sm:w-40 transition bg-yellow-500 text-white mx-3">
+                <a href="{{ url_for('about_us') }}" class="text-md text-2xl md:text-3xl text-center"><i
+                        class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_info"></i><span
+                        class="text-lg sm:text-xl Vazir">درباره ما</span></a></li>
+            <li class="animate__animated animate__fadeInDown animate__delay-3s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-32 pr-11 sm:w-40 transition bg-blue-600 text-white">
+                <a href="{{ url_for('contact_us') }}" class="text-md text-2xl md:text-3xl sm:text-center"><i
+                        class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_phone"></i><span
+                        class="text-lg sm:text-xl Vazir">تماس باما</span></a></li>
+        </ul>
     </div>
-    <div class="card-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-6" id="loc">
-                    <section class="mb-4">
-                        <address>
-                            <ul class="text-right">
-                                <li class="my-4">
-                                    <strong><i class="gb gb_phone ml-2 mb-2"></i>تلفن: </strong>
-                                    <a href="tel:021-54429000" target="_blank">
-                                        &#1781&#1780&#1780&#1778&#1785&#1776&#1776&#1776-&#1776&#1778&#1777
-                                    </a>
-                                </li>
-                                <li class="my-4">
-                                    <strong><i class="gb gb_email ml-2 mb-2"></i>پست الکترونیکی: </strong>
-                                    <a href="mailto:info@lamizcoffee.com" target="_blank"
-                                        style="font-size: 20px;"><b>info@lamizcoffee.com</b></a>
-                                </li>
-                                <li class="w-full my-4">
-                                    <strong><i class="gb gb_location_on ml-2 mb-2"></i>آدرس: </strong>
-                                    ایران - تهران - خیابان کارگر شمالی - خیابان فرصت - کوچه فرخنده - پلاک &#1778
-                                    <iframe class="map mt-8 w-full rounded-md" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=isfahan%20coffee%20%DA%A9%D8%A7%D9%84%D8%AC&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                                </li>
-                            </ul>
-                        </address>
-                    </section>
-                </div>
-                <div class="col-12 col-lg-6" id="msg">
-                    <section>
-                        <!-- <form action="{{ url_for('contact_us') }}" method="POST"> -->
-                        <form>
-                            <div class="container">
-                                <div class="form-row">
-                                    <div class="col-12 mt-4 mb-3 input-group" dir="ltr">
-                                        <input type="text" class="form-control text-right" tabindex="1" placeholder="* نام"
-                                            name="first_name" required>
-                                        <input type="text" tabindex="2" class="form-control text-right"
-                                            placeholder="* نام خانوادگی" name="last_name" required>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3 input-group" dir="ltr">
-                                        ​<div class="input-group-prepend">
-                                            <span class="input-group-text">09</span>
+    <!--  nav  -->
+    <!-- header -->
+    <section class="bg-header w-full py-10 mt-8 text-center"><h1
+            class="Vazir text-4xl sm:text-5xl sm:py-6 md:text-6xl md:py-8 lg:text-8xl lg:py-10 font-bold">کافه رستوران
+        لبخند</h1></section>
+    <!-- header -->
+    <div class="card shadow rounded mt-8">
+        <div class="card-header">
+            <h1 class="text-center text-4xl py-2 ">اطلاعات تماس</h1>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6" id="loc">
+                        <section class="mb-4">
+                            <address>
+                                <ul class="text-right">
+                                    <li class="my-4">
+                                        <strong><i class="gb gb_phone ml-2 mb-2"></i>تلفن: </strong>
+                                        <a href="tel:021-54429000" target="_blank">
+                                            &#1781&#1780&#1780&#1778&#1785&#1776&#1776&#1776-&#1776&#1778&#1777
+                                        </a>
+                                    </li>
+                                    <li class="my-4">
+                                        <strong><i class="gb gb_email ml-2 mb-2"></i>پست الکترونیکی: </strong>
+                                        <a href="mailto:info@lamizcoffee.com" target="_blank"
+                                           style="font-size: 20px;"><b>info@lamizcoffee.com</b></a>
+                                    </li>
+                                    <li class="w-full my-4">
+                                        <strong><i class="gb gb_location_on ml-2 mb-2"></i>آدرس: </strong>
+                                        ایران - تهران - خیابان کارگر شمالی - خیابان فرصت - کوچه فرخنده - پلاک &#1778
+                                        <iframe class="map mt-8 w-full rounded-md" height="400" id="gmap_canvas"
+                                                src="https://maps.google.com/maps?q=isfahan%20coffee%20%DA%A9%D8%A7%D9%84%D8%AC&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                                frameborder="0" scrolling="no" marginheight="0"
+                                                marginwidth="0"></iframe>
+                                    </li>
+                                </ul>
+                            </address>
+                        </section>
+                    </div>
+                    <div class="col-12 col-lg-6" id="msg">
+                        <section>
+                            <!-- <form action="{{ url_for('contact_us') }}" method="POST"> -->
+                            <form>
+                                <div class="container">
+                                    <div class="form-row">
+                                        <div class="col-12 mt-4 mb-3 input-group" dir="ltr">
+                                            <input type="text" class="form-control text-right" tabindex="1"
+                                                   placeholder="* نام"
+                                                   name="first_name" required>
+                                            <input type="text" tabindex="2" class="form-control text-right"
+                                                   placeholder="* نام خانوادگی" name="last_name" required>
                                         </div>
-                                        <input type="text" tabindex="3" class="form-control text-right"
-                                            placeholder="* تلفن همراه" name="phone_number" minlength="9" maxlength="9"
-                                            required>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3" dir="ltr">
-                                        <input type="text" tabindex="4" class="form-control text-right"
-                                            placeholder="نشانی پستی(اختیاری)" name="email">
-                                    </div>
-                                    <div class="col-12 mb-4" dir="ltr">
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3 input-group" dir="ltr">
+                                            ​
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">09</span>
+                                            </div>
+                                            <input type="text" tabindex="3" class="form-control text-right"
+                                                   placeholder="* تلفن همراه" name="phone_number" minlength="9"
+                                                   maxlength="9"
+                                                   required>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3" dir="ltr">
+                                            <input type="text" tabindex="4" class="form-control text-right"
+                                                   placeholder="نشانی پستی(اختیاری)" name="email">
+                                        </div>
+                                        <div class="col-12 mb-4" dir="ltr">
                                         <textarea tabindex="5" class="form-control  text-right" rows="14" name="comment"
-                                            placeholder="* پیام شما" required></textarea>
+                                                  placeholder="* پیام شما" required></textarea>
+                                        </div>
+                                        <!-- <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
+                                                value="ارسال"> -->
+                                        <button type="button"
+                                                class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
+                                                onclick="SendMessage()">ارسال
+                                        </button>
                                     </div>
-                                    <!-- <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
-                                            value="ارسال"> -->
-                                    <button type="button" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2" onclick="SendMessage()">ارسال</button>
                                 </div>
-                            </div>
-                        </form>
-                    </section>
+                            </form>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function SendMessage(){
-        $.post('{{ url_for("contact_us") }}',$('form').serialize(), function(data){
-            alert(data.msg);
-            $('form').each(function(){
-                this.reset();
+    <script>
+        function SendMessage() {
+            $.post('{{ url_for("contact_us") }}', $('form').serialize(), function (data) {
+                alert(data.msg);
+                $('form').each(function () {
+                    this.reset();
+                });
             });
-        });
-    }
-</script>
+        }
+    </script>
 
 {% endblock %}
