@@ -85,6 +85,7 @@ def menu():
         categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
         for item in items:
             item[2] = categories_dict[item[2]]
+            item[3] = item[1] * (1 - (item[3] / 100))
 
         # print(list(categories_dict.values()))
         return render_template("menu-test.html", items=items, table_number=table_number,
@@ -375,7 +376,7 @@ def login():
     elif request.method == "POST":
         resp = request.form
         try:
-            user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
+            user = DataBaseManager().check_record("users", phone_number=resp["username"][-9:])[0]
 
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
