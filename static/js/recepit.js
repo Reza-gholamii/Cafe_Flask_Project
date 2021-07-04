@@ -29,4 +29,17 @@ function change_status(status) {
     });
 }
 
+$(document).ready(function () {
+    $("#searchInput").on("keyup", function () {
+        var value = $(this).val();
+        $("#total_table tr").filter(function () {
+            console.log($(this))
+            console.log($(this).text())
+            console.log($(this).text().indexOf(value))
+            $(this).toggle($(this).text().indexOf(value) > -1)
+        });
+    });
+});
+
+
 
