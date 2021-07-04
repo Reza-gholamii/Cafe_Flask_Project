@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/pagify.js') }}"></script>
     {% block bootstrap %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
@@ -21,18 +20,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <title>کافه لبخند | {% block title %}{% endblock %}</title>
     {% block extra_head %}{% endblock %}
-    {% block pagify %}
-            <script>
-        $(document).ready(function() {
-          $('#body').pagify({
-            pages: ['menu', 'about_us', 'contact_us'],
-            animation: 'fadeIn',
-            'default': 'menu',
-            cache: true
-          });
-        });
-    </script>
-    {% endblock %}
 </head>
 <body>
 {% block nav %}
