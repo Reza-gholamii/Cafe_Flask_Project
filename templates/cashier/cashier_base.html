@@ -40,13 +40,31 @@
                     <ul id="menu_left_side" class="nav-list"
                         style="padding: 0 2em !important;  text-align: center !important;">
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item choosed "><i
-                                class="gb gb_dashboard gb_s24 menu-icon"></i>داشبورد
+                                class="gb gb_dashboard gb_s24 menu-icon "></i>داشبورد
                         </li>
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item "><i
-                                class="gb gb_tablet gb_s24 menu-icon"></i>سفارش ها
+
+                        <li data-toggle="collapse" data-target="#demo"
+                            class="cursor-pointer hover:text-blue-400 nav-list-item "><i
+                                class="gb gb_tablet  gb_s24 menu-icon"></i>سفارش ها
+                            <i
+                                class="gb  gb_arrow_drop_down gb_s24 menu-icon"></i>
                         </li>
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item "><i
-                                class="gb gb_restaurant gb_s24 menu-icon"></i>میزها
+                        <div id="demo" class="collapse">
+                              <li class="cursor-pointer hover:text-blue-400 collapse-items "><i
+                                class="gb gb_new_releases gb_s24 menu-icon"></i> جدید
+                        </li>
+                              <li class="cursor-pointer hover:text-blue-400 collapse-items"><i
+                                class="gb gb_restaurant gb_s24 menu-icon"></i>سرو شده
+                        </li>
+                            <li class="cursor-pointer hover:text-blue-400 collapse-items"><i
+                                class="gb gb_call_to_action gb_s24 menu-icon"></i>در حال پخت
+                        </li>
+                             <li class="cursor-pointer hover:text-blue-400 collapse-items"><i
+                                class="gb gb_money_off gb_s24 menu-icon"></i>پرداخت شده
+                        </li>
+                        </div>
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item" ><i
+                                class="gb gb_restaurant gb_s24 menu-icon"></i> میزها
                         </li>
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item"><i
                                 class="gb gb_restaurant_menu gb_s24 menu-icon"></i>منو
@@ -63,7 +81,7 @@
                 <div class="col-9  position-relative ">
                     <a href="#" class="position-absolute profile shadow">
                         <i class="profile-icon gb gb_account_circle gb_s48"></i>
-                        <span class="profile-text">{{ user[0]}} {{user[1] }}</span>
+                        <span class="profile-text">{{ user[0] }} {{ user[1] }}</span>
                     </a>
                 </div>
             </div>
