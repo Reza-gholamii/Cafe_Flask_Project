@@ -3,40 +3,10 @@
 {% block bootstrap %}{% endblock %}
 {% block extra_head %}
 <style>
-        :root {
-            --Background: #fafafa;
-        }
-
-        body {
-            background: url("{{ url_for('static', filename='img/bg-pat.jpg') }}") var(--Background);
-        }
-
-
         * {
             font-family: Yekan, sans-serif;
             direction: rtl;
             transition: all 400ms linear;
-        }
-
-        .Vazir {
-            font-family: Vazir, sans-serif;
-        }
-
-        .rtl {
-            direction: rtl;
-        }
-
-        .ltr {
-            direction: ltr;
-        }
-
-        .bg-header {
-            background: url("{{ url_for('static', filename='img/bg-menu.jpg') }}") 700px;
-        }
-
-        .bg-header > h1 {
-            color: #3d1800;
-            text-shadow: 0 2px 0 #fbe5cb, 0 -2px 0 #fbe5cb, 2px 0 #fbe5cb, -2px 0 0 #fbe5cb, 0 0 10px #000;
         }
 
         .category > a:nth-of-type(1):hover > .img-category {

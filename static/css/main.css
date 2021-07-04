@@ -255,30 +255,61 @@ textarea {
     }
 }
 
-:root {
-    --Background: #f2f2f2;
-}
+        :root {
+            --Background: #fafafa;
+        }
 
-body {
-    background: var(--Background);
-}
+        body {
+            background: url("/static/img/bg-pat.jpg") var(--Background);
+        }
 
-* {
-    font-family: Yekan, sans-serif;
-    direction: rtl;
-}
+        html {
+            direction: rtl;
+        }
 
-.Vazir {
-    font-family: Vazir, sans-serif;
-}
+        .bg-header {
+            background: url("/static/img/bg-menu.jpg") 700px;
+        }
 
-.rtl {
-    direction: rtl;
-}
 
-.ltr {
-    direction: ltr;
-}
+        .bg-header > h1 {
+            color: #3d1800;
+            text-shadow: 0 2px 0 #fbe5cb, 0 -2px 0 #fbe5cb, 2px 0 #fbe5cb, -2px 0 0 #fbe5cb, 0 0 10px #000;
+        }
+
+        .bg-caffe {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            opacity: 0.3;
+            background: url("/static/img/bg-pat.jpg") var(--Background);
+        }
+
+        * {
+            font-family: Yekan, sans-serif;
+        }
+
+        .Vazir {
+            font-family: Vazir, sans-serif;
+        }
+
+        .rtl {
+            direction: rtl;
+        }
+
+        .ltr {
+            direction: ltr;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
 
 .bg-yellow-900 {
     background: #3d1800;
