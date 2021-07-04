@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
-<link rel="stylesheet" href="../../static/css/fonts.css">
+    <link rel="stylesheet" href="../../static/css/fonts.css">
     <title>کافه | لیست صورتحسابها</title>
 
     <style>
@@ -43,6 +43,11 @@
 
         td {
             width: 20%;
+        }
+
+        .header-button {
+            border-radius: 7px !important;
+            border: 1px solid #868585;
         }
 
         @media print {
@@ -84,108 +89,142 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row main-row">
-        <div class="order-col col-11 col-sm-10 px-0 mx-auto my-3 shadow"
-             style=" border-radius: 8px !important;overflow: hidden;background: #fff;">
-            <table class="table text-center table-hover">
-                <thead class="bg-info">
-                <tr>
-                    <th>شماره صورتحساب</th>
-                    <th>هزینه کل (تومان)</th>
-                    <th>وضعیت</th>
-                    <th>ویرایش</th>
-                </tr>
-
-                </thead>
-                <tbody>
-
-                {% for recepit in recepits %}
-                <tr class="table-row">
-                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">{{recepit.4}}</td>
-                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">{{recepit.1}} تومان</td>
-                    <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25"
-                        id="status{{ loop.index0 }}">{{recepit.2}}
-                    </td>
-                    <td class="w-25 px-0">
-                        <a class="icon icon_refresh status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
-                           onclick="change_status(this)">
-                            <i class="gb gb_autorenew"></i>
-                        </a>
-                        <a class="icon icon_check status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
-                           onclick="change_status(this)">
-                            <i class="gb gb_done_all"></i>
-                        </a>
-                        <a class="icon icon_trash status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
-                           onclick="change_status(this)">
-                            <i class="gb gb_delete"></i>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-
-                </tbody>
-            </table>
-
-            {% for recepit in recepits %}
-            <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header bg-info">
-                            <h4 class="modal-title mx-auto">جزئیات</h4>
-                        </div>
-                        <div class="modal-body text-right">
-                            <div class="overflow-hidden">
-                                <p class="float-right">شماره صورتحساب: {{recepit.4}}</p>
-                                <p class="float-left">هزینه کل: {{recepit.1}} تومان</p>
-                            </div>
-                            <h5 class="text-center">آیتم ها</h5>
-                            <ul class="border rounded pl-2 py-2 pr-4">
-
-                                {% set order = orders[loop.index-1] %}
-                                {% for item in order%}
-                                <li>
-                                    <span class="float-right">{{ item.1 }}</span>
-                                    <span class="float-left">{{ item.2 }} عدد</span>
-                                </li>
-                                {% endfor %}
-
-
-                            </ul>
-                            <ul class="border rounded pl-2 py-2 pr-4">
-                                <li>
-                                    <span class="float-right">زمان درخواست</span>
-                                    <span class="float-left">{{recepit.6}}</span>
-                                </li>
-                                <li>
-                                    <span class="float-right">شماره میز</span>
-                                    <span class="float-left">{{recepit.3}}</span>
-                                </li>
-                                <li>
-                                    <span class="float-right">تخفیف</span>
-                                    <span class="float-left">{{recepit.5}} تومان</span>
-                                </li>
-                                <li>
-                                    <span class="float-right">هزینه کل</span>
-                                    <span class="float-left">{{recepit.1}} تومان</span>
-                                </li>
-                            </ul>
-                            <div id="print-icon" class="text-center" style="font-size: 35px" onclick="window.print()">
-                                <i class="gb gb_print" style="cursor: pointer"></i>
-                            </div>
-                        </div>
-                        <div class="modal-footer mx-auto">
-                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                        </div>
-                    </div>
-
+    <div class="row-bas">
+        <div class="col">
+            <div class="row mt-0">
+                <div class="col-11 col-sm-10 px-0 mx-auto text-right mb-2">
+                    <h4 class="m-2 text-center"><b>لیست صورتحسابهای کافه لبخند</b></h4>
                 </div>
             </div>
-            {% endfor %}
+
+            <div class="row">
+                <div class="col-11 col-sm-10 px-0 mx-auto">
+                    <div class="row">
+                        <div class="col-6 text-right d-flex align-items-center">
+                            <input id="archive-button" class="header-button ml-2" type="button" value="آرشیو">
+                            <input id="unpaid-button" class="header-button ml-2" type="button" value="پرداخت نشده">
+                            <input id="paid-button" class="header-button ml-2" type="button" value="پرداخت شده">
+                        </div>
+                        <div class="col-6 text-left align-items-center">
+                            <input class="form-control float-left text-right w-auto"
+                                   id="searchInput" type="text"
+                                   placeholder="جستجو...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row main-row">
+                <div class="order-col col-11 col-sm-10 px-0 mx-auto my-1 shadow"
+                     style=" border-radius: 8px !important;overflow: hidden;background: #fff;">
+                    <table class="table text-center table-hover mb-0">
+                        <thead class="bg-info">
+                        <tr>
+                            <th>شماره صورتحساب</th>
+                            <th>هزینه کل (تومان)</th>
+                            <th>وضعیت</th>
+                            <th>ویرایش</th>
+                        </tr>
+
+                        </thead>
+                        <tbody id="total_table">
+
+                        {% for recepit in recepits %}
+                        <tr class="table-row">
+                            <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">
+                                {{recepit.4}}
+                            </td>
+                            <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">
+                                {{recepit.1}}
+                                تومان
+                            </td>
+                            <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25"
+                                id="status{{ loop.index0 }}">{{recepit.2}}
+                            </td>
+                            <td class="w-25 px-0">
+                                <a class="icon icon_refresh status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
+                                   onclick="change_status(this)">
+                                    <i class="gb gb_autorenew"></i>
+                                </a>
+                                <a class="icon icon_check status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
+                                   onclick="change_status(this)">
+                                    <i class="gb gb_done_all"></i>
+                                </a>
+                                <a class="icon icon_trash status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
+                                   onclick="change_status(this)">
+                                    <i class="gb gb_delete"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+
+                    {% for recepit in recepits %}
+                    <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header bg-info">
+                                    <h4 class="modal-title mx-auto">جزئیات</h4>
+                                </div>
+                                <div class="modal-body text-right">
+                                    <div class="overflow-hidden">
+                                        <p class="float-right">شماره صورتحساب: {{recepit.4}}</p>
+                                        <p class="float-left">هزینه کل: {{recepit.1}} تومان</p>
+                                    </div>
+                                    <h5 class="text-center">آیتم ها</h5>
+                                    <ul class="border rounded pl-2 py-2 pr-4">
+
+                                        {% set order = orders[loop.index-1] %}
+                                        {% for item in order%}
+                                        <li>
+                                            <span class="float-right">{{ item.1 }}</span>
+                                            <span class="float-left">{{ item.2 }} عدد</span>
+                                        </li>
+                                        {% endfor %}
+
+
+                                    </ul>
+                                    <ul class="border rounded pl-2 py-2 pr-4">
+                                        <li>
+                                            <span class="float-right">زمان درخواست</span>
+                                            <span class="float-left">{{recepit.6}}</span>
+                                        </li>
+                                        <li>
+                                            <span class="float-right">شماره میز</span>
+                                            <span class="float-left">{{recepit.3}}</span>
+                                        </li>
+                                        <li>
+                                            <span class="float-right">تخفیف</span>
+                                            <span class="float-left">{{recepit.5}} تومان</span>
+                                        </li>
+                                        <li>
+                                            <span class="float-right">هزینه کل</span>
+                                            <span class="float-left">{{recepit.1}} تومان</span>
+                                        </li>
+                                    </ul>
+                                    <div id="print-icon" class="text-center" style="font-size: 35px"
+                                         onclick="window.print()">
+                                        <i class="gb gb_print" style="cursor: pointer"></i>
+                                    </div>
+                                </div>
+                                <div class="modal-footer mx-auto">
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
-
+</div>
 </div>
 <script>
     var user_id = '{{id}}';
