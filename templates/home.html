@@ -24,7 +24,74 @@
             top: -15px;
             margin-bottom: -15px;
         }
+
+        @keyframes bg_colori {
+            0% {
+                background: #673ab7;
+                box-shadow: 0 0 20px 10px #673ab7;
+            }
+            20% {
+                background: #ff9800;
+                box-shadow: 0 0 20px 5px #ff9800;
+            }
+            40% {
+                background: #e91e63;
+                box-shadow: 0 0 20px 0 #e91e63;
+            }
+            60% {
+                background: #44a227;
+                box-shadow: 0 0 20px 0 #44a227;
+            }
+            80% {
+                background: #2196f3;
+                box-shadow: 0 0 20px 5px #2196f3;
+            }
+            100% {
+                background: #673ab7;
+                box-shadow: 0 0 20px 10px #673ab7;
+            }
+        }
+
+        .bg-colori {
+            animation: bg_colori linear 8s infinite;
+        }
     </style>
+        <script>
+        $(document).ready(function() {
+            $('a').on('click', function (e) {
+                e.preventDefault();
+                let data_link = $(this).data('link')
+
+                if (data_link === "menu") {
+                    $link = "{{ url_for('menu') }}"
+                }
+
+                page_loader($link)
+            })
+        })
+
+        function page_loader(link) {
+            $.ajax({
+                url: link,
+                type: 'GET',
+                dataType: 'text',
+                success: function (response) {
+                    let body = $('html')
+                    body.fadeOut(500)
+
+                    setTimeout(function () {
+                        body.html('')
+                    }, 550)
+
+                    setTimeout(function () {
+                        body.fadeIn(500)
+                        window.location.replace("{{ url_for('menu') }}")
+                    },560)
+                }
+            })
+        }
+    </script>
+
 {% endblock %}
 
 {% block body %}
@@ -35,18 +102,10 @@
                     class="grid animate__animated animate__bounceIn grid-cols-3 w-full sm:w-11/12 md:w-10/12 lg:w-9/12 mx-auto gap-8 pt-5 sm:pt-10">
                 <div class="col-span-3 mx-auto sm:mx-none sm:col-span-1 sm:mt-6 relative">
                     <ul>
-                        <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-blue-600 text-white animate__animated animate__delay-1s animate__fadeInDown">
-                            <a href="{{ url_for('menu') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                                    class="absolute p-3 sm:p-3 h-36 pt-4 right-0 top-0 border-l-4 bg-white bg-opacity-20 gb gb_shopping_basket"></i><span
-                                    class="text-lg sm:text-xl font-bold pr-1">فهرست</span></a></li>
-                        <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-yellow-500 text-white mx-3 sm:mx-0 sm:my-8 animate__animated animate__delay-2s animate__fadeInDown">
-                            <a href="{{ url_for('contact_us') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                                    class="absolute p-3 h-36 right-0 pt-4 top-0 border-l-4 bg-white bg-opacity-20 gb gb_phone"></i><span
-                                    class="text-lg sm:text-xl font-bold pr-1">تماس</span></a></li>
-                        <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white animate__animated animate__delay-3s animate__fadeInDown">
-                            <a href="{{ url_for('about_us') }}" class="text-md text-2xl md:text-3xl text-center "><i
-                                    class="absolute p-3 h-36 right-0 pt-4 top-0 border-l-4 bg-white bg-opacity-20 gb gb_info"></i><span
-                                    class="text-lg sm:text-xl font-bold pr-1">درباره ما</span></a></li>
+                        <li class="cursor-pointer py-2 pb-4 inline-block sm:block pr-12 text-center relative overflow-hidden border-4 border-opacity-50 rounded-xl w-64 transition text-white bg-colori transform hover:scale-125">
+                            <a data-link="menu" class="text-md text-2xl md:text-3xl text-center"><i
+                                    class="absolute p-3 sm:p-3 sm:pt-4 h-36 pt-4 right-0 top-0 border-l-4 bg-white bg-opacity-20 gb gb_play_arrow"></i><span
+                                    class="text-lg sm:text-xl font-bold pr-3">برای ورود کلیک کنید</span></a></li>
                     </ul>
                 </div>
                 <div id="coffee_logo" class="mx-auto top-6 col-span-3 sm:col-span-2 relative"
@@ -65,7 +124,7 @@
                      class="transform ring-8 ring-yellow-900 ring-opacity-50 -skew-y-3 bg-yellow-900 fixed w-fu ll sm:w-10/12 md:w-9/12 lg:w-8/12 mx-auto shadow-2xl h-28 sm:rounded-xl sm:rounded-b-none left-0 right-0 z-20 overflow-visible"
                      style="bottom: -400px;transition: bottom 600ms linear">
                 <a onclick="$(this).parent().slideUp(100,function(){$('#coffee_logo').addClass('mt-24')})"
-                   class="cursor-pointer z-30 text-white text-4xl rounded-full p-2 text-center absolute bg-yellow-900 bg-opacity-30 right-0 mr-1 top-0">&times</a>
+                   class="cursor-pointer z-30 text-white text-4xl rounded-full p-2 pt-0 text-center absolute bg-yellow-900 bg-opacity-30 right-0 mr-1 top-0">&times</a>
                 <span class="absolute transform skew-y-3 rounded-2xl ring-4 p-2 pl-4 ring-white ring-opacity-50 bg-yellow-800 -rotate-3 text-white block left-4 w-25 z-40 text-xl"
                       style="top: -45px;"><i class="gb gb_face gb_s36 mb-1 ml-1"></i><span class="relative -top-2"> محمد امین طهرانی</span></span>
                 <p class="transform skew-y-3 relative mt-9 mr-3 text-yellow-100 text-lg sm:text-xl lg:text-2xl"><i class="gb gb_"></i> کافه لبخند یکی
