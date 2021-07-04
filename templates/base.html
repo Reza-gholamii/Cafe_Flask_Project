@@ -11,14 +11,14 @@
     {% block css_pages %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
     {% endblock %}
-    {% block tailwindcss %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
-    {% endblock %}
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     {% block bootstrap %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    {% endblock %}
+    {% block tailwindcss %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <title>کافه لبخند | {% block title %}{% endblock %}</title>
@@ -26,7 +26,7 @@
     {% block api_pages %}
         <script>
             $(document).ready(function () {
-                $('a').on('click', function (e) {
+                $('a[data-link]').on('click', function (e) {
                     e.preventDefault();
                     let data_link = $(this).data('link')
 
