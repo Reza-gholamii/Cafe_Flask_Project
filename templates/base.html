@@ -21,7 +21,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <title>کافه لبخند | {% block title %}{% endblock %}</title>
     {% block extra_head %}{% endblock %}
-    <script>
+    {% block pagify %}
+            <script>
         $(document).ready(function() {
           $('#body').pagify({
             pages: ['menu', 'about_us', 'contact_us'],
@@ -31,6 +32,7 @@
           });
         });
     </script>
+    {% endblock %}
 </head>
 <body>
 {% block nav %}
