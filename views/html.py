@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO,
 
 db_manager = ExtraDataBaseManager()
 
-status_dict = {'new': 'جدید', 'cooking': 'در حال پخت', 'serving': 'سرو شده', 'canceled': 'کنسل شده'}
+# status_dict = {'new': 'جدید', 'cooking': 'در حال پخت', 'serving': 'سرو شده', 'canceled': 'کنسل شده'}
 
 from core.manager import *
 
