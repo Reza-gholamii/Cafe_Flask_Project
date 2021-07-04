@@ -17,8 +17,8 @@ def register_cashier():
 
         db = dbmanager.DataBaseManager()
 
-        res = db.read_condition("users", "phone_number", phone_number[1:])
-        print(res)
+        res = db.read_condition("users", "phone_number", phone_number[-9:])
+        #print(res)
         if res:
             exception.UserExistError()
 
@@ -40,9 +40,9 @@ def register_cashier():
                                )
     password = sha256(password.encode()).hexdigest()
 
-    print(sha256(password.encode()).digest().decode())
+    # print(sha256(password.encode()).digest().decode())
     u = user_model.User(firstname, lastname, phone_number[2:], password, email)
     print(u.to_dict())
 
     # dbmanager.DataBaseManager().create("users", u)
-    print("user added successfully")
+    print("user added successfully")  # TODO: convert this prints to log info
