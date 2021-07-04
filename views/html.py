@@ -54,13 +54,19 @@ def contact_us():
         return render_template("contact_us.html")
 
     else:
+        # _vars = dict(request.form)
+        # message = TextMessage(**_vars)
+        # # TODO: use try and except for exceptions handeling after check validate
+        # db_manager.create(table="messages", model=message)
+        # logging.info(f"{__name__}: Message has Written into the DataBase")
+        # # TODO: show alert for send message successfully and next ...?
+        # return redirect(url_for('home'))
+
         _vars = dict(request.form)
         message = TextMessage(**_vars)
-        # TODO: use try and except for exceptions handeling after check validate
         db_manager.create(table="messages", model=message)
         logging.info(f"{__name__}: Message has Written into the DataBase")
-        # TODO: show alert for send message successfully and next ...?
-        return redirect(url_for('home'))
+        return {"Data Received": 200, "msg": "پیام شما با موفقیت ارسال گردید\nاز نظردهی شما بسیار سپاسگزاریم"}
 
 
 def menu():

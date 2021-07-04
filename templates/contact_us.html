@@ -142,7 +142,8 @@
                 </div>
                 <div class="col-12 col-lg-6" id="msg">
                     <section>
-                        <form action="{{ url_for('contact_us') }}" method="POST">
+                        <!-- <form action="{{ url_for('contact_us') }}" method="POST"> -->
+                        <form>
                             <div class="container">
                                 <div class="form-row">
                                     <div class="col-12 mt-4 mb-3 input-group" dir="ltr">
@@ -167,8 +168,9 @@
                                         <textarea tabindex="5" class="form-control  text-right" rows="14" name="comment"
                                             placeholder="* پیام شما" required></textarea>
                                     </div>
-                                    <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
-                                        value="ارسال">
+                                    <!-- <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
+                                            value="ارسال"> -->
+                                    <button type="button" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2" onclick="SendMessage()">ارسال</button>
                                 </div>
                             </div>
                         </form>
@@ -178,4 +180,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    function SendMessage(){
+        $.post('{{ url_for("contact_us") }}',$('form').serialize(), function(data){
+            alert(data.msg);
+        });
+        $('form').each(function(){
+            this.reset();
+        });
+    }
+</script>
+
 {% endblock %}
