@@ -397,3 +397,37 @@ def user_seter():
         return int(id)
     else:
         return redirect("login")
+
+
+def api(page):
+    if page == "menu":
+        two_person_table_number = [table.number for table in Table.TABLES.values() if
+                                   table.status == 12 and table.capacity == 2]
+        four_person_table_number = [table.number for table in Table.TABLES.values() if
+                                    table.status == 12 and table.capacity == 4]
+        eight_person_table_number = [table.number for table in Table.TABLES.values() if
+                                     table.status == 12 and table.capacity == 8]
+        two_person_table_number.sort()
+        four_person_table_number.sort()
+        eight_person_table_number.sort()
+
+        table_number = [two_person_table_number, four_person_table_number, eight_person_table_number]
+        items = db_manager.read_all('menu_items')
+        categories = db_manager.category_list()
+        items = list(map(lambda item: list(item), items))
+        image_names = [item[4] for item in items]
+        categories_dict = {}
+        categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
+        for item in items:
+            item[2] = categories_dict[item[2]]
+
+        return render_template('spa_api/' + page + '.html', items=items, table_number=table_number,
+                               cat=list(categories_dict.values()), images=image_names)
+
+    if page == "about_us":
+        return render_template('spa_api/' + page + '.html', page_name="about_us")
+
+    if page == "contact_us":
+        return render_template('spa_api/' + page + '.html')
+
+    return "API : Data Request Not Valid!"
