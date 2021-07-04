@@ -1,6 +1,93 @@
 {% extends "base.html" %}
+{% block tailwindcss %}{% endblock %}
 {% block title %}تماس با ما{% endblock %}
 {% block extra_head %}
+<style>
+    :root {
+        --Background: #fafafa;
+    }
+
+    html {
+        direction: rtl;
+    }
+
+    body {
+        background-color: #c8c8c8;
+        padding-top: 10px;
+    }
+
+    .bg-caffe {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        opacity: 0.3;
+        background: url(../static/img/bg.jpg);
+    }
+
+    * {
+        font-family: Yekan, sans-serif;
+    }
+
+    .Vazir {
+        font-family: Vazir, sans-serif;
+    }
+
+    .rtl {
+        direction: rtl;
+    }
+
+    .ltr {
+        direction: ltr;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    a {
+        text-decoration: none !important;
+    }
+
+    a.text-md, a.text-md:hover {
+        color: #fff !important;
+    }
+
+    .card {
+        max-width: 1200px;
+    }
+
+    .btn-coffee {
+        color: #fafafa;
+        background-color: #3d1800;
+        border-color: #3d1800;
+    }
+
+    .btn-coffee:hover {
+        color: #000;
+    }
+
+    @media only screen and (min-width: 992px) {
+        body {
+            padding: 1rem 2rem;
+        }
+
+        .card {
+            margin: 2rem auto;
+        }
+
+        #loc {
+            border-left: 1px solid #999;
+        }
+    }
+
+    @media only screen and (max-width: 992px) {
+        #loc {
+            border-bottom: 1px solid #999;
+        }
+    }
+</style>
 {% endblock %}
 {% block body %}
     <div class="card shadow rounded mt-8">
@@ -43,29 +130,29 @@
                             <form>
                                 <div class="container">
                                     <div class="form-row">
-                                        <div class="col-12 mt-4 mb-3 input-group" dir="ltr">
+                                        <div class="col-12 mt-4 mb-3 input-group ltr">
                                             <input type="text" class="form-control text-right" tabindex="1"
-                                                   placeholder="* نام"
+                                                   placeholder="نام *"
                                                    name="first_name" required>
                                             <input type="text" tabindex="2" class="form-control text-right"
-                                                   placeholder="* نام خانوادگی" name="last_name" required>
+                                                   placeholder="نام خانوادگی *" name="last_name" required>
                                         </div>
-                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3 input-group" dir="ltr">
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3 input-group ltr">
                                             ​
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">09</span>
                                             </div>
                                             <input type="text" tabindex="3" class="form-control text-right"
-                                                   placeholder="* تلفن همراه" name="phone_number" minlength="9"
+                                                   placeholder="تلفن همراه *" name="phone_number" minlength="9"
                                                    maxlength="9"
                                                    required>
                                         </div>
-                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3" dir="ltr">
+                                        <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3 ltr">
                                             <input type="text" tabindex="4" class="form-control text-right"
                                                    placeholder="نشانی پستی(اختیاری)" name="email">
                                         </div>
-                                        <div class="col-12 mb-4" dir="ltr">
-                                        <textarea tabindex="5" class="form-control  text-right" rows="14" name="comment" placeholder="* پیام شما" required></textarea>
+                                        <div class="col-12 mb-4 ltr">
+                                        <textarea tabindex="5" class="form-control  text-right" rows="14" name="comment" placeholder="پیام شما *" required></textarea>
                                         </div>
                                         <!-- <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
                                                 value="ارسال"> -->
