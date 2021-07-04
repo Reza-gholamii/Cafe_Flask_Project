@@ -24,7 +24,7 @@ class MenuItem(BaseModel):
     cooking_time: Optional[time]  # Estimated cooking time
     serving_time: Optional[time]  # Serving time period
     status: int  # active or deactive in list
-    MENU_ITEMS = Category.CATEGORIES  # collection of all menu items model in cafe from database
+    MENU_ITEMS = Category.CATEGORIES.copy()  # collection of all menu items model in cafe from database
 
     def __init__(self, title, price, category, discount=0,
                  image_name=None, cooking_time=None, serving_time=None, status="موجود"):
