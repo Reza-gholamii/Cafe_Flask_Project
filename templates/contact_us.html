@@ -185,9 +185,9 @@
     function SendMessage(){
         $.post('{{ url_for("contact_us") }}',$('form').serialize(), function(data){
             alert(data.msg);
-        });
-        $('form').each(function(){
-            this.reset();
+            $('form').each(function(){
+                this.reset();
+            });
         });
     }
 </script>
