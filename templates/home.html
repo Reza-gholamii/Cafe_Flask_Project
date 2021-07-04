@@ -4,10 +4,6 @@
 {% block title %}خانه{% endblock %}
 {% block extra_head %}
     <style>
-    
-        body {
-            background: #fafafa;
-        }
 
         body > div:first-child > div:first-child {
             background: #E1E1E1 url({{ url_for('static', filename='img/bg-home.jpg') }});
@@ -97,7 +93,8 @@
     </script>
 
 {% endblock %}
-
+{% block nav %}{% endblock %}
+{% block header %}{% endblock %}
 {% block body %}
     <div class="fixed top-0 bottom-0 right-0 left-0">
         <div class="fixed inset-2 md:inset-4 gap-0 animate__animated animate__fadeIn overflow-hidden rounded"
