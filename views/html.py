@@ -38,7 +38,7 @@ def home():
 
 
 def recipe(_id):
-    print("whatttt??????")
+    # print("whatttt??????")
     return render_template("recpie.html", ID=_id)
 
 
@@ -97,14 +97,12 @@ def menu():
         table_num = int(json_data['table_number'])
         recepite = Recepite(table_num)
 
-        orders = []
+        # orders = []
         for i in range(len(json_data['item_list'])):
-            # TODO: use recepite methods of class for easy add order for this price
-            orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
-        # return {"Data Received": 200}
-        print()
-        # return redirect(url_for("recipe", _id=recepite.number))
-        return f"/recipe/{recepite.number}"
+            # orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
+            recepite.add_order(json_data['item_list'][i], count=json_data['count_list'][i])
+        return redirect(url_for("recipe", _id=recepite.number))
+        # return f"/recipe/{recepite.number}"
 
 
 # fro here all are for cashier side

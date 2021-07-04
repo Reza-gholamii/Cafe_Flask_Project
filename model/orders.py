@@ -27,8 +27,8 @@ class Order(BaseModel):
         for category in MenuItem.MENU_ITEMS:
             for subcategory in MenuItem.MENU_ITEMS[category]:
                 if menu_item in MenuItem.MENU_ITEMS[category][subcategory]:
-                    items = MenuItem.MENU_ITEMS[category][subcategory]
-                    if items[menu_item].status == STATUSES["menu_items"]["موجود"]:
+                    item = MenuItem.MENU_ITEMS[category][subcategory][menu_item]
+                    if item.status == STATUSES["menu_items"]["موجود"]:
                         flag = True
 
         if flag:
