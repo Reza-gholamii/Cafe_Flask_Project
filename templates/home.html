@@ -2,10 +2,11 @@
 
 {% block bootstrap %}{% endblock %}
 {% block title %}خانه{% endblock %}
+{% block pagify %}{% endblock %}
 {% block extra_head %}
     <style>
 
-        body > div:first-child > div:first-child {
+        #body > div:first-child > div:first-child {
             background: #E1E1E1 url({{ url_for('static', filename='img/bg-home.jpg') }});
         }
 

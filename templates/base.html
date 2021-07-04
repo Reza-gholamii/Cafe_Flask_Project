@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pagify.js') }}"></script>
     {% block bootstrap %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
@@ -20,6 +21,18 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <title>کافه لبخند | {% block title %}{% endblock %}</title>
     {% block extra_head %}{% endblock %}
+    {% block pagify %}
+            <script>
+        $(document).ready(function() {
+          $('#body').pagify({
+            pages: ['menu', 'about_us', 'contact_us'],
+            animation: 'fadeIn',
+            'default': 'menu',
+            cache: true
+          });
+        });
+    </script>
+    {% endblock %}
 </head>
 <body>
 {% block nav %}
@@ -27,19 +40,19 @@
 <div class="mx-auto relative my-8 text-center">
     <ul>
         <li class="animate__animated animate__fadeInDown animate__delay-1s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-24 pr-11 sm:w-40 transition bg-green-500 text-white">
-            <a data-link="home" href="{{ url_for('home') }}" class="text-md text-2xl md:text-3xl text-center">
+            <a href="#menu" class="text-md text-2xl md:text-3xl text-center">
                 <i class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_storage"></i>
                 <span class="text-lg sm:text-xl Vazir">فهرست</span>
             </a>
         </li>
         <li class="animate__animated animate__fadeInDown animate__delay-2s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-28 pr-11 sm:w-40 transition bg-yellow-500 text-white mx-3">
-            <a data-link="about_us" href="{{ url_for('about_us') }}" class="text-md text-2xl md:text-3xl text-center">
+            <a href="#about_us" class="text-md text-2xl md:text-3xl text-center">
                 <i class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_info"></i>
                 <span class="text-lg sm:text-xl Vazir">درباره ما</span>
             </a>
         </li>
         <li class="animate__animated animate__fadeInDown animate__delay-3s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-32 pr-11 sm:w-40 transition bg-blue-600 text-white">
-            <a data-link="contact_us" href="{{ url_for('contact_us') }}" class="text-md text-2xl md:text-3xl sm:text-center">
+            <a href="#contact_us" class="text-md text-2xl md:text-3xl sm:text-center">
                 <i class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_phone"></i>
                 <span class="text-lg sm:text-xl Vazir">تماس باما</span>
             </a>
