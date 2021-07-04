@@ -40,8 +40,11 @@
                     <ul id="menu_left_side" class="nav-list"
                         style="padding: 0 2em !important;  text-align: center !important;">
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="dashboard" else "" }} ">
-                            <i
-                                    class="gb gb_dashboard gb_s24 menu-icon "></i>داشبورد
+                             <a href="{{ url_for("dashboard") }} " class="hover:text-blue-400">
+                                <i
+                                        class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                داشبورد
+                            </a>
                         </li>
 
                         <li data-toggle="collapse" data-target="#demo"
@@ -73,8 +76,11 @@
                             </a>
                         </li>
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="menu" else "" }}">
-                            <i
-                                    class="gb gb_restaurant_menu gb_s24 menu-icon"></i>منو
+                             <a href="{{ url_for("menu_items") }} " class="hover:text-blue-400">
+                                <i
+                                        class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                منو
+                            </a>
                         </li>
                     </ul>
                 </nav>

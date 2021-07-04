@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="fa-IR">
-<head>
-    <meta charset="UTF-8">
-    <title>صندوقدار | لیست منو</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
-    <link href="https://v1.fontapi.ir/css/Yekan" rel="stylesheet">
-    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" type="image/x-icon"
+{% extends "cashier/cashier_base.html" %}
+{% block title %}لیست منو{% endblock %}
+{% block bootstrap %}{{ super() }}{% endblock %}
+{% block tailwindcss %}{% endblock %}
+{% block extra_head %}
+   <link rel="shortcut icon" type="image/x-icon"
           href="https://icons.iconarchive.com/icons/graphicloads/food-drink/32/coffee-bean-icon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="../../static/css/fonts.css">
-    <style>
+      <style>
         :root {
             --Background: #fafafa;
         }
@@ -78,8 +72,9 @@
             list-style: none;
         }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
 <div class="container p-4">
     <ul class="px-0">
 
@@ -240,5 +235,4 @@
     var user_id = '{{id}}';
 </script>
 <script src="../../static/js/menu_items.js"></script>
-</body>
-</html>
+{% endblock %}
