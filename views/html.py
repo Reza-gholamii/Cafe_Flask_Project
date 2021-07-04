@@ -38,8 +38,10 @@ def home():
 
 
 def recipe(_id):
-    # print("whatttt??????")
-    return render_template("recpie.html", ID=_id)
+    if db_manager.read("recepites", _id):
+        return render_template("recpie.html", ID=_id)
+    else:
+        return render_template("404.html")
 
 
 def about_us():
@@ -80,12 +82,12 @@ def menu():
         items = db_manager.read_all('menu_items')
         categories = db_manager.category_list()
         items = list(map(lambda item: list(item), items))
-        image_names = [item[4] for item in items]
+        image_names = [(item[4] if item[4] else "") for item in items]
         categories_dict = {}
         categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
         for item in items:
             item[2] = categories_dict[item[2]]
-            item[3] = item[1] * (1 - (item[3] / 100))
+            item[3] = int(item[1] * (1 - (item[3] / 100)))
 
         # print(list(categories_dict.values()))
         return render_template("menu-test.html", items=items, table_number=table_number,
@@ -101,8 +103,8 @@ def menu():
         for i in range(len(json_data['item_list'])):
             # orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
             recepite.add_order(json_data['item_list'][i], count=json_data['count_list'][i])
-        return redirect(url_for("recipe", _id=recepite.number))
-        # return f"/recipe/{recepite.number}"
+        # return redirect(f"/recipe/{recepite.number}")
+        return f"/recipe/{recepite.number}"
 
 
 # fro here all are for cashier side
