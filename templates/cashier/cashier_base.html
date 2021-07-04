@@ -82,6 +82,14 @@
                                 منو
                             </a>
                         </li>
+
+                         <li class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="recipe" else "" }} ">
+                             <a href="{{ url_for("recepits") }} " class="hover:text-blue-400">
+                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                صورت حساب ها
+                            </a>
+                        </li>
+
                     </ul>
                 </nav>
             </div>

@@ -295,7 +295,7 @@ def cancelled_order_list(_id):
         return {"Data Received": 200}
 
 
-def recepit_list(_id):
+def recepit_list():
     if request.method == "GET":
         orders = []
         recepits_list = db_manager.read_all('recepites')
@@ -307,7 +307,7 @@ def recepit_list(_id):
             recepit[2] = change_status_lang_by_number(str(recepit[2]))
             orders.append(order)
             recepit.append(order[0][5].strftime('%m.%d.%Y'))
-        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, id=_id)
+        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, page_name="recipe")
 
     else:
         json_data = request.get_json()
