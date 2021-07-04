@@ -315,7 +315,7 @@ def recepit_list(_id):
 empty_table = [1, 3, 4, 7]
 
 
-def dashboard(_id):
+def dashboard():
     # this codes should be in all cashier side functions to get user and security reasons
     __ = user_seter()
     if type(__) == int:
@@ -336,49 +336,46 @@ def dashboard(_id):
         'count_view': 15
     }
 
-    return render_template('cashier/dashboard.html', user=user_data, data=data)
+    return render_template('cashier/dashboard.html', user=user_data, data=data, page_name="dashboard")
+
+
+def tables():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
+    tables = ExtraDataBaseManager().read_all("tables")
+    # TODO: where is order number?
+
+    return render_template("cashier/tables.html", tables=tables, user=user_data, page_name="tables")
 
 
 def login():
     if request.method == "GET":
         __ = user_seter()
         if type(__) == int:
-            return redirect(f"/cashier/{__}")
+            return redirect(f"/cashier")
 
         return render_template("cashier/login_cachier.html")
     elif request.method == "POST":
         resp = request.form
         try:
             user = DataBaseManager().check_record("users", phone_number=resp["username"][2:])[0]
-            print(user, "sdfsdf")
+
         except:
             return render_template("cashier/login_cachier.html", condition="warning")
         password_hashed = sha256(resp["password"].encode()).hexdigest()
         if user[-3] == password_hashed:
-            html_str = redirect(f"/cashier/{user[-1]}")
+            html_str = redirect(f"/cashier")
             response = make_response(html_str)
             response.set_cookie(
                 '_ID', str(user[-1]), max_age=timedelta(weeks=1))
             return response
         else:
             return render_template("cashier/login_cachier.html", condition="warning")
-
-
-def tables(_id):
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)
-        user = model.users.User(user_data[0], user_data[1], user_data[2], user_data[4], user_data[3])
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    tables = ExtraDataBaseManager().read_all("tables")
-    # TODO: where is order number?
-    print("where are here")
-    print(tables)
-    #
-    return render_template("cashier/tables.html", tables=tables, user=user)
 
 
 def charts():
