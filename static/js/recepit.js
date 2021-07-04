@@ -54,4 +54,8 @@ $("#paid-button").on("click", function () {
     });
 });
 
+$("#archive-button").on("click", function () {
+    $("#total_table tr").show()
+});
+
 
