@@ -102,9 +102,9 @@ def menu():
             # TODO: use recepite methods of class for easy add order for this price
             orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
         # return {"Data Received": 200}
-        print(f"/recipe/{recepite.number}")
+        print()
         # return redirect(url_for("recipe", _id=recepite.number))
-        return redirect("http://google.com")
+        return f"/recipe/{recepite.number}"
 
 
 # fro here all are for cashier side

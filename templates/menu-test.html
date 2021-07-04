@@ -99,8 +99,6 @@ $("#basket").submit(function (event) {
     $values = {}
     $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
 
-    console.log($inputs)
-    console.log($values)
 
     let len = Number((Object.keys($values).length-2)/2)
 
@@ -117,14 +115,15 @@ $("#basket").submit(function (event) {
         "count_list": count_list,
         "item_list": item_list
     }
+
 $.ajax({
     type: 'POST',
     contentType: 'application/json',
-    url: '{{ url_for("menu") }}',
+    url: "{{ url_for('menu') }}",
     dataType: 'json',
     data: JSON.stringify(data),
     success: function (result) {
-        console.log("ok", result);
+    }, error: function (result) {
 
         setTimeout(function () {
             $('#shopping_list').fadeOut(650)
@@ -137,11 +136,9 @@ $.ajax({
         }, 100)
 
         setTimeout(function () {
-            window.location.replace("{{ url_for('home') }}");
+            window.location.replace(result.responseText);
         }, 7000)
 
-    }, error: function (result) {
-        console.log(result);
     }
 });
 })
