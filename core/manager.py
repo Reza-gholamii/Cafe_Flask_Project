@@ -127,7 +127,7 @@ class ExtraDataBaseManager(DataBaseManager):
     Extra Methods for DataBase Manager Executed the Other Queries
     """
 
-    def bestsellers(self, size: int = 3, start=None, end=None) -> List[tuple]:
+    def bestsellers(self, size: int, start=None, end=None) -> List[tuple]:
         """
         Query to Find the Best Selling Products
         """
@@ -144,9 +144,9 @@ ORDER BY Sellers DESC;
 
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
-            result = cafe_cursor.fetchmany(size)
+            result = cafe_cursor.fetchall()
 
-        return result
+        return result[:size]
 
     def statusfilter(self, table: str, status: str) -> List[int]:
         """
@@ -305,13 +305,13 @@ ON menu_items.category = categories.id ORDER BY orders.{ordered};
 
         return result
     
-    def report_orders(self, week=True) -> List[Tuple[int, int]]:
+    def report_orders(self, field) -> List[Tuple[int, int]]:
         """
         Create Report with Data for Chart Page in Cashier Dashboard
         """
         
         query = f"""
-SELECT EXTRACT({'ISODOW' if week else 'HOUR'} FROM time_stamp) AS Field,
+SELECT EXTRACT({'ISODOW' if field == "weekday" else 'HOUR'} FROM time_stamp) AS Field,
 COUNT(*) FROM orders GROUP BY Field ORDER BY Field ASC;
 """
 

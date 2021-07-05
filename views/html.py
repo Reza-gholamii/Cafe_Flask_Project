@@ -208,7 +208,7 @@ def archive_list(_id):
 def new_order_list(_id):
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
-        new_orders = [list(order) for order in all_orders if order[5] == 'new']
+        new_orders = [list(order) for order in all_orders if order[5] == 'جدید']
         for order in new_orders:
             order[5] = change_status_lang(order[5])
         new_orders.sort(key=lambda x: x[0], reverse=True)
@@ -224,7 +224,7 @@ def new_order_list(_id):
 def cooking_order_list(_id):
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
-        cooking_orders = [list(order) for order in all_orders if order[5] == 'cooking']
+        cooking_orders = [list(order) for order in all_orders if order[5] == 'در حال پخت']
         for order in cooking_orders:
             order[5] = change_status_lang(order[5])
         cooking_orders.sort(key=lambda x: x[0], reverse=True)
@@ -240,7 +240,7 @@ def cooking_order_list(_id):
 def served_order_list(_id):
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
-        serving_orders = [list(order) for order in all_orders if order[5] == 'serving']
+        serving_orders = [list(order) for order in all_orders if order[5] == 'سرو شده']
         for order in serving_orders:
             order[5] = change_status_lang(order[5])
         serving_orders.sort(key=lambda x: x[0], reverse=True)
@@ -272,7 +272,7 @@ def paid_order_list(_id):
 def cancelled_order_list(_id):
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
-        canceled_orders = [list(order) for order in all_orders if order[5] == 'canceled']
+        canceled_orders = [list(order) for order in all_orders if order[5] == 'کنسل شده']
         for order in canceled_orders:
             order[5] = change_status_lang(order[5])
         canceled_orders.sort(key=lambda x: x[0], reverse=True)
@@ -390,7 +390,14 @@ def login():
 
 
 def charts():
-    return 'charts page'
+    day_report = db_manager.report_orders("weekday")
+    hour_report = db_manager.report_orders("hour")
+    best_sellers = db_manager.bestsellers(3)
+
+    weekdays, hours, bests = [], [], []
+    # TODO: create data list
+
+    return render_template("cashier/charts.html", days=weekdays, hours=hours, bests=bests)
 
 
 def user_seter():
