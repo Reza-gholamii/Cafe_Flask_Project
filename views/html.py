@@ -343,12 +343,15 @@ def dashboard():
     # }
 
     last_message = db_manager.last_row("messages")
+    today = date.today().strftime("%Y-%m-%d")
 
     data = {
         'last_message': last_message[0] if last_message else (),
         'count_new_orders': len(db_manager.statusfilter("orders", "جدید")),
-        'count_orders': len(db_manager.read_all("orders", today=date.today().strftime("%Y-%m-%d"))),
+        'count_orders': len(db_manager.read_all("orders", today=today)),
         'count_empty_tables': len(db_manager.statusfilter("tables", "خالی")),
+        'all_incoming': db_manager.incoming(),
+        'today_incoming': db_manager.incoming(today)
         # 'count_view': 15
     }
 
