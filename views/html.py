@@ -196,7 +196,7 @@ def archive_list(_id):
         for order in all_orders:
             order[5] = change_status_lang(order[5])
         all_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/new_orders_list.html", orders=all_orders, id=_id)
+        return render_template("cashier/archive_list.html", orders=all_orders, id=_id)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
