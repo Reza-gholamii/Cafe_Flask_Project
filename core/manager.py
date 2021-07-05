@@ -127,15 +127,16 @@ class ExtraDataBaseManager(DataBaseManager):
     Extra Methods for DataBase Manager Executed the Other Queries
     """
 
-    def bestsellers(self, size: int = 3) -> List[tuple]:
+    def bestsellers(self, size: int = 3, start=None, end=None) -> List[tuple]:
         """
         Query to Find the Best Selling Products
         """
 
-        query = """
+        query = f"""
 SELECT menu_items.id, title, SUM(orders.count) AS Sellers
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
+{f"'{start}' <= orders.time_stamp::DATE <= '{end}'" if start and end else ''}
 GROUP BY menu_items.id
 ORDER BY Sellers DESC;
 """
