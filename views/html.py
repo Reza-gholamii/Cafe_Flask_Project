@@ -396,7 +396,18 @@ def charts():
     best_sellers = db_manager.bestsellers(3)
 
     weekdays, hours, bests = [], [], []
-    # TODO: create data list
+    for item in best_sellers:
+        bests.append((item[1], item[2]))
+    
+    for days in range(6, 13):
+        for item in day_report:
+            if item[0] == (days % 7 or days % 7 + 1):
+                weekdays.append(item[1])
+            else:
+                weekdays.append(0)
+    
+    for hour in range(10, 24, 2):
+        pass
 
     return render_template("cashier/charts.html", days=weekdays, hours=hours, bests=bests)
 
