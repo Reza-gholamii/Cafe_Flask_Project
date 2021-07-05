@@ -2,7 +2,7 @@ from pprint import pprint
 
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
-from datetime import timedelta
+from datetime import timedelta, date
 from core.utility import *
 import model.users
 from core.manager import ExtraDataBaseManager, DataBaseManager
@@ -341,11 +341,15 @@ def dashboard():
     #     'count_empty_tables': len(empty_table),
     #     'count_view': 15
     # }
+
+    last_message = db_manager.last_row("messages")
+
     data = {
-        'count_new_orders': 12,
-        'count_orders': 12 + len(served_orders),
-        'count_empty_tables': len(empty_table),
-        'count_view': 15
+        'last_message': last_message[0] if last_message else (),
+        'count_new_orders': len(db_manager.statusfilter("orders", "جدید")),
+        'count_orders': len(db_manager.read_all("orders", today=date.today().strftime("%Y-%m-%d"))),
+        'count_empty_tables': len(db_manager.statusfilter("tables", "خالی")),
+        # 'count_view': 15
     }
 
     return render_template('cashier/dashboard.html', user=user_data, data=data, page_name="dashboard")
