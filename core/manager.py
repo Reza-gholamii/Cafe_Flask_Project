@@ -136,10 +136,8 @@ class ExtraDataBaseManager(DataBaseManager):
 SELECT menu_items.id, title, SUM(orders.count) AS Sellers
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
-{
-    f"WHERE orders.time_stamp::DATE >= '{start}' AND orders.time_stamp::DATE <= '{end}'"
-    if start and end else ''
-}
+{f"WHERE orders.time_stamp::DATE >= '{start}' AND orders.time_stamp::DATE <= '{end}'"
+if start and end else ''}
 GROUP BY menu_items.id
 ORDER BY Sellers DESC;
 """
@@ -304,6 +302,22 @@ ON menu_items.category = categories.id ORDER BY orders.{ordered};
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
             result = cafe_cursor.fetchmany(size)
+
+        return result
+    
+    def report_orders(self, week=True) -> List[Tuple[int, int]]:
+        """
+        Create Report with Data for Chart Page in Cashier Dashboard
+        """
+        
+        query = f"""
+SELECT EXTRACT({'ISODOW' if week else 'HOUR'} FROM time_stamp) AS Field,
+COUNT(*) FROM orders GROUP BY Field ORDER BY Field ASC;
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchall()
 
         return result
 
