@@ -292,7 +292,7 @@ ON menu_items.category = categories.id ORDER BY orders.{ordered};
 
         return result
 
-    def last_row(self, table: str, size: int = 1) -> List(tuple):
+    def last_row(self, table: str, size: int = 1) -> List[tuple]:
         """
         Returned Last Row from a Table Sorted by ID Primary Key
         """

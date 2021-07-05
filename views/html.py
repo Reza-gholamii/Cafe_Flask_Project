@@ -407,7 +407,11 @@ def charts():
                 weekdays.append(0)
     
     for hour in range(10, 24, 2):
-        pass
+        count = 0
+        for item in hour_report:
+            if hour <= item[0] < hour + 2:
+                count += item[1]
+        weekdays.append(count)
 
     return render_template("cashier/charts.html", days=weekdays, hours=hours, bests=bests)
 
