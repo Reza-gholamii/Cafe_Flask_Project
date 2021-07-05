@@ -205,14 +205,15 @@ def archive_list(_id):
         return {"Data Received": 200}
 
 
-def new_order_list(_id):
+def new_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         new_orders = [list(order) for order in all_orders if order[5] == 'جدید']
         for order in new_orders:
             order[5] = change_status_lang(order[5])
+        return render_template("cashier/new_orders_list.html", orders=new_orders)
         new_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/new_orders_list.html", orders=new_orders, id=_id)
+        return render_template("cashier/new_orders_list.html", orders=new_orders)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -221,14 +222,14 @@ def new_order_list(_id):
         return {"Data Received": 200}
 
 
-def cooking_order_list(_id):
+def cooking_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         cooking_orders = [list(order) for order in all_orders if order[5] == 'در حال پخت']
         for order in cooking_orders:
             order[5] = change_status_lang(order[5])
         cooking_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/cooking_orders_list.html", orders=cooking_orders, id=_id)
+        return render_template("cashier/cooking_orders_list.html", orders=cooking_orders)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -237,14 +238,14 @@ def cooking_order_list(_id):
         return {"Data Received": 200}
 
 
-def served_order_list(_id):
+def served_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         serving_orders = [list(order) for order in all_orders if order[5] == 'سرو شده']
         for order in serving_orders:
             order[5] = change_status_lang(order[5])
         serving_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/served_orders_list.html", orders=serving_orders, id=_id)
+        return render_template("cashier/served_orders_list.html", orders=serving_orders)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -253,14 +254,14 @@ def served_order_list(_id):
         return {"Data Received": 200}
 
 
-def paid_order_list(_id):
+def paid_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         paid_orders = [list(order) for order in all_orders if order[5] == 'paid']
         for order in paid_orders:
             order[5] = change_status_lang(order[5])
         paid_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/paid_orders_list.html", orders=paid_orders, id=_id)
+        return render_template("cashier/paid_orders_list.html", orders=paid_orders)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -269,14 +270,14 @@ def paid_order_list(_id):
         return {"Data Received": 200}
 
 
-def cancelled_order_list(_id):
+def cancelled_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         canceled_orders = [list(order) for order in all_orders if order[5] == 'کنسل شده']
         for order in canceled_orders:
             order[5] = change_status_lang(order[5])
         canceled_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders, id=_id)
+        return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders)
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -285,7 +286,7 @@ def cancelled_order_list(_id):
         return {"Data Received": 200}
 
 
-def recepit_list(_id):
+def recepit_list():
     if request.method == "GET":
         orders = []
         recepits_list = db_manager.read_all('recepites')
@@ -297,8 +298,8 @@ def recepit_list(_id):
             recepit[2] = change_status_lang_by_number(str(recepit[2]))
             orders.append(order)
             recepit.append(order[0][5].strftime('%m.%d.%Y'))
-        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, page_name="recipe",
-                               id=_id)
+        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, page_name="recipe"
+                               )
 
     else:
         json_data = request.get_json()
