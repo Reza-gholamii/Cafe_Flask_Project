@@ -84,6 +84,7 @@ def menu():
         items = db_manager.read_all('menu_items')
         categories = db_manager.category_list()
         items = list(map(lambda item: list(item), items))
+        items.sort(key=lambda x: x[8])
         image_names = [(item[4] if item[4] else "") for item in items]
         categories_dict = {}
         categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
@@ -416,7 +417,33 @@ def dashboard():
         # 'count_view': 15
     }
 
-    return render_template('cashier/dashboard.html', user=user_data, data=data, page_name="dashboard")
+    # Charts :
+    day_report = db_manager.report_orders("weekday")
+    hour_report = db_manager.report_orders("hour")
+    best_sellers = db_manager.bestsellers(3)
+
+    weekdays, hours, bests = [], [], []
+    for item in best_sellers:
+        bests.append((item[1], item[2]))
+
+    for days in range(6, 13):
+        for item in day_report:
+            if item[0] == (days % 7 or days % 7 + 1):
+                weekdays.append(item[1])
+            else:
+                weekdays.append(0)
+
+    for hour in range(10, 24, 2):
+        count = 0
+        for item in hour_report:
+            if hour <= item[0] < hour + 2:
+                count += item[1]
+        weekdays.append(count)
+
+    print(weekdays, hours, bests, sep="\n\n\n")
+
+    return render_template('cashier/dashboard.html', user=user_data, data=data, page_name="dashboard", days=weekdays,
+                           hours=hours, bests=bests)
 
 
 def tables():
@@ -456,32 +483,6 @@ def login():
             return response
         else:
             return render_template("cashier/login_cachier.html", condition="warning")
-
-
-def charts():
-    day_report = db_manager.report_orders("weekday")
-    hour_report = db_manager.report_orders("hour")
-    best_sellers = db_manager.bestsellers(3)
-
-    weekdays, hours, bests = [], [], []
-    for item in best_sellers:
-        bests.append((item[1], item[2]))
-
-    for days in range(6, 13):
-        for item in day_report:
-            if item[0] == (days % 7 or days % 7 + 1):
-                weekdays.append(item[1])
-            else:
-                weekdays.append(0)
-
-    for hour in range(10, 24, 2):
-        count = 0
-        for item in hour_report:
-            if hour <= item[0] < hour + 2:
-                count += item[1]
-        weekdays.append(count)
-
-    return render_template("cashier/charts.html", days=weekdays, hours=hours, bests=bests)
 
 
 def user_seter():
