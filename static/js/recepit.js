@@ -66,12 +66,12 @@ function sort_data(column) {
             let x = rows[j].getElementsByTagName("TD")[n];
             let y = rows[j + 1].getElementsByTagName("TD")[n];
             if (dir === "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                if (x.innerHTML > y.innerHTML) {
                     rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
                 }
             }
             if (dir === "desc") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                if (x.innerHTML < y.innerHTML) {
                     rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
                 }
             }
