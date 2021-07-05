@@ -46,7 +46,7 @@ class MenuItem(BaseModel):
 
         for group in self.__class__.MENU_ITEMS:
             if category in self.__class__.MENU_ITEMS[group]:
-                self.__class__.MENU_ITEMS[group][category][self.number] = self
+                self.__class__.MENU_ITEMS[group][category][self.title] = self
                 break
 
     def apply_discount(self, discount: int):

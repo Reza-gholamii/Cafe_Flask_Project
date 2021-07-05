@@ -99,8 +99,6 @@ $("#basket").submit(function (event) {
     $values = {}
     $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
 
-    console.log($inputs)
-    console.log($values)
 
     let len = Number((Object.keys($values).length-2)/2)
 
@@ -117,14 +115,15 @@ $("#basket").submit(function (event) {
         "count_list": count_list,
         "item_list": item_list
     }
+
 $.ajax({
     type: 'POST',
     contentType: 'application/json',
-    url: '{{ url_for("menu") }}',
+    url: "{{ url_for('menu') }}",
     dataType: 'json',
     data: JSON.stringify(data),
     success: function (result) {
-        console.log("ok", result);
+    }, error: function (result) {
 
         setTimeout(function () {
             $('#shopping_list').fadeOut(650)
@@ -137,11 +136,9 @@ $.ajax({
         }, 100)
 
         setTimeout(function () {
-            window.location.replace("{{ url_for('home') }}");
+            window.location.replace(result.responseText);
         }, 7000)
 
-    }, error: function (result) {
-        console.log(result);
     }
 });
 })
@@ -197,7 +194,7 @@ $.ajax({
                 <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">{{ items[i][0] }}</h3>
                 <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
                     <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400">
-                    <del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">{{ items[i][3] }}</del>{{ items[i][1] }}</span> تومان
+                    <del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">{{ items[i][1] }}</del>{{ items[i][3] }}</span> تومان
                 </div>
                 <a data-item="add_item" class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
                     به سبد خرید</a>

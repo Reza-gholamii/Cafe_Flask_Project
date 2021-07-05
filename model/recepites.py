@@ -81,3 +81,4 @@ class Recepite(BaseModel):
 
         order = Order(self.number, menu_item, count, time_stamp, status)
         self.orders[order.number] = order
+        self.sum_price()
