@@ -422,10 +422,6 @@ def dashboard():
     hour_report = db_manager.report_orders("hour")
     best_sellers = db_manager.bestsellers(3)
 
-    print(day_report)
-    print(hour_report)
-    print(best_sellers)
-
     weekdays, hours, bests = [], [], []
     for item in best_sellers:
         bests.append((item[1], item[2]))
@@ -444,7 +440,10 @@ def dashboard():
                 count += item[1]
         hours.append(count)
 
-    print(weekdays, hours, bests, sep="\n\n\n")
+    bests = {
+        'labels': [best[0] for best in bests],
+        'values': [best[1] for best in bests]
+    }
 
     return render_template('cashier/dashboard.html', user=user_data, data=data, page_name="dashboard", days=weekdays,
                            hours=hours, bests=bests)

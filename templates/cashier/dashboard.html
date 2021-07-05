@@ -77,7 +77,7 @@
             label: 'تعداد سفارش',
             backgroundColor: 'hsl(252, 82.9%, 67.8%)',
             borderColor: 'hsl(252, 82.9%, 67.8%)',
-            data: [0, 10, 5, 2, 20, 30, 45],
+            data: {{ hours }},
         }]
     };
 
@@ -98,14 +98,10 @@
 <script>
 
   const dataPie = {
-    labels: [
-      'نسکافه',
-      'قهوه اسپرسو',
-      'کاپوچینو'
-    ],
+    labels: {{ bests['labels'] | safe}},
     datasets: [{
       label: 'My First Dataset',
-      data: [300, 50, 100],
+      data: {{ bests['values'] }},
       backgroundColor: [
         'rgb(133, 105, 241)',
         'rgb(164, 101, 241)',
@@ -147,7 +143,7 @@
       label: "تعداد سفارشات",
       backgroundColor: 'hsl(252, 82.9%, 67.8%)',
       borderColor: 'hsl(252, 82.9%, 67.8%)',
-      data: [18, 10, 50, 20, 10, 30, 45],
+      data: {{ days }},
     }]
   };
 
