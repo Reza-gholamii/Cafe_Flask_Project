@@ -50,6 +50,10 @@
             border: 1px solid #868585;
         }
 
+        .sortable-column {
+            cursor: pointer;
+        }
+
         @media print {
             body * {
                 visibility: hidden;
@@ -120,9 +124,9 @@
                     <table id="main-table" class="table text-center table-hover mb-0">
                         <thead class="bg-info">
                         <tr>
-                            <th id=column0 data-dir="asc" onclick="sort_data('column0')">شماره صورتحساب</th>
-                            <th id=column1 data-dir="asc" onclick="sort_data('column1')">هزینه کل (تومان)</th>
-                            <th id=column2 data-dir="asc" onclick="sort_data('column2')">وضعیت</th>
+                            <th class="sortable-column" id=column0 data-dir="asc" onclick="sort_data('column0')">شماره صورتحساب</th>
+                            <th class="sortable-column" id=column1 data-dir="asc" onclick="sort_data('column1')">هزینه کل (تومان)</th>
+                            <th class="sortable-column" id=column2 data-dir="asc" onclick="sort_data('column2')">وضعیت</th>
                             <th>ویرایش</th>
                         </tr>
 
@@ -144,7 +148,7 @@
                             <td class="w-25 px-0">
                                 <a class="icon icon_refresh status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
                                    onclick="change_status(this)">
-                                    <i class="gb gb_autorenew"></i>
+                                    <i class="gb gb_content_paste"></i>
                                 </a>
                                 <a class="icon icon_check status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
                                    onclick="change_status(this)">
@@ -152,24 +156,13 @@
                                 </a>
                                 <a class="icon icon_trash status{{ loop.index0 }}" data-recepit="{{recepit.4}}"
                                    onclick="change_status(this)">
-                                    <i class="gb gb_delete"></i>
+                                    <i class="gb gb_cancel"></i>
                                 </a>
                             </td>
                         </tr>
                         {% endfor %}
 
                         </tbody>
-                        <!--                        <tfoot>-->
-                        <!--                        <div class="box-footer clearfix">-->
-                        <!--                            <ul class="pagination pagination-sm no-margin pull-right">-->
-                        <!--                                <li><a href="#" data-abc="true">«</a></li>-->
-                        <!--                                <li><a href="#" data-abc="true">1</a></li>-->
-                        <!--                                <li><a href="#" data-abc="true">2</a></li>-->
-                        <!--                                <li><a href="#" data-abc="true">3</a></li>-->
-                        <!--                                <li><a href="#" data-abc="true">»</a></li>-->
-                        <!--                            </ul>-->
-                        <!--                        </div>-->
-                        <!--                        </tfoot>-->
                     </table>
 
 
