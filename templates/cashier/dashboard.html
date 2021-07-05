@@ -40,23 +40,94 @@
             <b class="float-left text-3xl sm:text-4xl md:text-5xl p-4 sm:p-7 bg-white bg-opacity-20 rounded-3xl">81,000,000</b>
             <span class="absolute right-8 pt-4 sm:pt-8 float-right text-2xl font-bold">درآمد کل</span>
         </div>
-        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 overflow-hidden">
-            <div class="text-center text-2xl text-purple-600 my-4">گزارش سفارشات ساعتی امروز</div>
-            <canvas id="chartLine"></canvas>
+        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 lg:col-span-2 overflow-hidden">
+            <div class="text-center text-2xl text-purple-600 my-4">گزارش سفارشات ساعتی</div>
+            <canvas height="350" id="chartLine"></canvas>
         </div>
 
-        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 sm:col-span-3 overflow-hidden">
+        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 sm:col-span-3 lg:col-span-2 overflow-hidden">
             <div class="text-center text-2xl text-purple-600 my-4 ">محبوب ترین های هفته</div>
             <canvas height="350" class="mt-10" id="chartPie"></canvas>
         </div>
 
-        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 sm:col-span-3 overflow-hidden">
+        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 sm:col-span-3 lg:col-span-2 overflow-hidden">
             <div class="text-center text-2xl text-purple-600 my-4 ">گزارش سفارشات هفتگی</div>
             <canvas height="350" id="chartBar"></canvas>
         </div>
     </div>
     <!-- chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- Chart line -->
+<script>
+
+    const labels = [
+      '10',
+        '12',
+        '14',
+        '16',
+        '18',
+        '20',
+        '22',
+    ];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'تعداد سفارش',
+            backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+            borderColor: 'hsl(252, 82.9%, 67.8%)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+        }]
+    };
+
+    const configLineChart = {
+        type: 'line',
+        data,
+        options: {}
+    };
+
+    var chartLine = new Chart(
+        document.getElementById('chartLine'),
+        configLineChart
+    );
+</script>
+<!-- Chart line -->
+
+<!-- Chart pie -->
+<script>
+
+  const dataPie = {
+    labels: [
+      'نسکافه',
+      'قهوه اسپرسو',
+      'کاپوچینو'
+    ],
+    datasets: [{
+      label: 'My First Dataset',
+      data: [300, 50, 100],
+      backgroundColor: [
+        'rgb(133, 105, 241)',
+        'rgb(164, 101, 241)',
+        'rgb(101, 143, 241)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+
+  const configPie = {
+    type: 'pie',
+    data: dataPie,
+    options: {}
+  };
+
+
+  var chartBar = new Chart(
+    document.getElementById('chartPie'),
+    configPie
+  );
+</script>
+<!-- Chart pie -->
 
 <!-- Chart bar -->
 <script>
@@ -94,73 +165,4 @@
 </script>
 <!-- Chart bar -->
 
-<!-- Chart pie -->
-<script>
-
-  const dataPie = {
-    labels: [
-      'نسکافه',
-      'قهوه اسپرسو',
-      'کاپوچینو'
-    ],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [300, 50, 100],
-      backgroundColor: [
-        'rgb(133, 105, 241)',
-        'rgb(164, 101, 241)',
-        'rgb(101, 143, 241)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-
-  const configPie = {
-    type: 'pie',
-    data: dataPie,
-    options: {}
-  };
-
-
-  var chartBar = new Chart(
-    document.getElementById('chartPie'),
-    configPie
-  );
-</script>
-<!-- Chart pie -->
-
-<!-- Chart line -->
-<script>
-
-    const labels = [
-      '10',
-        '12',
-        '14',
-        '16',
-        '18',
-        '20',
-        '22',
-    ];
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'تعداد سفارش',
-            backgroundColor: 'hsl(252, 82.9%, 67.8%)',
-            borderColor: 'hsl(252, 82.9%, 67.8%)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    };
-
-    const configLineChart = {
-        type: 'line',
-        data,
-        options: {}
-    };
-
-    var chartLine = new Chart(
-        document.getElementById('chartLine'),
-        configLineChart
-    );
-</script>
-<!-- Chart bar -->
 {% endblock %}
