@@ -33,9 +33,6 @@ $(document).ready(function () {
     $("#searchInput").on("keyup", function () {
         var value = $(this).val();
         $("#table_body tr").filter(function () {
-            console.log($(this))
-            console.log($(this).text())
-            console.log($(this).text().indexOf(value))
             $(this).toggle($(this).text().indexOf(value) > -1)
         });
     });
@@ -58,4 +55,33 @@ $("#archive-button").on("click", function () {
     $("#table_body tr").show()
 });
 
+function sort_data(column) {
+    let n = Number(column.slice(-1))
+    let table = document.getElementById("main-table");
+    let rows = table.rows;
+    let target_column = document.getElementById(column);
+    let dir = target_column.getAttribute('data-dir')
+    for (i = 1; i < (rows.length - 1); i++) {
+        for (j = 1; j < (rows.length - 1); j++) {
+            let x = rows[j].getElementsByTagName("TD")[n];
+            let y = rows[j + 1].getElementsByTagName("TD")[n];
+            if (dir === "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
+                }
+            }
+            if (dir === "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
+                }
+            }
 
+
+        }
+    }
+    if (dir === "desc") {
+        target_column.setAttribute("data-dir", "asc")
+    } else {
+        target_column.setAttribute("data-dir", "desc")
+    }
+}
