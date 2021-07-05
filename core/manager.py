@@ -127,15 +127,19 @@ class ExtraDataBaseManager(DataBaseManager):
     Extra Methods for DataBase Manager Executed the Other Queries
     """
 
-    def bestsellers(self, size: int = 3) -> List[tuple]:
+    def bestsellers(self, size: int = 3, start=None, end=None) -> List[tuple]:
         """
         Query to Find the Best Selling Products
         """
 
-        query = """
+        query = f"""
 SELECT menu_items.id, title, SUM(orders.count) AS Sellers
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
+{
+    f"WHERE orders.time_stamp::DATE >= '{start}' AND orders.time_stamp::DATE <= '{end}'"
+    if start and end else ''
+}
 GROUP BY menu_items.id
 ORDER BY Sellers DESC;
 """
@@ -163,12 +167,16 @@ WHERE statuses.title = '{status}';
 
         return [item[0] for item in result]
 
-    def read_all(self, table: str, limit: int = None, offset: int = None, status: bool = True) -> List[tuple]:
+    def read_all(self, table: str, limit: int = None, offset: int = None,
+                 status: bool = True, today=False) -> List[tuple]:
         """
         Query to SELECT All Row & Columns from a Table with Limit Opional
         """
 
         query = f"SELECT * FROM {table}"
+
+        if today:
+            query += f" WHERE time_stamp::DATE = '{today}'"
 
         if status:
             query += f" ORDER BY {table}.status"
@@ -283,6 +291,19 @@ ON menu_items.category = categories.id ORDER BY orders.{ordered};
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
             result = cafe_cursor.fetchall()
+
+        return result
+
+    def last_row(self, table: str, size: int = 1) -> List(tuple):
+        """
+        Returned Last Row from a Table Sorted by ID Primary Key
+        """
+
+        query = f"SELECT * FROM {table} ORDER BY {table}.id DESC;"
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchmany(size)
 
         return result
 
