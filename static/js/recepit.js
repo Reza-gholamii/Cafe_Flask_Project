@@ -65,13 +65,21 @@ function sort_data(column) {
         for (j = 1; j < (rows.length - 1); j++) {
             let x = rows[j].getElementsByTagName("TD")[n];
             let y = rows[j + 1].getElementsByTagName("TD")[n];
+            if (column === "column0") {
+                var first_row = Number(x.innerHTML);
+                var second_row = Number(y.innerHTML);
+            }
+            if (column === "column1") {
+                first_row = Number(x.innerHTML.trim().slice(0, -5));
+                second_row = Number(y.innerHTML.trim().slice(0, -5));
+            }
             if (dir === "asc") {
-                if (x.innerHTML > y.innerHTML) {
+                if (first_row > second_row) {
                     rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
                 }
             }
             if (dir === "desc") {
-                if (x.innerHTML < y.innerHTML) {
+                if (first_row < second_row) {
                     rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
                 }
             }
