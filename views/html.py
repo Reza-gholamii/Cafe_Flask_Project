@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
 from datetime import timedelta
@@ -127,12 +129,6 @@ def order_list(_id):
                     item = list(item)
                     item[0] = change_status_lang(item[0])
                     order_l.append(item)
-
-                # else:
-                #     recepit = ["" for i in recepit]
-                #     recepit.insert(0, table_id)
-                #     recepit.insert(4, "0")
-                #     order_l = []
                 recepits.append(recepit)
                 orders.append(order_l)
         return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
@@ -160,10 +156,6 @@ def order_list(_id):
 
         return {"Data Received": 200}
 
-
-# this is for test
-
-
 def menu_items():
     __ = user_seter()
     if type(__) == int:
@@ -179,7 +171,7 @@ def menu_items():
         categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
         for item in items:
             item[2] = categories_dict[item[2]]
-        # items.sort(key=lambda x: x[8])
+        items.sort(key=lambda x: x[8])
         return render_template("cashier/menu_items.html", items=items, user=user_data, page_name="menu items")
     else:
         json_data = request.get_json()
@@ -197,27 +189,13 @@ def menu_items():
         return {"Data Received": 200}
 
 
-# this is for test
-#
-served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
-
-
-#
-# all_orders = orders.copy()
-
-
 def archive_list(_id):
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         all_orders = [list(order) for order in all_orders]
         for order in all_orders:
             order[5] = change_status_lang(order[5])
+        all_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/new_orders_list.html", orders=all_orders, id=_id)
     else:
         json_data = request.get_json()
@@ -233,6 +211,7 @@ def new_order_list(_id):
         new_orders = [list(order) for order in all_orders if order[5] == 'new']
         for order in new_orders:
             order[5] = change_status_lang(order[5])
+        new_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/new_orders_list.html", orders=new_orders, id=_id)
     else:
         json_data = request.get_json()
@@ -248,6 +227,7 @@ def cooking_order_list(_id):
         cooking_orders = [list(order) for order in all_orders if order[5] == 'cooking']
         for order in cooking_orders:
             order[5] = change_status_lang(order[5])
+        cooking_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/cooking_orders_list.html", orders=cooking_orders, id=_id)
     else:
         json_data = request.get_json()
@@ -263,6 +243,7 @@ def served_order_list(_id):
         serving_orders = [list(order) for order in all_orders if order[5] == 'serving']
         for order in serving_orders:
             order[5] = change_status_lang(order[5])
+        serving_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/served_orders_list.html", orders=serving_orders, id=_id)
     else:
         json_data = request.get_json()
@@ -278,6 +259,7 @@ def paid_order_list(_id):
         paid_orders = [list(order) for order in all_orders if order[5] == 'paid']
         for order in paid_orders:
             order[5] = change_status_lang(order[5])
+        paid_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/paid_orders_list.html", orders=paid_orders, id=_id)
     else:
         json_data = request.get_json()
@@ -293,6 +275,7 @@ def cancelled_order_list(_id):
         canceled_orders = [list(order) for order in all_orders if order[5] == 'canceled']
         for order in canceled_orders:
             order[5] = change_status_lang(order[5])
+        canceled_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders, id=_id)
     else:
         json_data = request.get_json()
@@ -328,6 +311,20 @@ def recepit_list(_id):
 # this is test for tables status
 empty_table = [1, 3, 4, 7]
 
+
+# this is for test
+#
+served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+                 ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
+
+
+#
+# all_orders = orders.copy()
 
 def dashboard():
     # this codes should be in all cashier side functions to get user and security reasons
