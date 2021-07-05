@@ -111,51 +111,6 @@ def menu():
 
 # fro here all are for cashier side
 
-
-def order_list(_id):
-    if request.method == "GET":
-        Table.all_tables()
-        tables_id = list(Table.TABLES.keys())
-        recepits, orders = [], []
-        for table_id in tables_id:
-            recepit = list(db_manager.calculate_price(table_id))
-            # todo: it's better to change the condition to unpaid or other thing
-            if recepit[0]:
-                recepit.insert(0, table_id)
-                order = db_manager.order_list(recepit[1])
-                recepit[2] = change_status_lang(recepit[2])
-                order_l = []
-                for item in order:
-                    item = list(item)
-                    item[0] = change_status_lang(item[0])
-                    order_l.append(item)
-                recepits.append(recepit)
-                orders.append(order_l)
-        return render_template('cashier/order_list.html', recepits=recepits, orders=orders, id=_id)
-    else:
-        json_data = request.get_json()
-        # updating recepit status
-        if 'new_recepit_status' in json_data.keys() and json_data['new_recepit_status']:
-            json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
-            status_record = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
-            db_manager.update('recepites', id=json_data['recepit_id'], status=status_record[2])
-        # updating order status
-        elif 'new_order_status' in json_data.keys() and json_data['new_order_status']:
-            json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
-            status_record = db_manager.check_record('statuses', title=json_data['new_order_status'])[0]
-            menu_item_record = db_manager.check_record('menu_items', title=json_data['order_name'])[0]
-            order_record = \
-                db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
-            db_manager.update('orders', id=order_record[5], status=status_record[2])
-        # updating order count
-        elif json_data['count']:
-            menu_item_record = db_manager.check_record('menu_items', title=json_data['item'])[0]
-            order_record = \
-                db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
-            db_manager.update('orders', id=order_record[5], count=json_data['count'])
-
-        return {"Data Received": 200}
-
 def menu_items():
     __ = user_seter()
     if type(__) == int:
@@ -189,14 +144,74 @@ def menu_items():
         return {"Data Received": 200}
 
 
-def archive_list(_id):
+def order_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
+    if request.method == "GET":
+        Table.all_tables()
+        tables_id = list(Table.TABLES.keys())
+        recepits, orders = [], []
+        for table_id in tables_id:
+            recepit = list(db_manager.calculate_price(table_id))
+            # todo: it's better to change the condition to unpaid or other thing
+            if recepit[0]:
+                recepit.insert(0, table_id)
+                order = db_manager.order_list(recepit[1])
+                recepit[2] = change_status_lang(recepit[2])
+                order_l = []
+                for item in order:
+                    item = list(item)
+                    item[0] = change_status_lang(item[0])
+                    order_l.append(item)
+                recepits.append(recepit)
+                orders.append(order_l)
+        return render_template('cashier/order_list.html', recepits=recepits, orders=orders, user=user_data,
+                               page_name="orders")
+    else:
+        json_data = request.get_json()
+        # updating recepit status
+        if 'new_recepit_status' in json_data.keys() and json_data['new_recepit_status']:
+            json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
+            status_record = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
+            db_manager.update('recepites', id=json_data['recepit_id'], status=status_record[2])
+        # updating order status
+        elif 'new_order_status' in json_data.keys() and json_data['new_order_status']:
+            json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
+            status_record = db_manager.check_record('statuses', title=json_data['new_order_status'])[0]
+            menu_item_record = db_manager.check_record('menu_items', title=json_data['order_name'])[0]
+            order_record = \
+                db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
+            db_manager.update('orders', id=order_record[5], status=status_record[2])
+        # updating order count
+        elif json_data['count']:
+            menu_item_record = db_manager.check_record('menu_items', title=json_data['item'])[0]
+            order_record = \
+                db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
+            db_manager.update('orders', id=order_record[5], count=json_data['count'])
+        return {"Data Received": 200}
+
+
+def archive_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         all_orders = [list(order) for order in all_orders]
         for order in all_orders:
             order[5] = change_status_lang(order[5])
         all_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/archive_list.html", orders=all_orders, id=_id)
+        return render_template("cashier/archive_list.html", orders=all_orders, user=user_data,
+                               page_name="archive orlders")
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -206,14 +221,22 @@ def archive_list(_id):
 
 
 def new_order_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         new_orders = [list(order) for order in all_orders if order[5] == 'جدید']
         for order in new_orders:
             order[5] = change_status_lang(order[5])
-        return render_template("cashier/new_orders_list.html", orders=new_orders)
+
         new_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/new_orders_list.html", orders=new_orders)
+        return render_template("cashier/new_orders_list.html", orders=new_orders, user=user_data,
+                               page_name="new orders")
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -223,13 +246,21 @@ def new_order_list():
 
 
 def cooking_order_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         cooking_orders = [list(order) for order in all_orders if order[5] == 'در حال پخت']
         for order in cooking_orders:
             order[5] = change_status_lang(order[5])
         cooking_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/cooking_orders_list.html", orders=cooking_orders)
+        return render_template("cashier/cooking_orders_list.html", orders=cooking_orders, user=user_data,
+                               page_name="cooking orders")
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -239,13 +270,21 @@ def cooking_order_list():
 
 
 def served_order_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         serving_orders = [list(order) for order in all_orders if order[5] == 'سرو شده']
         for order in serving_orders:
             order[5] = change_status_lang(order[5])
         serving_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/served_orders_list.html", orders=serving_orders)
+        return render_template("cashier/served_orders_list.html", orders=serving_orders, user=user_data,
+                               page_name="served order")
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -255,13 +294,21 @@ def served_order_list():
 
 
 def paid_order_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         paid_orders = [list(order) for order in all_orders if order[5] == 'paid']
         for order in paid_orders:
             order[5] = change_status_lang(order[5])
         paid_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/paid_orders_list.html", orders=paid_orders)
+        return render_template("cashier/paid_orders_list.html", orders=paid_orders, user=user_data,
+                               page_name="paid orders")
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -271,13 +318,21 @@ def paid_order_list():
 
 
 def cancelled_order_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         canceled_orders = [list(order) for order in all_orders if order[5] == 'کنسل شده']
         for order in canceled_orders:
             order[5] = change_status_lang(order[5])
         canceled_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders)
+        return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders, user=user_data,
+                               page_name="canceled orders")
     else:
         json_data = request.get_json()
         json_data['status'] = change_status_lang(json_data['status'])
@@ -287,6 +342,13 @@ def cancelled_order_list():
 
 
 def recepit_list():
+    # this codes should be in all cashier side functions to get user and security reasons
+    __ = user_seter()
+    if type(__) == int:
+        user_data = DataBaseManager().read("users", __)[0]
+    else:
+        return user_seter()
+    # ''''''''''''''''''''
     if request.method == "GET":
         orders = []
         recepits_list = db_manager.read_all('recepites')
@@ -298,8 +360,8 @@ def recepit_list():
             recepit[2] = change_status_lang_by_number(str(recepit[2]))
             orders.append(order)
             recepit.append(order[0][5].strftime('%m.%d.%Y'))
-        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, page_name="recipe"
-                               )
+        return render_template("cashier/receipt.html", recepits=recepits_list, orders=orders, page_name="recepits"
+                               , user=user_data)
 
     else:
         json_data = request.get_json()
@@ -311,7 +373,6 @@ def recepit_list():
 
 # this is test for tables status
 empty_table = [1, 3, 4, 7]
-
 
 # this is for test
 #
@@ -398,14 +459,14 @@ def charts():
     weekdays, hours, bests = [], [], []
     for item in best_sellers:
         bests.append((item[1], item[2]))
-    
+
     for days in range(6, 13):
         for item in day_report:
             if item[0] == (days % 7 or days % 7 + 1):
                 weekdays.append(item[1])
             else:
                 weekdays.append(0)
-    
+
     for hour in range(10, 24, 2):
         count = 0
         for item in hour_report:
