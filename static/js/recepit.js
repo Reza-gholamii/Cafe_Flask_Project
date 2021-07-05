@@ -65,9 +65,11 @@ function sort_data(column) {
         for (j = 1; j < (rows.length - 1); j++) {
             let x = rows[j].getElementsByTagName("TD")[n];
             let y = rows[j + 1].getElementsByTagName("TD")[n];
+            var first_row =x.innerHTML;
+            var second_row = y.innerHTML;
             if (column === "column0") {
-                var first_row = Number(x.innerHTML);
-                var second_row = Number(y.innerHTML);
+                first_row = Number(x.innerHTML);
+                second_row = Number(y.innerHTML);
             }
             if (column === "column1") {
                 first_row = Number(x.innerHTML.trim().slice(0, -5));
