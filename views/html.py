@@ -422,6 +422,10 @@ def dashboard():
     hour_report = db_manager.report_orders("hour")
     best_sellers = db_manager.bestsellers(3)
 
+    print(day_report)
+    print(hour_report)
+    print(best_sellers)
+
     weekdays, hours, bests = [], [], []
     for item in best_sellers:
         bests.append((item[1], item[2]))
@@ -438,7 +442,7 @@ def dashboard():
         for item in hour_report:
             if hour <= item[0] < hour + 2:
                 count += item[1]
-        weekdays.append(count)
+        hours.append(count)
 
     print(weekdays, hours, bests, sep="\n\n\n")
 
