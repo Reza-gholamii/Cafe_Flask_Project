@@ -21,10 +21,10 @@ app.add_url_rule("/cashier/orders/archive", 'archive_list', html.archive_list, m
 app.add_url_rule("/cashier/orders/new", 'new_order_list', html.new_order_list, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders/cooking", 'cooking_order_list', html.cooking_order_list,
                  methods=['GET', 'POST'])
-app.add_url_rule("/cashier/<_id>/orders/served", 'served_order_list', html.served_order_list, methods=['GET', 'POST'])
-app.add_url_rule("/cashier/<_id>/orders/paid", 'paid_order_list', html.paid_order_list, methods=['GET', 'POST'])
-app.add_url_rule("/cashier/<_id>/orders/cancelled", 'cancelled_order_list', html.cancelled_order_list,
+app.add_url_rule("/cashier/orders/served", 'served_order_list', html.served_order_list, methods=['GET', 'POST'])
+app.add_url_rule("/cashier/orders/paid", 'paid_order_list', html.paid_order_list, methods=['GET', 'POST'])
+app.add_url_rule("/cashier/orders/cancelled", 'cancelled_order_list', html.cancelled_order_list,
                  methods=['GET', 'POST'])
-app.add_url_rule("/cashier/<_id>/recepits", 'recepits', html.recepit_list, methods=['GET', 'POST'])
+app.add_url_rule("/cashier/recepits", 'recepits', html.recepit_list, methods=['GET', 'POST'])
 if __name__ == '__main__':
     app.run(port=12345)
