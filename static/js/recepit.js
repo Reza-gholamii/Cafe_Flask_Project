@@ -32,7 +32,7 @@ function change_status(status) {
 $(document).ready(function () {
     $("#searchInput").on("keyup", function () {
         var value = $(this).val();
-        $("#total_table tr").filter(function () {
+        $("#table_body tr").filter(function () {
             console.log($(this))
             console.log($(this).text())
             console.log($(this).text().indexOf(value))
@@ -42,20 +42,20 @@ $(document).ready(function () {
 });
 
 $("#unpaid-button").on("click", function () {
-    $("#total_table tr").filter(function () {
+    $("#table_body tr").filter(function () {
         $(this).toggle($(this).text().indexOf("پرداخت نشده") > -1)
     });
 
 });
 
 $("#paid-button").on("click", function () {
-    $("#total_table tr").filter(function () {
+    $("#table_body tr").filter(function () {
         $(this).toggle($(this).text().indexOf("پرداخت شده") > -1)
     });
 });
 
 $("#archive-button").on("click", function () {
-    $("#total_table tr").show()
+    $("#table_body tr").show()
 });
 
 
