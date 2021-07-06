@@ -1,94 +1,5 @@
 {% extends "base.html" %}
-{% block tailwindcss %}{% endblock %}
 {% block title %}تماس با ما{% endblock %}
-{% block extra_head %}
-<style>
-    :root {
-        --Background: #fafafa;
-    }
-
-    html {
-        direction: rtl;
-    }
-
-    body {
-        background-color: #c8c8c8;
-        padding-top: 10px;
-    }
-
-    .bg-caffe {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        opacity: 0.3;
-        background: url(../static/img/bg.jpg);
-    }
-
-    * {
-        font-family: Yekan, sans-serif;
-    }
-
-    .Vazir {
-        font-family: Vazir, sans-serif;
-    }
-
-    .rtl {
-        direction: rtl;
-    }
-
-    .ltr {
-        direction: ltr;
-    }
-
-    ul {
-        list-style-type: none;
-    }
-
-    a {
-        text-decoration: none !important;
-    }
-
-    a.text-md, a.text-md:hover {
-        color: #fff !important;
-    }
-
-    .card {
-        max-width: 1200px;
-    }
-
-    .btn-coffee {
-        color: #fafafa;
-        background-color: #3d1800;
-        border-color: #3d1800;
-    }
-
-    .btn-coffee:hover {
-        color: #000;
-    }
-
-    @media only screen and (min-width: 992px) {
-        body {
-            padding: 1rem 2rem;
-        }
-
-        .card {
-            margin: 2rem auto;
-        }
-
-        #loc {
-            border-left: 1px solid #999;
-        }
-    }
-
-    @media only screen and (max-width: 992px) {
-        #loc {
-            border-bottom: 1px solid #999;
-        }
-    }
-</style>
-{% endblock %}
 {% block body %}
     <div class="card shadow rounded mt-8">
         <div class="card-header">
@@ -154,8 +65,6 @@
                                         <div class="col-12 mb-4 ltr">
                                         <textarea tabindex="5" class="form-control  text-right" rows="14" name="comment" placeholder="پیام شما *" required></textarea>
                                         </div>
-                                        <!-- <input type="submit" class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
-                                                value="ارسال"> -->
                                         <button type="button"
                                                 class="btn btn-coffee btn-block btn-lg shadow rounded mb-2"
                                                 onclick="SendMessage()">ارسال
