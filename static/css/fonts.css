@@ -20,3 +20,10 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+    font-family: 'Aviny';
+    src: url("http://rangvorang.ir/Aviny.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
