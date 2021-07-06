@@ -93,6 +93,9 @@ def menu():
             item[3] = int(item[1] * (1 - (item[3] / 100)))
 
         # print(list(categories_dict.values()))
+
+        print(items, table_number, list(categories_dict.values()), image_names, sep="\n\n")
+
         return render_template("menu.html", items=items, table_number=table_number,
                                cat=list(categories_dict.values()), images=image_names
                                )
