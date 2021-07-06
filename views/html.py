@@ -191,12 +191,24 @@ def order_list():
             order_record = \
                 db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
             db_manager.update('orders', id=order_record[5], status=status_record[2])
+
+            recp_id = db_manager.read("orders", order_record[5])[0][3]
+            tab_id = db_manager.read("recepites", recp_id)[0][3]
+            prices = db_manager.calculate_price(tab_id)[2:]
+            db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         # updating order count
         elif json_data['count']:
             menu_item_record = db_manager.check_record('menu_items', title=json_data['item'])[0]
             order_record = \
                 db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
             db_manager.update('orders', id=order_record[5], count=json_data['count'])
+
+            recp_id = db_manager.read("orders", order_record[5])[0][3]
+            tab_id = db_manager.read("recepites", recp_id)[0][3]
+            prices = db_manager.calculate_price(tab_id)[2:]
+            db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -221,6 +233,12 @@ def archive_list():
         #json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -246,6 +264,12 @@ def new_order_list():
         # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -270,6 +294,12 @@ def cooking_order_list():
         # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -294,6 +324,12 @@ def served_order_list():
         # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -318,6 +354,12 @@ def paid_order_list():
         # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -342,6 +384,12 @@ def cancelled_order_list():
         # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
