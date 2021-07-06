@@ -213,7 +213,7 @@ $("a[data-search]").click(function() {
                 <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">{{ items[i][0] }}</h3>
                 <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
                     <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400">
-                    <del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">{{ items[i][1] }}</del>{{ items[i][3] }}</span> تومان
+                    <del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">{{ '' if items[i][3] == items[i][1] else items[i][1] }}</del>{{ items[i][3] }}</span> تومان
                 </div>
                 <a data-item="add_item" class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block" style="color: #fff !important">افزودن
                     به سبد خرید</a>
