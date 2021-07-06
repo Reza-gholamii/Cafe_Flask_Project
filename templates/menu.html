@@ -1,133 +1,152 @@
 {% extends "base.html" %}
 {% block title %}فهرست{% endblock %}
-{% block bootstrap %}{% endblock %}
 {% block extra_head %}
-<style>
-        :root {
-            --Background: #fafafa;
-        }
+<script>
+$(document).ready(function () {
+    function echer(data) {
+    let state = "";
 
-        body {
-            background: url("{{ url_for('static', filename='img/bg-pat.jpg') }}") var(--Background);
+    $('#basket>.item-in-basket').each(function () {
+
+        if ($(this).children('b:first').text() === data) {
+            $ThisItem = $(this).children('input[type="number"]')
+            state = "true";
         }
+    })
+
+    return state === "true";
+
+}
+
+$_pop = $('#main_pop')
+$_pop.click(function () {
+    if (event.target === $_pop[0]) {
+        $_pop.fadeOut(300)
+    }
+})
+
+let _ind = 0;
+
+$("a[data-item='add_item']").on('click', function () {
+    activator()
+    $('#basket_icon').fadeIn(300)
+
+    $_pop.fadeIn(300)
+    let a_clone = $(this).parent().clone()
+    a_clone.children('div').children('span').children('del').text('')
+
+    if (echer(a_clone.children('h3:first').text())) {
+        let _count = Number($ThisItem.val())+1
+        $ThisItem.val(_count)
+    } else {
+        $('#basket').prepend(
+            '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
+            '<input type="text" name="item'+ _ind +'" hidden value="' + a_clone.children('h3:first').text() + '">' +
+            '<b class="block col-span-3 Vazir text-xs sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
+            '<b class="block col-span-1 Vazir text-xs sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
+            '<input type="number" name="count'+ _ind +'" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
+            '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
+            '</div>')
+        _ind++
+    }
+})
+
+// table capacity select
+$('span[data-active]').click(function () {
+
+    let cap = $(this).data('active')
+
+    $('.table-number').not('.table-number-'+cap).attr('name','').hide()
+    $('.table-number-'+cap).fadeIn(500)
+
+    $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
+    $('input[name="capacity"]').removeAttr('checked')
+
+    $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
+    $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
+
+})
+
+// activator submitter basket:
+function activator(){
+    if ($('#basket>.item-in-basket').length && $('select[name="table_number"]').val()){
+        $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
+    }
+    else {
+        $('#submitter_pop').removeClass('bg-green-500').removeClass('cursor-pointer').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-gray-500').addClass('cursor-not-allowed')
+    }
+}
+
+$('.table-number').click(function() {
+    activator()
+})
+
+// event for click in deleter-ico after clean basket :
+function deleter(_this) {
+    $(_this).parent().remove()
+
+    if (!($('.item-in-basket')[0])){
+        $_pop.fadeOut(300)
+        $('#basket_icon').fadeOut(300)
+        activator()
+    }
+}
+
+// ajax send data after submit
+$("#basket").submit(function (event) {
+    event.preventDefault();
+    $inputs = $('#basket input, #basket select[name="table_number"]')
+    $values = {}
+    $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
 
 
-        * {
-            font-family: Yekan, sans-serif;
-            direction: rtl;
-            transition: all 400ms linear;
-        }
+    let len = Number((Object.keys($values).length-2)/2)
 
-        .Vazir {
-            font-family: Vazir, sans-serif;
-        }
+    let count_list = []
+    let item_list = []
 
-        .rtl {
-            direction: rtl;
-        }
+    for (let i = 0; i < len-1;i++) {
+        count_list.push($values['count'+i])
+        item_list.push($values['item'+i])
+    }
 
-        .ltr {
-            direction: ltr;
-        }
+    let data = {
+        "table_number" : $values['table_number'],
+        "count_list": count_list,
+        "item_list": item_list
+    }
 
-        .bg-header {
-            background: url("{{ url_for('static', filename='img/bg-menu.jpg') }}") 700px;
-        }
+$.ajax({
+    type: 'POST',
+    contentType: 'application/json',
+    url: "{{ url_for('menu') }}",
+    dataType: 'json',
+    data: JSON.stringify(data),
+    success: function (result) {
+    }, error: function (result) {
 
-        .bg-header > h1 {
-            color: #3d1800;
-            text-shadow: 0 2px 0 #fbe5cb, 0 -2px 0 #fbe5cb, 2px 0 #fbe5cb, -2px 0 0 #fbe5cb, 0 0 10px #000;
-        }
+        setTimeout(function () {
+            $('#shopping_list').fadeOut(650)
+        },700)
 
-        .category > a:nth-of-type(1):hover > .img-category {
-            filter: drop-shadow(0 0 5px #F87171);
-        }
+        $('#shopping_list').hide()
 
-        .category > a:nth-of-type(1):hover > span {
-            color: white;
-            background: #F87171;
-        }
+        setTimeout(function () {
+            $('.window-loader').fadeIn()
+        }, 100)
 
-        .category > a:nth-of-type(2):hover > .img-category {
-            filter: drop-shadow(0 0 5px #374266);
-        }
+        setTimeout(function () {
+            window.location.replace(result.responseText);
+        }, 7000)
 
-        .category > a:nth-of-type(2):hover > span {
-            color: white;
-            background: #374266;
-        }
+    }
+});
+})
 
-        .category > a:nth-of-type(3):hover > .img-category {
-            filter: drop-shadow(0 0 5px #FFBC27);
-        }
-
-        .category > a:nth-of-type(3):hover > span {
-            color: white;
-            background: #FFBC27;
-        }
-
-        .category > a:nth-of-type(4):hover > .img-category {
-            filter: drop-shadow(0 0 5px #4F46E5);
-        }
-
-        .category > a:nth-of-type(4):hover > span {
-            color: white;
-            background: #4F46E5;
-        }
-
-        .category > a:nth-of-type(5):hover > .img-category {
-            filter: drop-shadow(0 0 5px #F9A8D4);
-        }
-
-        .category > a:nth-of-type(5):hover > span {
-            color: white;
-            background: #F9A8D4;
-        }
-
-        .category > a:nth-of-type(6):hover > .img-category {
-            filter: drop-shadow(0 0 5px #3B82F6);
-        }
-
-        .category > a:nth-of-type(6):hover > span {
-            color: white;
-            background: #3B82F6;
-        }
-
-        .Vazir span,.Vazir del {
-            font-family: Vazir;
-        }
-</style>
+})
+</script>
 {% endblock %}
 {% block body %}
-<!--  Window Loader  -->
-<div class="window-loader fixed inset-0 bg-white bg-opacity-50 hidden mx-auto my-auto text-center flex item-center justify-center">
-    کافه لبخند میزبان بهترین لحظات شما <br>
-    از صبر و شکیبایی شما مچکریم!
-</div>
-<!--  Window Loader  -->
-<!--  nav  -->
-<div class="mx-auto relative my-8 text-center">
-    <ul>
-        <li class="animate__animated animate__fadeInDown animate__delay-1s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-24 pr-11 sm:w-40 transition bg-green-500 text-white">
-            <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
-                    class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_home"></i><span
-                    class="text-lg sm:text-xl Vazir">خانه</span></a></li>
-        <li class="animate__animated animate__fadeInDown animate__delay-2s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-28 pr-11 sm:w-40 transition bg-yellow-500 text-white mx-3">
-            <a href="#" class="text-md text-2xl md:text-3xl text-center"><i
-                    class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_info"></i><span
-                    class="text-lg sm:text-xl Vazir">درباره ما</span></a></li>
-        <li class="animate__animated animate__fadeInDown animate__delay-3s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-32 pr-11 sm:w-40 transition bg-blue-600 text-white">
-            <a href="#" class="text-md text-2xl md:text-3xl sm:text-center"><i
-                    class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_phone"></i><span
-                    class="text-lg sm:text-xl Vazir">تماس باما</span></a></li>
-    </ul>
-</div>
-<!--  nav  -->
-<!-- header -->
-<section class="bg-header w-full py-10 mt-8 text-center"><h1
-        class="Vazir text-4xl sm:text-5xl sm:py-6 md:text-6xl md:py-8 lg:text-8xl lg:py-10 font-bold">کافه رستوران
-    لبخند</h1></section>
-<!-- header -->
 <div class="main-div mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-8"
      style="max-width:1280px">
     <!-- category -->
@@ -167,180 +186,43 @@
     <!-- category -->
 
     <!-- items -->
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/tea.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                چای معطر ایرانی</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">10000</del>5000</span> تومان
+    {% for i in range(items|length) %}
+        <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
+            <img src="{{ url_for('static', filename='img/menu-img/'+ images[i] +'.jpg') }}" alt="{{ images[i] }}"
+                 class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
+            <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
+                <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">{{ items[i][0] }}</h3>
+                <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
+                    <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400">
+                    <del class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">{{ items[i][1] }}</del>{{ items[i][3] }}</span> تومان
+                </div>
+                <a data-item="add_item" class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
+                    به سبد خرید</a>
             </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
         </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/cap.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                کاپوچینو</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2"></del>15000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/coffee.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                قهوه اسپرسو دوبل</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/green_tea.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                چای سبز</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">8000</del>4000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/mocha.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                کافه موکا</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">18000</del>10000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/cake.jpeg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                کیک شکلاتی</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/ice.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                بستنی مخصوص</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2"></del>12000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/shake.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                شیک شکلات</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">25000</del>18000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/hamberger.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                همبرگر مخصوص</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">65000</del>49000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/dg.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                سیب زمینی</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">12000</del>8000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/pizza.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">
-                پیتزا لبخند</h3>            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">85000</del>69000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
-    <div class="rounded-2xl bg-gray-100 sm:rounded-3xl hover:shadow-2xl shadow-lg text-center border-4 border-gray-200 grid grid-cols-12 mb-8 sm:mb-14">
-        <img src="{{ url_for('static', filename='img/menu-img/pproni.jpg') }}" alt="tea"
-             class="col-span-4 sm:col-span-12 rounded-r-xl sm:relative sm:-top-10 sm:rounded-3xl sm:w-9/12 sm:mx-auto ring-4 ring-gray-200">
-        <div class="col-span-8 sm:col-span-12 py-4 relative text-right flex items-center sm:block">
-            <h3 class="text-center Vazir font-bold text-xl sm:text-2xl bg-gray-200 absolute sm:mx-auto sm:block right-0 left-0 -top-4 rounded-md py-1 sm:py-2 w-9/12 lg:w-10/12 mx-auto">                پپرونی مخصوص</h3>
-            <div class="Vazir text-right px-2 sm:px-6 font-bold text-sm sm:text-lg lg:text-sm xl:text-lg relative sm:mt-10">
-                <i class="gb gb_attach_money gb_s24 -mt-1"></i>قیمت : <span class="text-2xl relative text-red-400"><del
-                    class="absolute -top-2 opacity-50 -right-3 text-gray-400 text-lg mr-2">15000</del>9000</span> تومان
-            </div>
-            <a data-item="add_item"
-               class="cursor-pointer w-10/12 mx-auto py-2 px-4 border-2 absolute sm:relative bottom-4 sm:mb-6 bg-green-500 text-white -bottom-4 right-0 left-0 border-green-600 hover:bg-green-600 hover:border-green-700 hover:text-white rounded-md text-sm text-center block">افزودن
-                به سبد خرید</a>
-        </div>
-    </div>
+    {% endfor %}
     <!-- items -->
 </div>
 
 <!-- shopping list -->
 <div id="main_pop" class="fixed bg-black inset-0 bg-opacity-30 backdrop-filter backdrop-blur-md z-20"
      style="display: none;transition: display 300ms linear">
+    <!--  Window Loader  -->
+    <div class="window-loader overflow-hidden absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-11/12 md:w-10/12 lg:w-7/12 xl:w-5/12 z-30 p-8 pt-0 ring-8 ring-opacity-30 ring-white rounded-xl text-center text-2xl" style="display: none;height: max-content !important;line-height: 4rem">
+        <span class="block text-white rounded-b-xl Vazir bg-yellow-900 px-8 py-2"><i class="gb gb_info gb_s36"></i> سفارش شما در حال ثبت است ...</span>
+        <i class="gb gb_cached gb_s48 gb_animate_spin block my-8 text-yellow-900" style="font-size: 172px;"></i>
+        <div class="absolute py-6 -inset-x-4 text-white bg-yellow-900">
+                    کافه لبخند میزبان بهترین لحظات شما
+        <br>
+        از صبر و شکیبایی شما مچکریم!
+        </div>
+        <div class="text-white py-2 bg-yellow-900 opacity-0">
+                    کافه لبخند میزبان بهترین لحظات شما
+        <br>
+        از صبر و شکیبایی شما مچکریم!
+        </div>
+    </div>
+    <!--  Window Loader  -->
     <div id="shopping_list"
          class="absolute inset-0 bg-white bg-opacity-90 m-auto w-11/12 sm:w-10/12 md:w-9/12 lg:w-6/12 xl:w-4/12 p-4 ring-8 ring-opacity-30 ring-white rounded-xl"
          style="height: max-content !important;">
@@ -365,9 +247,26 @@
                       class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 md:py-2 text-white">چهار نفره</span>
                 <span data-active="8"
                       class="cursor-pointer Vazir hover:bg-opacity-100 font-bold text-lg bg-indigo-700 bg-opacity-40 rounded px-3 md:py-2 text-white">هشت نفره</span>
+                <select class="table-number table-number-2 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
+                    <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
+                    {% for i in table_number[0] %}
+                        <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select class="table-number table-number-4 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
+                    <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
+                    {% for i in table_number[1] %}
+                        <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select class="table-number table-number-8 col-span-3 px-4 Vazir py-1 rounded bg-indigo-700 bg-opacity-30 text-white text-center" name="table_number" style="display: none">
+                    <option selected disabled hidden class="Vazir text-white bg-indigo-500 py-2">لطفا شماره میز خود را انتخاب کنید ...</option>
+                    {% for i in table_number[2] %}
+                        <option value="{{ i }}" class="Vazir text-white bg-indigo-500 py-2">میز شماره {{ i }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            <input type="submit" id="submitter_pop"
-                    class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
+            <input type="submit" id="submitter_pop" class="block w-full bg-gray-500 cursor-not-allowed bg-opacity-80 py-2 text-center Vazir mt-4 rounded-md text-white font-bold hover:bg-opacity-100 cursor-pointer" value="ثبت سفارش">
         </form>
     </div>
 </div>
@@ -380,113 +279,3 @@
 </div>
 {% endblock %}
 
-{% block extra_js %}
-    <script>
-function echer(data) {
-    let state = "";
-
-    $('#basket>.item-in-basket').each(function () {
-
-        if ($(this).children('b:first').text() === data) {
-            $ThisItem = $(this).children('input[type="number"]')
-            state = "true";
-        }
-    })
-
-    return state === "true";
-
-}
-
-$_pop = $('#main_pop')
-$_pop.click(function () {
-    if (event.target === $_pop[0]) {
-        $_pop.fadeOut(300)
-    }
-})
-
-let _ind = 0;
-
-$("a[data-item='add_item']").on('click', function () {
-    $('#basket_icon').fadeIn(300)
-
-    $_pop.fadeIn(300)
-    let a_clone = $(this).parent().clone()
-    a_clone.children('div').children('span').children('del').text('')
-
-    if (echer(a_clone.children('h3:first').text())) {
-        let _count = Number($ThisItem.val())+1
-        $ThisItem.val(_count)
-    } else {
-        $('#basket').prepend(
-            '<div class="item-in-basket grid grid-cols-6 text-right mt-4 border-t-2 pt-4">' +
-            '<input type="text" name="item'+ _ind +'" hidden value="' + a_clone.children('h3:first').text() + '">' +
-            '<b class="block col-span-3 Vazir text-sm sm:text-lg md:text-lg">' + a_clone.children('h3:first').text() + '</b>' +
-            '<b class="block col-span-1 Vazir text-sm sm:text-lg md:text-lg text-red-500 text-center">' + a_clone.children('div').children('span').text() + '</b>' +
-            '<input type="number" name="count'+ _ind +'" min="1" value="1" class="block mx-auto bg-transparent Vazir text-center focus:outline-none rounded-lg ring-2 ring-yellow-900 w-10 pr-1">' +
-            '<i onclick="deleter(this)" class="deleter-ico block text-center text-red-500 cursor-pointer gb gb_delete_forever gb_s24 active:outline-none"></i>' +
-            '</div>')
-        _ind++
-    }
-})
-
-// table capacity select
-$('span[data-active]').click(function () {
-    $('#submitter_pop').removeClass('bg-gray-500').removeClass('cursor-not-allowed').addClass('bg-green-500').addClass('cursor-pointer')
-
-    $('span[data-active]').not(this).removeClass('bg-opacity-100').addClass('bg-opacity-40')
-    $('input[name="capacity"]').removeAttr('checked')
-
-    $(this).removeClass('bg-opacity-40').addClass('bg-opacity-100')
-    $('input[value="' + $(this).attr('data-active') + '"]').attr('checked', 'checked')
-
-})
-
-// event for click in deleter-ico after clean basket :
-function deleter(_this) {
-    $(_this).parent().remove()
-
-    if (!($('.item-in-basket')[0])){
-        $_pop.fadeOut(300)
-        $('#basket_icon').fadeOut(300)
-    }
-}
-
-// ajax send data after submit
-$("#basket").submit(function (event) {
-    event.preventDefault();
-    $inputs = $('#basket input')
-    $values = {}
-    $inputs.each(function () {if ($(this).attr('checked') === "checked" || $(this).attr('type') !== "radio"){$values[this.name] = $(this).val();}})
-
-    let len = Number((Object.keys($values).length-2)/2)
-
-    let count_list = []
-    let item_list = []
-
-    for (let i = 0; i < len;i++) {
-        count_list.push($values['count'+i])
-        item_list.push($values['item'+i])
-    }
-
-    let data = {
-        "capacity" : $values['capacity'],
-        "count_list": count_list,
-        "item_list": item_list
-    }
-
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: '#',
-        dataType: 'json',
-        data: JSON.stringify(data),
-        success: function (result) {
-            console.log("ok", result);
-        }, error: function (result) {
-            console.log(result);
-        }
-    });
-})
-
-</script>
-{% endblock %}
