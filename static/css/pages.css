@@ -6,20 +6,20 @@
     transition: all 400ms linear;
 }
 
-.category > a:nth-of-type(1):hover > .img-category {
+.category > a:nth-of-type(2):hover > .img-category {
     filter: drop-shadow(0 0 5px #F87171);
 }
 
-.category > a:nth-of-type(1):hover > span {
+.category > a:nth-of-type(2):hover > span {
     color: white;
     background: #F87171;
 }
 
-.category > a:nth-of-type(2):hover > .img-category {
+.category > a:nth-of-type(1):hover > .img-category {
     filter: drop-shadow(0 0 5px #374266);
 }
 
-.category > a:nth-of-type(2):hover > span {
+.category > a:nth-of-type(1):hover > span {
     color: white;
     background: #374266;
 }
