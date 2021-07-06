@@ -507,29 +507,48 @@ def user_seter():
 
 def api(page):
     if page == "menu":
-        two_person_table_number = [table.number for table in Table.TABLES.values() if
-                                   table.status == 12 and table.capacity == 2]
-        four_person_table_number = [table.number for table in Table.TABLES.values() if
-                                    table.status == 12 and table.capacity == 4]
-        eight_person_table_number = [table.number for table in Table.TABLES.values() if
-                                     table.status == 12 and table.capacity == 8]
-        two_person_table_number.sort()
-        four_person_table_number.sort()
-        eight_person_table_number.sort()
+        if request.method == "GET":
+            two_person_table_number = [table.number for table in Table.TABLES.values() if
+                                       table.status == 12 and table.capacity == 2]
+            four_person_table_number = [table.number for table in Table.TABLES.values() if
+                                        table.status == 12 and table.capacity == 4]
+            eight_person_table_number = [table.number for table in Table.TABLES.values() if
+                                         table.status == 12 and table.capacity == 8]
+            two_person_table_number.sort()
+            four_person_table_number.sort()
+            eight_person_table_number.sort()
 
-        table_number = [two_person_table_number, four_person_table_number, eight_person_table_number]
-        items = db_manager.read_all('menu_items')
-        categories = db_manager.category_list()
-        items = list(map(lambda item: list(item), items))
-        image_names = [item[4] for item in items]
-        categories_dict = {}
-        categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
-        for item in items:
-            item[2] = categories_dict[item[2]]
+            table_number = [two_person_table_number, four_person_table_number, eight_person_table_number]
+            items = db_manager.read_all('menu_items')
+            categories = db_manager.category_list()
+            items = list(map(lambda item: list(item), items))
+            items.sort(key=lambda x: x[8])
+            image_names = [(item[4] if item[4] else "") for item in items]
+            categories_dict = {}
+            categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
+            for item in items:
+                item[2] = categories_dict[item[2]]
+                item[3] = int(item[1] * (1 - (item[3] / 100)))
 
-        return render_template('spa_api/' + page + '.html', items=items, table_number=table_number,
-                               cat=list(categories_dict.values()), images=image_names)
+            # print(list(categories_dict.values()))
 
+            print(items, table_number, list(categories_dict.values()), image_names, sep="\n\n")
+
+            return render_template('spa_api/' + page + '.html', items=items, table_number=table_number,
+                                   cat=list(categories_dict.values()), images=image_names
+                                   )
+        else:
+            json_data = request.get_json()
+            print(json_data)
+            table_num = int(json_data['table_number'])
+            recepite = Recepite(table_num)
+
+            # orders = []
+            for i in range(len(json_data['item_list'])):
+                # orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
+                recepite.add_order(json_data['item_list'][i], count=json_data['count_list'][i])
+            # return redirect(f"/recipe/{recepite.number}")
+            return f"/recipe/{recepite.number}"
     if page == "about_us":
         return render_template('spa_api/' + page + '.html', page_name="about_us")
 
