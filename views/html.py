@@ -183,6 +183,10 @@ def order_list():
             #json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
             status_record = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
             db_manager.update('recepites', id=json_data['recepit_id'], status=status_record[2])
+
+            tabl_id = db_manager.read("recepites", json_data['recepit_id'])[0][3]
+            db_manager.update("tables", id=tabl_id, status=12)
+
         # updating order status
         elif 'new_order_status' in json_data.keys() and json_data['new_order_status']:
             #json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
@@ -425,6 +429,10 @@ def recepit_list():
         print(db_manager.check_record('statuses', title=json_data['status']))
         recepit_status_id = db_manager.check_record('statuses', title=json_data['status'])[0][2]
         db_manager.update('recepites', id=json_data['recepit_id'], status=recepit_status_id)
+
+        tabl_id = db_manager.read("recepites", json_data['recepit_id'])[0][3]
+        db_manager.update("tables", id=tabl_id, status=12)
+
     return {"Data Received": 200}
 
 
