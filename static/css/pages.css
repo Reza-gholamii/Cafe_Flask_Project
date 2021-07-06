@@ -6,6 +6,10 @@
     transition: all 400ms linear;
 }
 
+.item-box {
+    transition: none;
+}
+
 .category > a:nth-of-type(2):hover > .img-category {
     filter: drop-shadow(0 0 5px #F87171);
 }
