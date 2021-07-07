@@ -563,7 +563,7 @@ def user_seter():
         u = DataBaseManager().read("users", id)
         return int(id)
     else:
-        return redirect("login")
+        return redirect('/cashier/login')
 
 
 def api(page):
