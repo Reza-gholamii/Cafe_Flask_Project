@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     {% block bootstrap %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     {% endblock %}
     {% block tailwindcss %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
@@ -31,7 +31,7 @@
         // item clicked - choosed!
         $(document).ready(function () {
 
-            let data_link = $('a[data-link="dashboard-item"]')
+            let data_link = $('*[data-link="dashboard-item"]')
             data_link.click(function () {
                 $('li.choosed').removeClass('choosed')
                 $(this).parent().addClass('choosed')
@@ -132,8 +132,8 @@
                         </li>
 
                         <li data-collapse="true" class="nav-list-item pr-0 pb-4">
-                            <span class="cursor-pointer hover:text-blue-400 mr-8"><i
-                                    class="gb gb_style gb_s24 menu-icon"></i>
+                            <span data-link="dashboard-item" data-href="order_list" class="cursor-pointer hover:text-blue-400 mr-8">
+                                <i class="gb gb_style gb_s24 menu-icon"></i>
                                 سفارش ها
                                 <i class="gb mb-1 gb_navigate_before triangle transition transform"
                                    style="vertical-align: bottom"></i>
@@ -142,42 +142,42 @@
                                 <li class="cursor-pointer hover:text-blue-400">
                                     <a data-link="dashboard-item" data-href="new_orders_list"
                                        class="hover:text-blue-400">
-                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
                                         جدید
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
                                     <a data-link="dashboard-item" data-href="cooking_orders_list"
                                        class="hover:text-blue-400">
-                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
                                         در حال پخت
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
                                     <a data-link="dashboard-item" data-href="served_orders_list"
                                        class="hover:text-blue-400">
-                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
                                         سرو شده
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
                                     <a data-link="dashboard-item" data-href="paid_orders_list"
                                        class="hover:text-blue-400">
-                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
                                         پرداخت شده
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
                                     <a data-link="dashboard-item" data-href="cancelled_orders_list"
                                        class="hover:text-blue-400">
-                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
                                         کنسل شده
                                     </a>
                                 </li>
 
                                 <li class="cursor-pointer hover:text-blue-400">
                                     <a data-link="dashboard-item" data-href="archive_list" class="hover:text-blue-400">
-                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
                                         آرشیو
                                     </a>
                                 </li>

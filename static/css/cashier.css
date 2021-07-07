@@ -281,12 +281,10 @@ td {
 
     #print-icon, #print-icon * {
         visibility: hidden;
-    !important;
     }
 
     .modal-footer, .modal-footer * {
         visibility: hidden;
-    !important;
     }
 
     .item-title-modal {
@@ -297,4 +295,8 @@ td {
 .collapse-ul-el > li.choosed {
     font-size: 1.125rem;
     margin-right: -15px;
+}
+
+li.choosed li , li.choosed ul{
+    color: white;
 }
