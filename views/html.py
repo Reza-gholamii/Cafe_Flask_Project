@@ -166,11 +166,11 @@ def order_list():
             if recepit[0]:
                 recepit.insert(0, table_id)
                 order = db_manager.order_list(recepit[1])
-                #recepit[2] = change_status_lang(recepit[2])
+                # recepit[2] = change_status_lang(recepit[2])
                 order_l = []
                 for item in order:
                     item = list(item)
-                    #item[0] = change_status_lang(item[0])
+                    # item[0] = change_status_lang(item[0])
                     order_l.append(item)
                 recepits.append(recepit)
                 orders.append(order_l)
@@ -180,7 +180,7 @@ def order_list():
         json_data = request.get_json()
         # updating recepit status
         if 'new_recepit_status' in json_data.keys() and json_data['new_recepit_status']:
-            #json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
+            # json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
             status_record = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
             db_manager.update('recepites', id=json_data['recepit_id'], status=status_record[2])
 
@@ -189,7 +189,7 @@ def order_list():
 
         # updating order status
         elif 'new_order_status' in json_data.keys() and json_data['new_order_status']:
-            #json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
+            # json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
             status_record = db_manager.check_record('statuses', title=json_data['new_order_status'])[0]
             menu_item_record = db_manager.check_record('menu_items', title=json_data['order_name'])[0]
             order_record = \
@@ -227,14 +227,14 @@ def archive_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         all_orders = [list(order) for order in all_orders]
-        #for order in all_orders:
-            #order[5] = change_status_lang(order[5])
+        # for order in all_orders:
+        # order[5] = change_status_lang(order[5])
         all_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/archive_list.html", orders=all_orders, user=user_data,
                                page_name="archive orlders")
     else:
         json_data = request.get_json()
-        #json_data['status'] = change_status_lang(json_data['status'])
+        # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
@@ -421,8 +421,8 @@ def recepit_list():
 
     else:
         json_data = request.get_json()
-        #recepit_status = change_status_lang(json_data['status'])
-        #print(recepit_status)
+        # recepit_status = change_status_lang(json_data['status'])
+        # print(recepit_status)
         # print("###############")
         # print(json_data)
         # print("##############")
@@ -610,6 +610,7 @@ def api(page):
                 recepite.add_order(json_data['item_list'][i], count=json_data['count_list'][i])
             # return redirect(f"/recipe/{recepite.number}")
             return f"/recipe/{recepite.number}"
+
     if page == "about_us":
         return render_template('spa_api/' + page + '.html', page_name="about_us")
 
@@ -627,5 +628,64 @@ def api(page):
         # TODO: where is order number?
 
         return render_template('spa_api/' + page + '.html', tables=_tables, user=user_data)
+
+    if page == "dashboard":
+        # this codes should be in all cashier side functions to get user and security reasons
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+        # ''''''''''''''''''''
+        # data = {
+        #     'count_new_orders': len(orders),
+        #     'count_orders': len(orders) + len(served_orders),
+        #     'count_empty_tables': len(empty_table),
+        #     'count_view': 15
+        # }
+
+        last_message = db_manager.last_row("messages")
+        today = date.today().strftime("%Y-%m-%d")
+
+        data = {
+            'last_message': last_message[0] if last_message else (),
+            'count_new_orders': len(db_manager.statusfilter("orders", "جدید")),
+            'count_orders': len(db_manager.read_all("orders", today=today)),
+            'count_empty_tables': len(db_manager.statusfilter("tables", "خالی")),
+            'all_incoming': db_manager.incoming(),
+            'today_incoming': db_manager.incoming(today)
+            # 'count_view': 15
+        }
+
+        # Charts :
+        day_report = db_manager.report_orders("weekday")
+        hour_report = db_manager.report_orders("hour")
+        best_sellers = db_manager.bestsellers(3)
+
+        weekdays, hours, bests = [], [], []
+        for item in best_sellers:
+            bests.append((item[1], item[2]))
+
+        for days in range(6, 13):
+            for item in day_report:
+                if item[0] == (days % 7 or days % 7 + 1):
+                    weekdays.append(item[1])
+                else:
+                    weekdays.append(0)
+
+        for hour in range(10, 24, 2):
+            count = 0
+            for item in hour_report:
+                if hour <= item[0] < hour + 2:
+                    count += item[1]
+            hours.append(count)
+
+        bests = {
+            'labels': [best[0] for best in bests],
+            'values': [best[1] for best in bests]
+        }
+
+        return render_template('spa_api/' + page + '.html', user=user_data,
+                               data=data, page_name="dashboard", days=weekdays, hours=hours, bests=bests)
 
     return "API : Data Request Not Valid!"

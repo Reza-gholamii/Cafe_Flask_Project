@@ -1,0 +1,140 @@
+{% block body %}
+    <div class="w-full grid gap-4 sm:gap-8 p-4 sm:p-8 grid-cols-6">
+        <a href="#"
+           class="animate__animated animate__fadeInDown animate__delay-1s relative rounded-3xl block col-span-6 p-4 bg-purple-400 text-white border-8 border-purple-300 shadow-xl hover:shadow-lg">
+            <b class="float-left text-5xl p-7 bg-white bg-opacity-20 rounded-3xl">{{ data['count_new_orders'] }}</b>
+            <span class="absolute right-8 pt-8 float-right text-2xl font-bold">سفارشات جدید</span>
+        </a>
+        <a href="#"
+           class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-3 p-6 rounded-2xl overflow-hidden text-center bg-green-400 border-green-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">
+            سفارش
+            <i class="gb gb_assignment absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
+            <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">{{ data['count_orders'] }}</b>
+        </a>
+        <a href="#"
+           class="animate__animated animate__fadeInDown animate__delay-2s relative shadow-md hover:shadow-lg col-span-3 p-6 rounded-2xl overflow-hidden text-center bg-red-400 border-red-200 border-8 text-white text-shadow-md pt-16 font-bold Vazir text-xl">
+            میز خالی
+            <i class="gb gb_weekend absolute text-9xl opacity-20 -left-6 top-4 text-white"></i>
+            <b class="absolute mx-auto top-4 text-shadow-md right-0 left-0 text-4xl">{{ data['count_empty_tables'] }}</b>
+        </a>
+        <div class="animate__animated animate__fadeInDown animate__delay-3s relative rounded-3xl block col-span-6 p-4 bg-yellow-400 text-white border-8 border-yellow-300 shadow-xl hover:shadow-lg">
+            <b class="float-left text-3xl sm:text-4xl md:text-5xl p-4 sm:p-7 bg-white bg-opacity-20 rounded-3xl">{{ data['today_incoming'] }}</b>
+            <span class="absolute right-8 pt-4 sm:pt-8 float-right text-2xl font-bold">درآمد امروز</span>
+        </div>
+        <div class="animate__animated animate__fadeInDown animate__delay-4s relative rounded-3xl block col-span-6 p-4 bg-pink-500 text-white border-8 border-pink-300 shadow-xl hover:shadow-lg">
+            <b class="float-left text-3xl sm:text-4xl md:text-5xl p-4 sm:p-7 bg-white bg-opacity-20 rounded-3xl">{{ data['all_incoming'] }}</b>
+            <span class="absolute right-8 pt-4 sm:pt-8 float-right text-2xl font-bold">درآمد کل</span>
+        </div>
+        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 lg:col-span-2 overflow-hidden">
+            <div class="text-center text-2xl text-purple-600 my-4">گزارش سفارشات ساعتی</div>
+            <canvas height="350" id="chartLine"></canvas>
+        </div>
+
+        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 sm:col-span-3 lg:col-span-2 overflow-hidden">
+            <div class="text-center text-2xl text-purple-600 my-4 ">محبوب ترین های هفته</div>
+            <canvas height="350" class="mt-10" id="chartPie"></canvas>
+        </div>
+
+        <div class="animate__animated animate__fadeInDown animate__delay-5s col-span-6 sm:col-span-3 lg:col-span-2 overflow-hidden">
+            <div class="text-center text-2xl text-purple-600 my-4 ">گزارش سفارشات هفتگی</div>
+            <canvas height="350" id="chartBar"></canvas>
+        </div>
+    </div>
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chart line -->
+    <script>
+        $(document).ready(function () {
+            const labels = [
+                '10',
+                '12',
+                '14',
+                '16',
+                '18',
+                '20',
+                '22',
+            ];
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'تعداد سفارش',
+                    backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+                    borderColor: 'hsl(252, 82.9%, 67.8%)',
+                    data: {{ hours }},
+                }]
+            };
+
+            const configLineChart = {
+                type: 'line',
+                data,
+                options: {}
+            };
+
+            var chartLine = new Chart(
+                document.getElementById('chartLine'),
+                configLineChart
+            );
+
+            const dataPie = {
+                labels: {{ bests['labels'] | safe}},
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: {{ bests['values'] }},
+                    backgroundColor: [
+                        'rgb(133, 105, 241)',
+                        'rgb(164, 101, 241)',
+                        'rgb(101, 143, 241)'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            const configPie = {
+                type: 'pie',
+                data: dataPie,
+                options: {}
+            };
+
+
+            var chartBar = new Chart(
+                document.getElementById('chartPie'),
+                configPie
+            );
+
+
+            const labelsBarChart = [
+                'شنبه',
+                'یکشنبه',
+                'دوشنبه',
+                'سه شنبه',
+                'چهارشنبه',
+                'پنج شنبه',
+                'جمعه',
+            ];
+            const dataBarChart = {
+                labels: labelsBarChart,
+                datasets: [{
+                    label: "تعداد سفارشات",
+                    backgroundColor: 'hsl(252, 82.9%, 67.8%)',
+                    borderColor: 'hsl(252, 82.9%, 67.8%)',
+                    data: {{ days }},
+                }]
+            };
+
+            const configBarChart = {
+                type: 'bar',
+                data: dataBarChart,
+                options: {}
+            };
+
+
+            var chartBar = new Chart(
+                document.getElementById('chartBar'),
+                configBarChart
+            );
+        })
+
+    </script>
+
+{% endblock %}
