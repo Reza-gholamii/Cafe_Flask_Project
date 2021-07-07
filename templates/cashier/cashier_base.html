@@ -20,7 +20,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
     {% block extra_head %}{% endblock %}
-
     <script>
         // striper
         if (typeof (String.prototype.trim) === "undefined") {
@@ -34,7 +33,7 @@
 
             let data_link = $('a[data-link="dashboard-item"]')
             data_link.click(function () {
-                data_link.parent().removeClass('choosed')
+                $('li.choosed').removeClass('choosed')
                 $(this).parent().addClass('choosed')
                 $('h3[data-title="page-title"]').text(($(this).text().trim()))
 
@@ -141,35 +140,35 @@
                             </span>
                             <ul class="collapse-ul-el text-lg pr-16 mt-4 overflow-hidden" style="display: none">
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="new_order_list"
+                                    <a data-link="dashboard-item" data-href="new_orders_list"
                                        class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
                                         جدید
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="cooking_order_list"
+                                    <a data-link="dashboard-item" data-href="cooking_orders_list"
                                        class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
                                         در حال پخت
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="served_order_list"
+                                    <a data-link="dashboard-item" data-href="served_orders_list"
                                        class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
                                         سرو شده
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="paid_order_list"
+                                    <a data-link="dashboard-item" data-href="paid_orders_list"
                                        class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
                                         پرداخت شده
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="cancelled_order_list"
+                                    <a data-link="dashboard-item" data-href="cancelled_orders_list"
                                        class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
                                         کنسل شده

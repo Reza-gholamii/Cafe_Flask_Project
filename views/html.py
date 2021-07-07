@@ -757,4 +757,82 @@ def api(page):
         return render_template('spa_api/' + page + '.html', recepits=recepits_list, orders=orders, page_name="recepits"
                                , user=user_data)
 
+    if page == "new_orders_list":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        all_orders = db_manager.archive_orders_list('status')
+        new_orders = [list(order) for order in all_orders if order[5] == 'جدید']
+
+        new_orders.sort(key=lambda x: x[0], reverse=True)
+        return render_template('spa_api/' + page + '.html', orders=new_orders, user=user_data,page_name="new orders")
+
+    if page == "cooking_orders_list":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+        
+        all_orders = db_manager.archive_orders_list('status')
+        cooking_orders = [list(order) for order in all_orders if order[5] == 'در حال پخت']
+        cooking_orders.sort(key=lambda x: x[0], reverse=True)
+        return render_template('spa_api/' + page + '.html', orders=cooking_orders, user=user_data,
+                            page_name="cooking orders")
+        
+    if page == "served_orders_list":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        all_orders = db_manager.archive_orders_list('status')
+        serving_orders = [list(order) for order in all_orders if order[5] == 'سرو شده']
+        serving_orders.sort(key=lambda x: x[0], reverse=True)
+        return render_template('spa_api/' + page + '.html', orders=serving_orders, user=user_data,
+                            page_name="served order")
+
+    if page == "paid_orders_list":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        all_orders = db_manager.archive_orders_list('status')
+        paid_orders = [list(order) for order in all_orders if order[5] == 'پرداخت شده']
+        paid_orders.sort(key=lambda x: x[0], reverse=True)
+        return render_template('spa_api/' + page + '.html', orders=paid_orders, user=user_data,
+                            page_name="paid orders")
+
+    if page == "cancelled_orders_list":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        all_orders = db_manager.archive_orders_list('status')
+        canceled_orders = [list(order) for order in all_orders if order[5] == 'کنسل شده']
+        canceled_orders.sort(key=lambda x: x[0], reverse=True)
+        return render_template('spa_api/' + page + '.html', orders=canceled_orders, user=user_data,
+                            page_name="canceled orders")
+
+    if page == "archive_list":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        all_orders = db_manager.archive_orders_list('status')
+        all_orders = [list(order) for order in all_orders]
+        all_orders.sort(key=lambda x: x[0], reverse=True)
+        return render_template('spa_api/' + page + '.html', orders=all_orders, user=user_data,
+                            page_name="archive orlders")
+
     return "API : Data Request Not Valid!"
