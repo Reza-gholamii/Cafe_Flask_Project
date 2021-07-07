@@ -616,7 +616,7 @@ def api(page):
     if page == "contact_us":
         return render_template('spa_api/' + page + '.html')
 
-    if page == "table":
+    if page == "tables":
         __ = user_seter()
         if type(__) == int:
             user_data = DataBaseManager().read("users", __)[0]
