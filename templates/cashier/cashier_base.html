@@ -20,6 +20,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
     {% block extra_head %}{% endblock %}
+    <script>
+        $(document).ready(function() {
+            let data_link = $('a[data-link="dashboard-item"]')
+            data_link.click(function () {
+                data_link.parent().removeClass('choosed')
+                $(this).parent().addClass('choosed')
+            })
+        })
+    </script>
 </head>
 
 <body onresize="hamburger_close()">
@@ -38,51 +47,37 @@
             <div id="nav_parent" class="row menu sticky top-0">
                 <nav id="nav_menu" class="w-100 ">
                     <ul id="menu_left_side" class="nav-list"
-                        style="padding: 0 2em !important;  text-align: center !important;">
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="dashboard" else "" }} ">
-                            <a href="{{ url_for("dashboard") }} " class="hover:text-blue-400">
+                        style="text-align: right !important;">
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" class="hover:text-blue-400">
                                 <i class="gb gb_restaurant gb_s24 menu-icon"></i>
                                 داشبورد
                             </a>
                         </li>
 
-                        <li data-toggle="collapse" data-target="#demo"
-                            class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="orders" else "" }}">
-                            <i class="gb gb_tablet  gb_s24 menu-icon"></i>سفارش ها
-                            <i class="gb  gb_arrow_drop_down gb_s24 menu-icon"></i>
-                        </li>
-                        <div id="demo" class="collapse">
-                            <li class="cursor-pointer hover:text-blue-400 collapse-items "><i
-                                    class="gb gb_new_releases gb_s24 menu-icon"></i> جدید
-                            </li>
-                            <li class="cursor-pointer hover:text-blue-400 collapse-items"><i
-                                    class="gb gb_restaurant gb_s24 menu-icon"></i>سرو شده
-                            </li>
-                            <li class="cursor-pointer hover:text-blue-400 collapse-items"><i
-                                    class="gb gb_call_to_action gb_s24 menu-icon"></i>در حال پخت
-                            </li>
-                            <li class="cursor-pointer hover:text-blue-400 collapse-items"><i
-                                    class="gb gb_money_off gb_s24 menu-icon"></i>پرداخت شده
-                            </li>
-                        </div>
-                        <li class="cursor-pointer  nav-list-item {{ "choosed" if page_name=="tables" else "" }}">
-                            <a href="{{ url_for("tables") }} " class="hover:text-blue-400">
-                                <i
-                                        class="gb gb_restaurant gb_s24 menu-icon"></i>
-                                میزها
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" class="hover:text-blue-400">
+                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                سفارش ها
                             </a>
                         </li>
 
-                        <li class="cursor-pointer  nav-list-item {{ "choosed" if page_name=="menu items" else "" }}">
-                            <a href="{{ url_for("menu_items") }} " class="hover:text-blue-400">
-                                <i
-                                        class="gb gb_restaurant gb_s24 menu-icon"></i>
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" class="hover:text-blue-400">
+                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                میز ها
+                            </a>
+                        </li>
+
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" class="hover:text-blue-400">
+                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
                                 منو
                             </a>
                         </li>
 
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item {{ "choosed" if page_name=="recipe" else "" }} ">
-                            <a href="{{ url_for("recepits") }} " class="hover:text-blue-400">
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" class="hover:text-blue-400">
                                 <i class="gb gb_restaurant gb_s24 menu-icon"></i>
                                 صورت حساب ها
                             </a>
