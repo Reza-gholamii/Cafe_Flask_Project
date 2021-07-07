@@ -704,7 +704,7 @@ def api(page):
         items.sort(key=lambda x: x[8])
         return render_template('spa_api/' + page + '.html', items=items, user=user_data, page_name="menu items")
 
-    if page == "":
+    if page == "order_list":
         # this codes should be in all cashier side functions to get user and security reasons
         __ = user_seter()
         if type(__) == int:
