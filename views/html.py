@@ -624,7 +624,7 @@ def api(page):
         else:
             return user_seter()
         # ''''''''''''''''''''
-        _tables = ExtraDataBaseManager().read_all("tables")
+        _tables = db_manager.read_all("tables")
         # TODO: where is order number?
 
         return render_template('spa_api/' + page + '.html', tables=_tables, user=user_data)
