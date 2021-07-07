@@ -249,6 +249,7 @@ td {
 .header-button {
     border-radius: 7px !important;
     border: 1px solid #868585;
+    padding: 2px 8px;
 }
 
 .sortable-column {

@@ -732,7 +732,7 @@ def api(page):
         return render_template('spa_api/' + page + '.html', recepits=recepits, orders=orders, user=user_data,
                                page_name="orders")
 
-    if page == "recepit":
+    if page == "receipt":
         __ = user_seter()
         if type(__) == int:
             user_data = DataBaseManager().read("users", __)[0]
