@@ -1,0 +1,84 @@
+{% block body %}
+<div class="max-w-screen-2xl mx-auto" style="width: 100%">
+    <div class="table-main grid grid-cols-4 md:grid-cols-8  gap-8 gap-y-16 p-8 pt-12">
+        {% for table in tables %}
+            {% if table[0] ==2 %}
+                <div class="animate__animated animate__fadeInDown animate__delay-1s h-28 col-span-4 xl:col-span-2 rounded shadow-lg ring-4 cursor-help ring-opacity-40 ring-blue-200 hover:shadow-2xl p-4 relative transition bg-blue-100 hover:bg-white ">
+                    <h3 class="text-lg font-bold text-center bg-blue-500 p-2 absolute r-2 text-white ring-4 ring-blue-500 ring-opacity-40 h-16 w-16 rounded text-5xl"
+                        style="top: -1rem">
+                        {{ table[1] }}
+                    </h3>
+                    <div class="absolute left-4 text-white rounded ring-4 ring-opacity-40 bg-red-400 ring-red-400 pb-1 px-2 text-2xl"
+                         style="top: -1rem">
+            <span class="text-xl Vazir font-bold">
+                {% if table[2]==True %}
+                    پر
+                {% else %}
+                    خالی
+                {% endif %}
+            </span><i class="gb mb-1 mr-2 gb_done_all"></i>
+                    </div>
+                    <span class="absolute text-gray-400 Vazir left-3 bottom-2"><i class="gb gb_people ml-2"></i>دو نفره</span>
+                    <span class="absolute text-gray-400 Vazir right-3 bottom-2"><i
+                            class="gb gb_s18 mb-1 gb_timer ml-2"></i>16 : 18</span>
+
+                {% if table[2] == True %}
+                    <span class="absolute text-gray-400 Vazir right-24 bottom-10 text-xl"><i class="gb gb_event_note gb_s24 ml-2"></i>
+                        سفارش :<a href="#"
+                                                                                class="font-bold text-blue-400">851</a></span>
+                {% else %}
+                     <span class="absolute text-gray-400 Vazir right-24 bottom-10 text-xl"><i
+                            class="gb gb_event_note gb_s24 ml-2"></i><a href="#" class="font-bold text-blue-400"></a>میز خالی است!</span>
+                {% endif %}
+                </div>
+            {% elif table[0] == 4 %}
+                <div class="animate__animated animate__fadeInDown animate__delay-2s h-28 col-span-4 rounded shadow-lg ring-4 cursor-help ring-opacity-40 ring-yellow-200 hover:shadow-2xl p-4 relative transition bg-yellow-100 hover:bg-white">
+                    <h3 class="text-lg font-bold text-center bg-yellow-400 p-2 absolute r-2 text-white ring-4 ring-yellow-400 ring-opacity-40 h-16 w-16 rounded text-5xl"
+                        style="top: -1rem">{{ table[1] }}</h3>
+                    <div class="absolute left-4 text-white rounded ring-4 ring-opacity-40 bg-green-400 ring-green-400 pb-1 px-2 text-2xl"
+                         style="top: -1rem">
+                        <span class="text-xl Vazir font-bold">
+                              {% if table[2]==True %}
+                                  پر
+                              {% else %}
+                                  خالی
+                              {% endif %}
+                        </span><i class="gb mb-1 mr-2 gb_all_out"></i>
+                    </div>
+                    <span class="absolute text-gray-400 Vazir left-3 bottom-2"><i class="gb gb_people ml-2"></i>چهار نفره</span>
+                    <span class="absolute text-gray-400 Vazir right-3 bottom-2"><i
+                            class="gb gb_s18 mb-1 gb_timer ml-2"></i>-- : --</span>
+              {% if table[2] == True %}
+                    <span class="absolute text-gray-400 Vazir right-24 bottom-10 text-xl"><i class="gb gb_event_note gb_s24 ml-2"></i>
+                        سفارش :<a href="#"
+                                                                                class="font-bold text-blue-400">851</a></span>
+                {% else %}
+                     <span class="absolute text-gray-400 Vazir right-24 bottom-10 text-xl"><i
+                            class="gb gb_event_note gb_s24 ml-2"></i><a href="#" class="font-bold text-blue-400"></a>میز خالی است!</span>
+                {% endif %}
+                </div>
+            {% elif table[0] == 8 %}
+                <div class="animate__animated animate__fadeInDown animate__delay-3s h-36 col-span-4 md:col-span-8 rounded shadow-lg ring-4 cursor-help ring-opacity-40 ring-purple-300 hover:shadow-2xl p-4 relative transition bg-purple-200 hover:bg-white">
+                    <h3 class="text-lg font-bold text-center bg-purple-500 p-2 absolute r-2 text-white ring-4 ring-purple-500 ring-opacity-40 h-16 w-16 rounded text-5xl"
+                        style="top: -1rem">7</h3>
+                    <div class="absolute left-4 text-white rounded ring-4 ring-opacity-40 bg-green-400 ring-green-400 pb-1 px-2 text-2xl"
+                         style="top: -1rem">
+                        <span class="text-xl Vazir font-bold">خالی</span><i class="gb mb-1 mr-2 gb_all_out"></i>
+                    </div>
+                    <span class="absolute text-gray-400 Vazir left-3 bottom-2"><i class="gb gb_people ml-2"></i>هشت نفره</span>
+                    <span class="absolute text-gray-400 Vazir right-3 bottom-2"><i
+                            class="gb gb_s18 mb-1 gb_timer ml-2"></i>-- : --</span>
+                    {% if table[2] == True %}
+                    <span class="absolute text-gray-400 Vazir right-24 bottom-10 text-xl"><i class="gb gb_event_note gb_s24 ml-2"></i>
+                        سفارش :<a href="#"
+                                                                                class="font-bold text-blue-400">851</a></span>
+                {% else %}
+                     <span class="absolute text-gray-400 Vazir right-24 bottom-10 text-xl"><i
+                            class="gb gb_event_note gb_s24 ml-2"></i><a href="#" class="font-bold text-blue-400"></a>میز خالی است!</span>
+                {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
