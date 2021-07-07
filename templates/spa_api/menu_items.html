@@ -1,103 +1,115 @@
 {% block body %}
-<div class="container p-4">
-    <ul class="px-0">
+    <div class="container p-4 Vazir">
+        <ul class="px-0">
 
-        {% for item in items %}
+            {% for item in items %}
 
-        <li id="li{{ loop.index0 }}">
-            <div class="col-12 my-3">
-                <div class="card shadow rounded">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-4 col-lg-3 text-center">
-                                    <h6 id="row_h6_{{ loop.index0 }}" class="mt-2">
-                                        <b style="color: black;">{{item.0}}</b>
-                                    </h6>
-                                </div>
-                                <div class="col-4 col-lg-3 text-center"><h6 class="mt-2"><b style="color: black;">{{item.2}}</b></h6></div>
-                                <div id="row_span_{{ loop.index0 }}"
-                                     class="col-lg-3 text-center d-lg-block d-none mt-2 text-info px-0">
-                                    {{item.1}} تومان
-                                </div>
-                                <div class="col-4 col-lg-3 text-left">
-                                    <div class="options">
-                                        <button type="button" class="btn change" data-toggle="modal"
-                                                data-target="#edit{{ loop.index0 }}">
-                                            <strong><i class="gb gb_edit mb-5"></i></strong>
-                                        </button>
+                <li id="li{{ loop.index0 }}">
+                    <div class="col-12 my-3">
+                        <div class="card shadow rounded">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4 col-lg-3 text-center">
+                                            <h6 id="row_h6_{{ loop.index0 }}" class="mt-2">
+                                                <b style="color: black;">{{ item.0 }}</b>
+                                            </h6>
+                                        </div>
+                                        <div class="col-4 col-lg-3 text-center"><h6 class="mt-2"><b
+                                                style="color: black;">{{ item.2 }}</b></h6></div>
+                                        <div id="row_span_{{ loop.index0 }}"
+                                             class="col-lg-3 Vazir text-center d-lg-block d-none mt-2 text-info px-0">
+                                            {{ item.1 }} تومان
+                                        </div>
+                                        <div class="col-4 col-lg-3 text-left">
+                                            <div class="options">
+                                                <button type="button" class="btn change" data-toggle="modal"
+                                                        data-target="#edit{{ loop.index0 }}">
+                                                    <strong><i class="gb gb_edit mb-5"></i></strong>
+                                                </button>
 
-                                        <button type="button" class="btn change" data-toggle="modal"
-                                                data-target="#delete{{ loop.index0 }}">
-                                            <strong><i class="gb gb_delete mb-5 text-danger"></i></strong>
-                                        </button>
+                                                <button type="button" class="btn change" data-toggle="modal"
+                                                        data-target="#delete{{ loop.index0 }}">
+                                                    <strong><i class="gb gb_delete mb-5 text-danger"></i></strong>
+                                                </button>
 
-                                        <div class="modal fade" id="edit{{ loop.index0 }}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">{{item.0}}</h4>
-                                                        <button type="button" class="close zrbdr" data-dismiss="modal">
-                                                            &times;
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        <form class="edit_form" id="edit_form{{loop.index0}}" action="#"
-                                                              data-index="{{loop.index0}}"
-                                                              method="post">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="name"
-                                                                       placeholder="نام محصول را وارد نمایید"
-                                                                       name="name"
-                                                                       value="{{item.0}}">
+                                                <div class="modal fade" id="edit{{ loop.index0 }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">{{ item.0 }}</h4>
+                                                                <button type="button" class="close zrbdr"
+                                                                        data-dismiss="modal">
+                                                                    &times;
+                                                                </button>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <input type="number" class="form-control" id="price"
-                                                                       placeholder="قیمت محصول را وارد نمایید"
-                                                                       name="price"
-                                                                       step="1000" value="{{item.1}}">
+
+                                                            <div class="modal-body">
+                                                                <form class="edit_form" id="edit_form{{ loop.index0 }}"
+                                                                      action="#"
+                                                                      data-index="{{ loop.index0 }}"
+                                                                      method="post">
+                                                                    <div class="form-group">
+                                                                        <input type="text" class="form-control"
+                                                                               id="name"
+                                                                               placeholder="نام محصول را وارد نمایید"
+                                                                               name="name"
+                                                                               value="{{ item.0 }}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input type="number" class="form-control"
+                                                                               id="price"
+                                                                               placeholder="قیمت محصول را وارد نمایید"
+                                                                               name="price"
+                                                                               step="1000" value="{{ item.1 }}">
+                                                                    </div>
+                                                                    <button type="button" class="btn mdl btn-danger"
+                                                                            data-dismiss="modal">لغو
+                                                                    </button>
+                                                                    <button type="submit"
+                                                                            class="btn mdl btn-primary mr-2">ثبت
+                                                                    </button>
+                                                                </form>
                                                             </div>
-                                                            <button type="button" class="btn mdl btn-danger"
-                                                                    data-dismiss="modal">لغو
-                                                            </button>
-                                                            <button type="submit" class="btn mdl btn-primary mr-2">ثبت
-                                                            </button>
-                                                        </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="modal fade" id="delete{{ loop.index0 }}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">{{item.0}}</h4>
-                                                        <button type="button" class="close zrbdr" data-dismiss="modal">
-                                                            &times;
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        <form class="delete_form" id="delete_form{{loop.index0}}"
-                                                              action="#"
-                                                              data-index="{{loop.index0}}"
-                                                              method="POST">
-                                                            <div class="form-group">
-                                                                <p class="text-right">آیا از حذف این محصول اطمینان
-                                                                    دارید؟</p>
-                                                                <input style="display: none" type="text"
-                                                                       class="form-control" name="delete"
-                                                                       value="{{item.0}}">
+                                                <div class="modal fade" id="delete{{ loop.index0 }}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">{{ item.0 }}</h4>
+                                                                <button type="button" class="close zrbdr"
+                                                                        data-dismiss="modal">
+                                                                    &times;
+                                                                </button>
                                                             </div>
-                                                            <button type="button" class="btn mdl btn-primary"
-                                                                    data-dismiss="modal">بازگشت
-                                                            </button>
-                                                            <button type="submit" class="btn mdl btn-danger mr-2"
-                                                                    id="delete-item">حذف
-                                                            </button>
-                                                        </form>
+
+                                                            <div class="modal-body">
+                                                                <form class="delete_form"
+                                                                      id="delete_form{{ loop.index0 }}"
+                                                                      action="#"
+                                                                      data-index="{{ loop.index0 }}"
+                                                                      method="POST">
+                                                                    <div class="form-group">
+                                                                        <p class="text-right">آیا از حذف این محصول
+                                                                            اطمینان
+                                                                            دارید؟</p>
+                                                                        <input style="display: none" type="text"
+                                                                               class="form-control" name="delete"
+                                                                               value="{{ item.0 }}">
+                                                                    </div>
+                                                                    <button type="button" class="btn mdl btn-primary"
+                                                                            data-dismiss="modal">بازگشت
+                                                                    </button>
+                                                                    <button type="submit"
+                                                                            class="btn mdl btn-danger mr-2"
+                                                                            id="delete-item">حذف
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,56 +119,143 @@
                             </div>
                         </div>
                     </div>
+                </li>
+
+            {% endfor %}
+        </ul>
+        <div class="col-12 mt-5 mb-2">
+            <button type="button" class="btn btn-success w-100 add" data-toggle="modal" data-target="#add">
+                <strong><i class="gb gb_add_circle_outline ml-2 mb-2" style="font-size: 2.5rem;"></i></strong>
+            </button>
+
+            <div class="modal fade" id="add">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">محصول جدید</h4>
+                            <button type="button" class="close zrbdr" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="add_form" action="#" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="new_name"
+                                           placeholder="نام محصول را وارد نمایید" name="new_name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="new_cat"
+                                           placeholder="دسته محصول را وارد نمایید" name="new_cat">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="new_price"
+                                           placeholder="قیمت محصول را وارد نمایید" name="new_price" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="new_discount"
+                                           placeholder="درصد تخفیف را وارد کنید" name="new_discount">
+                                </div>
+                                <button type="button" class="btn mdl btn-danger" data-dismiss="modal">لغو</button>
+                                <button type="submit" class="btn mdl btn-primary mr-2">ثبت</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </li>
 
-        {% endfor %}
-    </ul>
-    <div class="col-12 mt-5 mb-2">
-        <button type="button" class="btn btn-success w-100 add" data-toggle="modal" data-target="#add">
-            <strong><i class="gb gb_add_circle_outline ml-2 mb-2" style="font-size: 2.5rem;"></i></strong>
-        </button>
-
-        <div class="modal fade" id="add">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">محصول جدید</h4>
-                        <button type="button" class="close zrbdr" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-                        <form id="add_form" action="#" method="POST">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="new_name"
-                                       placeholder="نام محصول را وارد نمایید" name="new_name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="new_cat"
-                                       placeholder="دسته محصول را وارد نمایید" name="new_cat">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="new_price"
-                                       placeholder="قیمت محصول را وارد نمایید" name="new_price" step="1000">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="new_discount"
-                                       placeholder="درصد تخفیف را وارد کنید" name="new_discount">
-                            </div>
-                            <button type="button" class="btn mdl btn-danger" data-dismiss="modal">لغو</button>
-                            <button type="submit" class="btn mdl btn-primary mr-2">ثبت</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
+    <script>
+        $(document).ready(function () {
+            var user_id = '{{id}}';
+            $(".edit_form").submit(function (event) {
+                event.preventDefault();
+                var index = $(this).attr("data-index")
+                var $inputs = $('#edit_form' + index + ' :input');
+                var values = {};
+                $inputs.each(function () {
+                    values[this.name] = $(this).val();
+                });
+                $("#row_h6_" + index).text(values["name"])
+                $("#row_span_" + index).text(values["price"] + ' تومان')
+                var data = {"action": "update", "name": values["name"], "price": values["price"]};
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: '/cashier/' + user_id + '/menu',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        console.log("ok", result);
+                    }, error: function (result) {
+                        console.log(result);
+                    }
+                });
+                $("#edit" + index).modal('hide');
+            });
 
-</div>
-<script>
-    var user_id = '{{id}}';
-</script>
-<script src="../../static/js/menu_items.js"></script>
+            $(".delete_form").submit(function (event) {
+                event.preventDefault();
+                var index = $(this).attr("data-index")
+                var $inputs = $('#edit_form' + index + ' :input');
+                var values = {};
+                $inputs.each(function () {
+                    values[this.name] = $(this).val();
+                });
+                var data = {"action": "delete", "row": index, "name": values["name"]};
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: '/cashier/' + user_id + '/menu',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        console.log("ok", result);
+                    }, error: function (result) {
+                        console.log(result);
+                    }
+                });
+                $("#delete" + index).modal('hide');
+                $('#delete' + index).on('hidden.bs.modal', function () {
+                    $("#li" + index).remove();
+                })
+            });
+
+
+            $("#add_form").submit(function (event) {
+                event.preventDefault();
+                var $inputs = $('#add_form :input');
+                var values = {};
+                $inputs.each(function () {
+                    values[this.name] = $(this).val();
+                });
+                console.log($inputs)
+                console.log(values)
+                var data = {
+                    "action": "add",
+                    "name": values["new_name"],
+                    "category": values["new_cat"],
+                    "price": values["new_price"],
+                    "discount": values["new_discount"]
+                };
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: '/cashier/' + user_id + '/menu',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        console.log("ok", result);
+                    }, error: function (result) {
+                        console.log(result);
+                    }
+                });
+                $("#add").modal('hide');
+                $('#add').on('hidden.bs.modal', function () {
+                    location.reload()
+                })
+
+            });
+        });
+    </script>
 {% endblock %}

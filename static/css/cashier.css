@@ -4,8 +4,12 @@
     font-family: Yekan, sans-serif;
 }
 
-.Vazir {
+.Vazir, .Vazir * {
     font-family: Vazir, sans-serif;
+}
+
+.Vazir i {
+    font-family: 'Gorbeh Icons', sans-serif;
 }
 
 .ltr {
@@ -68,7 +72,7 @@
 }
 
 .title {
-    font-size: 2.5em;
+    font-size: 2em;
     right: 1em;
     bottom: .2em;
     vertical-align: bottom;
@@ -202,4 +206,88 @@ button:focus {
 
 ul {
     list-style: none;
+}
+
+.main-col {
+    height: 100%;
+}
+
+.col-order {
+    height: 60px;
+    padding-top: 16px;
+}
+
+.row-recepit {
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px #d0cdcd;
+}
+
+.btn {
+    max-width: 100%;
+}
+
+.icon {
+    color: black;
+    font-size: 20px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.order-col {
+    height: 100%;
+}
+
+
+.table-row {
+    cursor: pointer;
+}
+
+td {
+    width: 20%;
+}
+
+.header-button {
+    border-radius: 7px !important;
+    border: 1px solid #868585;
+    padding: 2px 8px;
+}
+
+.sortable-column {
+    cursor: pointer;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .modal * {
+        max-width: 100%;
+        font-size: 50px;
+    }
+
+    li {
+        margin-right: 35px;
+    }
+
+    .modal-content, .modal-content * {
+        visibility: visible;
+    }
+
+    .modal-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    #print-icon, #print-icon * {
+        visibility: hidden;
+    !important;
+    }
+
+    .modal-footer, .modal-footer * {
+        visibility: hidden;
+    !important;
+    }
+
 }
