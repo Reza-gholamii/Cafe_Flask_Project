@@ -21,11 +21,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
     {% block extra_head %}{% endblock %}
     <script>
-        $(document).ready(function() {
+        if (typeof (String.prototype.trim) === "undefined") {
+            String.prototype.trim = function () {
+                return String(this).replace(/^\s+|\s+$/g, '');
+            };
+        }
+
+        $(document).ready(function () {
             let data_link = $('a[data-link="dashboard-item"]')
             data_link.click(function () {
                 data_link.parent().removeClass('choosed')
                 $(this).parent().addClass('choosed')
+                $('h3[data-title="page-title"]').text(($(this).text().trim()))
             })
         })
     </script>
@@ -48,37 +55,37 @@
                 <nav id="nav_menu" class="w-100 ">
                     <ul id="menu_left_side" class="nav-list"
                         style="text-align: right !important;">
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8 choosed">
                             <a data-link="dashboard-item" class="hover:text-blue-400">
-                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                <i class="gb gb_view_quilt gb_s24 menu-icon"></i>
                                 داشبورد
                             </a>
                         </li>
 
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
                             <a data-link="dashboard-item" class="hover:text-blue-400">
-                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                <i class="gb gb_date_range gb_s24 menu-icon"></i>
                                 سفارش ها
                             </a>
                         </li>
 
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
                             <a data-link="dashboard-item" class="hover:text-blue-400">
-                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                <i class="gb gb_select_all gb_s24 menu-icon"></i>
                                 میز ها
                             </a>
                         </li>
 
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
                             <a data-link="dashboard-item" class="hover:text-blue-400">
-                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                <i class="gb gb_list gb_s24 menu-icon"></i>
                                 منو
                             </a>
                         </li>
 
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
                             <a data-link="dashboard-item" class="hover:text-blue-400">
-                                <i class="gb gb_restaurant gb_s24 menu-icon"></i>
+                                <i class="gb gb_receipt gb_s24 menu-icon"></i>
                                 صورت حساب ها
                             </a>
                         </li>
@@ -90,20 +97,7 @@
         <div class="col-lg-9 col-md-8 ">
             <div class="row border-bottom shadow title-p" style="height: 9em">
                 <div class="col-3 align-bottom position-relative">
-                    <p class="title position-absolute mb-5">
-                        {{ "داشبورد" if page_name=="dashboard" else "" }}
-                        {{ "میزها" if page_name=="tables" else "" }}
-                        {{ "سفارش ها" if page_name=="orders" else "" }}
-                        {{ "منو" if page_name=="menu items" else "" }}
-                        {{ "همه سفارش ها" if page_name=="orders" else "" }}
-                        {{ "سفارش های جدید" if page_name=="new orders" else "" }}
-                        {{ "سفارش های در حال پخت" if page_name=="cooking orders" else "" }}
-                        {{ "سفارش های ذخیره شده" if page_name=="archive orders" else "" }}
-                        {{ "سفارش های سرو شده" if page_name=="served orders" else "" }}
-                        {{ "سفارش های پرداخت شده" if page_name=="paid orders" else "" }}
-                        {{ "سفارش های کنسل شده" if page_name=="canceld orders" else "" }}
-                        {{ "صورت حساب ها" if page_name=="recepits" else "" }}
-                    </p>
+                    <h3 data-title="page-title" class="title position-absolute mb-5">داشبورد</h3>
                 </div>
                 <div class="col-9  position-relative ">
                     <a href="#" class="position-absolute profile shadow">
