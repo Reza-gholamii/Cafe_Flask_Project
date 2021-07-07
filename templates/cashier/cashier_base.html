@@ -38,7 +38,7 @@
                 $('h3[data-title="page-title"]').text(($(this).text().trim()))
 
                 let data_href = $(this).data('href')
-                let _link = "{{ url_for('home') }}"+"api/"+data_href
+                let _link = "{{ url_for('home') }}" + "api/" + data_href
                 page_loader(_link)
             })
         })
@@ -55,6 +55,7 @@
             hero.style.display = "inline-block"
             menu.style.display = "inline-block"
         }
+
         function hamburger_close() {
             const navparent = document.getElementById("nav_parent")
             const hero = document.getElementById("nav_menu")
@@ -69,28 +70,28 @@
 
         // page loader :
         function page_loader(link) {
-                $.ajax({
-                    url: link,
-                    type: 'GET',
-                    dataType: 'text',
-                    success: function (response) {
-                        let body = $('#hero')
-                        setTimeout(function () {
-                            body.fadeOut(500)
-                        }, 540)
+            $.ajax({
+                url: link,
+                type: 'GET',
+                dataType: 'text',
+                success: function (response) {
+                    let body = $('#hero')
+                    setTimeout(function () {
+                        body.fadeOut(500)
+                    }, 540)
 
-                        setTimeout(function () {
-                            body.html('')
-                            body.html(response)
-                        }, 550)
+                    setTimeout(function () {
+                        body.html('')
+                        body.html(response)
+                    }, 550)
 
-                        setTimeout(function () {
-                            body.fadeIn(500)
-                        }, 560)
+                    setTimeout(function () {
+                        body.fadeIn(500)
+                    }, 560)
 
-                    }
-                })
-            }
+                }
+            })
+        }
     </script>
 </head>
 
@@ -118,11 +119,17 @@
                             </a>
                         </li>
 
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
-                            <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
-                                <i class="gb gb_date_range gb_s24 menu-icon"></i>
-                                سفارش ها
-                            </a>
+                        <li data-collapse="true" class="cursor-pointer hover:text-blue-400 nav-list-item pr-0">
+                            <span class="pr-8">سفارش ها</span>
+                            <i class="gb mb-1 gb_navigate_before triangle" style="vertical-align: bottom"></i>
+                            <ul class="text-lg pr-16">
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">

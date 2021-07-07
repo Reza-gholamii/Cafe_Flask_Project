@@ -17,8 +17,7 @@ app.add_url_rule("/cashier/menu", 'menu_items', html.menu_items, methods=['GET',
 app.add_url_rule("/cashier/orders", 'order_list', html.order_list, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders/archive", 'archive_list', html.archive_list, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders/new", 'new_order_list', html.new_order_list, methods=['GET', 'POST'])
-app.add_url_rule("/cashier/orders/cooking", 'cooking_order_list', html.cooking_order_list,
-                 methods=['GET', 'POST'])
+app.add_url_rule("/cashier/orders/cooking", 'cooking_order_list', html.cooking_order_list, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders/served", 'served_order_list', html.served_order_list, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders/paid", 'paid_order_list', html.paid_order_list, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders/cancelled", 'cancelled_order_list', html.cancelled_order_list,
