@@ -213,184 +213,87 @@ def order_list():
 
 
 def archive_list():
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)[0]
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    if request.method == "GET":
-        all_orders = db_manager.archive_orders_list('status')
-        all_orders = [list(order) for order in all_orders]
-        # for order in all_orders:
-        # order[5] = change_status_lang(order[5])
-        all_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/archive_list.html", orders=all_orders, user=user_data,
-                               page_name="archive orlders")
-    else:
-        json_data = request.get_json()
-        # json_data['status'] = change_status_lang(json_data['status'])
-        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
-        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+    json_data = request.get_json()
+    # json_data['status'] = change_status_lang(json_data['status'])
+    status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+    db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
-        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
-        tab_id = db_manager.read("recepites", recp_id)[0][3]
-        prices = db_manager.calculate_price(tab_id)[2:]
-        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+    recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+    tab_id = db_manager.read("recepites", recp_id)[0][3]
+    prices = db_manager.calculate_price(tab_id)[2:]
+    db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
 
-        return {"Data Received": 200}
+    return {"Data Received": 200}
 
 
 def new_order_list():
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)[0]
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    if request.method == "GET":
-        all_orders = db_manager.archive_orders_list('status')
-        new_orders = [list(order) for order in all_orders if order[5] == 'جدید']
-        # for order in new_orders:
-        #     order[5] = change_status_lang(order[5])
+    json_data = request.get_json()
+    # json_data['status'] = change_status_lang(json_data['status'])
+    status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+    db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
-        new_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/new_orders_list.html", orders=new_orders, user=user_data,
-                               page_name="new orders")
-    else:
-        json_data = request.get_json()
-        # json_data['status'] = change_status_lang(json_data['status'])
-        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
-        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+    recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+    tab_id = db_manager.read("recepites", recp_id)[0][3]
+    prices = db_manager.calculate_price(tab_id)[2:]
+    db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
 
-        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
-        tab_id = db_manager.read("recepites", recp_id)[0][3]
-        prices = db_manager.calculate_price(tab_id)[2:]
-        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
-
-        return {"Data Received": 200}
+    return {"Data Received": 200}
 
 
 def cooking_order_list():
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)[0]
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    if request.method == "GET":
-        all_orders = db_manager.archive_orders_list('status')
-        cooking_orders = [list(order) for order in all_orders if order[5] == 'در حال پخت']
-        # for order in cooking_orders:
-        #     order[5] = change_status_lang(order[5])
-        cooking_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/cooking_orders_list.html", orders=cooking_orders, user=user_data,
-                               page_name="cooking orders")
-    else:
-        json_data = request.get_json()
-        # json_data['status'] = change_status_lang(json_data['status'])
-        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
-        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+    json_data = request.get_json()
+    # json_data['status'] = change_status_lang(json_data['status'])
+    status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+    db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
-        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
-        tab_id = db_manager.read("recepites", recp_id)[0][3]
-        prices = db_manager.calculate_price(tab_id)[2:]
-        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+    recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+    tab_id = db_manager.read("recepites", recp_id)[0][3]
+    prices = db_manager.calculate_price(tab_id)[2:]
+    db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
 
-        return {"Data Received": 200}
+    return {"Data Received": 200}
 
 
 def served_order_list():
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)[0]
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    if request.method == "GET":
-        all_orders = db_manager.archive_orders_list('status')
-        serving_orders = [list(order) for order in all_orders if order[5] == 'سرو شده']
-        # for order in serving_orders:
-        #     order[5] = change_status_lang(order[5])
-        serving_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/served_orders_list.html", orders=serving_orders, user=user_data,
-                               page_name="served order")
-    else:
-        json_data = request.get_json()
-        # json_data['status'] = change_status_lang(json_data['status'])
-        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
-        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+    json_data = request.get_json()
+    # json_data['status'] = change_status_lang(json_data['status'])
+    status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+    db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
-        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
-        tab_id = db_manager.read("recepites", recp_id)[0][3]
-        prices = db_manager.calculate_price(tab_id)[2:]
-        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+    recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+    tab_id = db_manager.read("recepites", recp_id)[0][3]
+    prices = db_manager.calculate_price(tab_id)[2:]
+    db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
 
-        return {"Data Received": 200}
+    return {"Data Received": 200}
 
 
 def paid_order_list():
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)[0]
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    if request.method == "GET":
-        all_orders = db_manager.archive_orders_list('status')
-        paid_orders = [list(order) for order in all_orders if order[5] == 'پرداخت شده']
-        # for order in paid_orders:
-        #     order[5] = change_status_lang(order[5])
-        paid_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/paid_orders_list.html", orders=paid_orders, user=user_data,
-                               page_name="paid orders")
-    else:
-        json_data = request.get_json()
-        # json_data['status'] = change_status_lang(json_data['status'])
-        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
-        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+    json_data = request.get_json()
+    # json_data['status'] = change_status_lang(json_data['status'])
+    status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+    db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
-        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
-        tab_id = db_manager.read("recepites", recp_id)[0][3]
-        prices = db_manager.calculate_price(tab_id)[2:]
-        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+    recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+    tab_id = db_manager.read("recepites", recp_id)[0][3]
+    prices = db_manager.calculate_price(tab_id)[2:]
+    db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
 
-        return {"Data Received": 200}
+    return {"Data Received": 200}
 
 
 def cancelled_order_list():
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)[0]
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    if request.method == "GET":
-        all_orders = db_manager.archive_orders_list('status')
-        canceled_orders = [list(order) for order in all_orders if order[5] == 'کنسل شده']
-        # for order in canceled_orders:
-        #     order[5] = change_status_lang(order[5])
-        canceled_orders.sort(key=lambda x: x[0], reverse=True)
-        return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders, user=user_data,
-                               page_name="canceled orders")
-    else:
-        json_data = request.get_json()
-        # json_data['status'] = change_status_lang(json_data['status'])
-        status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
-        db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+    json_data = request.get_json()
+    # json_data['status'] = change_status_lang(json_data['status'])
+    status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
+    db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
-        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
-        tab_id = db_manager.read("recepites", recp_id)[0][3]
-        prices = db_manager.calculate_price(tab_id)[2:]
-        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+    recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+    tab_id = db_manager.read("recepites", recp_id)[0][3]
+    prices = db_manager.calculate_price(tab_id)[2:]
+    db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
 
-        return {"Data Received": 200}
+    return {"Data Received": 200}
 
 
 def recepit_list():
