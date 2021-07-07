@@ -20,13 +20,16 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
     {% block extra_head %}{% endblock %}
+
     <script>
+        // striper
         if (typeof (String.prototype.trim) === "undefined") {
             String.prototype.trim = function () {
                 return String(this).replace(/^\s+|\s+$/g, '');
             };
         }
 
+        // item clicked - choosed!
         $(document).ready(function () {
             let data_link = $('a[data-link="dashboard-item"]')
             data_link.click(function () {
@@ -35,6 +38,30 @@
                 $('h3[data-title="page-title"]').text(($(this).text().trim()))
             })
         })
+
+        // menu action :
+        function hamburger_open() {
+            const menu = document.getElementById("nav_menu")
+            const close = document.getElementById("hamburger_close")
+            const open = document.getElementById("hamburger_open")
+            const hero = document.getElementById("menu-position")
+            open.style.display = "none"
+            close.style.visibility = "visible"
+            hero.appendChild(menu)
+            hero.style.display = "inline-block"
+            menu.style.display = "inline-block"
+        }
+        function hamburger_close() {
+            const navparent = document.getElementById("nav_parent")
+            const hero = document.getElementById("nav_menu")
+            const menu = document.getElementById("menu-position")
+            const close = document.getElementById("hamburger_close")
+            const open = document.getElementById("hamburger_open")
+            open.style.removeProperty("display")
+            close.style.visibility = "hidden"
+            menu.style.display = "none"
+            navparent.appendChild(hero)
+        }
     </script>
 </head>
 
