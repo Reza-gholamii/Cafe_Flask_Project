@@ -20,7 +20,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
     {% block extra_head %}{% endblock %}
-
     <script>
         // striper
         if (typeof (String.prototype.trim) === "undefined") {
@@ -34,7 +33,7 @@
 
             let data_link = $('a[data-link="dashboard-item"]')
             data_link.click(function () {
-                data_link.parent().removeClass('choosed')
+                $('li.choosed').removeClass('choosed')
                 $(this).parent().addClass('choosed')
                 $('h3[data-title="page-title"]').text(($(this).text().trim()))
 
