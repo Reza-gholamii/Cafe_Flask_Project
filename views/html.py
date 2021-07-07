@@ -513,18 +513,18 @@ def dashboard():
                            hours=hours, bests=bests)
 
 
-def tables():
-    # this codes should be in all cashier side functions to get user and security reasons
-    __ = user_seter()
-    if type(__) == int:
-        user_data = DataBaseManager().read("users", __)[0]
-    else:
-        return user_seter()
-    # ''''''''''''''''''''
-    tables = ExtraDataBaseManager().read_all("tables")
-    # TODO: where is order number?
-
-    return render_template("cashier/tables.html", tables=tables, user=user_data, page_name="tables")
+# def tables():
+#     # this codes should be in all cashier side functions to get user and security reasons
+#     __ = user_seter()
+#     if type(__) == int:
+#         user_data = DataBaseManager().read("users", __)[0]
+#     else:
+#         return user_seter()
+#     # ''''''''''''''''''''
+#     tables = ExtraDataBaseManager().read_all("tables")
+#     # TODO: where is order number?
+#
+#     return render_template("cashier/tables.html", tables=tables, user=user_data, page_name="tables")
 
 
 def login():
@@ -615,5 +615,17 @@ def api(page):
 
     if page == "contact_us":
         return render_template('spa_api/' + page + '.html')
+
+    if page == "table":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+        # ''''''''''''''''''''
+        _tables = ExtraDataBaseManager().read_all("tables")
+        # TODO: where is order number?
+
+        return render_template('spa_api/' + page + '.html', tables=_tables, user=user_data)
 
     return "API : Data Request Not Valid!"
