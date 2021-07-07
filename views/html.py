@@ -688,4 +688,20 @@ def api(page):
         return render_template('spa_api/' + page + '.html', user=user_data,
                                data=data, page_name="dashboard", days=weekdays, hours=hours, bests=bests)
 
+    if page == "menu_items":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+        items = db_manager.read_all('menu_items')
+        categories = db_manager.category_list()
+        items = list(map(lambda item: list(item), items))
+        categories_dict = {}
+        categories = list(map(lambda item: categories_dict.update({item[0]: item[1]}), categories))
+        for item in items:
+            item[2] = categories_dict[item[2]]
+        items.sort(key=lambda x: x[8])
+        return render_template('spa_api/' + page + '.html', items=items, user=user_data, page_name="menu items")
+
     return "API : Data Request Not Valid!"

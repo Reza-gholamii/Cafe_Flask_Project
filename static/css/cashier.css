@@ -166,3 +166,40 @@ b, b:hover {
 .grid a:hover {
     color: white !important;
 }
+
+.options {
+    position: absolute;
+    left: 1rem;
+}
+
+span {
+    margin: auto;
+}
+
+strong {
+    font-size: 1.5rem;
+}
+
+button:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.change {
+    height: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.zrbdr {
+    position: absolute;
+    left: 0.25rem;
+}
+
+.mdl:hover, .add:hover {
+    color: #000;
+}
+
+ul {
+    list-style: none;
+}
