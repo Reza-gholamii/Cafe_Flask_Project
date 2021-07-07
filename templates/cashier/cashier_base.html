@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     {% block bootstrap %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
     {% endblock %}
     {% block tailwindcss %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
     {% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
@@ -68,6 +68,7 @@
             hero.style.display = "inline-block"
             menu.style.display = "inline-block"
         }
+
         function hamburger_close() {
             const navparent = document.getElementById("nav_parent")
             const hero = document.getElementById("nav_menu")
@@ -132,35 +133,56 @@
                         </li>
 
                         <li data-collapse="true" class="nav-list-item pr-0 pb-4">
-                            <span class="cursor-pointer hover:text-blue-400 mr-8"><i class="gb gb_style gb_s24 menu-icon"></i>
+                            <span class="cursor-pointer hover:text-blue-400 mr-8"><i
+                                    class="gb gb_style gb_s24 menu-icon"></i>
                                 سفارش ها
-                                <i class="gb mb-1 gb_navigate_before triangle transition transform" style="vertical-align: bottom"></i>
+                                <i class="gb mb-1 gb_navigate_before triangle transition transform"
+                                   style="vertical-align: bottom"></i>
                             </span>
                             <ul class="collapse-ul-el text-lg pr-16 mt-4 overflow-hidden" style="display: none">
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="new_order_list"
+                                       class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
-                                        همه
+                                        جدید
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="cooking_order_list"
+                                       class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
-                                        همه
+                                        در حال پخت
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="served_order_list"
+                                       class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
-                                        همه
+                                        سرو شده
                                     </a>
                                 </li>
                                 <li class="cursor-pointer hover:text-blue-400">
-                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="paid_order_list"
+                                       class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
-                                        همه
+                                        پرداخت شده
                                     </a>
                                 </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="cancelled_order_list"
+                                       class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        کنسل شده
+                                    </a>
+                                </li>
+
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="archive_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        آرشیو
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
 
