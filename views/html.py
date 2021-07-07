@@ -166,11 +166,11 @@ def order_list():
             if recepit[0]:
                 recepit.insert(0, table_id)
                 order = db_manager.order_list(recepit[1])
-                recepit[2] = change_status_lang(recepit[2])
+                #recepit[2] = change_status_lang(recepit[2])
                 order_l = []
                 for item in order:
                     item = list(item)
-                    item[0] = change_status_lang(item[0])
+                    #item[0] = change_status_lang(item[0])
                     order_l.append(item)
                 recepits.append(recepit)
                 orders.append(order_l)
@@ -180,23 +180,39 @@ def order_list():
         json_data = request.get_json()
         # updating recepit status
         if 'new_recepit_status' in json_data.keys() and json_data['new_recepit_status']:
-            json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
+            #json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
             status_record = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
             db_manager.update('recepites', id=json_data['recepit_id'], status=status_record[2])
+
+            tabl_id = db_manager.read("recepites", json_data['recepit_id'])[0][3]
+            db_manager.update("tables", id=tabl_id, status=12)
+
         # updating order status
         elif 'new_order_status' in json_data.keys() and json_data['new_order_status']:
-            json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
+            #json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
             status_record = db_manager.check_record('statuses', title=json_data['new_order_status'])[0]
             menu_item_record = db_manager.check_record('menu_items', title=json_data['order_name'])[0]
             order_record = \
                 db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
             db_manager.update('orders', id=order_record[5], status=status_record[2])
+
+            recp_id = db_manager.read("orders", order_record[5])[0][3]
+            tab_id = db_manager.read("recepites", recp_id)[0][3]
+            prices = db_manager.calculate_price(tab_id)[2:]
+            db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         # updating order count
         elif json_data['count']:
             menu_item_record = db_manager.check_record('menu_items', title=json_data['item'])[0]
             order_record = \
                 db_manager.check_record('orders', recepite=json_data['recepit_id'], menu_item=menu_item_record[8])[0]
             db_manager.update('orders', id=order_record[5], count=json_data['count'])
+
+            recp_id = db_manager.read("orders", order_record[5])[0][3]
+            tab_id = db_manager.read("recepites", recp_id)[0][3]
+            prices = db_manager.calculate_price(tab_id)[2:]
+            db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -211,16 +227,22 @@ def archive_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         all_orders = [list(order) for order in all_orders]
-        for order in all_orders:
-            order[5] = change_status_lang(order[5])
+        #for order in all_orders:
+            #order[5] = change_status_lang(order[5])
         all_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/archive_list.html", orders=all_orders, user=user_data,
                                page_name="archive orlders")
     else:
         json_data = request.get_json()
-        json_data['status'] = change_status_lang(json_data['status'])
+        #json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -235,17 +257,23 @@ def new_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         new_orders = [list(order) for order in all_orders if order[5] == 'جدید']
-        for order in new_orders:
-            order[5] = change_status_lang(order[5])
+        # for order in new_orders:
+        #     order[5] = change_status_lang(order[5])
 
         new_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/new_orders_list.html", orders=new_orders, user=user_data,
                                page_name="new orders")
     else:
         json_data = request.get_json()
-        json_data['status'] = change_status_lang(json_data['status'])
+        # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -260,16 +288,22 @@ def cooking_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         cooking_orders = [list(order) for order in all_orders if order[5] == 'در حال پخت']
-        for order in cooking_orders:
-            order[5] = change_status_lang(order[5])
+        # for order in cooking_orders:
+        #     order[5] = change_status_lang(order[5])
         cooking_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/cooking_orders_list.html", orders=cooking_orders, user=user_data,
                                page_name="cooking orders")
     else:
         json_data = request.get_json()
-        json_data['status'] = change_status_lang(json_data['status'])
+        # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -284,16 +318,22 @@ def served_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         serving_orders = [list(order) for order in all_orders if order[5] == 'سرو شده']
-        for order in serving_orders:
-            order[5] = change_status_lang(order[5])
+        # for order in serving_orders:
+        #     order[5] = change_status_lang(order[5])
         serving_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/served_orders_list.html", orders=serving_orders, user=user_data,
                                page_name="served order")
     else:
         json_data = request.get_json()
-        json_data['status'] = change_status_lang(json_data['status'])
+        # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -307,17 +347,23 @@ def paid_order_list():
     # ''''''''''''''''''''
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
-        paid_orders = [list(order) for order in all_orders if order[5] == 'paid']
-        for order in paid_orders:
-            order[5] = change_status_lang(order[5])
+        paid_orders = [list(order) for order in all_orders if order[5] == 'پرداخت شده']
+        # for order in paid_orders:
+        #     order[5] = change_status_lang(order[5])
         paid_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/paid_orders_list.html", orders=paid_orders, user=user_data,
                                page_name="paid orders")
     else:
         json_data = request.get_json()
-        json_data['status'] = change_status_lang(json_data['status'])
+        # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -332,16 +378,22 @@ def cancelled_order_list():
     if request.method == "GET":
         all_orders = db_manager.archive_orders_list('status')
         canceled_orders = [list(order) for order in all_orders if order[5] == 'کنسل شده']
-        for order in canceled_orders:
-            order[5] = change_status_lang(order[5])
+        # for order in canceled_orders:
+        #     order[5] = change_status_lang(order[5])
         canceled_orders.sort(key=lambda x: x[0], reverse=True)
         return render_template("cashier/cancelled_orders_list.html", orders=canceled_orders, user=user_data,
                                page_name="canceled orders")
     else:
         json_data = request.get_json()
-        json_data['status'] = change_status_lang(json_data['status'])
+        # json_data['status'] = change_status_lang(json_data['status'])
         status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
         db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
+
+        recp_id = db_manager.read("orders", json_data['order_id'])[0][3]
+        tab_id = db_manager.read("recepites", recp_id)[0][3]
+        prices = db_manager.calculate_price(tab_id)[2:]
+        db_manager.update("recepites", id=recp_id, total_price=prices[0], final_price=prices[1])
+
         return {"Data Received": 200}
 
 
@@ -369,24 +421,33 @@ def recepit_list():
 
     else:
         json_data = request.get_json()
-        recepit_status = change_status_lang(json_data['status'])
-        recepit_status_id = db_manager.check_record('statuses', title=recepit_status)[0][2]
+        #recepit_status = change_status_lang(json_data['status'])
+        #print(recepit_status)
+        # print("###############")
+        # print(json_data)
+        # print("##############")
+        print(db_manager.check_record('statuses', title=json_data['status']))
+        recepit_status_id = db_manager.check_record('statuses', title=json_data['status'])[0][2]
         db_manager.update('recepites', id=json_data['recepit_id'], status=recepit_status_id)
+
+        tabl_id = db_manager.read("recepites", json_data['recepit_id'])[0][3]
+        db_manager.update("tables", id=tabl_id, status=12)
+
     return {"Data Received": 200}
 
 
 # this is test for tables status
-empty_table = [1, 3, 4, 7]
+# empty_table = [1, 3, 4, 7]
 
 # this is for test
 #
-served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-                 ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
+# served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+#                  ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+#                  ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+#                  ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+#                  ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+#                  ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
+#                  ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
 
 
 #

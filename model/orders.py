@@ -35,7 +35,7 @@ class Order(BaseModel):
             self.count = count
             self.status = STATUSES[self.name][status]
             self.time_stamp = time_stamp
-            self.recepite = recepite
+            self.recepite = recepite.number
             self.menu_item = db_manager.get_id("menu_items", title=menu_item)
 
             try:
@@ -44,6 +44,8 @@ class Order(BaseModel):
             except:
                 self.number = db_manager.create(self.name, self)
                 logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
+
+            self.parent = recepite
         else:
             logging.error(f"{__name__}: This Item isn't in the Active List.")
 
@@ -54,6 +56,7 @@ class Order(BaseModel):
 
         self.status = STATUSES[self.name][status]
         db_manager.update(self.name, id=self.number, status=self.status)
+        self.parent.sum_price()
         logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
 
     def change_count(self, count):
@@ -63,4 +66,5 @@ class Order(BaseModel):
 
         self.count = count
         db_manager.update(self.name, id=self.number, count=self.count)
+        self.parent.sum_price()
         logging.debug(f"{__name__}: Change Count Number Column Successfully in DataBase.")

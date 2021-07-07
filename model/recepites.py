@@ -79,6 +79,6 @@ class Recepite(BaseModel):
         Add Order for this Recepite Number by a Method for Self Recepite
         """
 
-        order = Order(self.number, menu_item, count, time_stamp, status)
+        order = Order(self, menu_item, count, time_stamp, status)
         self.orders[order.number] = order
         self.sum_price()
