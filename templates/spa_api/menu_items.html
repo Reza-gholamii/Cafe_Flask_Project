@@ -171,7 +171,6 @@
     </div>
     <script>
         $(document).ready(function () {
-            var user_id = '{{id}}';
             $(".edit_form").submit(function (event) {
                 event.preventDefault();
                 var index = $(this).attr("data-index")
@@ -186,7 +185,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/cashier/' + user_id + '/menu',
+                    url: '/cashier/menu',
                     dataType: 'json',
                     data: JSON.stringify(data),
                     success: function (result) {
@@ -210,7 +209,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/cashier/' + user_id + '/menu',
+                    url: '/cashier/menu',
                     dataType: 'json',
                     data: JSON.stringify(data),
                     success: function (result) {
@@ -246,7 +245,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/cashier/' + user_id + '/menu',
+                    url: '/cashier/menu',
                     dataType: 'json',
                     data: JSON.stringify(data),
                     success: function (result) {
