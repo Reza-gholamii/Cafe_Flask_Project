@@ -92,10 +92,6 @@ def menu():
             item[2] = categories_dict[item[2]]
             item[3] = int(item[1] * (1 - (item[3] / 100)))
 
-        # print(list(categories_dict.values()))
-
-        print(items, table_number, list(categories_dict.values()), image_names, sep="\n\n")
-
         return render_template("menu.html", items=items, table_number=table_number,
                                cat=list(categories_dict.values()), images=image_names
                                )
@@ -142,7 +138,7 @@ def menu_items():
             db_manager.update('menu_items', id=item_id, title=json_data['name'], price=json_data['price'])
         elif json_data['action'] == "add":
             new_item = MenuItem(title=json_data['name'], price=json_data['price'], category=json_data['category'],
-                                discount=json_data['discount'])
+                                discount=json_data['discount'], image_name=json_data['image'])
         items = db_manager.read_all('menu_items')
         items.sort(key=lambda x: x[8])
         return {"Data Received": 200}

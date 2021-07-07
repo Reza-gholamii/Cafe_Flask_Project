@@ -147,6 +147,10 @@
                                            placeholder="دسته محصول را وارد نمایید" name="new_cat">
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" class="form-control" id="new_img"
+                                           placeholder="نام عکس را وارد نمایید" name="new_img">
+                                </div>
+                                <div class="form-group">
                                     <input type="number" class="form-control" id="new_price"
                                            placeholder="قیمت محصول را وارد نمایید" name="new_price" step="1000">
                                 </div>
@@ -235,6 +239,7 @@
                     "action": "add",
                     "name": values["new_name"],
                     "category": values["new_cat"],
+                    "image":values["new_img"],
                     "price": values["new_price"],
                     "discount": values["new_discount"]
                 };
