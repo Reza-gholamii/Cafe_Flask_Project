@@ -31,6 +31,7 @@
 
         // item clicked - choosed!
         $(document).ready(function () {
+
             let data_link = $('a[data-link="dashboard-item"]')
             data_link.click(function () {
                 data_link.parent().removeClass('choosed')
@@ -40,6 +41,18 @@
                 let data_href = $(this).data('href')
                 let _link = "{{ url_for('home') }}" + "api/" + data_href
                 page_loader(_link)
+            })
+
+            // data coalpse:
+            $("li[data-collapse]>span:first").click(function () {
+                let triangle = $(this).children('i.triangle')
+                triangle.toggleClass('-rotate-90')
+
+                if (triangle.hasClass('-rotate-90')) {
+                    $(this).parent().children('ul').slideDown()
+                } else {
+                    $(this).parent().children('ul').slideUp()
+                }
             })
         })
 
@@ -55,7 +68,6 @@
             hero.style.display = "inline-block"
             menu.style.display = "inline-block"
         }
-
         function hamburger_close() {
             const navparent = document.getElementById("nav_parent")
             const hero = document.getElementById("nav_menu")
@@ -119,10 +131,30 @@
                             </a>
                         </li>
 
-                        <li data-collapse="true" class="cursor-pointer hover:text-blue-400 nav-list-item pr-0">
-                            <span class="pr-8">سفارش ها</span>
-                            <i class="gb mb-1 gb_navigate_before triangle" style="vertical-align: bottom"></i>
-                            <ul class="text-lg pr-16">
+                        <li data-collapse="true" class="nav-list-item pr-0 pb-4">
+                            <span class="cursor-pointer hover:text-blue-400 mr-8"><i class="gb gb_style gb_s24 menu-icon"></i>
+                                سفارش ها
+                                <i class="gb mb-1 gb_navigate_before triangle transition transform" style="vertical-align: bottom"></i>
+                            </span>
+                            <ul class="collapse-ul-el text-lg pr-16 mt-4 overflow-hidden" style="display: none">
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
                                 <li class="cursor-pointer hover:text-blue-400">
                                     <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
                                         <i class="gb gb_date_range gb_s18 menu-icon"></i>
