@@ -704,4 +704,32 @@ def api(page):
         items.sort(key=lambda x: x[8])
         return render_template('spa_api/' + page + '.html', items=items, user=user_data, page_name="menu items")
 
+    if page == "":
+        # this codes should be in all cashier side functions to get user and security reasons
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        Table.all_tables()
+        tables_id = list(Table.TABLES.keys())
+        recepits, orders = [], []
+        for table_id in tables_id:
+            recepit = list(db_manager.calculate_price(table_id))
+            # todo: it's better to change the condition to unpaid or other thing
+            if recepit[0]:
+                recepit.insert(0, table_id)
+                order = db_manager.order_list(recepit[1])
+                # recepit[2] = change_status_lang(recepit[2])
+                order_l = []
+                for item in order:
+                    item = list(item)
+                    # item[0] = change_status_lang(item[0])
+                    order_l.append(item)
+                recepits.append(recepit)
+                orders.append(order_l)
+        return render_template('spa_api/' + page + '.html', recepits=recepits, orders=orders, user=user_data,
+                               page_name="orders")
+
     return "API : Data Request Not Valid!"

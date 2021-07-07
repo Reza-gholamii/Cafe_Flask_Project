@@ -4,7 +4,7 @@
     font-family: Yekan, sans-serif;
 }
 
-.Vazir , .Vazir * {
+.Vazir, .Vazir * {
     font-family: Vazir, sans-serif;
 }
 
@@ -206,4 +206,29 @@ button:focus {
 
 ul {
     list-style: none;
+}
+
+.main-col {
+    height: 100%;
+}
+
+.col-order {
+    height: 60px;
+    padding-top: 16px;
+}
+
+.row-recepit {
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px #d0cdcd;
+}
+
+.btn {
+    max-width: 100%;
+}
+
+.icon {
+    color: black;
+    font-size: 20px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
