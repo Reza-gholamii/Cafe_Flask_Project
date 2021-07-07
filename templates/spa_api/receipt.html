@@ -31,15 +31,15 @@
                         <table id="main-table" class="table text-center table-hover mb-0">
                             <thead class="bg-info">
                             <tr>
-                                <th class="sortable-column" id=column0 data-dir="asc" onclick="sort_data('column0')">
+                                <th class="sortable-column" id='column0' data-dir="asc">
                                     شماره
                                     صورتحساب
                                 </th>
-                                <th class="sortable-column" id=column1 data-dir="asc" onclick="sort_data('column1')">
+                                <th class="sortable-column" id='column1' data-dir="asc">
                                     هزینه
                                     کل (تومان)
                                 </th>
-                                <th class="sortable-column" id=column2 data-dir="asc" onclick="sort_data('column2')">
+                                <th class="sortable-column" id='column2' data-dir="asc">
                                     وضعیت
                                 </th>
                                 <th>ویرایش</th>
@@ -146,8 +146,7 @@
         </div>
     </div>
     <script>
-        $(document).ready(function (){
-            var user_id = '{{id}}';
+        $(document).ready(function () {
 
             $('a.icon').click(function () {
                 change_status(this)
@@ -183,38 +182,12 @@
                     }
                 });
             }
-        })
 
-        $(document).ready(function () {
-            var user_id = '{{id}}';
-
-
-
-            $(document).ready(function () {
-                $("#searchInput").on("keyup", function () {
-                    var value = $(this).val();
-                    $("#table_body tr").filter(function () {
-                        $(this).toggle($(this).text().indexOf(value) > -1)
-                    });
-                });
-            });
-
-            $("#unpaid-button").on("click", function () {
-                $("#table_body tr").filter(function () {
-                    $(this).toggle($(this).text().indexOf("پرداخت نشده") > -1)
-                });
-
-            });
-
-            $("#paid-button").on("click", function () {
-                $("#table_body tr").filter(function () {
-                    $(this).toggle($(this).text().indexOf("پرداخت شده") > -1)
-                });
-            });
-
-            $("#archive-button").on("click", function () {
-                $("#table_body tr").show()
-            });
+            $('th[data-dir]').click(function () {
+                const col = $(this).attr('id')
+                console.log(col)
+                sort_data(col)
+            })
 
             function sort_data(column) {
                 let n = Number(column.slice(-1))
@@ -246,8 +219,6 @@
                                 rows[j].parentNode.insertBefore(rows[j + 1], rows[j]);
                             }
                         }
-
-
                     }
                 }
                 if (dir === "desc") {
@@ -256,6 +227,35 @@
                     target_column.setAttribute("data-dir", "desc")
                 }
             }
+        })
+
+        $(document).ready(function () {
+
+            $(document).ready(function () {
+                $("#searchInput").on("keyup", function () {
+                    var value = $(this).val();
+                    $("#table_body tr").filter(function () {
+                        $(this).toggle($(this).text().indexOf(value) > -1)
+                    });
+                });
+            });
+
+            $("#unpaid-button").on("click", function () {
+                $("#table_body tr").filter(function () {
+                    $(this).toggle($(this).text().indexOf("پرداخت نشده") > -1)
+                });
+
+            });
+
+            $("#paid-button").on("click", function () {
+                $("#table_body tr").filter(function () {
+                    $(this).toggle($(this).text().indexOf("پرداخت شده") > -1)
+                });
+            });
+
+            $("#archive-button").on("click", function () {
+                $("#table_body tr").show()
+            });
 
         });
 
