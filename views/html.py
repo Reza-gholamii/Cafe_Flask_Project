@@ -628,10 +628,12 @@ def api(page):
         for counter in range(len(_tables)):
             _tables[counter] = list(_tables[counter])
             recp = db_manager.calculate_price(_tables[counter][3])
-            if recp:
+            # print(recp)
+            if recp[0]:
                 _ord = db_manager.order_list(recp[0])
                 _time = _ord[0][5].strftime("%H : %M")
                 _tables[counter][3] = [recp[0], _time]
+                # print(_tables[counter][3])
             else:
                 _tables[counter][3] = None
         # TODO: where is order number?
