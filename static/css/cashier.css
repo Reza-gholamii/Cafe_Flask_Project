@@ -4,8 +4,12 @@
     font-family: Yekan, sans-serif;
 }
 
-.Vazir {
+.Vazir , .Vazir * {
     font-family: Vazir, sans-serif;
+}
+
+.Vazir i {
+    font-family: 'Gorbeh Icons', sans-serif;
 }
 
 .ltr {
