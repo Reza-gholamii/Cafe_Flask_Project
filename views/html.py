@@ -759,4 +759,17 @@ def api(page):
         return render_template('spa_api/' + page + '.html', recepits=recepits_list, orders=orders, page_name="recepits"
                                , user=user_data)
 
+    if page == "new_orders_list":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        all_orders = db_manager.archive_orders_list('status')
+        new_orders = [list(order) for order in all_orders if order[5] == 'جدید']
+
+        new_orders.sort(key=lambda x: x[0], reverse=True)
+        return render_template('spa_api/' + page + '.html', orders=new_orders, user=user_data,page_name="new orders")
+
     return "API : Data Request Not Valid!"
