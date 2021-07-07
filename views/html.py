@@ -625,6 +625,10 @@ def api(page):
             return user_seter()
         # ''''''''''''''''''''
         _tables = db_manager.read_all("tables")
+        for table in _tables:
+            recp = db_manager.calculate_price(table[3])
+            if recp:
+                table[3] = recp[0]
         # TODO: where is order number?
 
         return render_template('spa_api/' + page + '.html', tables=_tables, user=user_data)
