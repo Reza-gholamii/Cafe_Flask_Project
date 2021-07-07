@@ -289,5 +289,8 @@ td {
         visibility: hidden;
     !important;
     }
-
+    
+    .item-title-modal {
+        margin: 20px auto;
+    }
 }

@@ -17,7 +17,7 @@
                                 <input id="paid-button" class="header-button ml-2" type="button" value="پرداخت شده">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input class="form-control float-sm-left float-right text-right w-auto"
+                                <input class="form-control float-left w-full text-right"
                                        id="searchInput" type="text"
                                        placeholder="جستجو...">
                             </div>
@@ -49,7 +49,7 @@
                             <tbody id="table_body">
 
                             {% for recepit in recepits %}
-                                <tr class="table-row">
+                                <tr class="table-row Vazir">
                                     <td data-toggle="modal" data-target="#myModal{{ loop.index0 }}" class="w-25">
                                         {{ recepit.4 }}
                                     </td>
@@ -63,15 +63,15 @@
                                     <td class="w-25 px-0">
                                         <a class="icon icon_refresh status{{ loop.index0 }}"
                                            data-recepit="{{ recepit.4 }}">
-                                            <i class="gb gb_content_paste"></i>
+                                            <i class="gb gb_content_paste hover:text-blue-500"></i>
                                         </a>
                                         <a class="icon icon_check status{{ loop.index0 }}"
                                            data-recepit="{{ recepit.4 }}">
-                                            <i class="gb gb_done_all"></i>
+                                            <i class="gb gb_done_all hover:text-blue-500"></i>
                                         </a>
                                         <a class="icon icon_trash status{{ loop.index0 }}"
                                            data-recepit="{{ recepit.4 }}">
-                                            <i class="gb gb_cancel"></i>
+                                            <i class="gb gb_cancel hover:text-blue-500"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -90,13 +90,13 @@
                                         <div class="modal-header bg-info">
                                             <h4 class="modal-title mx-auto">جزئیات</h4>
                                         </div>
-                                        <div class="modal-body text-right">
+                                        <div class="modal-body text-right Vazir">
                                             <div class="overflow-hidden">
                                                 <p class="float-right">شماره صورتحساب: {{ recepit.4 }}</p>
                                                 <p class="float-left">هزینه کل: {{ recepit.1 }} تومان</p>
                                             </div>
-                                            <h5 class="text-center">آیتم ها</h5>
-                                            <ul class="border rounded pl-2 py-2 pr-4">
+                                            <h5 class="text-center text-xl my-4 item-title-modal">آیتم ها</h5>
+                                            <ul class="border grid rounded pl-2 py-2 pr-4">
 
                                                 {% set order = orders[loop.index-1] %}
                                                 {% for item in order %}
@@ -108,7 +108,7 @@
 
 
                                             </ul>
-                                            <ul class="border rounded pl-2 py-2 pr-4">
+                                            <ul class="border mt-4 grid rounded pl-2 py-2 pr-4">
                                                 <li>
                                                     <span class="float-right">زمان درخواست</span>
                                                     <span class="float-left">{{ recepit.6 }}</span>
