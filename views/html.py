@@ -2,7 +2,7 @@ from pprint import pprint
 
 from flask import render_template, request, redirect, make_response, Response
 from flask.helpers import url_for
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 from core.utility import *
 import model.users
 from core.manager import ExtraDataBaseManager, DataBaseManager
@@ -629,7 +629,9 @@ def api(page):
             _tables[counter] = list(_tables[counter])
             recp = db_manager.calculate_price(_tables[counter][3])
             if recp:
-                _tables[counter][3] = [recp[0], "18:16"]
+                _ord = db_manager.order_list(recp[0])
+                _time = _ord[0][5].strftime("%H : %M")
+                _tables[counter][3] = [recp[0], _time]
             else:
                 _tables[counter][3] = None
         # TODO: where is order number?
