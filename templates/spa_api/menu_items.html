@@ -230,8 +230,6 @@
                 $inputs.each(function () {
                     values[this.name] = $(this).val();
                 });
-                console.log($inputs)
-                console.log(values)
                 var data = {
                     "action": "add",
                     "name": values["new_name"],
@@ -254,7 +252,8 @@
                 });
                 $("#add").modal('hide');
                 $('#add').on('hidden.bs.modal', function () {
-                    location.reload()
+                    console.log('aded!')
+                    $('a[data-href="menu_items"]').click()
                 })
 
             });
