@@ -38,7 +38,7 @@
                 $('h3[data-title="page-title"]').text(($(this).text().trim()))
 
                 let data_href = $(this).data('href')
-                let _link = "{{ url_for('home') }}"+"api/"+data_link
+                let _link = "{{ url_for('home') }}"+"api/"+data_href
                 page_loader(_link)
             })
         })
