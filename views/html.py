@@ -732,4 +732,24 @@ def api(page):
         return render_template('spa_api/' + page + '.html', recepits=recepits, orders=orders, user=user_data,
                                page_name="orders")
 
+    if page == "recepit":
+        __ = user_seter()
+        if type(__) == int:
+            user_data = DataBaseManager().read("users", __)[0]
+        else:
+            return user_seter()
+
+        orders = []
+        recepits_list = db_manager.read_all('recepites')
+        recepits_list.sort(key=lambda x: x[4], reverse=True)
+        recepits_list = list(map(lambda recepit: list(recepit), recepits_list))
+        for recepit in recepits_list:
+            recepit.append(recepit[0] - recepit[1])
+            order = db_manager.order_list(recepit[4])
+            recepit[2] = change_status_lang_by_number(str(recepit[2]))
+            orders.append(order)
+            recepit.append(order[0][5].strftime('%m.%d.%Y'))
+        return render_template('spa_api/' + page + '.html', recepits=recepits_list, orders=orders, page_name="recepits"
+                               , user=user_data)
+
     return "API : Data Request Not Valid!"
