@@ -208,6 +208,10 @@ ul {
     list-style: none;
 }
 
+.order-col {
+    height: 100%;
+}
+
 .main-col {
     height: 100%;
 }
@@ -232,11 +236,6 @@ ul {
     margin-left: 4px;
     margin-right: 4px;
 }
-
-.order-col {
-    height: 100%;
-}
-
 
 .table-row {
     cursor: pointer;
@@ -289,7 +288,7 @@ td {
         visibility: hidden;
     !important;
     }
-    
+
     .item-title-modal {
         margin: 20px auto;
     }
