@@ -294,3 +294,8 @@ td {
         margin: 20px auto;
     }
 }
+
+.collapse-ul-el > li.choosed {
+    font-size: 1.125rem;
+    margin-right: -15px;
+}

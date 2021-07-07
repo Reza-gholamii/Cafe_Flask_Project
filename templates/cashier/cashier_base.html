@@ -31,6 +31,7 @@
 
         // item clicked - choosed!
         $(document).ready(function () {
+
             let data_link = $('a[data-link="dashboard-item"]')
             data_link.click(function () {
                 data_link.parent().removeClass('choosed')
@@ -38,8 +39,20 @@
                 $('h3[data-title="page-title"]').text(($(this).text().trim()))
 
                 let data_href = $(this).data('href')
-                let _link = "{{ url_for('home') }}"+"api/"+data_href
+                let _link = "{{ url_for('home') }}" + "api/" + data_href
                 page_loader(_link)
+            })
+
+            // data coalpse:
+            $("li[data-collapse]>span:first").click(function () {
+                let triangle = $(this).children('i.triangle')
+                triangle.toggleClass('-rotate-90')
+
+                if (triangle.hasClass('-rotate-90')) {
+                    $(this).parent().children('ul').slideDown()
+                } else {
+                    $(this).parent().children('ul').slideUp()
+                }
             })
         })
 
@@ -69,28 +82,28 @@
 
         // page loader :
         function page_loader(link) {
-                $.ajax({
-                    url: link,
-                    type: 'GET',
-                    dataType: 'text',
-                    success: function (response) {
-                        let body = $('#hero')
-                        setTimeout(function () {
-                            body.fadeOut(500)
-                        }, 540)
+            $.ajax({
+                url: link,
+                type: 'GET',
+                dataType: 'text',
+                success: function (response) {
+                    let body = $('#hero')
+                    setTimeout(function () {
+                        body.fadeOut(500)
+                    }, 540)
 
-                        setTimeout(function () {
-                            body.html('')
-                            body.html(response)
-                        }, 550)
+                    setTimeout(function () {
+                        body.html('')
+                        body.html(response)
+                    }, 550)
 
-                        setTimeout(function () {
-                            body.fadeIn(500)
-                        }, 560)
+                    setTimeout(function () {
+                        body.fadeIn(500)
+                    }, 560)
 
-                    }
-                })
-            }
+                }
+            })
+        }
     </script>
 </head>
 
@@ -118,11 +131,37 @@
                             </a>
                         </li>
 
-                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
-                            <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
-                                <i class="gb gb_date_range gb_s24 menu-icon"></i>
+                        <li data-collapse="true" class="nav-list-item pr-0 pb-4">
+                            <span class="cursor-pointer hover:text-blue-400 mr-8"><i class="gb gb_style gb_s24 menu-icon"></i>
                                 سفارش ها
-                            </a>
+                                <i class="gb mb-1 gb_navigate_before triangle transition transform" style="vertical-align: bottom"></i>
+                            </span>
+                            <ul class="collapse-ul-el text-lg pr-16 mt-4 overflow-hidden" style="display: none">
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="order_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>
+                                        همه
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
