@@ -621,19 +621,17 @@ def api(page):
             return user_seter()
         # ''''''''''''''''''''
         _tables = db_manager.read_all("tables")
+        _tables = list(map(lambda table: list(table), _tables))
+        _tables.sort(key=lambda item: item[3])
         for counter in range(len(_tables)):
-            _tables[counter] = list(_tables[counter])
             recp = db_manager.calculate_price(_tables[counter][3])
-            # print(recp)
             if recp[0]:
                 _ord = db_manager.order_list(recp[0])
-                _time = _ord[0][5].strftime("%H : %M")
-                _tables[counter][3] = [recp[0], _time]
-                # print(_tables[counter][3])
+                _time = _ord[0][5].strftime(
+                    "%M : %H")  # H and M is in reverse order, since it get reversed again at front
+                _tables[counter].append([recp[0], _time])
             else:
-                _tables[counter][3] = None
-        # TODO: where is order number?
-
+                _tables[counter].append(None)
         return render_template('spa_api/' + page + '.html', tables=_tables, user=user_data)
 
     if page == "dashboard":
