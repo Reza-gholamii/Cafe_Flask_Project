@@ -1,61 +1,8 @@
-<!DOCTYPE html>
-<html lang="fa-IR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/css/fonts.css">
-    <title>کافه | لیست سفارشات پرداخت شده</title>
-
-    <style>
-        * {
-            font-family: Vazir, sans-serif;
-            direction: rtl;
-        }
-
-        body {
-            background-color: #e3e3e3;
-        }
-
-        .order-col {
-            height: 100%;
-        }
-
-        .btn {
-            max-width: 100%;
-        }
-
-        .icon {
-            color: black;
-            font-size: 21px;
-            margin-left: 4px;
-            margin-right: 4px;
-        }
-
-        .table-row {
-            cursor: pointer;
-        }
-
-        td {
-            width: 20%;
-        }
-        .sortable-column {
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
 <div class="container-fluid">
-
      <div class="row-bas">
         <div class="col">
             <div class="row mt-0">
-                <div class="col-11 col-sm-10 px-0 mx-auto text-right mb-2">
+                <div class="col-11 px-0 mx-auto text-right mb-2">
                     <h4 class="m-2 text-center"><b>لیست سفارشات پرداخت شده کافه لبخند</b></h4>
                 </div>
             </div>
@@ -70,7 +17,7 @@
                             <input id="third_item-button" class="header-button ml-2" type="button" value="کاپوچینو">
                         </div>
                         <div class="col-12 col-sm-6">
-                            <input class="form-control float-sm-left float-right text-right w-auto"
+                            <input class="form-control float-left text-right w-100"
                                    id="searchInput" type="text"
                                    placeholder="جستجو...">
                         </div>
@@ -115,7 +62,7 @@
                             <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
                         </div>
                         <div class="modal-body text-right">
-                            <ul class="border rounded pl-2 py-2">
+                            <ul class="border rounded p-2 mb-4">
                                 <li>
                                     <span class="float-right">زمان درخواست</span>
                                     <span class="float-left">{{ order.6 }}</span></li>
@@ -167,14 +114,6 @@
         </div>
     </div>
         </div>
-
-
-
 </div>
-<!--<script src="static/js/archive_list.js"></script>-->
-<script>
-    var user_id = '{{id}}';
-</script>
+</div>
 <script src="{{ url_for('static', filename='js/paid_order_list.js') }}"></script>
-</body>
-</html>
