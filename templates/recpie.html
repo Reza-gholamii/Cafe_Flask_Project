@@ -1,95 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/fonts.css">
-    <link rel="stylesheet" href="../static/css/gorbe-font.css">
-    <link rel="stylesheet" href="../static/css/tailwind.min.css">
-
-    <title>Document</title>
-
-    <style>
-           body  {
-            background: #E1E1E1 url("../static/img/bg-home.jpg");
-
-
-        }
-           .my-container{
-               margin: 5em auto;
-               height: 50vh;
-               width: 30em;
-               border-radius: .7em;
-
-           }
-           .my-container img{
-               width: 100%;
-               height: 40%;
-               object-fit: cover;
-               border-radius: .7em;
-
-           }
-           .logo-text{
-                text-align: center;
-               margin-top: 1em;
-               font-weight: bold;
-               font-size: 1.2em;
-           }
-
-           .logo-text span{
-                color: #3B82F6;
-           }
-
-           .order-text{
-               text-align: center;
-                margin-top: 1.5em;
-
-           }
-
-           .order-text span{
-
-                margin-right: 1em;
-                font-size: 1.5em;
-                font-weight: bold;
-               color: #005cbf;
-           }
-
-
-    </style>
-
-</head>
-<body>
-  <div class="mx-auto relative pt-8 text-center">
-        <ul>
-            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-blue-600 text-white">
-                <a href="{{ url_for('menu') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_shopping_basket"></i><span
-                        class="text-lg sm:text-xl">فهرست</span></a></li>
-            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-yellow-500 text-white mx-3">
-                <a href="{{ url_for('contact_us') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_phone"></i><span
-                        class="text-lg sm:text-xl">تماس</span></a></li>
-            <li class="cursor-pointer py-1 pb-3 inline-block pr-16 text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-36 sm:w-40 transition bg-green-500 text-white">
-                <a href="{{ url_for('home') }}" class="text-md text-2xl md:text-3xl text-center"><i
-                        class="absolute px-3 pt-3 -top-1 h-36 right-0 top-0 border-l-4 bg-whitee gb gb_home"></i><span
-                        class="text-lg sm:text-xl">خانه</span></a></li>
-        </ul>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="my-container shadow   bg-light border">
-                <img src="../static/img/recpie.jpeg" alt="">
-
-                <p class="logo-text">کافه <span>لبخند</span></p>
-                <p class="order-text Vazir">شماره سفارش شما: <span>{{ ID }}</span></p>
-                <p class="text-center mt-5 font-weight-bold">از خرید شما سپاسگذاریم. با در دست داشتن شماره سفارش به کافه مراجعه کنید </p>
-
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="my-container shadow   bg-light border">
+            <img src="{{ url_for('static', filename="img/recpie.jpeg") }}">
+            <p class="order-text Vazir">شماره سفارش شما: <span>{{ ID }}</span></p>
+            <p class="text-center mt-5 font-weight-bold">از خرید شما سپاسگذاریم. با در دست داشتن شماره سفارش به کافه
+                مراجعه کنید </p>
         </div>
     </div>
 </div>
-</body>
-</html>
