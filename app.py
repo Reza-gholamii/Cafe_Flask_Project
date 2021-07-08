@@ -12,7 +12,7 @@ app.add_url_rule("/recipe/<_id>", 'recipe', html.recipe)
 app.add_url_rule("/api/<page>", 'api', html.api, methods=['GET'])
 
 app.add_url_rule("/cashier/login", 'login', html.login, methods=['GET', 'POST'])
-app.add_url_rule("/cashier", 'dashboard', html.dashboard, methods=['POST'])
+app.add_url_rule("/cashier", 'dashboard', html.dashboard, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/menu", 'menu_items', html.menu_items, methods=['GET', 'POST'])
 app.add_url_rule("/cashier/orders", 'order_list', html.order_list, methods=['POST'])
 app.add_url_rule("/cashier/orders/archive", 'archive_list', html.archive_list, methods=['POST'])
