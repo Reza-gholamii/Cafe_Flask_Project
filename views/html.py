@@ -36,7 +36,8 @@ def viewer():
 
 def home():
     viewer()
-    return render_template("home.html", page_name="home")
+    message = db_manager.last_row("messages")[0]
+    return render_template("home.html", page_name="home", person=message[0] + message[1], txt=message[4])
 
 
 def recipe(_id):
