@@ -104,7 +104,6 @@
     </div>
     <script>
         $(document).ready(function () {
-            var user_id = '{{id}}';
 
             $("[data-id=adder_num]").on('click', function () {
                 let num = Number($(this).parent().children('b')[0].innerText);
@@ -116,7 +115,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/cashier/' + user_id + '/orders',
+                    url: '/cashier/orders',
                     dataType: 'json',
                     data: JSON.stringify(data),
                     success: function (result) {
@@ -139,7 +138,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json',
-                        url: '/cashier/' + user_id + '/orders',
+                        url: '/cashier/orders',
                         dataType: 'json',
                         data: JSON.stringify(data),
                         success: function (result) {
@@ -198,7 +197,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: '/cashier/' + user_id + '/orders',
+                    url: '/cashier/orders',
                     dataType: 'json',
                     data: JSON.stringify(data),
                     success: function (result) {

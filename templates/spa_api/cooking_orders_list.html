@@ -47,76 +47,76 @@
                         <tbody id="table_body">
 
                         {% for order in orders %}
-                        <tr class="table-row" data-toggle="modal" data-target="#myModal{{ loop.index0 }}">
-                            <td>{{ order.0 }}</td>
-                            <td>{{ order.1 }}</td>
-                            <td>{{ order.2 }}</td>
-                            <td>{{ order.4 }} عدد</td>
-                            <td id="status{{ loop.index0 }}">{{ order.5 }}</td>
-                        </tr>
+                            <tr class="table-row" data-toggle="modal" data-target="#myModal{{ loop.index0 }}">
+                                <td>{{ order.0 }}</td>
+                                <td>{{ order.1 }}</td>
+                                <td>{{ order.2 }}</td>
+                                <td>{{ order.4 }} عدد</td>
+                                <td id="status{{ loop.index0 }}">{{ order.5 }}</td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>
 
                     {% for order in orders %}
-                    <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
-                        <div class="modal-dialog">
+                        <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
+                            <div class="modal-dialog">
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header bg-info">
-                                    <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
-                                </div>
-                                <div class="modal-body text-right">
-                                    <ul class="border grid p-2 rounded pl-2">
-                                        <li>
-                                            <span class="float-right">زمان درخواست</span>
-                                            <span class="float-left">{{ order.6 }}</span></li>
-                                        <li>
-                                            <span class="float-right">وضعیت</span>
-                                            <span id="modal_status{{ loop.index0 }}"
-                                                  class="float-left">{{ order.5 }}</span>
-                                        </li>
-                                        <li>
-                                            <span class="float-right">دسته بندی</span>
-                                            <span class="float-left">{{ order.3 }}</span>
-                                        </li>
-                                    </ul>
-                                    <div class="col mt-4 mx-auto text-center">
-                                        <a class="icon icon_refresh modal{{ loop.index0 }} row{{ order.5 }}"
-                                           data-order="{{ order.0 }}"
-                                           onclick="change_status(this)">
-                                            <i class="gb gb_refresh"></i>
-                                        </a>
-                                        <a class="icon icon_cook modal{{ loop.index0 }} row{{ order.5 }}"
-                                           data-order="{{ order.0 }}"
-                                           onclick="change_status(this)">
-                                            <i class="gb gb_kitchen"></i>
-                                        </a>
-                                        <a class="icon icon_serve modal{{ loop.index0 }} row{{ order.5 }}"
-                                           data-order="{{ order.0 }}"
-                                           onclick="change_status(this)">
-                                            <i class="gb gb_local_cafe"></i>
-                                        </a>
-                                        <a class="icon icon_check modal{{ loop.index0 }} row{{ order.5 }}"
-                                           data-order="{{ order.0 }}"
-                                           onclick="change_status(this)">
-                                            <i class="gb gb_done_all"></i>
-                                        </a>
-                                        <a class="icon icon_trash modal{{ loop.index0 }} row{{ order.5 }}"
-                                           data-order="{{ order.0 }}"
-                                           onclick="change_status(this)">
-                                            <i class="gb gb_cancel"></i>
-                                        </a>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header bg-info">
+                                        <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
+                                    </div>
+                                    <div class="modal-body text-right">
+                                        <ul class="border grid p-2 rounded pl-2">
+                                            <li>
+                                                <span class="float-right">زمان درخواست</span>
+                                                <span class="float-left">{{ order.6 }}</span></li>
+                                            <li>
+                                                <span class="float-right">وضعیت</span>
+                                                <span id="modal_status{{ loop.index0 }}"
+                                                      class="float-left">{{ order.5 }}</span>
+                                            </li>
+                                            <li>
+                                                <span class="float-right">دسته بندی</span>
+                                                <span class="float-left">{{ order.3 }}</span>
+                                            </li>
+                                        </ul>
+                                        <div class="col mt-4 mx-auto text-center">
+                                            <a class="icon icon_refresh modal{{ loop.index0 }} row{{ order.5 }}"
+                                               data-order="{{ order.0 }}"
+                                               onclick="change_status(this)">
+                                                <i class="gb gb_refresh"></i>
+                                            </a>
+                                            <a class="icon icon_cook modal{{ loop.index0 }} row{{ order.5 }}"
+                                               data-order="{{ order.0 }}"
+                                               onclick="change_status(this)">
+                                                <i class="gb gb_kitchen"></i>
+                                            </a>
+                                            <a class="icon icon_serve modal{{ loop.index0 }} row{{ order.5 }}"
+                                               data-order="{{ order.0 }}"
+                                               onclick="change_status(this)">
+                                                <i class="gb gb_local_cafe"></i>
+                                            </a>
+                                            <a class="icon icon_check modal{{ loop.index0 }} row{{ order.5 }}"
+                                               data-order="{{ order.0 }}"
+                                               onclick="change_status(this)">
+                                                <i class="gb gb_done_all"></i>
+                                            </a>
+                                            <a class="icon icon_trash modal{{ loop.index0 }} row{{ order.5 }}"
+                                               data-order="{{ order.0 }}"
+                                               onclick="change_status(this)">
+                                                <i class="gb gb_cancel"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer mx-auto">
+                                        <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
                                     </div>
                                 </div>
-                                <div class="modal-footer mx-auto">
-                                    <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
-                                </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
                     {% endfor %}
                 </div>
             </div>
