@@ -257,6 +257,10 @@ $.ajax({
 
         $('#shopping_list').hide()
 
+        $('#basket').each(function () {
+            $(this).children(".item-in-basket").remove()
+        })
+
         setTimeout(function () {
             $('.window-loader').fadeIn()
         }, 100)
