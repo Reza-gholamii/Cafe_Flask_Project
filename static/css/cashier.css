@@ -300,3 +300,7 @@ td {
 li.choosed li , li.choosed ul{
     color: white;
 }
+
+table , table * {
+    font-family: Vazir, sans-serif;
+}
