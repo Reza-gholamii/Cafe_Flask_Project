@@ -1,0 +1,87 @@
+<div class="card shadow rounded mt-8">
+    <div class="card-header">
+        <h1 class="text-center text-4xl py-2 ">اطلاعات تماس</h1>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6" id="loc">
+                    <section class="mb-4">
+                        <address>
+                            <ul class="text-right">
+                                <li class="my-4">
+                                    <strong><i class="gb gb_phone ml-2 relative top-1 mt-1"></i>تلفن: </strong>
+                                    <a href="tel:021-54429000" target="_blank">
+                                        &#1781&#1780&#1780&#1778&#1785&#1776&#1776&#1776-&#1776&#1778&#1777
+                                    </a>
+                                </li>
+                                <li class="my-4">
+                                    <strong><i class="gb gb_email ml-2 relative top-2"></i>پست الکترونیکی: </strong>
+                                    <a href="mailto:info@lamizcoffee.com" target="_blank"
+                                       style="font-size: 20px;"><b>info@lamizcoffee.com</b></a>
+                                </li>
+                                <li class="w-full my-4">
+                                    <strong><i class="gb gb_location_on ml-2 relative top-1 mt-1"></i>آدرس: </strong>
+                                    ایران - تهران - خیابان کارگر شمالی - خیابان فرصت - کوچه فرخنده - پلاک &#1778
+                                    <iframe class="map mt-8 w-full rounded-md" height="400" id="gmap_canvas"
+                                            src="https://maps.google.com/maps?q=isfahan%20coffee%20%DA%A9%D8%A7%D9%84%D8%AC&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                            frameborder="0" scrolling="no" marginheight="0"
+                                            marginwidth="0"></iframe>
+                                </li>
+                            </ul>
+                        </address>
+                    </section>
+                </div>
+                <div class="col-12 col-lg-6" id="msg">
+                    <section>
+                        <!-- <form action="{{ url_for('contact_us') }}" method="POST"> -->
+                        <form>
+                            <div class="container">
+                                <div class="form-row">
+                                    <div class="col-12 mt-4 mb-3 input-group ltr">
+                                        <input type="text" class="form-control text-right" tabindex="1"
+                                               placeholder="نام *"
+                                               name="first_name" required>
+                                        <input type="text" tabindex="2" class="form-control text-right"
+                                               placeholder="نام خانوادگی *" name="last_name" required>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3 input-group ltr">
+                                        ​
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">09</span>
+                                        </div>
+                                        <input type="text" tabindex="3" class="form-control text-right"
+                                               placeholder="تلفن همراه *" name="phone_number" minlength="9"
+                                               maxlength="9"
+                                               required>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 mb-3 ltr">
+                                        <input type="text" tabindex="4" class="form-control text-right"
+                                               placeholder="نشانی پستی(اختیاری)" name="email">
+                                    </div>
+                                    <div class="col-12 mb-4 ltr">
+                                    <textarea tabindex="5" class="form-control  text-right" style="height: 385px;" name="comment" placeholder="پیام شما *" required></textarea>
+                                    </div>
+                                    <button type="button"
+                                            class="btn btn-coffee btn-block btn-lg text-white bg-yellow-900 shadow rounded mb-2"
+                                            onclick="SendMessage()">ارسال
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function SendMessage() {
+        $.post('{{ url_for("contact_us") }}', $('form').serialize(), function (data) {
+            alert(data.msg);
+            $('form').each(function () {
+                this.reset();
+            });
+        });
+    }
+</script>

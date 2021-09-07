@@ -106,6 +106,7 @@ CONSTRAINT fk_stat
 CREATE TABLE IF NOT EXISTS categories (
 title VARCHAR(50) NOT NULL UNIQUE,
 root INT,
+image_name VARCHAR(100),
 id SERIAL PRIMARY KEY,
 CONSTRAINT fk_tree
     FOREIGN KEY(root)
@@ -202,46 +203,46 @@ VALUES ('menu_items', 4);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('new', 1, 5);
+VALUES ('جدید', 1, 5);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('cooking', 1, 6);
+VALUES ('در حال پخت', 1, 6);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('serving', 1, 7);
+VALUES ('سرو شده', 1, 7);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('canceled', 1, 8);
+VALUES ('کنسل شده', 1, 8);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('paid', 2, 9);
+VALUES ('پرداخت شده', 2, 9);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('unpaid', 2, 10);
+VALUES ('پرداخت نشده', 2, 10);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('canceled', 2, 11);
+VALUES ('کنسل شده', 2, 11);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('empty', 3, 12);
+VALUES ('خالی', 3, 12);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('full', 3, 13);
+VALUES ('پر', 3, 13);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('active', 4, 14);
+VALUES ('موجود', 4, 14);
 """,
     """
 INSERT INTO statuses (title, root, id)
-VALUES ('deactive', 4, 15);
+VALUES ('ناموجود', 4, 15);
 """
 ]

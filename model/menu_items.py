@@ -2,7 +2,7 @@ from core.models import *
 from core.manager import *
 from datetime import time
 from typing import Optional
-from categories import Category
+from model.categories import Category
 
 
 db_manager = ExtraDataBaseManager()
@@ -24,10 +24,10 @@ class MenuItem(BaseModel):
     cooking_time: Optional[time]  # Estimated cooking time
     serving_time: Optional[time]  # Serving time period
     status: int  # active or deactive in list
-    MENU_ITEMS = Category.CATEGORIES  # collection of all menu items model in cafe from database
+    MENU_ITEMS = Category.CATEGORIES.copy()  # collection of all menu items model in cafe from database
 
     def __init__(self, title, price, category, discount=0,
-                 image_name=None, cooking_time=None, serving_time=None, status="active"):
+                 image_name=None, cooking_time=None, serving_time=None, status="موجود"):
         self.title = title
         self.price = price
         self.category = db_manager.get_id("categories", title=category)
@@ -43,10 +43,10 @@ class MenuItem(BaseModel):
         except:
             self.number = db_manager.get_id(self.name, **self.to_dict())
             logging.warning(f"{__name__}: Model Already Existed in {self.number} Row ID.")
-        
+
         for group in self.__class__.MENU_ITEMS:
             if category in self.__class__.MENU_ITEMS[group]:
-                self.__class__.MENU_ITEMS[group][category][self.number] = self
+                self.__class__.MENU_ITEMS[group][category][self.title] = self
                 break
 
     def apply_discount(self, discount: int):
@@ -67,7 +67,7 @@ class MenuItem(BaseModel):
         self.price = price
         logging.debug(f"{__name__}: Change Price Column Successfully in DataBase.")
 
-    def change_status(self, status="deactive"):
+    def change_status(self, status="ناموجود"):
         """
         Method for Change Status of Model from active to deactive or Upside Down
         """
@@ -87,5 +87,5 @@ class MenuItem(BaseModel):
             status = db_manager.read("statuses", menu_item[7])[0][0]
             cls(menu_item[0], menu_item[1], category, menu_item[3],
                 menu_item[4], menu_item[5], menu_item[6], status)
-        
+
         logging.debug(f"{__name__}: Read Data from DataBase Successfully.")

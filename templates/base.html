@@ -1,157 +1,130 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="no-js" lang="fa-IR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css') }}">
-
-    {% block extra_head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    {% block css_pages %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/pages.css') }}">
     {% endblock %}
-    <title>kaffee coffee</title>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    {% block bootstrap %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    {% endblock %}
+    {% block tailwindcss %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+    {% endblock %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>کافه لبخند | {% block title %}{% endblock %}</title>
+    {% block extra_head %}{% endblock %}
+    {% block api_pages %}
+        <script>
+            $(document).ready(function () {
+                $('a[data-link]').on('click', function (e) {
+                    e.preventDefault();
+                    let data_link = $(this).data('link')
 
-    <style>
-        :root {
-            --primary-color: #795548;
-            --bg-color: #f2f2f2;
-            --text-color: #444444;
-            --secondary-color: #7E334B ;
-        }
+                    let _link = "{{ url_for('home') }}"+"api/"+data_link
+                    console.log(_link)
 
-        .bg-color {
-            background: var(--bg-color);
-        }
+                    page_loader(_link)
+                })
+            })
 
-        body {
-            background: var(--bg-color);
-            margin: 0;
-        }
+            function page_loader(link) {
+                $.ajax({
+                    url: link,
+                    type: 'GET',
+                    dataType: 'text',
+                    success: function (response) {
+                        let body = $('#body')
+                        body.fadeOut(500)
 
-        .logo {
-            text-decoration: none;
-            font-weight: bold;
-            color: black;
-            font-size: 1.4em;
-            margin: auto 0;
-            padding-top: .3em;
-        }
+                        setTimeout(function () {
+                            body.html('')
+                        }, 550)
 
-        .logo > span {
-            color: var(--primary-color);
-        }
+                        setTimeout(function () {
+                            body.fadeIn(500)
+                            body.html(response)
+                        }, 560)
 
-        .logo-pic {
-            width: 2.5em;
-            margin: .7em;
-        }
-
-        .primary-nav {
-            display: flex;
-            justify-self: center;
-            margin: auto 0 ;
-            list-style-type: none;
-            text-decoration: none;
-        }
-
-        .primary-nav > li {
-            margin: 0 1.5em;
-        }
-
-        .secondary-nav {
-            display: flex;
-
-            margin-right: 0;
-            padding-top: .5em;
-            list-style-type: none;
-            text-decoration: none;
-        }
-
-        .secondary-nav > li {
-            margin: 0 2em;
-        }
-
-        .unchoosed {
-            color: black;
-        }
-
-        .choosed {
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /*.sign-btn {
-            border: 1px solid var(--primary-color);
-            padding: .5em 1em;
-            border-radius: 1em;
-        }*/
-        .sign-btn>span{
-            padding-left: 3px;
-            padding-top: 1px;
-        }
-        a:hover{
-            text-decoration: none;
-            color: var(--primary-color);
-        }
-
-        .secondary-nav-btn{
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-    </style>
+                    }
+                })
+            }
+        </script>
+    {% endblock %}
 </head>
-<body>
-
-
-    <ul class="nav-list">
-        <li class="nav-list-item"><i class="gb gb_dashboard gb_s24"></i>dashboard</li>
-        <li class="nav-list-item "><i class="gb gb_tablet gb_s24"></i>orders</li>
-        <li class="nav-list-item "><i class="gb gb_restaurant gb_s24"></i>tables</li>
-        <li class="nav-list-item"><i class="gb gb_restaurant_menu gb_s24"></i>menu</li>
-    </ul>
-
-
-
-<div class="container-fluid">
-    <div class="row bg-light border-bottom  ">
-        <div class="col-2 d-flex flex-wrap">
-            <img src="../static/img/main_icon.png" class="logo-pic" alt="logo">
-            <a class="logo" href="#">panda<span>kaffee</span></a>
-        </div>
-        <div class="col-6 d-flex flex-wrap">
-            <ul class="primary-nav">
-                <li><a class="{{ 'choosed' if page_name=='home' else 'unchoosed' }}"
-                       href="{{ url_for("home") }}">Home</a></li>
-                <li><a class="{{ 'choosed' if page_name=='menu' else 'unchoosed' }}"
-                       href="{{ url_for("menu") }}">Menu</a></li>
-                <li><a class="flex-wrap {{ 'choosed' if page_name=='about_us' else 'unchoosed' }}"
-                       href="{{ url_for("about_us") }}">About Us</a></li>
-                <li><a class="{{ 'choosed' if page_name=='contact_us' else 'unchoosed' }}"
-                       href="{{ url_for("contact_us") }}">Contact Us</a></li>
-            </ul>
-        </div>
-        <div class="col-4 float-right align-self-center d-flex flex-wrap m-0 p-0">
-            <ul class="secondary-nav ">
-                <li><a class="secondary-nav-btn" href="#">order list</a></li>
-                <li>
-                    <a class="secondary-nav-btn d-flex justify-content-end" href="#">
-                        <i class="gb gb_account_circle gb_s24"></i>
-                        <span>Sign up</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+<body class="animate__animated animate__fadeIn">
+{% block nav %}
+    <!--  nav  -->
+    <div class="mx-auto relative my-8 text-center">
+        <ul>
+            <li class="animate__animated animate__fadeInDown animate__delay-1s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-green-600 ring-green-500 ring-opacity-50 rounded-lg w-28 pr-11 sm:w-40 transition bg-green-500 text-white">
+                <a data-link="menu" class="text-md text-2xl md:text-3xl text-center">
+                    <i class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_storage"></i>
+                    <span class="text-lg sm:text-xl Vazir">فهرست</span>
+                </a>
+            </li>
+            <li class="animate__animated animate__fadeInDown animate__delay-2s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-yellow-600 ring-yellow-500 ring-opacity-50 rounded-lg w-28 pr-11 sm:w-40 transition bg-yellow-500 text-white mx-3">
+                <a data-link="about_us" class="text-md text-2xl md:text-3xl text-center">
+                    <i class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_info"></i>
+                    <span class="text-lg sm:text-xl Vazir">درباره ما</span>
+                </a>
+            </li>
+            <li class="animate__animated animate__fadeInDown animate__delay-3s cursor-pointer py-1 pb-3 inline-block sm:pr-14 sm:font-bold text-center relative overflow-hidden ring-4 hover:bg-blue-700 ring-blue-600 ring-opacity-50 rounded-lg w-32 pr-11 sm:w-40 transition bg-blue-600 text-white">
+                <a data-link="contact_us" class="text-md text-2xl md:text-3xl sm:text-center">
+                    <i class="absolute px-2 sm:px-3 pt-3 h-36 right-0 top-0 border-l-4 border-opacity-50 gb gb_phone"></i>
+                    <span class="text-lg sm:text-xl Vazir">تماس باما</span>
+                </a>
+            </li>
+        </ul>
     </div>
+    <!--  nav  -->
+{% endblock %}
+{% block header %}
+    <!-- header -->
+    <section class="bg-header w-full py-10 mt-8 text-center">
+        <h1 class="Aviny text-6xl sm:text-8xl sm:py-6 md:text-9xl md:py-8 lg:py-10">کافه رستوران
+            لبخند</h1>
+    </section>
+    <!-- header -->
+{% endblock %}
 
-    <div class="row bg-color">
-        {% block body %}
-        {% endblock %}
-    </div>
-
+<!-- body -->
+<div id="body">
+    {% block body %}{% endblock %}
 </div>
+<!-- body -->
+
+{% block footer %}
+
+<!-- footer -->
+    <section class="bg-header w-full py-1 mt-8 text-center">
+        <h1 class="Vazir text-xl md:text-2xl py-2 font-bold">
+            قراره باخنده از تلخی قهوه ی ما شیرینی باهم بودن رو بچشیم !
+        </h1>
+    </section>
+<!-- footer -->
+
+{% endblock %}
+
+<!--  JS Plugins  -->
+<script src="{{ url_for('static', filename='js/modernizr.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+  AOS.init();
+</script>
+{% block extra_js %}{% endblock %}
+<!--  JS Plugins  -->
 </body>
 </html>

@@ -1,4 +1,4 @@
-from core.exceptions import UserExistError, UserNotFoundError
+from core.exceptions import UserExistError
 from core.models import *
 from core.manager import *
 from core.utility import *
@@ -27,20 +27,21 @@ class User(BaseModel):
     USERS: dict = {}  # collection of all users model in cafe from database
 
     def __init__(self, first_name, last_name, phone_number, password, email=None, **extra_information):
-        for user in self.__class__.USERS:
-            if user.phone_number == phone_number:
-                raise UserExistError("User Already Exist in the Database.")
+        # for _id in self.__class__.USERS:
+        #     user = self.__class__.USERS[_id]
+        #     if user.phone_number == phone_number and user.password != password:
+        #         raise UserExistError("User Already Exist in the Database.")
 
-        if not Validators.check_phone("09" + phone_number):
-            raise ValidationError("Phone Number Must be Length 9.")
+        # if not Validators.check_phone("09" + phone_number):
+        #     raise ValidationError("Phone Number Must be Length 9.")
         # if not Validators.check_password(password):
         #     raise ValidationError("Password Minimum Length is 8.")
-        if email and not Validators.check_email(email):
-            raise ValidationError("Email Must be Username@domain.com Form.")
+        # if email and not Validators.check_email(email):
+        #     raise ValidationError("Email Must be Username@domain.com Form.")
 
         self.first_name = first_name
         self.last_name = last_name
-        self.phone_number = phone_number
+        self.phone_number = phone_number[-9:]
         self.email = email
         self.password = password
         self.extra_information = dumps(extra_information)
@@ -60,8 +61,8 @@ class User(BaseModel):
         Check Exist User with Correct Password for Cashier Login
         """
 
-        phone_number = phone_number[2:]
-        password = sha256(password.encode()).hexdigest()
+        phone_number = phone_number[-9:]
+        #  password = sha256(password.encode()).hexdigest()
         try:
             logging.debug(f"{__name__}: Find This Username & Password Successfully in DataBase.")
             return db_manager.get_id(cls.name, phone_number=phone_number, password=password)

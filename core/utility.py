@@ -1,17 +1,12 @@
 import re as regex
 
 
-def inputer(text, empty=False, type=str, validator: callable = None, retry=False, retry_print=""):
+def inputer(text, type=str, validator: callable = None, retry=False, retry_print=""):
     try:
         res = type(input(text))
-        if not empty:
-            if res == "":
-                return ""
         if validator:
             if validator(res):
                 return res
-            else:
-                raise Exception
     except:
         if retry:
             print(retry_print)
@@ -55,3 +50,44 @@ class Validators:
         """
 
         return bool(regex.search(cls.password_pattern, password))
+
+
+def change_status_lang(parameter):
+    status_dict = {'new': 'جدید',
+                   'cooking': 'در حال پخت',
+                   'serving': 'سرو شده',
+                   'canceled': 'کنسل شده',
+                   'paid': 'پرداخت شده',
+                   'unpaid': 'پرداخت نشده',
+                   'empty': 'خالی',
+                   'full': 'پر'
+                   }
+    status_dict_reverse = {value: key for key, value in status_dict.items()}
+
+    if parameter in status_dict.keys():
+        parameter = status_dict[parameter]
+    elif parameter in status_dict.values():
+        parameter = status_dict_reverse[parameter]
+
+    return parameter
+
+
+def change_status_lang_by_number(parameter):
+    status_dict = {'5': 'جدید',
+                   '6': 'در حال پخت',
+                   '7': 'سرو شده',
+                   '8': 'کنسل شده',
+                   '9': 'پرداخت شده',
+                   '10': 'پرداخت نشده',
+                   '11': 'کنسل شده',
+                   '12': 'خالی',
+                   '13': 'پر'
+                   }
+    status_dict_reverse = {value: key for key, value in status_dict.items()}
+
+    if parameter in status_dict.keys():
+        parameter = status_dict[parameter]
+    elif parameter in status_dict.values():
+        parameter = status_dict_reverse[parameter]
+
+    return parameter

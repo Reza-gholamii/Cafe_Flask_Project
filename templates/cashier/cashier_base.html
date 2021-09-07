@@ -1,0 +1,242 @@
+<!doctype html>
+<html class="no-js" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>صندوقدار | {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gorbe-font.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    {% block bootstrap %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    {% endblock %}
+    {% block tailwindcss %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+    {% endblock %}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cashier.css') }}">
+    {% block extra_head %}{% endblock %}
+    <script>
+        // striper
+        if (typeof (String.prototype.trim) === "undefined") {
+            String.prototype.trim = function () {
+                return String(this).replace(/^\s+|\s+$/g, '');
+            };
+        }
+
+        // item clicked - choosed!
+        $(document).ready(function () {
+
+            let data_link = $('*[data-link="dashboard-item"]')
+            data_link.click(function () {
+                $('li.choosed').removeClass('choosed')
+                $(this).parent().addClass('choosed')
+                $('h3[data-title="page-title"]').text(($(this).text().trim()))
+
+                let data_href = $(this).data('href')
+                let _link = "{{ url_for('home') }}" + "api/" + data_href
+                page_loader(_link)
+            })
+
+            // data coalpse:
+            $("li[data-collapse]>span:first").click(function () {
+                let triangle = $(this).children('i.triangle')
+                triangle.toggleClass('-rotate-90')
+
+                if (triangle.hasClass('-rotate-90')) {
+                    $(this).parent().children('ul').slideDown()
+                } else {
+                    $(this).parent().children('ul').slideUp()
+                }
+            })
+        })
+
+        // menu action :
+        function hamburger_open() {
+            const menu = document.getElementById("nav_menu")
+            const close = document.getElementById("hamburger_close")
+            const open = document.getElementById("hamburger_open")
+            const hero = document.getElementById("menu-position")
+            open.style.display = "none"
+            close.style.visibility = "visible"
+            hero.appendChild(menu)
+            hero.style.display = "inline-block"
+            menu.style.display = "inline-block"
+        }
+
+        function hamburger_close() {
+            const navparent = document.getElementById("nav_parent")
+            const hero = document.getElementById("nav_menu")
+            const menu = document.getElementById("menu-position")
+            const close = document.getElementById("hamburger_close")
+            const open = document.getElementById("hamburger_open")
+            open.style.removeProperty("display")
+            close.style.visibility = "hidden"
+            menu.style.display = "none"
+            navparent.appendChild(hero)
+        }
+
+        // page loader :
+        function page_loader(link) {
+            $.ajax({
+                url: link,
+                type: 'GET',
+                dataType: 'text',
+                success: function (response) {
+                    let body = $('#hero')
+                    setTimeout(function () {
+                        body.fadeOut(500)
+                    }, 540)
+
+                    setTimeout(function () {
+                        body.html('')
+                        body.html(response)
+                    }, 550)
+
+                    setTimeout(function () {
+                        body.fadeIn(500)
+                    }, 560)
+
+                }
+            })
+        }
+    </script>
+</head>
+
+<body onresize="hamburger_close()">
+
+<div class="container-fluid">
+    <div class="row top-mobile menu-row">
+        <div class="col-lg-3 col-md-4 bg-dark top-mobile md:min-h-screen">
+            <div class="row bg-dark position-relative">
+                <i id="hamburger_open" onclick="hamburger_open()" class="gb gb_menu hamburger-menu "></i>
+                <i id="hamburger_close" onclick="hamburger_close()"
+                   class="gb gb_close hamburger-close hamburger-close-menu"></i>
+                <img class="logo-img" src="{{ url_for('static', filename='img/coffee.png') }}" alt="کافه لبخند">
+                <p class="logo-text Vazir mb-5">کافه <span class="font-weight-bold logo-text2">لبخند</span></p>
+            </div>
+            <hr class="hr-menu-top p-0 m-0 w-100">
+            <div id="nav_parent" class="row menu sticky top-0">
+                <nav id="nav_menu" class="w-100 ">
+                    <ul id="menu_left_side" class="nav-list"
+                        style="text-align: right !important;">
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8 choosed">
+                            <a data-link="dashboard-item" data-href="dashboard" class="hover:text-blue-400">
+                                <i class="gb gb_view_quilt gb_s24 menu-icon"></i>
+                                داشبورد
+                            </a>
+                        </li>
+
+                        <li data-collapse="true" class="nav-list-item pr-0 pb-4">
+                            <span data-link="dashboard-item" data-href="order_list" class="cursor-pointer hover:text-blue-400 mr-8">
+                                <i class="gb gb_style gb_s24 menu-icon"></i>
+                                سفارش ها
+                                <i class="gb mb-1 gb_navigate_before triangle transition transform"
+                                   style="vertical-align: bottom"></i>
+                            </span>
+                            <ul class="collapse-ul-el text-lg pr-16 mt-4 overflow-hidden" style="display: none">
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="new_orders_list"
+                                       class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
+                                        جدید
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="cooking_orders_list"
+                                       class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
+                                        در حال پخت
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="served_orders_list"
+                                       class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
+                                        سرو شده
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="paid_orders_list"
+                                       class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
+                                        پرداخت شده
+                                    </a>
+                                </li>
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="cancelled_orders_list"
+                                       class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
+                                        کنسل شده
+                                    </a>
+                                </li>
+
+                                <li class="cursor-pointer hover:text-blue-400">
+                                    <a data-link="dashboard-item" data-href="archive_list" class="hover:text-blue-400">
+                                        <i class="gb gb_date_range gb_s18 menu-icon"></i>سفارش های
+                                        آرشیو
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" data-href="tables" class="hover:text-blue-400">
+                                <i class="gb gb_select_all gb_s24 menu-icon"></i>
+                                میز ها
+                            </a>
+                        </li>
+
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" data-href="menu_items" class="hover:text-blue-400">
+                                <i class="gb gb_list gb_s24 menu-icon"></i>
+                                منو
+                            </a>
+                        </li>
+
+                        <li class="cursor-pointer hover:text-blue-400 nav-list-item pr-8">
+                            <a data-link="dashboard-item" data-href="receipt" class="hover:text-blue-400">
+                                <i class="gb gb_receipt gb_s24 menu-icon"></i>
+                                صورت حساب ها
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-8 ">
+            <div class="row border-bottom shadow title-p" style="height: 9em">
+                <div class="col-4 align-bottom position-relative">
+                    <h3 data-title="page-title" class="title position-absolute mb-5">داشبورد</h3>
+                </div>
+                <div class="col-8  position-relative ">
+                    <a href="#" class="position-absolute profile shadow">
+                        <i class="profile-icon gb gb_account_circle gb_s48"></i>
+                        <span class="profile-text">{{ user[0] }} {{ user[1] }}</span>
+                    </a>
+                </div>
+            </div>
+            <div id="menu-position" class="w-100 bg-dark"></div>
+            <div id="hero" class="row  position-relative">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  JS Plugins  -->
+<script src="{{ url_for('static', filename='js/modernizr.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block extra_js %}{% endblock %}
+<!--  JS Plugins  -->
+
+</body>
+</html>
+

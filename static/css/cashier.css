@@ -1,0 +1,306 @@
+
+* {
+    direction: rtl;
+    font-family: Yekan, sans-serif;
+}
+
+.Vazir, .Vazir * {
+    font-family: Vazir, sans-serif;
+}
+
+.Vazir i {
+    font-family: 'Gorbeh Icons', sans-serif;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.logo-img {
+    width: 5em;
+    margin: 1.5em 1em 2.3em 1em;
+}
+
+.logo-text {
+    position: absolute;
+    bottom: .4em;
+    font-size: 1.75em;
+    right: 3.7em;
+    color: white;
+}
+
+.logo-text2 {
+    font-weight: bold;
+    color: #29b6f6;
+}
+
+.nav-list {
+    list-style: none;
+    width: 100%;
+}
+
+.nav-list-item {
+    color: white;
+    font-size: 1.5em;
+    padding-bottom: 1em;
+    margin-top: 1em;
+    border-bottom: 1px solid white;
+}
+
+.collapse-items {
+    color: white;
+    margin-right: 2em;
+}
+
+.menu-icon {
+    margin-left: .5em;
+    margin-top: .7em;
+    font-size: 1.5em;
+}
+
+.hr-menu {
+    background-color: white;
+
+}
+
+.hr-menu-top {
+    background-color: #29b6f6;
+}
+
+.title {
+    font-size: 2em;
+    right: 1em;
+    bottom: .2em;
+    vertical-align: bottom;
+}
+
+.choosed {
+    font-size: 1.7em;
+    color: #29b6f6;
+}
+
+.profile {
+    text-decoration: none;
+    color: black;
+    border-radius: .5em;
+    padding: .5em 1em .5em 2em;
+    font-size: 1em;
+    bottom: .9em;
+    left: 3em;
+    vertical-align: bottom;
+    horiz-align: left;
+    margin-bottom: 1em;
+}
+
+.profile-icon {
+    color: #29b6f6;
+    margin-left: .5em;
+}
+
+.mobile-display {
+    display: none;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .logo-img {
+        visibility: hidden;
+    }
+
+    .hamburger-menu {
+        visibility: visible !important;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .title-p {
+        display: none;
+    }
+
+    .menu-row {
+        height: 15em !important;
+    }
+
+    .top-mobile {
+        height: unset !important;
+    }
+
+}
+
+.hamburger-menu {
+    color: white;
+    visibility: hidden;
+    position: absolute;
+    right: .9em;
+    bottom: .6em;
+    text-align: right;
+    font-size: 3em;
+}
+
+.hamburger-close-menu {
+    color: white;
+    visibility: hidden;
+    position: absolute;
+    right: .9em;
+    bottom: .6em;
+    text-align: right;
+    font-size: 3em;
+}
+
+a, a:hover {
+    text-decoration: none !important;
+}
+
+b, b:hover {
+    color: white;
+    text-align: center;
+    font-family: Vazir, sans-serif;
+}
+
+.text-shadow-md {
+    text-shadow: 0 0 10px #999;
+}
+
+.grid a:hover {
+    color: white !important;
+}
+
+.options {
+    position: absolute;
+    left: 1rem;
+}
+
+span {
+    margin: auto;
+}
+
+strong {
+    font-size: 1.5rem;
+}
+
+button:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.change {
+    height: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.zrbdr {
+    position: absolute;
+    left: 0.25rem;
+}
+
+.mdl:hover, .add:hover {
+    color: #000;
+}
+
+ul {
+    list-style: none;
+}
+
+.order-col {
+    height: 100%;
+}
+
+.main-col {
+    height: 100%;
+}
+
+.col-order {
+    height: 60px;
+    padding-top: 16px;
+}
+
+.row-recepit {
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px #d0cdcd;
+}
+
+.btn {
+    max-width: 100%;
+}
+
+.icon {
+    color: black;
+    font-size: 20px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.table-row {
+    cursor: pointer;
+}
+
+td {
+    width: 20%;
+}
+
+.header-button {
+    border-radius: 7px !important;
+    border: 1px solid #868585;
+    padding: 2px 8px;
+}
+
+.sortable-column {
+    cursor: pointer;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .modal * {
+        max-width: 100%;
+        font-size: 50px;
+    }
+
+    li {
+        margin-right: 35px;
+    }
+
+    .modal-content, .modal-content * {
+        visibility: visible;
+    }
+
+    .modal-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    #print-icon, #print-icon * {
+        visibility: hidden;
+    }
+
+    .modal-footer, .modal-footer * {
+        visibility: hidden;
+    }
+
+    .item-title-modal {
+        margin: 20px auto;
+    }
+}
+
+.collapse-ul-el > li.choosed {
+    font-size: 1.125rem;
+    margin-right: -15px;
+}
+
+li.choosed li , li.choosed ul{
+    color: white;
+}
+
+table , table * {
+    font-family: Vazir, sans-serif;
+}

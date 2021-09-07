@@ -1,7 +1,7 @@
 from core.models import *
 from core.manager import *
 from datetime import datetime
-from menu_items import MenuItem
+from model.menu_items import MenuItem
 
 
 db_manager = ExtraDataBaseManager()
@@ -22,22 +22,21 @@ class Order(BaseModel):
     menu_item: int
 
     def __init__(self, recepite, menu_item, count=1,
-                 time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="new"):
+                 time_stamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), status="جدید"):
         flag = False
-        code = db_manager.get_id("menu_items", title=menu_item)
         for category in MenuItem.MENU_ITEMS:
             for subcategory in MenuItem.MENU_ITEMS[category]:
-                if code in MenuItem.MENU_ITEMS[category][subcategory]:
-                    items = MenuItem.MENU_ITEMS[category][subcategory]
-                    if items[code].status == STATUSES["menu_items"]["active"]:
+                if menu_item in MenuItem.MENU_ITEMS[category][subcategory]:
+                    item = MenuItem.MENU_ITEMS[category][subcategory][menu_item]
+                    if item.status == STATUSES["menu_items"]["موجود"]:
                         flag = True
 
         if flag:
             self.count = count
             self.status = STATUSES[self.name][status]
             self.time_stamp = time_stamp
-            self.recepite = recepite
-            self.menu_item = code
+            self.recepite = recepite.number
+            self.menu_item = db_manager.get_id("menu_items", title=menu_item)
 
             try:
                 self.number = db_manager.get_id(self.name, **self.to_dict())
@@ -45,6 +44,8 @@ class Order(BaseModel):
             except:
                 self.number = db_manager.create(self.name, self)
                 logging.info(f"{__name__}: Model Created Successfully in {self.number} Row ID.")
+
+            self.parent = recepite
         else:
             logging.error(f"{__name__}: This Item isn't in the Active List.")
 
@@ -55,6 +56,7 @@ class Order(BaseModel):
 
         self.status = STATUSES[self.name][status]
         db_manager.update(self.name, id=self.number, status=self.status)
+        self.parent.sum_price()
         logging.debug(f"{__name__}: Change Status Column Successfully in DataBase.")
 
     def change_count(self, count):
@@ -64,4 +66,5 @@ class Order(BaseModel):
 
         self.count = count
         db_manager.update(self.name, id=self.number, count=self.count)
+        self.parent.sum_price()
         logging.debug(f"{__name__}: Change Count Number Column Successfully in DataBase.")

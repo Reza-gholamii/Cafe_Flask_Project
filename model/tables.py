@@ -17,7 +17,7 @@ class Table(BaseModel):
     status: int  # empty or full
     TABLES: dict = {}  # collection of all tables model in cafe from database
 
-    def __init__(self, capacity, position_space, status="empty"):
+    def __init__(self, capacity, position_space, status="خالی"):
         self.capacity = capacity
         self.position_space = position_space
         self.status = STATUSES[self.name][status]
@@ -31,7 +31,7 @@ class Table(BaseModel):
 
         self.__class__.TABLES[self.number] = self
 
-    def change_status(self, status="full"):
+    def change_status(self, status="پر"):
         """
         Method for Change Status of Model from empty to full or Upside Down
         """

@@ -66,6 +66,8 @@ class DataBaseManager(BaseManager):
     # '''''''''''''''''''''
 
     def update(self, table, **kwargs):
+        """kwargs should include id of a row and one or more column=amount for updating
+            Example: row_id=1, first_name=ali, last_name=ahmadi"""
         set_string = ""
         condition_string_key = list(kwargs.keys())[0]
         condition_string_value = kwargs[condition_string_key]
@@ -81,6 +83,8 @@ class DataBaseManager(BaseManager):
         self.send_query(query)
 
     def get_id(self, table, **kwargs):
+        """kwargs should include table name and one column=amount for searching
+                Example: users, national-code=11111"""
         condition = ""
         for column, value in kwargs.items():
             if column != "time_stamp":
@@ -123,24 +127,26 @@ class ExtraDataBaseManager(DataBaseManager):
     Extra Methods for DataBase Manager Executed the Other Queries
     """
 
-    def bestsellers(self, size: int = 3) -> List[tuple]:
+    def bestsellers(self, size: int, start=None, end=None) -> List[tuple]:
         """
         Query to Find the Best Selling Products
         """
 
-        query = """
+        query = f"""
 SELECT menu_items.id, title, SUM(orders.count) AS Sellers
 FROM orders INNER JOIN menu_items
 ON orders.menu_item = menu_items.id
+{f"WHERE orders.time_stamp::DATE >= '{start}' AND orders.time_stamp::DATE <= '{end}'"
+if start and end else ''}
 GROUP BY menu_items.id
 ORDER BY Sellers DESC;
 """
 
         with self.access_database() as cafe_cursor:
             cafe_cursor.execute(query)
-            result = cafe_cursor.fetchmany(size)
+            result = cafe_cursor.fetchall()
 
-        return result
+        return result[:size]
 
     def statusfilter(self, table: str, status: str) -> List[int]:
         """
@@ -159,12 +165,16 @@ WHERE statuses.title = '{status}';
 
         return [item[0] for item in result]
 
-    def read_all(self, table: str, limit: int = None, offset: int = None, status: bool = True) -> List[tuple]:
+    def read_all(self, table: str, limit: int = None, offset: int = None,
+                 status: bool = True, today=False) -> List[tuple]:
         """
         Query to SELECT All Row & Columns from a Table with Limit Opional
         """
 
         query = f"SELECT * FROM {table}"
+
+        if today:
+            query += f" WHERE time_stamp::DATE = '{today}'"
 
         if status:
             query += f" ORDER BY {table}.status"
@@ -210,7 +220,7 @@ WHERE root IS {'NOT NULL' if sub else 'NULL'}
         """
 
         query = f"""
-SELECT statuses.title, menu_items.title, orders.count, menu_items.price, menu_items.discount
+SELECT statuses.title, menu_items.title, orders.count, menu_items.price, menu_items.discount, orders.time_stamp
 FROM recepites INNER JOIN orders ON orders.recepite = recepites.id
 INNER JOIN menu_items ON orders.menu_item = menu_items.id
 INNER JOIN statuses ON orders.status = statuses.id
@@ -274,6 +284,35 @@ statuses.title, orders.time_stamp FROM orders INNER JOIN statuses
 ON orders.status = statuses.id INNER JOIN menu_items
 ON orders.menu_item = menu_items.id INNER JOIN categories
 ON menu_items.category = categories.id ORDER BY orders.{ordered};
+"""
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchall()
+
+        return result
+
+    def last_row(self, table: str, size: int = 1) -> List[tuple]:
+        """
+        Returned Last Row from a Table Sorted by ID Primary Key
+        """
+
+        query = f"SELECT * FROM {table} ORDER BY {table}.id DESC;"
+
+        with self.access_database() as cafe_cursor:
+            cafe_cursor.execute(query)
+            result = cafe_cursor.fetchmany(size)
+
+        return result
+    
+    def report_orders(self, field) -> List[Tuple[int, int]]:
+        """
+        Create Report with Data for Chart Page in Cashier Dashboard
+        """
+        
+        query = f"""
+SELECT EXTRACT({'ISODOW' if field == "weekday" else 'HOUR'} FROM time_stamp) AS Field,
+COUNT(*) FROM orders GROUP BY Field ORDER BY Field ASC;
 """
 
         with self.access_database() as cafe_cursor:

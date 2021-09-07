@@ -1,0 +1,213 @@
+{% block body %}
+    <div class="container-fluid">
+        <div class="row main-row bg-light">
+            <div class="col-11 main-col text-center mx-auto my-3 Vazir">
+
+                {% for recepit in recepits %}
+                    <div class="row row-recepit mx-auto my-4 bg-light">
+                        <div class="col-xl-1 col-lg-2 col-sm-3 col-3 px-0 col-order">میز {{ recepit.0 }}</div>
+                        <div class="col-xl-2 col-lg-3 col-sm-5 col-5 px-0 col-order" id="recepit_number">
+                            صورتحساب: {{ recepit.1 }}
+                        </div>
+                        <div class="col-lg-3 d-none d-xl-block col-order">هزینه: {{ recepit.4 }} تومان</div>
+                        <div class="col-xl-2 col-lg col-sm-4 col-4 px-0 col-order" id="status">{{ recepit.2 }}</div>
+                        <div class="col-xl-2 col-lg col-sm-6 col-6 px-0 col-order">
+                            {% if recepit.1 != "" %}
+                                <a class="icon icon_unpaid" data-recepit="{{ recepit.1 }}"
+                                >
+                                    <i class="gb gb_content_paste"></i>
+                                </a>
+                                <a class="icon icon_check" data-recepit="{{ recepit.1 }}">
+                                    <i class="gb gb_done_all"></i>
+                                </a>
+                                <a class="icon icon_trash" data-recepit="{{ recepit.1 }}">
+                                    <i class="gb gb_cancel"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-sm-6 col-6 px-0 col-order" style="padding-top: 10px">
+                            <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#myModal{{ loop.index0 }}">جزئیات
+                            </button>
+                        </div>
+
+                        <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header bg-info">
+                                        <h4 class="modal-title mx-auto">جزئیات</h4>
+                                    </div>
+                                    <div class="modal-body text-right Vazir">
+                                        <div class="overflow-hidden">
+                                            <p class="float-right">شماره صوتحساب: <span
+                                                    class="font-bold">{{ recepit.1 }}</span></p>
+                                            <p class="float-left">هزینه کل: <span
+                                                    class="font-bold">{{ recepit.4 }}</span></p>
+                                        </div>
+                                        <h5 class="text-center text-xl mt-6 mb-4">آیتم ها</h5>
+                                        <ul class="border rounded pl-2 py-2 pr-4 grid">
+
+                                            {% set order = orders[loop.index-1] %}
+                                            {% for item in order %}
+                                                <li>
+                                                <div class="row row-order text-center">
+                                                    <div class="col-2 px-0" id="item">{{ item.1 }}</div>
+                                                    <div class="col-3 px-0">
+                                                        <i data-id="adder_num"
+                                                           class="gb gb_add_circle ml-2 cursor-pointer text-black"
+                                                           style="color: #008b0e" data-recepit="{{ recepit.1 }}"></i>
+                                                        <b class="text-black hover:text-black">{{ item.2 }}</b> عدد
+                                                        <i data-id="suber_num"
+                                                           class="gb gb_remove_circle mr-2 cursor-pointer"
+                                                           style="color: #a30000" data-recepit="{{ recepit.1 }}"></i>
+                                                    </div>
+                                                    <div class="col-3 px-0">{{ item.0 }}</div>
+                                                    <div class="col-4 px-0">
+                                                        <a class="icon icon_refresh" data-recepit="{{ recepit.1 }}"
+                                                           data-order="{{ item.1 }}">
+                                                            <i class="gb gb_refresh text-black hover:text-blue-600"></i>
+                                                        </a>
+                                                        <a class="icon icon_cook" data-recepit="{{ recepit.1 }}"
+                                                           data-order="{{ item.1 }}">
+                                                            <i class="gb gb_kitchen text-black hover:text-blue-600"></i>
+                                                        </a>
+                                                        <a class="icon icon_serve" data-recepit="{{ recepit.1 }}"
+                                                           data-order="{{ item.1 }}">
+                                                            <i class="gb gb_local_cafe text-black hover:text-blue-600"></i>
+                                                        </a>
+                                                        <a class="icon icon_trash" data-recepit="{{ recepit.1 }}"
+                                                           data-order="{{ item.1 }}">
+                                                            <i class="gb gb_cancel text-black hover:text-blue-600"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+
+                                        </ul>
+                                    </div>
+                                    <div class="mb-4 mx-auto">
+                                        <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $("[data-id=adder_num]").on('click', function () {
+                let num = Number($(this).parent().children('b')[0].innerText);
+                $(this).parent().children('b')[0].innerText = String(num + 1);
+                let item = $(this).parent().parent().children('#item')[0].innerText;
+                let recepit_id = $(this).attr("data-recepit")
+                var data = {"recepit_id": recepit_id, "item": item, "count": String(num + 1)};
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: '/cashier/orders',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        console.log("ok", result);
+                    }, error: function (result) {
+                        console.log(result);
+                    }
+                });
+            })
+
+            $("[data-id=suber_num]").on('click', function () {
+
+                let num = Number($(this).parent().children('b')[0].innerText);
+                if (num !== 1) {
+                    $(this).parent().children('b')[0].innerText = String(num - 1);
+                    let item = $(this).parent().parent().children('#item')[0].innerText;
+                    let recepit_id = $(this).attr("data-recepit")
+                    var data = {"recepit_id": recepit_id, "item": item, "count": String(num - 1)};
+
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json',
+                        url: '/cashier/orders',
+                        dataType: 'json',
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            console.log("ok", result);
+                        }, error: function (result) {
+                            console.log(result);
+                        }
+                    });
+                }
+            })
+
+            $('a.icon').click(function () {
+                change_status(this)
+            })
+
+            function change_status(status) {
+                let new_status = ""
+                let class_name = status.classList[1]
+                let row_number = status.parentNode.parentNode
+                let row_name = row_number.classList[1]
+
+
+                if (class_name === 'icon_refresh') {
+                    new_status = 'جدید'
+                } else if (class_name === 'icon_cook') {
+                    new_status = 'در حال پخت'
+                } else if (class_name === 'icon_serve') {
+                    new_status = 'سرو شده'
+                } else if (class_name === 'icon_check') {
+                    new_status = 'پرداخت شده'
+                } else if (class_name === 'icon_unpaid') {
+                    new_status = 'پرداخت نشده'
+                } else if (class_name === 'icon_trash') {
+                    new_status = 'کنسل شده'
+                }
+
+
+                if (row_name === 'row-recepit') {
+                    var target_column = row_number.childNodes[7];
+                    let recepit_id = status.getAttribute("data-recepit")
+                    var data = {"recepit_id": recepit_id, "new_recepit_status": new_status, "new_order_status": ""};
+                } else {
+                    var target_column = row_number.childNodes[5];
+                    let recepit_id = status.getAttribute("data-recepit")
+                    let order_name = status.getAttribute("data-order")
+                    var data = {
+                        "recepit_id": recepit_id,
+                        "order_name": order_name,
+                        "new_recepit_status": "",
+                        "new_order_status": new_status
+                    };
+                }
+
+                target_column.innerText = new_status
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: '/cashier/orders',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        console.log("ok", result);
+                    }, error: function (result) {
+                        console.log(result);
+                    }
+                });
+            }
+        })
+
+    </script>
+{% endblock %}

@@ -2,7 +2,7 @@ import core.utility as utility
 import core.manager as dbmanager
 import core.exceptions as exception
 import model.users as user_model
-
+from hashlib import sha256
 
 def register_cashier():
     firstname = utility.inputer("enter cashier's firstname :")
@@ -17,10 +17,10 @@ def register_cashier():
 
         db = dbmanager.DataBaseManager()
 
-        res = db.read_condition("users", "phone_number", phone_number[2:])
-        print(res)
+        res = db.read_condition("users", "phone_number", phone_number[-9:])
+        #print(res)
         if res:
-            raise exception.UserExistError
+            exception.UserExistError()
 
     except:
         print("this user exist!!..try again")
@@ -33,18 +33,16 @@ def register_cashier():
                             )
     if email == "":
         email = None
-
     password = utility.inputer("enter cashier's password:",
                                validator=utility.Validators.check_password,
                                retry=True,
-                               retry_print="password is not valid. pleas enter a valid email"
+                               retry_print="email is not valid. pleas enter a valid email"
                                )
+    password = sha256(password.encode()).hexdigest()
 
-
-    #TODO : hash password
-    #TODO : ask about user added to database
+    # print(sha256(password.encode()).digest().decode())
     u = user_model.User(firstname, lastname, phone_number[2:], password, email)
     print(u.to_dict())
 
     # dbmanager.DataBaseManager().create("users", u)
-    print("user added successfully")
+    print("user added successfully")  # TODO: convert this prints to log info

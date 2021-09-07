@@ -1,0 +1,114 @@
+<div class="container-fluid">
+     <div class="row-bas">
+        <div class="col">
+            <div class="row mt-0">
+                <div class="col-11 px-0 mx-auto text-right mb-2">
+                    <h4 class="m-2 text-center"><b>لیست سفارشات پرداخت شده کافه لبخند</b></h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-11 col-sm-10 px-0 mx-auto">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-right d-flex align-items-center">
+                            <input id="archive-button" class="header-button ml-2" type="button" value="همه">
+                            <input id="first_item-button" class="header-button ml-2" type="button" value="قهوه">
+                            <input id="second_item-button" class="header-button ml-2" type="button" value="پپرونی">
+                            <input id="third_item-button" class="header-button ml-2" type="button" value="کاپوچینو">
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <input class="form-control float-left text-right w-100"
+                                   id="searchInput" type="text"
+                                   placeholder="جستجو...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row main-row">
+        <div class="order-col col-11 col-sm-10 px-0 mx-auto my-1 shadow"
+             style=" border-radius: 8px !important;overflow: hidden;background: #fff;">
+            <table id="main-table" class="table text-center table-hover mb-0">
+                <thead class="bg-info">
+                <tr>
+                    <th class="sortable-column" id=column0 data-dir="asc" onclick="sort_data('column0')">شماره سفارش</th>
+                    <th class="sortable-column" id=column1 data-dir="asc" onclick="sort_data('column1')">شماره صورتحساب</th>
+                    <th class="sortable-column" id=column2 data-dir="asc" onclick="sort_data('column2')">آیتم</th>
+                    <th class="sortable-column" id=column3 data-dir="asc" onclick="sort_data('column3')">تعداد</th>
+                    <th>وضعیت</th>
+                </tr>
+
+                </thead>
+                <tbody id="table_body">
+
+                {% for order in orders %}
+                <tr class="table-row" data-toggle="modal" data-target="#myModal{{ loop.index0 }}">
+                    <td>{{ order.0 }}</td>
+                    <td>{{ order.1 }}</td>
+                    <td>{{ order.2 }}</td>
+                    <td>{{ order.4 }} عدد</td>
+                    <td id="status{{ loop.index0 }}">{{ order.5 }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% for order in orders %}
+            <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title mx-auto">جزئیات سفارش</h4>
+                        </div>
+                        <div class="modal-body text-right">
+                            <ul class="border grid rounded p-2 mb-4">
+                                <li>
+                                    <span class="float-right">زمان درخواست</span>
+                                    <span class="float-left">{{ order.6 }}</span></li>
+                                <li>
+                                    <span class="float-right">وضعیت</span>
+                                    <span id="modal_status{{ loop.index0 }}" class="float-left">{{ order.5 }}</span>
+                                </li>
+                                <li>
+                                    <span class="float-right">دسته بندی</span>
+                                    <span class="float-left">{{ order.3 }}</span>
+                                </li>
+                            </ul>
+                            <div class="col mx-auto text-center">
+                                <a class="icon icon_refresh modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}">
+                                    <i class="gb gb_refresh"></i>
+                                </a>
+                                <a class="icon icon_cook modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}">
+                                    <i class="gb gb_kitchen"></i>
+                                </a>
+                                <a class="icon icon_serve modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}">
+                                    <i class="gb gb_local_cafe"></i>
+                                </a>
+                                <a class="icon icon_check modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}">
+                                    <i class="gb gb_done_all"></i>
+                                </a>
+                                <a class="icon icon_trash modal{{ loop.index0 }} row{{ order.5 }}"
+                                   data-order="{{ order.0 }}">
+                                    <i class="gb gb_cancel"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer mx-auto">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+        </div>
+</div>
+</div>
+<script src="{{ url_for('static', filename='js/paid_order_list.js') }}"></script>

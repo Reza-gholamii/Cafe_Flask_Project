@@ -1,0 +1,153 @@
+{% extends "cashier/cashier_base.html" %}
+{% block title %}لیست سفارش ها{% endblock %}
+{% block bootstrap %}{{ super() }}{% endblock %}
+{% block tailwindcss %}{% endblock %}
+{% block extra_head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://gorbeh.ikacc.ir/gorbeh/css/gorbeh-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/fonts.css">
+    <style>
+        * {
+            font-family: Vazir, sans-serif;
+            direction: rtl;
+        }
+
+        body {
+            background-color: #fafafa;
+        }
+
+        .main-col {
+            height: 100%;
+        }
+
+        .col-order {
+            height: 60px;
+            padding-top: 16px;
+        }
+
+        .row-recepit {
+            border-radius: 7px;
+            box-shadow: 1px 1px 5px #d0cdcd;
+        }
+
+        .btn {
+            max-width: 100%;
+        }
+        .icon {
+            color: black;
+            font-size: 20px;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row main-row bg-light">
+        <div class="col-7 col-md-7 col-lg-8 main-col text-center mx-auto my-3">
+
+            {% for recepit in recepits %}
+            <div class="row row-recepit mx-auto my-4 bg-light">
+                <div class="col-xl-1 col-lg-2 col-sm-3 col-3 px-0 col-order">میز {{ recepit.0 }}</div>
+                <div class="col-xl-2 col-lg-3 col-sm-5 col-5 px-0 col-order" id="recepit_number">صورتحساب: {{ recepit.1
+                    }}
+                </div>
+                <div class="col-lg-3 d-none d-xl-block col-order">هزینه: {{ recepit.4 }} تومان</div>
+                <div class="col-xl-2 col-lg col-sm-4 col-4 px-0 col-order" id="status">{{ recepit.2 }}</div>
+                <div class="col-xl-2 col-lg col-sm-6 col-6 px-0 col-order">
+                    {% if recepit.1 != "" %}
+                    <a class="icon icon_unpaid" data-recepit="{{recepit.1}}" onclick="change_status(this)">
+                        <i class="gb gb_content_paste"></i>
+                    </a>
+                    <a class="icon icon_check" data-recepit="{{recepit.1}}" onclick="change_status(this)">
+                        <i class="gb gb_done_all"></i>
+                    </a>
+                    <a class="icon icon_trash" data-recepit="{{recepit.1}}" onclick="change_status(this)">
+                        <i class="gb gb_cancel"></i>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-xl-2 col-lg-2 col-sm-6 col-6 px-0 col-order" style="padding-top: 10px">
+                    <button type="button" class="btn btn-info" data-toggle="modal"
+                            data-target="#myModal{{ loop.index0 }}">جزئیات
+                    </button>
+                </div>
+
+                <div class="modal fade" id="myModal{{ loop.index0 }}" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                <h4 class="modal-title mx-auto">جزئیات</h4>
+                            </div>
+                            <div class="modal-body text-right">
+                                <div class="overflow-hidden">
+                                    <p class="float-right">شماره صوتحساب: {{ recepit.1 }}</p>
+                                    <p class="float-left">هزینه کل: {{ recepit.4 }}</p>
+                                </div>
+                                <h5 class="text-center">آیتم ها</h5>
+                                <ul class="border rounded pl-2 py-2 pr-4">
+
+                                    {% set order = orders[loop.index-1] %}
+                                    {% for item in order%}
+                                    <li>
+                                        <div class="row row-order text-center">
+                                            <div class="col-2 px-0" id="item">{{ item.1 }}</div>
+                                            <div class="col-3 px-0">
+                                                <i data-id="adder_num" class="gb gb_add_circle ml-2 cursor-pointer"
+                                                   style="color: #008b0e" data-recepit="{{recepit.1}}"></i>
+                                                <b>{{ item.2 }}</b> عدد
+                                                <i data-id="suber_num" class="gb gb_remove_circle mr-2 cursor-pointer"
+                                                   style="color: #a30000" data-recepit="{{recepit.1}}"></i>
+                                            </div>
+                                            <div class="col-3 px-0">{{ item.0 }}</div>
+                                            <div class="col-4 px-0">
+                                                <a class="icon icon_refresh" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.1 }}" onclick="change_status(this)">
+                                                    <i class="gb gb_refresh"></i>
+                                                </a>
+                                                <a class="icon icon_cook" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.1 }}" onclick="change_status(this)">
+                                                    <i class="gb gb_kitchen"></i>
+                                                </a>
+                                                <a class="icon icon_serve" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.1 }}" onclick="change_status(this)">
+                                                    <i class="gb gb_local_cafe"></i>
+                                                </a>
+                                                <a class="icon icon_trash" data-recepit="{{recepit.1}}"
+                                                   data-order="{{ item.1 }}" onclick="change_status(this)">
+                                                    <i class="gb gb_cancel"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+
+                                </ul>
+                            </div>
+                            <div class="modal-footer mx-auto">
+                                <button type="button" class="btn btn-info" data-dismiss="modal">بستن</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+<script>
+    var user_id = '{{id}}';
+</script>
+<script src="../../static/js/order_list.js"></script>
+{% endblock %}
