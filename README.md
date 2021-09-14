@@ -16,6 +16,6 @@ A Cafe Website Designed In Python And Flask : Reza Gholami &amp; Rasool Ahadi &a
 
 ### Full Responsive :
 <p>
-<img src="./.temp/responsive_menu.png" alt="" style="width:48%;height: 500px">
-<img src="./.temp/responsive_home.png" alt="" style="width:48%;height: 500px">
+<img src="./.temp/responsive_menu.png" alt="" style="width:48%">
+<img src="./.temp/responsive_home.png" alt="" style="width:48%">
 </p>
