@@ -1,11 +1,7 @@
-from core.exceptions import UserExistError
 from core.models import *
 from core.manager import *
-from core.utility import *
-from core.exceptions import *
 from typing import Optional
 from json import dumps, loads
-from hashlib import sha256
 
 
 db_manager = ExtraDataBaseManager()

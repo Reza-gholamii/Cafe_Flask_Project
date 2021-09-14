@@ -3,10 +3,13 @@ class BaseExceptions(Exception):
     A Base Model for Inheritance All Exceptions Class
     """
 
+
 class UserNotFoundError(BaseException):
     """
     user is not in database
     """
+
+
 class UserExistError(BaseExceptions):
     """
     User Already Exist in the Database.
@@ -23,5 +26,3 @@ class MenuGenerateError(BaseExceptions):
     """
     menu generator error
     """
-
-

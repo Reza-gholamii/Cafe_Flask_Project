@@ -1,19 +1,12 @@
-from pprint import pprint
-
 from flask import render_template, request, redirect, make_response, Response
-from flask.helpers import url_for
-from datetime import timedelta, date, datetime
+from datetime import timedelta, date
 from core.utility import *
-import model.users
-from core.manager import ExtraDataBaseManager, DataBaseManager
-from core.models import TextMessage, BaseModel
-from model.categories import Category
+from core.manager import ExtraDataBaseManager
+from core.models import TextMessage
 from model.menu_items import MenuItem
 from hashlib import sha256
-from model import users
 import logging
 
-from model.orders import Order
 from model.tables import Table
 from model.recepites import Recepite
 
