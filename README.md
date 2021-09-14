@@ -5,12 +5,15 @@ A Cafe Website Designed In Python And Flask : Reza Gholami &amp; Rasool Ahadi &a
 ### Home :
 <img src="./.temp/home.png" alt="">
 <br>
+
 ### Menu :
 <img src="./.temp/menu.png" alt="">
 <br>
+
 ### Admin Panel :
 <img src="./.temp/cashier.gif" alt="">
 <br>  
+
 ### Full Responsive :
-<img src="./.temp/responsive_menu.png" alt="">
-<img src="./.temp/responsive_home.png" alt="">
+<img src="./.temp/responsive_menu.png" alt="" style="width:48%;float:left">
+<img src="./.temp/responsive_home.png" alt="" style="width:48%;float:left">
