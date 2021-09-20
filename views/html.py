@@ -15,15 +15,10 @@ logging.basicConfig(level=logging.INFO,
 
 db_manager = ExtraDataBaseManager()
 
-# status_dict = {'new': 'جدید', 'cooking': 'در حال پخت', 'serving': 'سرو شده', 'canceled': 'کنسل شده'}
-
 from core.manager import *
 
 
 def viewer():
-    # with open("views.log", "r+") as file:
-    #     _v = int(file.readline(0))+1
-    #     file.write(str(_v))
     print("viwed from user this page!")
 
 
@@ -91,15 +86,11 @@ def menu():
                                )
     else:
         json_data = request.get_json()
-        print(json_data)
         table_num = int(json_data['table_number'])
         recepite = Recepite(table_num)
 
-        # orders = []
         for i in range(len(json_data['item_list'])):
-            # orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
             recepite.add_order(json_data['item_list'][i], count=json_data['count_list'][i])
-        # return redirect(f"/recipe/{recepite.number}")
         return f"/recipe/{recepite.number}"
 
 
@@ -156,11 +147,9 @@ def order_list():
             if recepit[0]:
                 recepit.insert(0, table_id)
                 order = db_manager.order_list(recepit[1])
-                # recepit[2] = change_status_lang(recepit[2])
                 order_l = []
                 for item in order:
                     item = list(item)
-                    # item[0] = change_status_lang(item[0])
                     order_l.append(item)
                 recepits.append(recepit)
                 orders.append(order_l)
@@ -170,7 +159,6 @@ def order_list():
         json_data = request.get_json()
         # updating recepit status
         if 'new_recepit_status' in json_data.keys() and json_data['new_recepit_status']:
-            # json_data['new_recepit_status'] = change_status_lang(json_data['new_recepit_status'])
             status_record = db_manager.check_record('statuses', title=json_data['new_recepit_status'])[0]
             db_manager.update('recepites', id=json_data['recepit_id'], status=status_record[2])
 
@@ -179,7 +167,6 @@ def order_list():
 
         # updating order status
         elif 'new_order_status' in json_data.keys() and json_data['new_order_status']:
-            # json_data['new_order_status'] = change_status_lang(json_data['new_order_status'])
             status_record = db_manager.check_record('statuses', title=json_data['new_order_status'])[0]
             menu_item_record = db_manager.check_record('menu_items', title=json_data['order_name'])[0]
             order_record = \
@@ -208,7 +195,6 @@ def order_list():
 
 def archive_list():
     json_data = request.get_json()
-    # json_data['status'] = change_status_lang(json_data['status'])
     status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
     db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
@@ -222,7 +208,6 @@ def archive_list():
 
 def new_order_list():
     json_data = request.get_json()
-    # json_data['status'] = change_status_lang(json_data['status'])
     status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
     db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
@@ -236,7 +221,6 @@ def new_order_list():
 
 def cooking_order_list():
     json_data = request.get_json()
-    # json_data['status'] = change_status_lang(json_data['status'])
     status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
     db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
@@ -250,7 +234,6 @@ def cooking_order_list():
 
 def served_order_list():
     json_data = request.get_json()
-    # json_data['status'] = change_status_lang(json_data['status'])
     status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
     db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
@@ -264,7 +247,6 @@ def served_order_list():
 
 def paid_order_list():
     json_data = request.get_json()
-    # json_data['status'] = change_status_lang(json_data['status'])
     status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
     db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
@@ -278,7 +260,6 @@ def paid_order_list():
 
 def cancelled_order_list():
     json_data = request.get_json()
-    # json_data['status'] = change_status_lang(json_data['status'])
     status_record = db_manager.check_record('statuses', title=json_data['status'])[0]
     db_manager.update('orders', id=json_data['order_id'], status=status_record[2])
 
@@ -314,12 +295,6 @@ def recepit_list():
 
     else:
         json_data = request.get_json()
-        # recepit_status = change_status_lang(json_data['status'])
-        # print(recepit_status)
-        # print("###############")
-        # print(json_data)
-        # print("##############")
-        print(db_manager.check_record('statuses', title=json_data['status']))
         recepit_status_id = db_manager.check_record('statuses', title=json_data['status'])[0][2]
         db_manager.update('recepites', id=json_data['recepit_id'], status=recepit_status_id)
 
@@ -328,24 +303,6 @@ def recepit_list():
 
     return {"Data Received": 200}
 
-
-# this is test for tables status
-# empty_table = [1, 3, 4, 7]
-
-# this is for test
-#
-# served_orders = [("۳۲۵", "۱", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-#                  ("۳۲۵", "۲", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-#                  ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-#                  ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-#                  ("۳۲۵", "۴", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-#                  ("۳۲۵", "۶", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲"),
-#                  ("۳۲۵", "۷", "۰۶/۲۰/۲۰۲۱", "جدید", "قهوه", "۲", "نسکافه", "۱", "کاپوچینو", "۲")]
-
-
-#
-# all_orders = orders.copy()
-
 def dashboard():
     # this codes should be in all cashier side functions to get user and security reasons
     __ = user_seter()
@@ -353,13 +310,6 @@ def dashboard():
         user_data = DataBaseManager().read("users", __)[0]
     else:
         return user_seter()
-    # ''''''''''''''''''''
-    # data = {
-    #     'count_new_orders': len(orders),
-    #     'count_orders': len(orders) + len(served_orders),
-    #     'count_empty_tables': len(empty_table),
-    #     'count_view': 15
-    # }
 
     last_message = db_manager.last_row("messages")
     today = date.today().strftime("%Y-%m-%d")
@@ -371,7 +321,6 @@ def dashboard():
         'count_empty_tables': len(db_manager.statusfilter("tables", "خالی")),
         'all_incoming': db_manager.incoming(),
         'today_incoming': db_manager.incoming(today)
-        # 'count_view': 15
     }
 
     # Charts :
@@ -404,21 +353,6 @@ def dashboard():
 
     return render_template('cashier/dashboard.html', user=user_data, data=data, page_name="dashboard", days=weekdays,
                            hours=hours, bests=bests)
-
-
-# def tables():
-#     # this codes should be in all cashier side functions to get user and security reasons
-#     __ = user_seter()
-#     if type(__) == int:
-#         user_data = DataBaseManager().read("users", __)[0]
-#     else:
-#         return user_seter()
-#     # ''''''''''''''''''''
-#     tables = ExtraDataBaseManager().read_all("tables")
-#     # TODO: where is order number?
-#
-#     return render_template("cashier/tables.html", tables=tables, user=user_data, page_name="tables")
-
 
 def login():
     if request.method == "GET":
@@ -491,24 +425,17 @@ def api(page):
                 item[2] = categories_dict[item[2]]
                 item[3] = int(item[1] * (1 - (item[3] / 100)))
 
-            # print(list(categories_dict.values()))
-
-            print(items, table_number, list(categories_dict.values()), image_names, sep="\n\n")
-
             return render_template('spa_api/' + page + '.html', items=items, table_number=table_number,
                                    cat=list(categories_dict.values()), images=image_names
                                    )
         else:
             json_data = request.get_json()
-            print(json_data)
             table_num = int(json_data['table_number'])
             recepite = Recepite(table_num)
 
             # orders = []
             for i in range(len(json_data['item_list'])):
-                # orders.append(Order(recepite.number, json_data['item_list'][i], count=json_data['count_list'][i]))
                 recepite.add_order(json_data['item_list'][i], count=json_data['count_list'][i])
-            # return redirect(f"/recipe/{recepite.number}")
             return f"/recipe/{recepite.number}"
 
     if page == "about_us":
@@ -546,12 +473,6 @@ def api(page):
         else:
             return user_seter()
         # ''''''''''''''''''''
-        # data = {
-        #     'count_new_orders': len(orders),
-        #     'count_orders': len(orders) + len(served_orders),
-        #     'count_empty_tables': len(empty_table),
-        #     'count_view': 15
-        # }
 
         last_message = db_manager.last_row("messages")
         today = date.today().strftime("%Y-%m-%d")
@@ -563,7 +484,6 @@ def api(page):
             'count_empty_tables': len(db_manager.statusfilter("tables", "خالی")),
             'all_incoming': db_manager.incoming(),
             'today_incoming': db_manager.incoming(today)
-            # 'count_view': 15
         }
 
         # Charts :
@@ -630,11 +550,9 @@ def api(page):
             if recepit[0]:
                 recepit.insert(0, table_id)
                 order = db_manager.order_list(recepit[1])
-                # recepit[2] = change_status_lang(recepit[2])
                 order_l = []
                 for item in order:
                     item = list(item)
-                    # item[0] = change_status_lang(item[0])
                     order_l.append(item)
                 recepits.append(recepit)
                 orders.append(order_l)
