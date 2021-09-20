@@ -132,7 +132,8 @@
                         </li>
 
                         <li data-collapse="true" class="nav-list-item pr-0 pb-4">
-                            <span data-link="dashboard-item" data-href="order_list" class="cursor-pointer hover:text-blue-400 mr-8">
+                            <span data-link="dashboard-item" data-href="order_list"
+                                  class="cursor-pointer hover:text-blue-400 mr-8">
                                 <i class="gb gb_style gb_s24 menu-icon"></i>
                                 سفارش ها
                                 <i class="gb mb-1 gb_navigate_before triangle transition transform"
@@ -216,7 +217,7 @@
                     <h3 data-title="page-title" class="title position-absolute mb-5">داشبورد</h3>
                 </div>
                 <div class="col-8  position-relative ">
-                    <a href="#" class="position-absolute profile shadow">
+                    <a href="{{ url_for('logout') }}" class="position-absolute profile shadow">
                         <i class="profile-icon gb gb_account_circle gb_s48"></i>
                         <span class="profile-text">{{ user[0] }} {{ user[1] }}</span>
                     </a>

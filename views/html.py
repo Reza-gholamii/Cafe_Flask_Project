@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, make_response, Response
+from flask import render_template, request, redirect, make_response, Response, url_for
 from datetime import timedelta, date
 from core.utility import *
 from core.manager import ExtraDataBaseManager
@@ -443,6 +443,13 @@ def login():
             return response
         else:
             return render_template("cashier/login_cachier.html", condition="warning")
+
+
+def logout():
+    if request.method == "GET":
+        resp = make_response(redirect(url_for('login')))
+        resp.delete_cookie('_ID')
+        return resp
 
 
 def user_seter():
