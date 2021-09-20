@@ -317,12 +317,11 @@ def dashboard():
     data = {
         'last_message': last_message[0] if last_message else (),
         'count_new_orders': len(db_manager.statusfilter("orders", "جدید")),
-        'count_orders': len(db_manager.read_all("orders", today=today)),
         'count_empty_tables': len(db_manager.statusfilter("tables", "خالی")),
+        'count_full_tables': len(db_manager.statusfilter("tables", "پر")),
         'all_incoming': db_manager.incoming(),
         'today_incoming': db_manager.incoming(today)
     }
-
     # Charts :
     day_report = db_manager.report_orders("weekday")
     hour_report = db_manager.report_orders("hour")
@@ -480,8 +479,8 @@ def api(page):
         data = {
             'last_message': last_message[0] if last_message else (),
             'count_new_orders': len(db_manager.statusfilter("orders", "جدید")),
-            'count_orders': len(db_manager.read_all("orders", today=today)),
             'count_empty_tables': len(db_manager.statusfilter("tables", "خالی")),
+            'count_full_tables': len(db_manager.statusfilter("tables", "پر")),
             'all_incoming': db_manager.incoming(),
             'today_incoming': db_manager.incoming(today)
         }
