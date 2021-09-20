@@ -1,10 +1,59 @@
-<div class="container">
-    <div class="row">
-        <div class="my-container shadow   bg-light border">
-            <img src="{{ url_for('static', filename="img/recpie.jpeg") }}">
-            <p class="order-text Vazir">شماره سفارش شما: <span>{{ ID }}</span></p>
-            <p class="text-center mt-5 font-weight-bold">از خرید شما سپاسگذاریم. با در دست داشتن شماره سفارش به کافه
-                مراجعه کنید </p>
-        </div>
+{% extends "base.html" %}
+{% block title %}صفحه سفارش{% endblock %}
+{% block extra_head %}
+    <style>
+
+        .my-container {
+            margin: 5em auto;
+            height: 50vh;
+            width: 30em;
+            border-radius: .7em;
+
+        }
+
+        .my-container img {
+            width: 100%;
+            height: 40%;
+            object-fit: cover;
+            border-radius: .7em;
+
+        }
+
+        .logo-text {
+            text-align: center;
+            margin-top: 1em;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .logo-text span {
+            color: #3B82F6;
+        }
+
+        .order-text {
+            text-align: center;
+            margin-top: 1.5em;
+
+        }
+
+        .order-text span {
+
+            margin-right: 1em;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #005cbf;
+        }
+
+    </style>
+
+{% endblock %}
+{% block body %}
+    <div class="my-container shadow bg-light border">
+        <img src="{{ url_for('static', filename="img/recpie.jpeg") }}">
+
+        <p class="logo-text">کافه <span>لبخند</span></p>
+        <p class="order-text Vazir">شماره سفارش شما: <span>{{ ID }}</span></p>
+        <p class="text-center mt-5 font-weight-bold">از خرید شما سپاسگذاریم. با در دست داشتن شماره سفارش به کافه
+            مراجعه کنید </p>
     </div>
-</div>
+{% endblock %}
